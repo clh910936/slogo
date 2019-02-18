@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public interface FrontExternalAPI {
     /**
      * part of Board class
@@ -10,12 +12,5 @@ public interface FrontExternalAPI {
      * changes the background color of the void
      * will have an argument for the color TBD
      */
-    public void setBackgroundColor();
-
-    /**
-     * part of Console class
-     * prints an error to be seen by the user
-     */
-    public void printError();
-
+    public void setBackgroundColor(Paint color);
 }
