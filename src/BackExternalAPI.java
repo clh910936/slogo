@@ -28,4 +28,10 @@ public interface BackExternalAPI {
      */
     public Map<String, Double> getVariables();
 
+    /**
+     * Gets a list of the user defined commands
+     * @return
+     */
+    public List<String> getUserCreatedCommands();
+
 }
