@@ -1,4 +1,6 @@
-public interface BackInternal {
+import javafx.util.Pair;
+
+public interface BackInternalAPI {
 
     /**
      * Defined within the UserSetCommandModel
