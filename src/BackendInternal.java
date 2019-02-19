@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 public interface BackendInternal {
 
     /**
@@ -11,14 +13,14 @@ public interface BackendInternal {
      * The user can define a variable that can
      * @param var
      */
-    public void addVariable(Variable var);
+    public void addVariable(Object var);
 
     /**
      *
      * @param var
-     * @throws InvalidInputException
+     * @throws
      */
-    public void removeVariable(Variable var) throws InvalidInputException;
+    public void removeVariable(Object var) throws IllegalCommandException;
 
     /**
      *
