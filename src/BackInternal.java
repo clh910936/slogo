@@ -1,4 +1,4 @@
-public interface BackendInternal {
+public interface BackInternal {
 
     /**
      * Defined within the UserSetCommandModel
