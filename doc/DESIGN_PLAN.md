@@ -132,14 +132,14 @@ public interface BackInternal {
      * Parses any input to a command
      * @param consoleInput
      */
-    public void parseCommand(String consoleInput) throw IllegalCommandException;
+    public void parseCommand(String consoleInput) throw BackEndInternal.IllegalCommandException;
 }
 
 
 ```
 
 #### Backend external API
-The back-end external API works to provide the front-end with the necessary updated models of `Turtle`, `History`, and `Variables`, `Commands`, once the back-end has parsed the commands entered from the front-end. When the user enters a command, the back-end allows the front-end to pass the unprocessed commands via `parse()`, which connects the user interface to the back-end. This API will throw `IllegalCommandException` is the command that is parsed is invalid.
+The back-end external API works to provide the front-end with the necessary updated models of `Turtle`, `History`, and `Variables`, `Commands`, once the back-end has parsed the commands entered from the front-end. When the user enters a command, the back-end allows the front-end to pass the unprocessed commands via `parse()`, which connects the user interface to the back-end. This API will throw `BackEndInternal.IllegalCommandException` is the command that is parsed is invalid.
 
 ```
 import java.util.List;
@@ -151,7 +151,7 @@ public interface BackExternalAPI {
      * Part of the controller. Front-end calls parse() to give unprocessed commands to back-end.
      * @return a unprocessed text object
      */
-    public Object parse(String input) throws IllegalCommandException;
+    public Object parse(String input) throws BackEndInternal.IllegalCommandException;
 
     /**
      * When the front-end gets told by TurtleModel that the turtle as been updated, the front-end calls getTurtle()

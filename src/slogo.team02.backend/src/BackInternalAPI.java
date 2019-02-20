@@ -15,15 +15,15 @@ public interface BackInternalAPI {
      * The user can define a variable that can be accessed through any other command
      * @param var
      */
-    public void addVariable(Variable var);
+    public void addVariable(Object var);
 
     /**
      * Defined within the VariablesModel
      * Removes a variable from the current state
      * @param var
-     * @throws InvalidInputException if the variable doesn't exist
+     * @throws IllegalCommandException if the variable doesn't exist
      */
-    public void removeVariable(Variable var) throws InvalidInputException;
+    public void removeVariable(Object var) throws IllegalCommandException;
 
     /**
      * Defined within the TurtleModel
@@ -35,9 +35,9 @@ public interface BackInternalAPI {
      * Defined within the TurtleModel
      * Places the turtle at a certain place on the board
      * @param coordinates
-     * @throws InvalidInputException if the coordinates are outside the bounds of the dimensions of the board
+     * @throws if the coordinates are outside the bounds of the dimensions of the board
      */
-    public void moveTurtleToCoordinates(Pair coordinates) throws InvalidInputException;
+    public void moveTurtleToCoordinates(Pair coordinates) throws IllegalCommandException;
 
     /**
      * Defined within the TurtleModel
@@ -50,7 +50,7 @@ public interface BackInternalAPI {
      * Defined within the TurtleModel
      * Sets the direction of the turtle to a certain direction
      * Should handle degrees greater than a value of 360
-     * @param new direction of the turtle
+     * @param  direction of the turtle
      */
     public void setTurtleDirection(double direction);
 
@@ -88,7 +88,7 @@ public interface BackInternalAPI {
      * Defined within the HistoryModel
      * Removes a certain input from the history data
      */
-    public void removeCommandFromHistory() throws InvalidInputException;
+    public void removeCommandFromHistory() throws IllegalCommandException;
 
     /**
      * Defined within the HistoryModel
@@ -101,5 +101,5 @@ public interface BackInternalAPI {
      * Parses any input to a command
      * @param consoleInput
      */
-    public void parseCommand(String consoleInput) throw IllegalCommandException;
+    public void parseCommand(String consoleInput) throws IllegalCommandException;
 }
