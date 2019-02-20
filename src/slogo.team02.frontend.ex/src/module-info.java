@@ -1,4 +1,4 @@
-module slogo.team02.backend {
+module slogo.team02.frontend.ex {
     requires java.base;
     requires javafx.base;
 }
