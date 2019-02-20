@@ -54,6 +54,7 @@ public interface FrontInternalAPI {
      */
     public void printToConsole(String s);
 
+
     /**
      * Part of the UserDefinedCommandView class
      * updates the user defined variables based on the changed made to the UserDefinedVariables model
