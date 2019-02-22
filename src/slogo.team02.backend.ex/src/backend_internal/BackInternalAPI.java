@@ -1,4 +1,4 @@
-import javafx.util.Pair;
+package in;
 
 public interface BackInternalAPI {
 
@@ -29,7 +29,7 @@ public interface BackInternalAPI {
      * Defined within the TurtleModel
      * @return Java Pair object with x coordinate and y coordinate of the turtle
      */
-    public Pair getTurtleCoordinates();
+    public Object getTurtleCoordinates();
 
     /**
      * Defined within the TurtleModel
@@ -37,7 +37,7 @@ public interface BackInternalAPI {
      * @param coordinates
      * @throws if the coordinates are outside the bounds of the dimensions of the board
      */
-    public void moveTurtleToCoordinates(Pair coordinates) throws IllegalCommandException;
+    public void moveTurtleToCoordinates(Object coordinates) throws IllegalCommandException;
 
     /**
      * Defined within the TurtleModel
