@@ -1,3 +1,5 @@
+package FrontInternal;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,7 +38,7 @@ public class Console {
     private final int BUTTON_INSET = 5;
     private final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
     private final int BUTTON_VGAP = 10;
-    private final String RESOURCE_FILENAME = "Console";
+    private final String RESOURCE_FILENAME = "FrontInternal.Console";
     private final String RUN_BUTTON = "RUN_BUTTON";
 
     private Insets myButtonInsets;
