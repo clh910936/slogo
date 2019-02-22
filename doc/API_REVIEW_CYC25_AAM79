@@ -1,0 +1,15 @@
+BACKEND
+- Their API design doesn't include a model and will instead parse information and then send it
+back to the front end directly. This can be more concise in the backend but will require more work
+in the front end. This can also give the frontend more flexibility with what it wants to do
+with information.
+- Their API design is encapsulating the turtle to just the front end so that the backend is only
+processing the text of the commands and not actual turtle commands.
+
+- We talked about the use of reflection instead of if statements to map a command text to a method or class name.
+
+- We also talked about using a stack to parse individual lines of commands
+- Using recursion instead: going to use getParam() method that will be in the Parser class which will keep being called within the individual command methods. 
+    getParam() will return an integer and it keeps being called because there will be a chain of calls to getParam which will either retun the constant
+    that's next in the parsed string or it will use reflection to call another method for the associated command name. Each command will get the arrayList
+    of the split split passed in and the next 
