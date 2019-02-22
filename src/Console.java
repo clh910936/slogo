@@ -94,6 +94,7 @@ public class Console {
 
     private void readText() {
         String input = myUserInputField.getText();
+        //TODO: Parse
         System.out.println(input);
     }
 
