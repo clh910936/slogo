@@ -1,4 +1,3 @@
-package Model;
 
 public class IllegalCommandException extends RuntimeException {
 
