@@ -132,14 +132,14 @@ public interface BackInternal {
      * Parses any input to a command
      * @param consoleInput
      */
-    public void parseCommand(String consoleInput) throw BackEndInternal.IllegalCommandException;
+    public void parseCommand(String consoleInput) throw BackEndInternal.Exceptions.IllegalCommandException;
 }
 
 
 ```
 
 #### Backend external API
-The back-end external API works to provide the front-end with the necessary updated models of `Turtle`, `History`, and `Variables`, `Commands`, once the back-end has parsed the commands entered from the front-end. When the user enters a command, the back-end allows the front-end to pass the unprocessed commands via `parse()`, which connects the user interface to the back-end. This API will throw `BackEndInternal.IllegalCommandException` is the command that is parsed is invalid.
+The back-end external API works to provide the front-end with the necessary updated models of `Turtle`, `History`, and `Variables`, `Commands`, once the back-end has parsed the commands entered from the front-end. When the user enters a command, the back-end allows the front-end to pass the unprocessed commands via `parse()`, which connects the user interface to the back-end. This API will throw `BackEndInternal.Exceptions.IllegalCommandException` is the command that is parsed is invalid.
 
 ```
 import java.util.List;
@@ -151,7 +151,7 @@ public interface BackExternalAPI {
      * Part of the controller. Front-end calls parse() to give unprocessed commands to back-end.
      * @return a unprocessed text object
      */
-    public Object parse(String input) throws BackEndInternal.IllegalCommandException;
+    public Object parse(String input) throws BackEndInternal.Exceptions.IllegalCommandException;
 
     /**
      * When the front-end gets told by TurtleModel that the turtle as been updated, the front-end calls getTurtle()
@@ -186,7 +186,7 @@ public interface BackExternalAPI {
 The front-end internal API will include the necessary methods to update the windows displayed to the user. This includes methods to update the history, variables, and user-defined commands as well as methods to display errors to the user and to print to the console. Since parts of the view will follow the `Observer` pattern and monitor the state of different models on the backend, methods from the internal API will be invoked once these models indicate changes in their states.
 
 ```
-public interface FrontInternalAPI {
+public interface FrontInternal.FrontInternalAPI {
 
     /**
      * Part of GUI class

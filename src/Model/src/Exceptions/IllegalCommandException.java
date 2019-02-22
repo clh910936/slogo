@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class IllegalCommandException extends RuntimeException {
 
     /**
