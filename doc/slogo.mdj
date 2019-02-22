@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
+					"name": "FrontInternal.Main",
 					"defaultDiagram": true,
 					"ownedViews": [
 						{
@@ -506,7 +506,7 @@
 											"top": 311,
 											"width": 102.96533203125,
 											"height": 13,
-											"text": "Console"
+											"text": "FrontInternal.Console"
 										},
 										{
 											"_type": "LabelView",
@@ -9052,7 +9052,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Console",
+					"name": "FrontInternal.Console",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

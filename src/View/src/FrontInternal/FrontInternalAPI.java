@@ -1,4 +1,4 @@
-
+package FrontInternal;
 
 public interface FrontInternalAPI {
 
