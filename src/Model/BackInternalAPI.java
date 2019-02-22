@@ -1,5 +1,3 @@
-package in;
-
 public interface BackInternalAPI {
 
     /**
@@ -23,7 +21,7 @@ public interface BackInternalAPI {
      * @param var
      * @throws IllegalCommandException if the variable doesn't exist
      */
-    public void removeVariable(Object var) throws IllegalCommandException;
+    public void removeVariable(Object var) throws Model.IllegalCommandException;
 
     /**
      * Defined within the TurtleModel
@@ -37,7 +35,7 @@ public interface BackInternalAPI {
      * @param coordinates
      * @throws if the coordinates are outside the bounds of the dimensions of the board
      */
-    public void moveTurtleToCoordinates(Object coordinates) throws IllegalCommandException;
+    public void moveTurtleToCoordinates(Object coordinates) throws Model.IllegalCommandException;
 
     /**
      * Defined within the TurtleModel
@@ -88,7 +86,7 @@ public interface BackInternalAPI {
      * Defined within the HistoryModel
      * Removes a certain input from the history data
      */
-    public void removeCommandFromHistory() throws IllegalCommandException;
+    public void removeCommandFromHistory() throws Model.IllegalCommandException;
 
     /**
      * Defined within the HistoryModel
@@ -101,5 +99,5 @@ public interface BackInternalAPI {
      * Parses any input to a command
      * @param consoleInput
      */
-    public void parseCommand(String consoleInput) throws IllegalCommandException;
+    public void parseCommand(String consoleInput) throws Model.IllegalCommandException;
 }

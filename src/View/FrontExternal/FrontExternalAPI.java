@@ -1,4 +1,7 @@
-import java.awt.*;
+package FrontExternal;
+
+
+import javafx.scene.paint.Paint;
 
 public interface FrontExternalAPI {
     /**

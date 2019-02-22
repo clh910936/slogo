@@ -1,9 +1,17 @@
-import java.awt.*;
+package View;
 
-public interface FrontExternalAPI {
+public interface FrontInternalAPI {
+
     /**
-     * part of Board class
-     * clears the drawings off of the board
+     * Part of GUI class
+     * adds an element to the root of the scene
+     * it will take in an object to add to the stage
+     */
+    public void addElement();
+
+    /**
+     * Part of board class
+     * clears the drawings
      */
     public void clearBoard();
 
@@ -12,7 +20,14 @@ public interface FrontExternalAPI {
      * changes the background color of the void
      * will have an argument for the color TBD
      */
-    public void setBackgroundColor(Paint color);
+    public void setBackgroundColor();
+
+    /**
+     * part of Console class
+     * prints an error to be seen by the user
+     * will be used to print errors to user when catching thrown by backend
+     */
+    public void printError(String s);
 
     /**
      * part of TurtleView class.
@@ -35,10 +50,18 @@ public interface FrontExternalAPI {
      */
     public void updateVariables();
 
+    /**
+     * Part of Console class.
+     * prints to the console
+     */
+    public void printToConsole(String s);
+
 
     /**
      * Part of the UserDefinedCommandView class
-     * updates the user defined commands based on the changed made to the UserDefinedCommands model
+     * updates the user defined variables based on the changed made to the UserDefinedVariables model
+     * triggered by backend, using a listener event? (maybe need an external component)
      */
-    public void updateUserDefinedCommands();
+    public void updateUserDefinedVariables();
+
 }
