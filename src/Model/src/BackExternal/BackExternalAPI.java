@@ -9,7 +9,7 @@ public interface BackExternalAPI {
      * Part of the controller. Front-end calls parse() to give unprocessed commands to back-end.
      * @return a unprocessed text object
      */
-    public Object parse(String input) throws Model.IllegalCommandException;
+    public Object parse(String input) throws IllegalCommandException;
 
     /**
      * When the front-end gets told by TurtleModel that the turtle as been updated, the front-end calls getTurtle()

@@ -186,7 +186,7 @@ public interface BackExternalAPI {
 The front-end internal API will include the necessary methods to update the windows displayed to the user. This includes methods to update the history, variables, and user-defined commands as well as methods to display errors to the user and to print to the console. Since parts of the view will follow the `Observer` pattern and monitor the state of different models on the backend, methods from the internal API will be invoked once these models indicate changes in their states.
 
 ```
-public interface FrontInternalAPI {
+public interface FrontInternal.FrontInternalAPI {
 
     /**
      * Part of GUI class
