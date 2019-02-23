@@ -4,7 +4,7 @@ import javafx.collections.ListChangeListener;
 import java.util.List;
 
 /**
- * This class extends ListChangeListener and then displays the changes in a formatted
+ * This class implements ListChangeListener and then displays the changes in a formatted
  * pane with a title and a scrollable view.
  */
 public class ListView implements ListChangeListener {
