@@ -50,15 +50,12 @@ public class Console {
         myStage = stage;
         initializeInstanceVariables();
 
-        //TODO: format button grid pane
-        formatButtonGridPane();
         createRunButton();
         addButtons();
-
         initializeDropDown();
+        formatButtonGridPane();
 
         myBorderPane.setCenter(myTextHBox);
-
         myBorderPane.setRight(myButtonGridPane);
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
@@ -77,7 +74,6 @@ public class Console {
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
-
     }
 
     private void initializeLanguageList(){
@@ -88,10 +84,9 @@ public class Console {
         }
     }
 
-    //TODO: fix magic values
-    //TODO: bind language to variable input into parse
     private void initializeDropDown(){
         myLanguageDropDown.getItems().addAll(myLanguages);
+        myLanguageDropDown.setValue(myResourcesBundle.getString("DEFAULT_LANGUAGE"));
         myButtonGridPane.add(myLanguageDropDown, 0, 1);
     }
 
@@ -127,7 +122,4 @@ public class Console {
         myButtonList.add(temp);
         return temp;
     }
-
-
-
 }
