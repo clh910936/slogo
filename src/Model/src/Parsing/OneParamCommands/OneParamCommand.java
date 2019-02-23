@@ -13,7 +13,7 @@ public abstract class OneParamCommand implements CommandsInfo {
 
     @Override
     public void addParameterToCommand(double val) throws ParamsExceedLimitException {
-        if (isReady) throw new ParamsExceedLimitException("you're giving me too many parameters");
+        if (isReady) throw new ParamsExceedLimitException();
         this.input = val;
         isReady = true;
     }
@@ -23,4 +23,8 @@ public abstract class OneParamCommand implements CommandsInfo {
         return isReady;
     }
 
+    @Override
+    public String getCommandName() {
+        return this.getClass().getSimpleName();
+    }
 }
