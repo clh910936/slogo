@@ -1,19 +1,16 @@
 package FrontInternal;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,22 +30,21 @@ public class Console {
     private List<String> myLanguages;
     private TextArea myUserInputField;
 
-    private final Paint myBorderColor = Color.WHITE;
     private final int CONSOLE_WIDTH = 500;
     private final int CONSOLE_HEIGHT = 300;
-    private final int BUTTON_WIDTH = 60;
+    private final int BUTTON_WIDTH = 80;
     private final int BUTTON_INSET = 5;
     private final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
     private final int BUTTON_VGAP = 10;
     private final String RESOURCE_FILENAME = "Console";
     private final String RUN_BUTTON = "RUN_BUTTON";
-
     private Insets myButtonInsets;
 
 
     public Console(Stage stage){
         myStage = stage;
         initializeInstanceVariables();
+        initializeLanguageList();
 
         createRunButton();
         addButtons();
@@ -66,7 +62,7 @@ public class Console {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
         myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
-        initializeLanguageList();
+
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
         myErrorBox = new HBox();
@@ -85,6 +81,7 @@ public class Console {
     }
 
     private void initializeDropDown(){
+        myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
         myLanguageDropDown.getItems().addAll(myLanguages);
         myLanguageDropDown.setValue(myResourcesBundle.getString("DEFAULT_LANGUAGE"));
         myButtonGridPane.add(myLanguageDropDown, 0, 1);
@@ -92,8 +89,9 @@ public class Console {
 
     private void formatButtonGridPane() {
         myButtonGridPane.setPrefWidth(BUTTON_PANE_WIDTH);
-        myButtonGridPane.setAlignment(Pos.TOP_CENTER);
+
         myButtonGridPane.setVgap(BUTTON_VGAP);
+        myButtonGridPane.setAlignment(Pos.TOP_CENTER);
     }
 
     private void createRunButton() {
