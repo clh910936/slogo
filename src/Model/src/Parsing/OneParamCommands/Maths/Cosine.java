@@ -1,6 +1,8 @@
-package Parsing.OneParamCommands;
+package Parsing.OneParamCommands.Maths;
 
-public class Cosine extends OneParamCommand{
+import Parsing.OneParamCommands.OneParamCommand;
+
+public class Cosine extends OneParamCommand {
     public Cosine() {
         super();
     }

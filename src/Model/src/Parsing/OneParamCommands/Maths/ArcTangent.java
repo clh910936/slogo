@@ -1,4 +1,6 @@
-package Parsing.OneParamCommands;
+package Parsing.OneParamCommands.Maths;
+
+import Parsing.OneParamCommands.OneParamCommand;
 
 public class ArcTangent extends OneParamCommand {
     public ArcTangent() {
