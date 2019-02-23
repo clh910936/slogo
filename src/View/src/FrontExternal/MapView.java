@@ -1,6 +1,7 @@
 package FrontExternal;
 
 import javafx.collections.MapChangeListener;
+import javafx.scene.layout.Pane;
 
 import java.util.Map;
 
@@ -49,5 +50,12 @@ public class MapView implements MapChangeListener {
     //value is the int associated with it
     private String formatString(String s, Integer value){
         return (s + FORMAT + value);
+    }
+
+    /**
+     * @return Pane associated with the MapView
+     */
+    public Pane getPane(){
+        return myViewTemplate;
     }
 }

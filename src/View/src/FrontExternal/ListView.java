@@ -1,6 +1,8 @@
 package FrontExternal;
 
 import javafx.collections.ListChangeListener;
+import javafx.scene.layout.Pane;
+
 import java.util.List;
 
 /**
@@ -41,5 +43,12 @@ public class ListView implements ListChangeListener {
         for(int k = 0; k < tempList.size(); k++){
             myViewPane.addFinalLine(tempList.get(k));
         }
+    }
+
+    /**
+     * @return Pane associated with the MapView
+     */
+    public Pane getPane(){
+        return myViewPane;
     }
 }
