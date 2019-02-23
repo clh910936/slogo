@@ -1,10 +1,13 @@
 package Parsing;
 
+import Exceptions.ParamsExceedLimitException;
+
 public interface CommandsInfo {
 
-    public void addParameterToCommand(double val);
+    void addParameterToCommand(double val) throws ParamsExceedLimitException;
 
-    public boolean isCommandReadyToRemove();
+    boolean isCommandReadyToRemove();
 
+    double executeCommand();
 
 }

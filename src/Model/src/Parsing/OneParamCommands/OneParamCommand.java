@@ -1,5 +1,6 @@
 package Parsing.OneParamCommands;
 
+import Exceptions.ParamsExceedLimitException;
 import Parsing.CommandsInfo;
 
 public abstract class OneParamCommand implements CommandsInfo {
@@ -11,7 +12,8 @@ public abstract class OneParamCommand implements CommandsInfo {
     }
 
     @Override
-    public void addParameterToCommand(double val) {
+    public void addParameterToCommand(double val) throws ParamsExceedLimitException {
+        if (isReady) throw new ParamsExceedLimitException("you're giving me too many parameters");
         this.input = val;
         isReady = true;
     }
@@ -20,10 +22,5 @@ public abstract class OneParamCommand implements CommandsInfo {
     public boolean isCommandReadyToRemove() {
         return isReady;
     }
-
-    public abstract double executeCommand();
-
-
-
 
 }
