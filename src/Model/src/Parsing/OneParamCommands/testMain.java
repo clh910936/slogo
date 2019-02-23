@@ -1,14 +1,17 @@
 package Parsing.OneParamCommands;
 
+
+import Parsing.OneParamCommands.Turtle.Forward;
+
 public class testMain {
 
     public static void main (String[] args) {
-        Random rn = new Random();
-        System.out.println(rn.isCommandReadyToRemove());
-        rn.addParameterToCommand(5);
-        System.out.println(rn.isCommandReadyToRemove());
-        System.out.println(rn.executeCommand());
-//        rn.addParameterToCommand(6);
-//        System.out.println(rn.isCommandReadyToRemove());
+        Forward fd = new Forward();
+        System.out.println(fd.isCommandReadyToRemove());
+        fd.addParameterToCommand(25);
+        System.out.println(fd.isCommandReadyToRemove());
+        System.out.println(fd.executeCommand());
+//        fd.addParameterToCommand(6);
+//        System.out.println(fd.isCommandReadyToRemove());
     }
 }
