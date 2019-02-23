@@ -18,13 +18,24 @@ public class CommandParser {
             String input = commandInputList[0];
             if(isConstant(input)) {
                 if(commandStack.isEmpty()) {
-                    throw new IllegalCommandException("No command found for inputted numbers");
+                    throw new IllegalCommandException("Too many parameters inputted");
                 }
                 Object currCommandObject = commandStack.peek();
-                currCommandObject.addParam(input);
+                currCommandObject.addParameterToCommand(input);
+                //TODO: take into account parameters that arent numbers
+
+                if(currCommandObject.isCommandReadyToRemove()) {
+                    int value = currCommandObject.execute();
+                    commandStack.pop();
+                    Object newCommandObject = commandStack.peek();
+                    newCommandObject.addParameterToCommand(value);
+                }
             }
-            Object commandObject = getCommandObject(input);
-            commandStack.push(commandObject);
+            else {
+                Object commandObject = getCommandObject(input);
+                commandStack.push(commandObject);
+            }
+
 
 
         }
