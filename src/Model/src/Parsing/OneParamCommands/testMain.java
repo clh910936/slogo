@@ -1,17 +1,17 @@
 package Parsing.OneParamCommands;
 
-
-import Parsing.OneParamCommands.Turtle.Forward;
+import Parsing.TwoParamCommands.Maths.Sum;
 
 public class testMain {
 
     public static void main (String[] args) {
-        Forward fd = new Forward();
-        System.out.println(fd.isCommandReadyToRemove());
-        fd.addParameterToCommand(25);
-        System.out.println(fd.isCommandReadyToRemove());
-        System.out.println(fd.executeCommand());
-//        fd.addParameterToCommand(6);
-//        System.out.println(fd.isCommandReadyToRemove());
+        Sum s = new Sum();
+        System.out.println(s.getCommandName());
+        s.addParameterToCommand(3);
+        //System.out.println(s.executeCommand());
+        System.out.println(s.isCommandReadyToRemove());
+        s.addParameterToCommand(8);
+        System.out.println(s.executeCommand());
+        System.out.println(s.isCommandReadyToRemove());
     }
 }

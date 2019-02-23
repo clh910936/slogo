@@ -1,5 +1,6 @@
 package Parsing;
 
+import Exceptions.InsufficientParamsException;
 import Exceptions.ParamsExceedLimitException;
 
 public interface CommandsInfo {
@@ -8,6 +9,8 @@ public interface CommandsInfo {
 
     boolean isCommandReadyToRemove();
 
-    double executeCommand();
+    double executeCommand() throws InsufficientParamsException;
+
+    String getCommandName();
 
 }
