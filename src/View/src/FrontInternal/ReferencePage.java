@@ -29,7 +29,7 @@ public class ReferencePage {
     private static final String NLN = "\n";
 
 
-    ReferencePage(Stage stage) throws IOException {
+    ReferencePage(Stage stage) {
         myStage = stage;
         myStage.setTitle("Command References");
         myResourceBundle = ResourceBundle.getBundle(RESOURCE_NAME);
@@ -42,7 +42,11 @@ public class ReferencePage {
         myOtherAccordion = new Accordion();
         myTabPane = new TabPane();
 
-        createAndAddTab(myResourceBundle.getString("Basic"), "Basic_Files");
+        createAndAddTab(myResourceBundle.getString("Turtle Commands"), "Turtle_Files");
+        createAndAddTab(myResourceBundle.getString("Turtle Queries"), "TurtleQ_Files");
+        createAndAddTab(myResourceBundle.getString("Math Operations"), "Math_Files");
+        createAndAddTab(myResourceBundle.getString("Boolean Operations"), "Boolean_Files");
+        createAndAddTab(myResourceBundle.getString("Other Comands"), "Other_Files");
         //Tab basicTab = new Tab(myResourceBundle.getString("BASIC"));
         //basicTab.setContent(myBasicAccordion);
 
@@ -114,7 +118,7 @@ public class ReferencePage {
 
     //TODO: Deal with possible IOException
     private String readFile(String name) {
-        String fileName = "src/View/ReferencePageFiles/" + name + TXT;
+        String fileName = FILE_SOURCE_PREFIX + name + TXT;
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(fileName));
