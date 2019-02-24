@@ -8,13 +8,17 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ResourceBundle;
 
-
+/**
+ * @author Carrie Hunner
+ * This class creates a reference page of all the different Slogo commands.
+ * In creating an instanve of ReferencePage, it will initialize all the necessary variables
+ * and display the screen. It is coompletely self-contained.
+ */
 public class ReferencePage {
-
     private Stage myStage;
     private TabPane myTabPane;
-
     private ResourceBundle myResourceBundle;
+    private Scene myScene;
 
     private static final String RESOURCE_NAME = "ReferencePage";
     private static final String TXT = ".txt";
@@ -23,24 +27,27 @@ public class ReferencePage {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
 
-
     ReferencePage(Stage stage) {
         myStage = stage;
-        myStage.setTitle("Command References");
-        myResourceBundle = ResourceBundle.getBundle(RESOURCE_NAME);
+        initializeVariables();
+        stage.setScene(myScene);
+        createAllTabs();
+        myStage.show();
+    }
 
+    private void initializeVariables() {
         myTabPane = new TabPane();
+        myScene = new Scene(myTabPane, WIDTH, HEIGHT);
+        myResourceBundle = ResourceBundle.getBundle(RESOURCE_NAME);
+        myStage.setTitle(myResourceBundle.getString("Title"));
+    }
 
+    private void createAllTabs() {
         createAndAddTab("Turtle Commands", "Turtle_Files");
         createAndAddTab("Turtle Queries", "TurtleQ_Files");
         createAndAddTab("Math Operations", "Math_Files");
         createAndAddTab("Boolean Operations", "Boolean_Files");
         createAndAddTab("Other", "Other_Files");
-
-
-        Scene scene = new Scene(myTabPane, WIDTH, HEIGHT);
-        stage.setScene(scene);
-        //stage.show();
     }
 
     /**
@@ -51,10 +58,11 @@ public class ReferencePage {
      */
     private void createAndAddTab(String tabName, String propertyKey) {
         Tab tempTab = new Tab();
-        myTabPane.getTabs().add(tempTab);
+        Accordion tempAccordion = new Accordion();
         ScrollPane outerScrollPane = new ScrollPane();
 
-        Accordion tempAccordion = new Accordion();
+        myTabPane.getTabs().add(tempTab);
+
         tempAccordion.setPrefWidth(WIDTH);
         outerScrollPane.setContent(tempAccordion);
         tempTab.setContent(outerScrollPane);
@@ -75,7 +83,6 @@ public class ReferencePage {
         }
     }
 
-    //TODO: Deal with possible IOException
     private String readFile(String name) {
         String fileName = FILE_SOURCE_PREFIX + name + TXT;
         BufferedReader in = null;
@@ -94,5 +101,4 @@ public class ReferencePage {
         }
 
     }
-
 }
