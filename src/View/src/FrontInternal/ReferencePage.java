@@ -25,7 +25,7 @@ public class ReferencePage {
 
     private static final String RESOURCE_NAME = "ReferencePage";
     private static final String TXT = ".txt";
-    private static final String FILE_SOURCE_PREFIX = "src/View/ReferencePageFiles/";
+    private static final String FILE_SOURCE_PREFIX = "src/View/ReferencePageFiles/sprint1";
     private static final String NLN = "\n";
 
 
@@ -42,11 +42,11 @@ public class ReferencePage {
         myOtherAccordion = new Accordion();
         myTabPane = new TabPane();
 
-        createAndAddTab(myResourceBundle.getString("Turtle Commands"), "Turtle_Files");
-        createAndAddTab(myResourceBundle.getString("Turtle Queries"), "TurtleQ_Files");
-        createAndAddTab(myResourceBundle.getString("Math Operations"), "Math_Files");
-        createAndAddTab(myResourceBundle.getString("Boolean Operations"), "Boolean_Files");
-        createAndAddTab(myResourceBundle.getString("Other Comands"), "Other_Files");
+        createAndAddTab("Turtle Commands", "Turtle_Files");
+        createAndAddTab("Turtle Queries", "TurtleQ_Files");
+        createAndAddTab("Math Operations", "Math_Files");
+        createAndAddTab("Boolean Operations", "Boolean_Files");
+        createAndAddTab("Other Comands", "Other_Files");
         //Tab basicTab = new Tab(myResourceBundle.getString("BASIC"));
         //basicTab.setContent(myBasicAccordion);
 
@@ -85,7 +85,7 @@ public class ReferencePage {
 
         Scene scene = new Scene(myTabPane, 300, 200);
         stage.setScene(scene);
-        stage.show();
+        //stage.show();
     }
 
     /**
