@@ -14,19 +14,14 @@ public class ReferencePage {
     private Stage myStage;
     private TabPane myTabPane;
 
-    private Accordion myBasicAccordion;
-    private Accordion myTurtleAccordion;
-    private Accordion myTurtleQAccordion;
-    private Accordion myMathOpsAccordion;
-    private Accordion myBooleanAccordion;
-    private Accordion myOtherAccordion;
-
     private ResourceBundle myResourceBundle;
 
     private static final String RESOURCE_NAME = "ReferencePage";
     private static final String TXT = ".txt";
-    private static final String FILE_SOURCE_PREFIX = "src/View/ReferencePageFiles/sprint1";
+    private static final String FILE_SOURCE_PREFIX = "src/View/ReferencePageFiles/sprint1/";
     private static final String NLN = "\n";
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 400;
 
 
     ReferencePage(Stage stage) {
@@ -34,19 +29,13 @@ public class ReferencePage {
         myStage.setTitle("Command References");
         myResourceBundle = ResourceBundle.getBundle(RESOURCE_NAME);
 
-        myBasicAccordion = new Accordion();
-        myTurtleAccordion = new Accordion();
-        myTurtleQAccordion = new Accordion();
-        myMathOpsAccordion = new Accordion();
-        myBooleanAccordion = new Accordion();
-        myOtherAccordion = new Accordion();
         myTabPane = new TabPane();
 
         createAndAddTab("Turtle Commands", "Turtle_Files");
         createAndAddTab("Turtle Queries", "TurtleQ_Files");
         createAndAddTab("Math Operations", "Math_Files");
         createAndAddTab("Boolean Operations", "Boolean_Files");
-        createAndAddTab("Other Comands", "Other_Files");
+        createAndAddTab("Other", "Other_Files");
         //Tab basicTab = new Tab(myResourceBundle.getString("BASIC"));
         //basicTab.setContent(myBasicAccordion);
 
@@ -83,7 +72,7 @@ public class ReferencePage {
 //        }
 //        myTabPane
 
-        Scene scene = new Scene(myTabPane, 300, 200);
+        Scene scene = new Scene(myTabPane, WIDTH, HEIGHT);
         stage.setScene(scene);
         //stage.show();
     }
@@ -97,8 +86,12 @@ public class ReferencePage {
     private void createAndAddTab(String tabName, String propertyKey) {
         Tab tempTab = new Tab();
         myTabPane.getTabs().add(tempTab);
+        ScrollPane outerScrollPane = new ScrollPane();
+
         Accordion tempAccordion = new Accordion();
-        tempTab.setContent(tempAccordion);
+        tempAccordion.setPrefWidth(WIDTH);
+        outerScrollPane.setContent(tempAccordion);
+        tempTab.setContent(outerScrollPane);
         tempTab.setText(tabName);
 
         String fileNamesString = myResourceBundle.getString(propertyKey);
