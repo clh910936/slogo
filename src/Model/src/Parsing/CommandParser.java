@@ -4,16 +4,9 @@ import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
 import Variables.VariablesModel;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Stack;
-import java.util.ResourceBundle;
-import java.util.AbstractMap;
-import java.util.Collections;
-import java.util.EmptyStackException;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -72,12 +65,12 @@ public class CommandParser {
                     addParameterToRecentCommand(commandStack, value);
                 }
             }
-            if(input.equals(LIST_START_SYMBOL)) {
-                i = addListParameterToRecentCommand(commandStack, commandInputList, i);
-            }
-            if(input.equals(LIST_END_SYMBOL)) {
-                throw new IllegalCommandException("List parameter is invalid");
-            }
+//            if(input.equals(LIST_START_SYMBOL)) {
+//                i = addListParameterToRecentCommand(commandStack, commandInputList, i);
+//            }
+//            if(input.equals(LIST_END_SYMBOL)) {
+//                throw new IllegalCommandException("List parameter is invalid");
+//            }
             else {
                 CommandsInfo commandObject = getCommandObject(input);
                 commandStack.push(commandObject);
@@ -86,17 +79,17 @@ public class CommandParser {
         return value;
     }
 
-    private int addListParameterToRecentCommand(Stack commandStack, String[] commandInputList, int currentIndex) {
-        try {
-            String[] listContents = getListContents(commandInputList, currentIndex + 1);
-            Object commandObject = commandStack.peek();
-            ((CommandsInfo) commandObject).addListParameterToCommand(listContents);
-            return currentIndex+listContents.length+2;
-        }
-        catch (IllegalCommandException e){
-            throw e;
-        }
-    }
+//    private int addListParameterToRecentCommand(Stack commandStack, String[] commandInputList, int currentIndex) {
+//        try {
+//            String[] listContents = getListContents(commandInputList, currentIndex + 1);
+//            Object commandObject = commandStack.peek();
+//            ((CommandsInfo) commandObject).addListParameterToCommand(listContents);
+//            return currentIndex+listContents.length+2;
+//        }
+//        catch (IllegalCommandException e){
+//            throw e;
+//        }
+//    }
 
     private void addParameterToRecentCommand(Stack commandStack, double value) {
         try{
