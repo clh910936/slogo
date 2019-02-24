@@ -6,12 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,77 +24,85 @@ public class Console {
     private ComboBox myLanguageDropDown;
 
     private ResourceBundle myResourcesBundle;
-    private String myLanguage;
 
     private Button myRunButton;
     private List<Button> myButtonList;
+    private List<String> myLanguages;
     private TextArea myUserInputField;
 
-    private final Paint myBorderColor = Color.WHITE;
     private final int CONSOLE_WIDTH = 500;
     private final int CONSOLE_HEIGHT = 300;
-    private final int BUTTON_WIDTH = 60;
+    private final int BUTTON_WIDTH = 80;
     private final int BUTTON_INSET = 5;
     private final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
     private final int BUTTON_VGAP = 10;
-    private final String RESOURCE_FILENAME = "FrontInternal.Console";
+    private final String RESOURCE_FILENAME = "Console";
     private final String RUN_BUTTON = "RUN_BUTTON";
-
     private Insets myButtonInsets;
 
 
-    Console(Stage stage){
+    public Console(Stage stage){
         myStage = stage;
-        myButtonList = new ArrayList<>();
-        myButtonGridPane = new GridPane();
-        myBorderPane = new BorderPane();
-        myErrorBox = new HBox();
-        myLanguageDropDown = new ComboBox();
-        myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
-        //myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
+        initializeInstanceVariables();
+        initializeLanguageList();
 
-        myUserInputField = new TextArea();
-        myTextHBox = new HBox(myUserInputField);
-
-        //TODO: format button grid pane
-        formatButtonGridPane();
         createRunButton();
         addButtons();
-
         initializeDropDown();
+        formatButtonGridPane();
 
         myBorderPane.setCenter(myTextHBox);
-        myButtonGridPane.add(myLanguageDropDown, 0, 1);
         myBorderPane.setRight(myButtonGridPane);
-
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         myStage.setScene(consoleScene);
     }
 
-    //TODO: fix magic values
-    //TODO: bind language to variable input into parse
+    private void initializeInstanceVariables() {
+        myButtonList = new ArrayList<>();
+        myLanguages = new ArrayList<>();
+        myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
+
+        myButtonGridPane = new GridPane();
+        myBorderPane = new BorderPane();
+        myErrorBox = new HBox();
+        myLanguageDropDown = new ComboBox();
+        myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
+        myUserInputField = new TextArea();
+        myTextHBox = new HBox(myUserInputField);
+    }
+
+    private void initializeLanguageList(){
+        String languages = myResourcesBundle.getString("POSSIBLE_LANGUAGES");
+        String[] temp = languages.split(" ");
+        for(String s : temp){
+            myLanguages.add(s);
+        }
+    }
+
     private void initializeDropDown(){
-        ArrayList<String> languages = new ArrayList<>();
-        languages.add("English");
-        languages.add("French");
-        myLanguageDropDown.getItems().addAll(languages);
-        myLanguageDropDown.setValue("English");
+        myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
+        myLanguageDropDown.getItems().addAll(myLanguages);
+        myLanguageDropDown.setValue(myResourcesBundle.getString("DEFAULT_LANGUAGE"));
+        myButtonGridPane.add(myLanguageDropDown, 0, 1);
     }
 
     private void formatButtonGridPane() {
         myButtonGridPane.setPrefWidth(BUTTON_PANE_WIDTH);
-        myButtonGridPane.setAlignment(Pos.TOP_CENTER);
+
         myButtonGridPane.setVgap(BUTTON_VGAP);
+        myButtonGridPane.setAlignment(Pos.TOP_CENTER);
     }
 
     private void createRunButton() {
-        myRunButton = createAndFormatButton("Run");
+        myRunButton = createAndFormatButton(myResourcesBundle.getString(RUN_BUTTON));
         myRunButton.setOnMouseClicked(e -> readText());
     }
 
     private void readText() {
         String input = myUserInputField.getText();
+        String language = (String) myLanguageDropDown.getValue();
+        System.out.println(language);
         //TODO: Parse
         System.out.println(input);
     }
@@ -113,7 +120,4 @@ public class Console {
         myButtonList.add(temp);
         return temp;
     }
-
-
-
 }
