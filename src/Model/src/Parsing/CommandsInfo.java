@@ -13,8 +13,6 @@ public interface CommandsInfo {
 
     double executeCommand() throws InsufficientParamsException;
 
-    //void addListParameterToCommand(String[] listOfParams);
-
     String getCommandName();
 
 }
