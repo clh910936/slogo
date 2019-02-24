@@ -6,7 +6,6 @@ import Variables.VariablesModel;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -26,6 +25,7 @@ public class CommandParser {
     private static final String CONSTANT_SYMBOL = "Constant";
     private static final String LIST_START_SYMBOL = "ListStart";
     private static final String LIST_END_SYMBOL = "ListEnd";
+    private static final String MAKE_VARIABLE = "MakeVariable";
     private VariablesModel myVariablesModel;
 
     public CommandParser(VariablesModel variablesModel) {
@@ -33,18 +33,17 @@ public class CommandParser {
         myVariablesModel = variablesModel;
     }
 
-    public double parse(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException{
-        addPatterns("languages/" + language);
-        addPatterns("languages/Syntax");
-        Map<String,String> variableMap = new HashMap<>();
+    public double parseCommand(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException {
         String[] commandInputList = commandInput.split(WHITESPACE);
         if(commandInputList.length==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
-        return parseCommand(commandInputList, variableMap);
+        return parseArrayCommand(commandInputList, language);
     }
 
-    public double parseCommand(String[] commandInputList, Map<String,String> variableMap) throws IllegalCommandException, ParamsExceedLimitException{
+    public double parseArrayCommand(String[] commandInputList, String language) throws IllegalCommandException, ParamsExceedLimitException{
+        addPatterns("languages/" + language);
+        addPatterns("languages/Syntax");
         Stack commandStack = new Stack();
         //TODO: handle -1?
         double value = -1;
@@ -54,7 +53,7 @@ public class CommandParser {
 
             if(input.equals(COMMENT_SYMBOL)) continue;
             if(input.equals(VARIABLE_SYMBOL)) {
-                rawInput = myVariablesModel.getVariable(input);
+                rawInput = handleVariable(commandStack,rawInput);
                 input = getRegexSymbol(rawInput);
             }
             if(input.equals(CONSTANT_SYMBOL)) {
@@ -72,10 +71,10 @@ public class CommandParser {
                     addParameterToRecentCommand(commandStack, value);
                 }
             }
-            if(input.equals(LIST_START_SYMBOL)) {
+            else if(input.equals(LIST_START_SYMBOL)) {
                 i = addListParameterToRecentCommand(commandStack, commandInputList, i);
             }
-            if(input.equals(LIST_END_SYMBOL)) {
+            else if(input.equals(LIST_END_SYMBOL)) {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             else {
@@ -84,6 +83,18 @@ public class CommandParser {
             }
         }
         return value;
+    }
+
+    private String handleVariable(Stack commandStack, String rawInput) {
+        Object commandObject = commandStack.peek();
+        if(((CommandsInfo) commandObject).getCommandName().equals(MAKE_VARIABLE)) {
+            ((CommandsInfo) commandObject).addParameterToCommand(rawInput.substring(1));
+            ((CommandsInfo) commandObject).giveVariablesModel(myVariablesModel);
+        }
+        else {
+            rawInput = myVariablesModel.getVariable(rawInput.substring(1));
+            return rawInput;
+        }
     }
 
     private int addListParameterToRecentCommand(Stack commandStack, String[] commandInputList, int currentIndex) {
@@ -104,7 +115,6 @@ public class CommandParser {
             ((CommandsInfo) newCommandObject).addParameterToCommand(value);
         }
         catch (ParamsExceedLimitException e){
-            //TODO: getCommandName()?
             throw e;
         }
         catch (EmptyStackException e) {
