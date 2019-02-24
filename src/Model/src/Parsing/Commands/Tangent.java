@@ -1,6 +1,6 @@
-package Parsing.OneParamCommands;
+package Parsing.Commands;
 
-public class Tangent extends OneParamCommand{
+public class Tangent extends OneParamCommand {
     public Tangent() {
         super();
     }

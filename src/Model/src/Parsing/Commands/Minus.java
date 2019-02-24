@@ -1,4 +1,4 @@
-package Parsing.OneParamCommands;
+package Parsing.Commands;
 
 public class Minus extends OneParamCommand {
     public Minus() {

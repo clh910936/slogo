@@ -9,8 +9,13 @@ import java.util.regex.Pattern;
 
 
 public class CommandParser {
-    public static final String WHITESPACE = "\\s+";
+    private static final String WHITESPACE = "\\s+";
     private List<Map.Entry<String, Pattern>> mySymbols;
+    private static final String COMMENT_SYMBOL = "Comment";
+    private static final String COMMAND_SYMBOL = "Command";
+    private static final String VARIABLE_SYMBOL = "Variable";
+    private static final String CONSTANT_SYMBOL = "Constant";
+
 
     public CommandParser() {
         mySymbols = new ArrayList<>();
@@ -40,7 +45,7 @@ public class CommandParser {
         return parseCommand(commandInput, variableMap);
     }
 
-    public double parseCommand(String commandInput, Map<String,String> variableMap) throws IllegalCommandException{
+    public double parseCommand(String commandInput, Map<String,String> variableMap) throws IllegalCommandException, ParamsExceedLimitException{
         String[] commandInputList = commandInput.split(WHITESPACE);
         if(commandInputList.length==0) {
             throw new IllegalCommandException("No Command Inputted");
@@ -50,23 +55,20 @@ public class CommandParser {
         double value = -1;
         for(int i = 0 ; i<commandInputList.length; i++) {
             String rawInput = commandInputList[i];
-            String input;
-            try {
-                input = getSymbol(rawInput);
-            }
-            catch (IllegalCommandException e){
-                throw e;
-            }
+            String input = getRegexSymbol(rawInput);
+
             System.out.println(rawInput);
             System.out.println(input);
 
-            if(input.equals("Comment")) continue;
-            if(input.equals("Variable")) {
-                input = variableMap.get(input);
+            if(input.equals(COMMENT_SYMBOL)) continue;
+            if(input.equals(VARIABLE_SYMBOL)) {
+                rawInput = variableMap.get(input);
+                input = getRegexSymbol(rawInput);
             }
-            if(input.equals("Constant")) {
+
+            if(input.equals(CONSTANT_SYMBOL)) {
                 if(commandStack.isEmpty()) {
-                    throw new IllegalCommandException("Too many parameters inputted");
+                    throw new ParamsExceedLimitException();
                 }
                 Object currCommandObject = commandStack.peek();
                 ((CommandsInfo) currCommandObject).addParameterToCommand(Double.parseDouble(rawInput));
@@ -75,20 +77,17 @@ public class CommandParser {
                 if(((CommandsInfo) currCommandObject).isCommandReadyToRemove()) {
                     value = ((CommandsInfo) currCommandObject).executeCommand();
                     commandStack.pop();
-//                    if(commandStack.isEmpty()) {
-                        if(i==commandInputList.length-1) break;
-//                        else throw new IllegalCommandException("Too many parameters included");
-//                    }
+                    if(i==commandInputList.length-1 && commandStack.isEmpty()) break;
                     try{
                         Object newCommandObject = commandStack.peek();
                         ((CommandsInfo) newCommandObject).addParameterToCommand(value);
                     }
                     catch (ParamsExceedLimitException e){
                         //TODO: getCommandName()
-                        throw new ParamsExceedLimitException("Too many parameters for the command " );
+                        throw e;
                     }
                     catch (EmptyStackException e) {
-                        throw new ParamsExceedLimitException("Too many parameters for the command " );
+                        throw new ParamsExceedLimitException();
                     }
                 }
             }
@@ -100,11 +99,22 @@ public class CommandParser {
         return value;
     }
 
+    private String getRegexSymbol(String rawInput) {
+        String input;
+        try {
+            input = getSymbol(rawInput);
+        }
+        catch (IllegalCommandException e){
+            throw e;
+        }
+        return input;
+    }
+
     private CommandsInfo getCommandObject(String command) {
         Class commandClass;
         Object commandObject = null;
         try{
-            commandClass = Class.forName("Parsing.OneParamCommands."+command);
+            commandClass = Class.forName("Parsing.Commands."+command);
         }
         catch (ClassNotFoundException e) {
             throw new IllegalCommandException(command + " is not a valid command");

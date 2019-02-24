@@ -1,6 +1,6 @@
-package Parsing.OneParamCommands;
+package Parsing.Commands;
 
-public class Random extends OneParamCommand{
+public class Random extends OneParamCommand {
     public Random() {
         super();
     }

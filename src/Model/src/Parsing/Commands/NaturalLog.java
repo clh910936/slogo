@@ -1,6 +1,6 @@
-package Parsing.OneParamCommands;
+package Parsing.Commands;
 
-public class NaturalLog extends OneParamCommand{
+public class NaturalLog extends OneParamCommand {
     public NaturalLog() {
         super();
     }

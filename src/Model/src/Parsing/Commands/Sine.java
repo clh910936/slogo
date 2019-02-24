@@ -1,6 +1,6 @@
-package Parsing.OneParamCommands;
+package Parsing.Commands;
 
-public class Sine extends OneParamCommand{
+public class Sine extends OneParamCommand {
 
     public Sine() {
         super();
