@@ -36,41 +36,7 @@ public class ReferencePage {
         createAndAddTab("Math Operations", "Math_Files");
         createAndAddTab("Boolean Operations", "Boolean_Files");
         createAndAddTab("Other", "Other_Files");
-        //Tab basicTab = new Tab(myResourceBundle.getString("BASIC"));
-        //basicTab.setContent(myBasicAccordion);
 
-        //File f = new File("and.txt");
-
-        //Text text = new Text(readFile(f.getAbsolutePath()));
-        //TitledPane temp = new TitledPane();
-        //temp.setContent(text);
-        //myBasicAccordion.getPanes().add(temp);
-
-        /**
-         *
-         */
-
-        //myTabPane.getTabs().add(basicTab);
-
-
-
-//        for(int k = 0; k < 3; k++){
-//            TitledPane temp = new TitledPane();
-//            Text text = new Text(Integer.toString(k));
-//            temp.setContent(text);
-//            myBasicAccordion.getPanes().add(temp);
-//        }
-//        myTabPane.getTabs().add(basicTab);
-//
-//        Tab turtleTab = new Tab("Turtle Commands");
-//        turtleTab.setContent(myTurtleAccordion);
-//        for(int k = 0; k < 3; k++){
-//            TitledPane temp = new TitledPane();
-//            Text text = new Text(Integer.toString(k));
-//            temp.setContent(text);
-//            myTurtleAccordion.getPanes().add(temp);
-//        }
-//        myTabPane
 
         Scene scene = new Scene(myTabPane, WIDTH, HEIGHT);
         stage.setScene(scene);
