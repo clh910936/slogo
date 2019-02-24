@@ -2,6 +2,7 @@ package BackExternal;
 
 import java.util.List;
 import java.util.Map;
+import Exceptions.IllegalCommandException;
 
 public interface BackExternalAPI {
 
