@@ -1,4 +1,4 @@
-package Parsing.TwoParamCommands;
+package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
 import Parsing.CommandsInfo;

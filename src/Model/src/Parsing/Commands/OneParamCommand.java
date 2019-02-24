@@ -1,4 +1,4 @@
-package Parsing.OneParamCommands;
+package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
 import Parsing.CommandsInfo;

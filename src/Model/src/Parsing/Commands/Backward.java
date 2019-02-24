@@ -1,10 +1,8 @@
-package Parsing.OneParamCommands.Turtle;
+package Parsing.Commands;
 
-import Parsing.OneParamCommands.OneParamCommand;
+public class Backward extends OneParamCommand {
 
-public class Right extends OneParamCommand {
-
-    public Right() {
+    public Backward() {
         super();
     }
 

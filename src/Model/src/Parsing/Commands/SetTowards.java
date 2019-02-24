@@ -1,10 +1,8 @@
-package Parsing.OneParamCommands.Turtle;
+package Parsing.Commands;
 
-import Parsing.OneParamCommands.OneParamCommand;
+public class SetTowards extends OneParamCommand {
 
-public class SetHeading extends OneParamCommand {
-
-    public SetHeading() {
+    public SetTowards() {
         super();
     }
 

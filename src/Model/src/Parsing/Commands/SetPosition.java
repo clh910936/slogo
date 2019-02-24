@@ -1,9 +1,8 @@
-package Parsing.OneParamCommands.Turtle;
+package Parsing.Commands;
 
-import Parsing.OneParamCommands.OneParamCommand;
+public class SetPosition extends OneParamCommand {
 
-public class Left extends OneParamCommand {
-    public Left() {
+    public SetPosition() {
         super();
     }
 

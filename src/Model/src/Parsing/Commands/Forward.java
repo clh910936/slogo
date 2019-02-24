@@ -1,6 +1,4 @@
-package Parsing.OneParamCommands.Turtle;
-
-import Parsing.OneParamCommands.OneParamCommand;
+package Parsing.Commands;
 
 public class Forward extends OneParamCommand {
 

@@ -1,6 +1,4 @@
-package Parsing.OneParamCommands.Maths;
-
-import Parsing.OneParamCommands.OneParamCommand;
+package Parsing.Commands;
 
 public class Not extends OneParamCommand {
 
