@@ -1,5 +1,9 @@
 package FrontInternal;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Console extends Stage{
+public class Console extends Stage {
     //private CommandParser myParser;
     private BorderPane myBorderPane;
     private HBox myTextHBox;
@@ -39,6 +43,7 @@ public class Console extends Stage{
     private final String RESOURCE_FILENAME = "Console";
     private final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
+    private boolean displaying = true;
 
 
     //public Console(Stage stage, CommandParser parser){
@@ -57,6 +62,7 @@ public class Console extends Stage{
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         this.setScene(consoleScene);
+        setOnCloseRequest(e -> displaying = false);
         this.show();
     }
 
@@ -122,5 +128,9 @@ public class Console extends Stage{
         temp.setPadding(myButtonInsets);
         myButtonList.add(temp);
         return temp;
+    }
+
+    public boolean getDisplaying(){
+        return displaying;
     }
 }

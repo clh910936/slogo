@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //var model = new model();
-        // should pass model into this
+        // should pass model into this maybe
         var display = new GUI();
         stage.setTitle(TITLE);
         stage.setScene(display.getScene());

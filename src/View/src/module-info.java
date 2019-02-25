@@ -2,6 +2,7 @@ module View {
     requires javafx.base;
     requires javafx.graphics;
     requires javafx.controls;
-    exports FrontExternal;
+    requires java.desktop;
+    requires javafx.web;
     exports Main;
 }
