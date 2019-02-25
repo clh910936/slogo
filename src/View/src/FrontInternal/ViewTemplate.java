@@ -1,4 +1,4 @@
-package FrontExternal;
+package FrontInternal;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
  * This is used in both ListView and MapView to format the HistoryView, VariablesView,
  * and UserDefinedCommandsView
  */
-class ViewTemplate extends BorderPane {
+public class ViewTemplate extends BorderPane {
     private GridPane myGridPane;
     private HBox myTitleBox;
     private ScrollPane myVariableScroll;
@@ -28,7 +28,7 @@ class ViewTemplate extends BorderPane {
      * Creates a ListView object with the Title set and no content text
      * @param title String of the name to appear at the top of the pane
      */
-    ViewTemplate(String title){
+    public ViewTemplate(String title){
         myGridPane = new GridPane();
         myTitleBox = new HBox();
         myVariableScroll = new ScrollPane();
@@ -52,7 +52,7 @@ class ViewTemplate extends BorderPane {
      * This line cannot be edited by the user
      * @param s String of text to be added
      */
-    protected void addFinalLine(String s){
+    public void addFinalLine(String s){
         HBox tempHBox = new HBox();
         Text tempText = new Text(s);
         tempHBox.getChildren().add(tempText);
@@ -63,7 +63,7 @@ class ViewTemplate extends BorderPane {
     /**
      * Removes all lines of text from the pane
      */
-    protected void clearLines(){
+    public void clearLines(){
         myGridPane.getChildren().clear();
         myGridIndex = 0;
     }

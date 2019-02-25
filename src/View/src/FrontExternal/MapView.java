@@ -1,5 +1,6 @@
 package FrontExternal;
 
+import FrontInternal.ViewTemplate;
 import javafx.collections.MapChangeListener;
 import javafx.scene.layout.Pane;
 
