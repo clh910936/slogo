@@ -19,7 +19,7 @@ public abstract class OneParamCommand implements CommandsInfo {
     }
 
     @Override
-    public boolean isCommandReadyToRemove() {
+    public boolean isCommandReadyToExecute() {
         return isReady;
     }
 
