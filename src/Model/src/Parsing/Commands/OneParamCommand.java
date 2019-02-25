@@ -12,14 +12,14 @@ public abstract class OneParamCommand implements CommandsInfo {
     }
 
     @Override
-    public void addParameterToCommand(double val) throws ParamsExceedLimitException {
+    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
         if (isReady) throw new ParamsExceedLimitException();
-        this.input = val;
+        this.input = (double) val;
         isReady = true;
     }
 
     @Override
-    public boolean isCommandReadyToRemove() {
+    public boolean isCommandReadyToExecute() {
         return isReady;
     }
 

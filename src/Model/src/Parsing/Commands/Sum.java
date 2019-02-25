@@ -9,7 +9,7 @@ public class Sum extends TwoParamCommand {
 
     @Override
     public double executeCommand() throws InsufficientParamsException {
-        if (! isCommandReadyToRemove()) throw new InsufficientParamsException();
+        if (! isCommandReadyToExecute()) throw new InsufficientParamsException();
         return input1 + input2;
     }
 }

@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class SetTowards extends OneParamCommand {
+public class SetTowards extends TwoParamCommand {
 
     public SetTowards() {
         super();
@@ -9,6 +9,6 @@ public class SetTowards extends OneParamCommand {
     @Override
     public double executeCommand() {
         // TODO: talk to front-end and return the right thing
-        return input;
+        return input1;
     }
 }

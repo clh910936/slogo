@@ -3,36 +3,39 @@ package Parsing.Commands;
 import Exceptions.ParamsExceedLimitException;
 import Parsing.CommandsInfo;
 
-public abstract class TwoParamCommand implements CommandsInfo {
+public abstract class LoopCommand implements CommandsInfo {
     public static final int MAX_PARAMS = 2;
-    protected double input1;
-    protected double input2;
     private int numOfInputs;
+    protected String[] input1;
+    protected String[] input2;
 
-    public TwoParamCommand() {
+
+    public LoopCommand() {
         numOfInputs = 0;
     }
 
     @Override
-    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
+    public void addParameterToCommand(Object listOfParams) throws ParamsExceedLimitException{
         if (numOfInputs >= MAX_PARAMS) throw new ParamsExceedLimitException();
-
         if (numOfInputs == 0) {
-            this.input1 = (double) val;
+            this.input1 = (String[]) listOfParams;
         }
         if (numOfInputs == 1) {
-            this.input2 = (double) val;
+            this.input2 = (String[]) listOfParams;
         }
         numOfInputs++;
     }
 
     @Override
     public boolean isCommandReadyToExecute() {
-        return (numOfInputs == MAX_PARAMS);
+        return (input1 != null && input2 != null);
     }
+
 
     @Override
     public String getCommandName() {
         return this.getClass().getSimpleName();
     }
+
+
 }
