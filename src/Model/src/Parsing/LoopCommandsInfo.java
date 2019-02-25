@@ -1,12 +1,14 @@
 package Parsing;
 
-public interface LoopCommandsInfo {
+import Exceptions.IllegalLoopParamsException;
+
+public interface LoopCommandsInfo extends CommandsGeneral{
 
 
     void addListParameterToCommand(String[] listOfParams);
 
 
-    double executeCommand();
+    double executeLoop() throws IllegalLoopParamsException;
 
 
 

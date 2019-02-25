@@ -5,11 +5,11 @@ import Exceptions.ParamsExceedLimitException;
 
 import java.util.Collection;
 
-public interface CommandsInfo {
+public interface CommandsInfo extends CommandsGeneral{
 
     void addParameterToCommand(double val) throws ParamsExceedLimitException;
 
-    boolean isCommandReadyToRemove();
+
 
     double executeCommand() throws InsufficientParamsException;
 
