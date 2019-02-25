@@ -15,9 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Console {
-    private Stage myStage;
-    private CommandParser myParser;
+public class Console extends Stage{
+    //private CommandParser myParser;
     private BorderPane myBorderPane;
     private HBox myTextHBox;
     private GridPane myButtonGridPane;
@@ -42,9 +41,9 @@ public class Console {
     private Insets myButtonInsets;
 
 
-    public Console(Stage stage, CommandParser parser){
-        myStage = stage;
-        myParser = parser;
+    //public Console(Stage stage, CommandParser parser){
+    public Console (){
+        //myParser = parser;
         initializeInstanceVariables();
         initializeLanguageList();
 
@@ -57,7 +56,8 @@ public class Console {
         myBorderPane.setRight(myButtonGridPane);
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
-        myStage.setScene(consoleScene);
+        this.setScene(consoleScene);
+        this.show();
     }
 
     private void initializeInstanceVariables() {
@@ -107,7 +107,7 @@ public class Console {
         System.out.println(language);
         //TODO: Parse
         System.out.println(input);
-        parser.parse(language, input);
+        //parser.parse(language, input);
     }
 
     private void addButtons(){
