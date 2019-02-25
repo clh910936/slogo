@@ -24,8 +24,7 @@ public class For extends LoopCommand {
     }
 
     @Override
-    public double executeLoop() throws IllegalLoopParamsException {
-        System.out.println("IN execute loop");
+    public double executeCommand() {
         if (input1.length != NUM_PARAMS) throw new IllegalLoopParamsException();
         if (! isCommandReadyToExecute()) return 0;
 
@@ -48,14 +47,15 @@ public class For extends LoopCommand {
                     newCommandArray[j] = variableValues.get(i).toString();
                 }
             }
+            if(newCommandArray.length==0) return 0;
             // TODO: made just to test || prob be moved
             String newCommand = String.join(" ", newCommandArray);
             CommandParser cp = new CommandParser(new VariablesModel());
-            out = cp.parse(newCommand, "English");
+            out = cp.parseCommand(newCommand, "English");
         }
-        System.out.println("OUT: " + out);
-
         return out;
     }
+
+
 }
 

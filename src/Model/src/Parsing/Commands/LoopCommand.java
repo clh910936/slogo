@@ -1,9 +1,9 @@
 package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.LoopCommandsInfo;
+import Parsing.CommandsGeneral;
 
-public abstract class LoopCommand implements LoopCommandsInfo {
+public abstract class LoopCommand implements CommandsGeneral {
     public static final int MAX_PARAMS = 2;
     private int numOfInputs;
     protected String[] input1;
@@ -15,13 +15,13 @@ public abstract class LoopCommand implements LoopCommandsInfo {
     }
 
     @Override
-    public void addListParameterToCommand(String[] listOfParams) throws ParamsExceedLimitException{
+    public void addParameterToCommand(Object listOfParams) throws ParamsExceedLimitException{
         if (numOfInputs >= MAX_PARAMS) throw new ParamsExceedLimitException();
         if (numOfInputs == 0) {
-            this.input1 = listOfParams;
+            this.input1 = (String[]) listOfParams;
         }
         if (numOfInputs == 1) {
-            this.input2 = listOfParams;
+            this.input2 = (String[]) listOfParams;
         }
         numOfInputs++;
     }
@@ -32,6 +32,10 @@ public abstract class LoopCommand implements LoopCommandsInfo {
     }
 
 
+    @Override
+    public String getCommandName() {
+        return this.getClass().getSimpleName();
+    }
 
 
 }

@@ -2,10 +2,8 @@ package Parsing;
 
 import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
-import Parsing.Commands.LoopCommand;
 import Variables.VariablesModel;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -13,64 +11,69 @@ import java.util.regex.Pattern;
 
 public class CommandParser {
     private static final String WHITESPACE = "\\s+";
-    private List<Map.Entry<String, Pattern>> mySymbols;
-
     private static final String COMMENT_SYMBOL = "Comment";
     private static final String VARIABLE_SYMBOL = "Variable";
     private static final String CONSTANT_SYMBOL = "Constant";
     private static final String LIST_START_SYMBOL = "ListStart";
     private static final String LIST_END_SYMBOL = "ListEnd";
+    private static final String MAKE_VARIABLE = "MakeVariable";
+    private static final String LANGUAGES_SYNTAX_FILE = "languages/Syntax";
+    private static final String LANGUAGES_FILE = "languages/";
+
+    private List<Map.Entry<String, Pattern>> mySymbols;
     private VariablesModel myVariablesModel;
+
 
     public CommandParser(VariablesModel variablesModel) {
         mySymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
     }
 
-    public double parse(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException{
-        addPatterns("languages/" + language);
-        addPatterns("languages/Syntax");
-        Map<String,String> variableMap = new HashMap<>();
+    public double parseCommand(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException {
         String[] commandInputList = commandInput.split(WHITESPACE);
         if(commandInputList.length==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
-        return parseCommand(commandInputList, variableMap);
-    }
+        addPatterns(LANGUAGES_FILE + language);
+        addPatterns(LANGUAGES_SYNTAX_FILE);
 
-    public double parseCommand(String[] commandInputList, Map<String,String> variableMap) throws IllegalCommandException, ParamsExceedLimitException{
         Stack commandStack = new Stack();
-        //TODO: handle -1?
-        double value = -1;
-        for(int i = 0 ; i<commandInputList.length; i++) {
+        double currentReturnValue = -1;
+        int i = 0;
+
+        while(i<commandInputList.length || !commandStack.isEmpty()) {
             String rawInput = commandInputList[i];
             String input = getRegexSymbol(rawInput);
 
-            System.out.println("Index: " + i + "|| raw: " + rawInput + "|| regex: " + input);
-
-            if(input.equals(COMMENT_SYMBOL)) continue;
+            if(input.equals(COMMENT_SYMBOL)) {
+                i++;
+                continue;
+            }
 
             if(input.equals(VARIABLE_SYMBOL)) {
-                rawInput = myVariablesModel.getVariable(input);
-                input = getRegexSymbol(rawInput);
+                CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+                if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
+                    commandObject.addParameterToCommand(rawInput.substring(1));
+                    // TODO: add giveVariablesModel method
+                    commandObject.giveVariablesModel(myVariablesModel);
+                }
+                else {
+                    rawInput = myVariablesModel.getVariable(rawInput.substring(1));
+                    input = getRegexSymbol(rawInput);
+                }
             }
-            else if(input.equals(CONSTANT_SYMBOL)) {
+            if(input.equals(CONSTANT_SYMBOL)) {
                 if(commandStack.isEmpty()) {
                     throw new ParamsExceedLimitException();
                 }
-                Object currCommandObject = commandStack.peek();
-                ((CommandsInfo) currCommandObject).addParameterToCommand(Double.parseDouble(rawInput));
-                //TODO: take into account parameters that arent numbers?
-
-                if(((CommandsInfo) currCommandObject).isCommandReadyToExecute()) {
-                    value = ((CommandsInfo) currCommandObject).executeCommand();
-                    commandStack.pop();
-                    if(i==commandInputList.length-1 && commandStack.isEmpty()) break;
-                    addParameterToRecentCommand(commandStack, value);
-                }
+                currentReturnValue = executeCommandsOnStack(commandStack, Double.parseDouble(rawInput), currentReturnValue);
+                i++;
             }
             else if(input.equals(LIST_START_SYMBOL)) {
-                i = addListParameterToRecentCommand(commandStack, commandInputList, i);
+                String[] listContents = getListContents(commandInputList, i + 1);
+                currentReturnValue = executeCommandsOnStack(commandStack, listContents, currentReturnValue);
+                int listLength = listContents.length + 2;
+                i+=listLength;
             }
             else if(input.equals(LIST_END_SYMBOL)) {
                 throw new IllegalCommandException("List parameter is invalid");
@@ -78,46 +81,40 @@ public class CommandParser {
             else {
                 CommandsGeneral commandObject = getCommandObject(input);
                 commandStack.push(commandObject);
-
+                i++;
             }
         }
-        return value;
+        if(currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
+        return currentReturnValue;
     }
 
-    private int addListParameterToRecentCommand(Stack commandStack, String[] commandInputList, int currentIndex) {
-        try {
-            String[] listContents = getListContents(commandInputList, currentIndex + 1);
-            Object commandObject = commandStack.peek();
-
-            ((LoopCommandsInfo) commandObject).addListParameterToCommand(listContents);
-
-            if (((LoopCommandsInfo) commandObject).isCommandReadyToExecute()) {
-                System.out.println("EXECUTING");
-                ((LoopCommandsInfo) commandObject).executeLoop();
-            }
-
-
-
-            // TODO: @michael changed this from +2 to +1
-            return currentIndex+listContents.length+1;
-        }
-        catch (IllegalCommandException e){
-            throw e;
-        }
-    }
-
-    private void addParameterToRecentCommand(Stack commandStack, double value) {
+    private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) {
+        CommandsGeneral commandObject;
         try{
-            Object newCommandObject = commandStack.peek();
-            ((CommandsInfo) newCommandObject).addParameterToCommand(value);
-        }
-        catch (ParamsExceedLimitException e){
-            //TODO: getCommandName()?
-            throw e;
+            commandObject = addParameterToCommand(commandStack, parameter);
         }
         catch (EmptyStackException e) {
             throw new ParamsExceedLimitException();
         }
+        while(commandObject.isCommandReadyToExecute()) {
+            currentReturnValue = commandObject.executeCommand();
+            commandStack.pop();
+            if (commandStack.isEmpty()) break;
+            commandObject = addParameterToCommand(commandStack, currentReturnValue);
+        }
+        return currentReturnValue;
+    }
+
+
+    private CommandsGeneral addParameterToCommand(Stack commandStack, Object value) {
+        CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+        try{
+            commandObject.addParameterToCommand(value);
+        }
+        catch (ParamsExceedLimitException e){
+            throw e;
+        }
+        return commandObject;
     }
 
     private String[] getListContents(String[] commandInputList, int currentIndex) throws IllegalCommandException{
@@ -128,10 +125,8 @@ public class CommandParser {
             String input = getRegexSymbol(rawInput);
             if(!input.equals(LIST_END_SYMBOL)) listContents.add(rawInput);
             else {
-                for (String s : listContents) System.out.print(s + "|");
                 return listContents.toArray(new String[listContents.size()]);
             }
-
             currentIndex++;
         }
         throw new IllegalCommandException("Invalid List Parameter");

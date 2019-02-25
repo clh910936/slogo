@@ -1,9 +1,9 @@
 package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsInfo;
+import Parsing.CommandsGeneral;
 
-public abstract class OneParamCommand implements CommandsInfo {
+public abstract class OneParamCommand implements CommandsGeneral {
     protected double input;
     private boolean isReady;
 
@@ -12,9 +12,9 @@ public abstract class OneParamCommand implements CommandsInfo {
     }
 
     @Override
-    public void addParameterToCommand(double val) throws ParamsExceedLimitException {
+    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
         if (isReady) throw new ParamsExceedLimitException();
-        this.input = val;
+        this.input = (double) val;
         isReady = true;
     }
 

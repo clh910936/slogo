@@ -1,9 +1,9 @@
 package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsInfo;
+import Parsing.CommandsGeneral;
 
-public abstract class TwoParamCommand implements CommandsInfo {
+public abstract class TwoParamCommand implements CommandsGeneral {
     public static final int MAX_PARAMS = 2;
     protected double input1;
     protected double input2;
@@ -14,14 +14,14 @@ public abstract class TwoParamCommand implements CommandsInfo {
     }
 
     @Override
-    public void addParameterToCommand(double val) throws ParamsExceedLimitException {
+    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
         if (numOfInputs >= MAX_PARAMS) throw new ParamsExceedLimitException();
 
         if (numOfInputs == 0) {
-            this.input1 = val;
+            this.input1 = (double) val;
         }
         if (numOfInputs == 1) {
-            this.input2 = val;
+            this.input2 = (double) val;
         }
         numOfInputs++;
     }
