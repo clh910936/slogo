@@ -1,9 +1,9 @@
 package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsInfo;
+import Parsing.CommandsGeneral;
 
-public abstract class LoopCommand implements CommandsInfo {
+public abstract class LoopCommand implements CommandsGeneral {
     public static final int MAX_PARAMS = 2;
     private int numOfInputs;
     protected String[] input1;

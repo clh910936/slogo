@@ -1,9 +1,9 @@
 package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsInfo;
+import Parsing.CommandsGeneral;
 
-public abstract class OneParamCommand implements CommandsInfo {
+public abstract class OneParamCommand implements CommandsGeneral {
     protected double input;
     private boolean isReady;
 

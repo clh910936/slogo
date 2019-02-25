@@ -8,4 +8,6 @@ public interface CommandsGeneral {
     void addParameterToCommand(Object val) throws ParamsExceedLimitException;
 
     double executeCommand() throws InsufficientParamsException;
+    String getCommandName();
+
 }
