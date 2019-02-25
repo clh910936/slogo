@@ -107,7 +107,7 @@ public class Console {
         System.out.println(language);
         //TODO: Parse
         System.out.println(input);
-        parser.parse(language, input);
+        parser.parseCommand(input, language);
     }
 
     private void addButtons(){
