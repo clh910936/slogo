@@ -5,14 +5,7 @@ import Exceptions.ParamsExceedLimitException;
 import Variables.VariablesModel;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Stack;
-import java.util.ResourceBundle;
-import java.util.AbstractMap;
-import java.util.Collections;
-import java.util.EmptyStackException;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -38,10 +31,6 @@ public class CommandParser {
         if(commandInputList.length==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
-        return parseArrayCommand(commandInputList, language);
-    }
-
-    public double parseArrayCommand(String[] commandInputList, String language) throws IllegalCommandException, ParamsExceedLimitException{
         addPatterns("languages/" + language);
         addPatterns("languages/Syntax");
         Stack commandStack = new Stack();
@@ -59,7 +48,8 @@ public class CommandParser {
                 Object commandObject = commandStack.peek();
                 if(((CommandsInfo) commandObject).getCommandName().equals(MAKE_VARIABLE)) {
                     ((CommandsInfo) commandObject).addParameterToCommand(rawInput.substring(1));
-                    ((CommandsInfo) commandObject).giveVariablesModel(myVariablesModel);
+                    // TODO: add giveVariablesModel method
+//                    ((CommandsInfo) commandObject).giveVariablesModel(myVariablesModel);
                 }
                 else {
                     rawInput = myVariablesModel.getVariable(rawInput.substring(1));
@@ -70,22 +60,31 @@ public class CommandParser {
                 if(commandStack.isEmpty()) {
                     throw new ParamsExceedLimitException();
                 }
-                CommandsGeneral currCommandObject = (CommandsGeneral) commandStack.peek();
-                currCommandObject.addParameterToCommand(Double.parseDouble(rawInput));
-                while(currCommandObject.isCommandReadyToExecute()) {
-                    System.out.println(value);
-                    value = currCommandObject.executeCommand();
-                    commandStack.pop();
-                    if(i==commandInputList.length-1 && commandStack.isEmpty()) break;
-                    currCommandObject = (CommandsGeneral) commandStack.peek();
-                    addParameterToCommand(currCommandObject, value);
+
+//                while(currCommandObject.isCommandReadyToExecute()) {
+//                    value = currCommandObject.executeCommand();
+//                    commandStack.pop();
+//                    if(i==commandInputList.length-1 && commandStack.isEmpty()) break;
+//                    currCommandObject = (CommandsGeneral) commandStack.peek();
+//                    addParameterToCommand(currCommandObject, value);
+//                }
+                CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+                addParameterToCommand(commandObject, Double.parseDouble(rawInput));
+                if(commandObject.isCommandReadyToExecute()) {
+                    value = returnValueAfterCollapsingStack(commandStack);
                 }
+                if(i==commandInputList.length-1 && commandStack.isEmpty()) break;
                 i++;
             }
             else if(input.equals(LIST_START_SYMBOL)) {
                 String[] listContents = getListContents(commandInputList, i + 1);
-                addListParameterToRecentCommand(commandStack, listContents);
-                i = i+listContents.length+1;
+                CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+                addListParameterToRecentCommand(commandObject, listContents);
+                if(commandObject.isCommandReadyToExecute()) {
+                    value = returnValueAfterCollapsingStack(commandStack);
+                }
+                if(i==commandInputList.length-1 && commandStack.isEmpty()) break;
+                i = i+listContents.length+2;
             }
             else if(input.equals(LIST_END_SYMBOL)) {
                 throw new IllegalCommandException("List parameter is invalid");
@@ -100,11 +99,23 @@ public class CommandParser {
         return value;
     }
 
+    private double returnValueAfterCollapsingStack(Stack commandStack) {
+        double value = -1;
+        CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+        while(commandObject.isCommandReadyToExecute()) {
+            value = commandObject.executeCommand();
+            commandStack.pop();
+            if (commandStack.isEmpty()) break;
+            commandObject = (CommandsGeneral) commandStack.peek();
+            addParameterToCommand(commandObject, value);
+        }
+        return value;
+    }
 
 
-    private String[] addListParameterToRecentCommand(Stack commandStack, String[] listContents) {
+
+    private String[] addListParameterToRecentCommand(CommandsGeneral commandObject, String[] listContents) {
         try {
-            CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
             commandObject.addParameterToCommand(listContents);
             return listContents;
         }
@@ -113,7 +124,7 @@ public class CommandParser {
         }
     }
 
-    private void addParameterToCommand(CommandsGeneral commandObject, double value) {
+    private void addParameterToCommand(CommandsGeneral commandObject, Object value) {
         try{
             commandObject.addParameterToCommand(value);
         }
@@ -133,10 +144,9 @@ public class CommandParser {
             String input = getRegexSymbol(rawInput);
             if(!input.equals(LIST_END_SYMBOL)) listContents.add(rawInput);
             else {
-                for (String s : listContents) System.out.print(s + "|");
+//                for (String s : listContents) System.out.print(s + "|");
                 return listContents.toArray(new String[listContents.size()]);
             }
-
             currentIndex++;
         }
         throw new IllegalCommandException("Invalid List Parameter");

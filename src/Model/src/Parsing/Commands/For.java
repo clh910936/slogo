@@ -47,6 +47,7 @@ public class For extends LoopCommand {
                     newCommandArray[j] = variableValues.get(i).toString();
                 }
             }
+            if(newCommandArray.length==0) return 0;
             // TODO: made just to test || prob be moved
             String newCommand = String.join(" ", newCommandArray);
             CommandParser cp = new CommandParser(new VariablesModel());
