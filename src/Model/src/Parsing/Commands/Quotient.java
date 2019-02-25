@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Quotient extends TwoParamCommand {
+public class Quotient extends TwoParamCommandDoubles {
 
     public Quotient() {
         super();

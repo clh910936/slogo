@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Or extends TwoParamCommand {
+public class Or extends TwoParamCommandDoubles {
 
     public Or() {
         super();

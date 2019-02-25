@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class LessThan extends TwoParamCommand{
+public class LessThan extends TwoParamCommandDoubles {
 
     public LessThan() {
         super();

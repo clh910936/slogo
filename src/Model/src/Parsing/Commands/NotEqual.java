@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class NotEqual extends TwoParamCommand{
+public class NotEqual extends TwoParamCommandDoubles {
 
     public NotEqual() {
         super();
