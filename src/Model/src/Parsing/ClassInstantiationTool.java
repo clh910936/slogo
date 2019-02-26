@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ClassInstantiationTool {
 
-    private static Object getObject(String classPath, String className) {
+    public static Object getObject(String classPath, String className) {
         Class classToInstantiate = findReflectionClass(classPath, className);
         Object instantiatedObject = instantiateReflectionClass(classToInstantiate);
         return instantiatedObject;

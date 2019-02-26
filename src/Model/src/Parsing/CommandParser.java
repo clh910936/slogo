@@ -15,6 +15,7 @@ public class CommandParser {
     public static final String CONSTANT_SYMBOL = "Constant";
     public static final String LIST_START_SYMBOL = "ListStart";
     public static final String LIST_END_SYMBOL = "ListEnd";
+    public static final String COMMAND_SYMBOL = "Command";
     public static final String MAKE_VARIABLE = "MakeVariable";
     private static final String SYNTAX_FILE = "languages/Syntax";
     private static final String LANGUAGES_FILE = "languages/";
@@ -72,15 +73,19 @@ public class CommandParser {
             else if(input.equals(LIST_END_SYMBOL)) {
                 throw new IllegalCommandException("List parameter is invalid");
             }
-            else {
-                String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-                CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
-                commandStack.push(commandObject);
+            else if (input.equals(COMMAND_SYMBOL)){
+                pushNewCommandObject(commandStack, input);
                 i++;
             }
         }
         if(currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
         return currentReturnValue;
+    }
+
+    private void pushNewCommandObject(Stack commandStack, String input) {
+        String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
+        CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
+        commandStack.push(commandObject);
     }
 
     private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) throws ParamsExceedLimitException {
