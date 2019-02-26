@@ -8,6 +8,7 @@ import FrontExternal.MapView;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -33,6 +34,7 @@ public class GUI {
     private MapView myMapView;
     private Console myConsole;
     private Board myBoard;
+    private HBox myRoot;
 
     private ResourceBundle myResources;
 
@@ -41,15 +43,15 @@ public class GUI {
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
         var right = makeRightView();
-        var root = new HBox(left, right);
-        root.setHgrow(right, Priority.ALWAYS);
+        myRoot = new HBox(left, right);
+        myRoot.setHgrow(right, Priority.ALWAYS);
 //        root.setRight(makeRightView());
 //        root.setLeft(makeBoard());
-        myScene = new Scene(root, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+        myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
     private Node makeRightView() {
-        return new VBox(makeListView(), makeMapView());
+        return new VBox(makeListView(), makeMapView(), makeButton("Move", e -> myBoard.move()));
     }
 
     private Node makeBoard() {
