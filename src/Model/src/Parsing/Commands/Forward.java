@@ -4,9 +4,8 @@ import Turtle.TurtleModel;
 
 public class Forward extends OneParamCommand {
 
-    public Forward(TurtleModel turtleModel) {
+    public Forward() {
         super();
-        this.turtle = turtleModel;
     }
 
     @Override
