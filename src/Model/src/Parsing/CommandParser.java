@@ -2,6 +2,7 @@ package Parsing;
 
 import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
+import Parsing.Commands.MakeVariable;
 import Turtle.TurtleModel;
 import Variables.VariablesModel;
 
@@ -56,7 +57,8 @@ public class CommandParser {
                 CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
                 if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
                     commandObject.addParameterToCommand(rawInput.substring(1));
-                    //commandObject.giveVariablesModel(myVariablesModel);
+                    ((MakeVariable) commandObject).giveVariablesModel(myVariablesModel);
+                    i++;
                 }
                 else {
                     rawInput = Double.toString(parseCommand(myVariablesModel.getVariable(rawInput.substring(1)),language));
@@ -77,7 +79,7 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             else if (input.equals(COMMAND_SYMBOL)){
-                pushNewCommandObject(commandStack, input);
+                pushNewCommandObject(commandStack, rawInput);
                 i++;
             }
         }
@@ -88,7 +90,7 @@ public class CommandParser {
     private void pushNewCommandObject(Stack commandStack, String input) {
         String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
         CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
-        commandObject.addParameterToCommand(myTurtleModel);
+//        commandObject.addParameterToCommand(myTurtleModel);
         commandStack.push(commandObject);
     }
 
@@ -115,6 +117,8 @@ public class CommandParser {
 
     private CommandsGeneral addParameterToLastCommand(Stack commandStack, Object value) {
         CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+        System.out.println(commandObject.getCommandName());
+
         try{
             commandObject.addParameterToCommand(value);
         }

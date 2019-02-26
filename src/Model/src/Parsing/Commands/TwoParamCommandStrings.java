@@ -5,7 +5,7 @@ import Parsing.CommandsGeneral;
 
 public abstract class TwoParamCommandStrings extends TwoParamCommand implements CommandsGeneral {
     protected String input1;
-    protected double input2;
+    protected Double input2;
 
     @Override
     public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
@@ -15,7 +15,7 @@ public abstract class TwoParamCommandStrings extends TwoParamCommand implements 
             this.input1 = (String) val;
         }
         if (numOfInputs == 1) {
-            this.input2 = (double) val;
+            this.input2 = (Double) val;
         }
         numOfInputs++;
     }

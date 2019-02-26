@@ -53,6 +53,7 @@ public class For extends LoopCommand {
             // TODO: made just to test || prob be moved
             String newCommand = String.join(" ", newCommandArray);
             CommandParser cp = new CommandParser(new VariablesModel(), turtle);
+            //TODO: can't hard code in English
             out = cp.parseCommand(newCommand, "English");
         }
         return out;
