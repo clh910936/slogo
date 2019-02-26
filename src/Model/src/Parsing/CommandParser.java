@@ -77,7 +77,7 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             else if (input.equals(COMMAND_SYMBOL)){
-                pushNewCommandObject(commandStack, input);
+                pushNewCommandObject(commandStack, rawInput);
                 i++;
             }
         }

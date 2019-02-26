@@ -39,7 +39,7 @@ public class ClassInstantiationTool {
         catch (InvocationTargetException e) {
             System.out.println("Could not instantiate " + myClass);
         }
-        if(instantiatedObject!=null) return myClass;
+        if(instantiatedObject!=null) return instantiatedObject;
         else {
             throw new IllegalArgumentException();
         }
