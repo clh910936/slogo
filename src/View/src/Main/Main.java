@@ -16,6 +16,7 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         stage.setScene(display.getScene());
         stage.show();
+       // new Console();
 
     }
 

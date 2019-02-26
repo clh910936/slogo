@@ -10,10 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -28,17 +32,29 @@ public class GUI {
     private ListView myListView;
     private MapView myMapView;
     private Console myConsole;
+    private Board myBoard;
 
     private ResourceBundle myResources;
 
     // private
     public GUI() {
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
-        var root = new BorderPane();
-        root.setRight(makeListView());
-        root.setLeft(makeMapView());
-        //root.setCenter(makeConsoleButton());
+        var left = makeBoard();
+        var right = makeRightView();
+        var root = new HBox(left, right);
+        root.setHgrow(right, Priority.ALWAYS);
+//        root.setRight(makeRightView());
+//        root.setLeft(makeBoard());
         myScene = new Scene(root, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+    }
+
+    private Node makeRightView() {
+        return new VBox(makeListView(), makeMapView());
+    }
+
+    private Node makeBoard() {
+        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height);
+        return new HBox(myBoard);
     }
 
     private Node makeConsoleButton() {
