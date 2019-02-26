@@ -1,4 +1,4 @@
-package Parsing.History;
+package History;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,11 +12,11 @@ public class HistoryModel {
         myHistory = new ArrayList<>();
     }
 
-    public void addHistoryEntry(String command) {
+    public void addHistoryEntry(String command, Boolean successful) {
         myHistory.add(command);
     }
 
-    public List<String> getVariables() {
+    public List<String> getHistory() {
         return Collections.unmodifiableList(myHistory);
     }
 }

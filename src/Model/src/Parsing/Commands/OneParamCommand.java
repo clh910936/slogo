@@ -15,6 +15,10 @@ public abstract class OneParamCommand implements CommandsGeneral {
 
     @Override
     public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
+        if (val instanceof TurtleModel) {
+            turtle = (TurtleModel) val;
+            return;
+        }
         if (isReady) throw new ParamsExceedLimitException();
         this.input = (double) val;
         isReady = true;

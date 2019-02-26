@@ -61,7 +61,7 @@ public class CommandParser {
                     i++;
                 }
                 else {
-                    rawInput = Double.toString(parseCommand(myVariablesModel.getVariable(rawInput.substring(1)),language));
+                    rawInput = myVariablesModel.getVariable(rawInput.substring(1));
                     input = Regex.getRegexSymbol(rawInput, mySymbols);
                 }
             }
@@ -90,7 +90,7 @@ public class CommandParser {
     private void pushNewCommandObject(Stack commandStack, String input) {
         String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
         CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
-//        commandObject.addParameterToCommand(myTurtleModel);
+        commandObject.addParameterToCommand(myTurtleModel);
         commandStack.push(commandObject);
     }
 

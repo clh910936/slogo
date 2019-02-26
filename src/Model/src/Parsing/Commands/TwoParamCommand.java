@@ -2,9 +2,11 @@ package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
 import Parsing.CommandsGeneral;
+import Turtle.TurtleModel;
 
 public abstract class TwoParamCommand implements CommandsGeneral {
     public static final int MAX_PARAMS = 2;
+    protected TurtleModel turtle;
     protected int numOfInputs;
     public TwoParamCommand() {
         numOfInputs = 0;

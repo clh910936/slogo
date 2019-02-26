@@ -10,6 +10,7 @@ public class parsertestmain {
                 "fd :random\n", "English"));
 //        System.out.println(cp.parseCommand("sum 10 10", "English"));
 
+
         //System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
