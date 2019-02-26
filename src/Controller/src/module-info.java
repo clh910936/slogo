@@ -1,3 +1,0 @@
-module Controller {
-    requires Model;
-}
