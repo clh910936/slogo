@@ -8,7 +8,7 @@ public class Backward extends OneParamCommand {
 
     @Override
     public double executeCommand() {
-        // TODO: talk to front-end and return the right thing
+        this.turtle.moveForward(-input);
         return input;
     }
 }

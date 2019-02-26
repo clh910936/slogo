@@ -8,7 +8,9 @@ public class SetTowards extends TwoParamCommandDoubles {
 
     @Override
     public double executeCommand() {
-        // TODO: talk to front-end and return the right thing
-        return input1;
+        double newAngle = turtle.getAngleToPoint(input1, input2);
+        double diff = turtle.getDegreesDifference(newAngle);
+        turtle.setHeadingAngle(newAngle);
+        return diff;
     }
 }

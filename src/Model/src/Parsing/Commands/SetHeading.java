@@ -8,7 +8,8 @@ public class SetHeading extends OneParamCommand {
 
     @Override
     public double executeCommand() {
-        // TODO: talk to front-end and return the right thing
-        return input;
+        double difference = this.turtle.getDegreesDifference(input);
+        this.turtle.setHeadingAngle(input);
+        return difference;
     }
 }

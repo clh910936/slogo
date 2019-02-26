@@ -7,7 +7,7 @@ public class Left extends OneParamCommand {
 
     @Override
     public double executeCommand() {
-        // TODO: talk to front-end and return the right thing
+        this.turtle.turnCounterClockwise(input);
         return input;
     }
 }
