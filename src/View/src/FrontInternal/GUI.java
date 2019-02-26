@@ -37,7 +37,7 @@ public class GUI {
         var root = new BorderPane();
         root.setRight(makeListView());
         root.setLeft(makeMapView());
-        root.setCenter(makeConsoleButton());
+        //root.setCenter(makeConsoleButton());
         myScene = new Scene(root, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
