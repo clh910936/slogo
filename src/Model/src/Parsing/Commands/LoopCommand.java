@@ -2,12 +2,14 @@ package Parsing.Commands;
 
 import Exceptions.ParamsExceedLimitException;
 import Parsing.CommandsGeneral;
+import Turtle.TurtleModel;
 
 public abstract class LoopCommand implements CommandsGeneral {
     public static final int MAX_PARAMS = 2;
     private int numOfInputs;
     protected String[] input1;
     protected String[] input2;
+    protected TurtleModel turtle;
 
 
     public LoopCommand() {

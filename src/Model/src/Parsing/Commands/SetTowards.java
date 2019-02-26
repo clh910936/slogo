@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class SetTowards extends TwoParamCommand {
+public class SetTowards extends TwoParamCommandDoubles {
 
     public SetTowards() {
         super();

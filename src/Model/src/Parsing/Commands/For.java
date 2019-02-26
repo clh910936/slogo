@@ -3,6 +3,7 @@ package Parsing.Commands;
 import Exceptions.IllegalLoopParamsException;
 import Exceptions.InsufficientParamsException;
 import Parsing.CommandParser;
+import Turtle.TurtleModel;
 import Variables.VariablesModel;
 
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ public class For extends LoopCommand {
     public static final int INCR_LOC = 3;
 
 
-    public For() {
+    public For(TurtleModel turtleModel) {
         super();
+        this.turtle = turtleModel;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class For extends LoopCommand {
             if(newCommandArray.length==0) return 0;
             // TODO: made just to test || prob be moved
             String newCommand = String.join(" ", newCommandArray);
-            CommandParser cp = new CommandParser(new VariablesModel());
+            CommandParser cp = new CommandParser(new VariablesModel(), turtle);
             out = cp.parseCommand(newCommand, "English");
         }
         return out;

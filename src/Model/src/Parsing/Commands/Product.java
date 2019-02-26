@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Product extends TwoParamCommand{
+public class Product extends TwoParamCommandDoubles {
 
     public Product() {
         super();

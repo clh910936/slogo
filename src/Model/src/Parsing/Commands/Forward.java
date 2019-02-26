@@ -1,14 +1,18 @@
 package Parsing.Commands;
 
+import Turtle.TurtleModel;
+
 public class Forward extends OneParamCommand {
 
-    public Forward() {
+    public Forward(TurtleModel turtleModel) {
         super();
+        this.turtle = turtleModel;
     }
 
     @Override
     public double executeCommand() {
-        //TODO: talk to front-end and return the right thing
+        this.turtle.moveForward(input);
+        this.turtle.printTurtleStatus();
         return input;
     }
 }

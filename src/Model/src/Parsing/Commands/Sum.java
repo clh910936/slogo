@@ -2,7 +2,7 @@ package Parsing.Commands;
 
 import Exceptions.InsufficientParamsException;
 
-public class Sum extends TwoParamCommand {
+public class Sum extends TwoParamCommandDoubles {
     public Sum() {
         super();
     }

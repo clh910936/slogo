@@ -1,5 +1,6 @@
 package Parsing.Commands;
 
+
 public class Not extends OneParamCommand {
 
     public Not() {
