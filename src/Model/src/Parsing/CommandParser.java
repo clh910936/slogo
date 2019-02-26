@@ -4,13 +4,12 @@ import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
 import Variables.VariablesModel;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
 
 
 public class CommandParser {
-    private static final String WHITESPACE = "\\s+";
+    public static final String WHITESPACE = "\\s+";
     public static final String COMMENT_SYMBOL = "Comment";
     public static final String VARIABLE_SYMBOL = "Variable";
     public static final String CONSTANT_SYMBOL = "Constant";
@@ -21,13 +20,14 @@ public class CommandParser {
     private static final String LANGUAGES_FILE = "languages/";
     private static final String COMMANDS_PACKAGE_PATH = "Parsing.Commands.";
 
-    public static List<Map.Entry<String, Pattern>> mySymbols;
+    private List<Map.Entry<String, Pattern>> mySymbols;
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
 
 
     public CommandParser(VariablesModel variablesModel) {
         mySymbols = new ArrayList<>();
+        myCommandSymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
@@ -41,32 +41,25 @@ public class CommandParser {
         Stack commandStack = new Stack();
         double currentReturnValue = -1;
         int i = 0;
-
         while(i<commandInputList.length || !commandStack.isEmpty()) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput, mySymbols);
-
             if(input.equals(COMMENT_SYMBOL)) {
                 i++;
                 continue;
             }
-
             if(input.equals(VARIABLE_SYMBOL)) {
                 CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
                 if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
                     commandObject.addParameterToCommand(rawInput.substring(1));
-                    // TODO: add giveVariablesModel method
-                    commandObject.giveVariablesModel(myVariablesModel);
+//                    commandObject.giveVariablesModel(myVariablesModel);
                 }
                 else {
-                    rawInput = myVariablesModel.getVariable(rawInput.substring(1));
-                    input = Regex.getRegexSymbol(rawInput,mySymbols);
+                    rawInput = Double.toString(parseCommand(myVariablesModel.getVariable(rawInput.substring(1)),language));
+                    input = Regex.getRegexSymbol(rawInput, mySymbols);
                 }
             }
             if(input.equals(CONSTANT_SYMBOL)) {
-                if(commandStack.isEmpty()) {
-                    throw new ParamsExceedLimitException();
-                }
                 currentReturnValue = executeCommandsOnStack(commandStack, Double.parseDouble(rawInput), currentReturnValue);
                 i++;
             }
@@ -81,7 +74,7 @@ public class CommandParser {
             }
             else {
                 String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-                CommandsGeneral commandObject = (CommandsGeneral) getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
+                CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
                 commandStack.push(commandObject);
                 i++;
             }
@@ -90,10 +83,13 @@ public class CommandParser {
         return currentReturnValue;
     }
 
-    private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) {
+    private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) throws ParamsExceedLimitException {
+        if(commandStack.isEmpty()) {
+            throw new ParamsExceedLimitException();
+        }
         CommandsGeneral commandObject;
         try{
-            commandObject = addParameterToCommand(commandStack, parameter);
+            commandObject = addParameterToLastCommand(commandStack, parameter);
         }
         catch (EmptyStackException e) {
             throw new ParamsExceedLimitException();
@@ -102,13 +98,13 @@ public class CommandParser {
             currentReturnValue = commandObject.executeCommand();
             commandStack.pop();
             if (commandStack.isEmpty()) break;
-            commandObject = addParameterToCommand(commandStack, currentReturnValue);
+            commandObject = addParameterToLastCommand(commandStack, currentReturnValue);
         }
         return currentReturnValue;
     }
 
 
-    private CommandsGeneral addParameterToCommand(Stack commandStack, Object value) {
+    private CommandsGeneral addParameterToLastCommand(Stack commandStack, Object value) {
         CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
         try{
             commandObject.addParameterToCommand(value);
@@ -120,7 +116,6 @@ public class CommandParser {
     }
 
     private String[] getListContents(String[] commandInputList, int currentIndex) throws IllegalCommandException{
-
         List<String> listContents = new ArrayList<>();
         while(currentIndex<commandInputList.length) {
             String rawInput = commandInputList[currentIndex];
@@ -133,50 +128,4 @@ public class CommandParser {
         }
         throw new IllegalCommandException("Invalid List Parameter");
     }
-
-
-
-
-
-    private Object getObject(String classPath, String className) {
-        Class classToInstantiate = findReflectionClass(classPath, className);
-        Object instantiatedObject = instantiateReflectionClass(classToInstantiate);
-        return instantiatedObject;
-    }
-
-    private Class findReflectionClass(String classPath, String classToFind) {
-        Class foundClass;
-        try{
-            foundClass = Class.forName(classPath + classToFind);
-        }
-        catch (ClassNotFoundException e) {
-            throw new IllegalCommandException(classToFind + " is not a valid command");
-        }
-        return foundClass;
-    }
-
-    private Object instantiateReflectionClass(Class myClass) {
-        Object instantiatedObject = null;
-        try{
-            instantiatedObject = myClass.getDeclaredConstructor().newInstance();
-        }
-        catch (NoSuchMethodException e){
-            System.out.println(myClass + " has no constructor");
-        }
-        catch (InstantiationException e) {
-            System.out.println("Could not instantiate " + myClass);
-        }
-        catch (IllegalAccessException e) {
-            System.out.println("Could not instantiate " + myClass);
-        }
-        catch (InvocationTargetException e) {
-            System.out.println("Could not instantiate " + myClass);
-        }
-        if(instantiatedObject!=null) return myClass;
-        else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-
-    }
+}

@@ -2,18 +2,23 @@ package Parsing;
 
 import Exceptions.IllegalCommandException;
 
-import java.util.*;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Collections;
+import java.util.AbstractMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Regex {
 
-    public static void addPatterns (String syntax, List<Map.Entry<String, Pattern>> mySymbols) {
+    public static List<Map.Entry<String, Pattern>> addPatterns (String syntax, List<Map.Entry<String, Pattern>> mySymbols) {
         var resources = ResourceBundle.getBundle(syntax);
         for (var key : Collections.list(resources.getKeys())) {
             var regex = resources.getString(key);
             mySymbols.add(new AbstractMap.SimpleEntry<>(key,
                     Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
+        return mySymbols;
     }
 
     /**
