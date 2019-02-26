@@ -11,22 +11,25 @@ import java.util.regex.Pattern;
 
 public class CommandParser {
     private static final String WHITESPACE = "\\s+";
-    private static final String COMMENT_SYMBOL = "Comment";
-    private static final String VARIABLE_SYMBOL = "Variable";
-    private static final String CONSTANT_SYMBOL = "Constant";
-    private static final String LIST_START_SYMBOL = "ListStart";
-    private static final String LIST_END_SYMBOL = "ListEnd";
-    private static final String MAKE_VARIABLE = "MakeVariable";
-    private static final String LANGUAGES_SYNTAX_FILE = "languages/Syntax";
+    public static final String COMMENT_SYMBOL = "Comment";
+    public static final String VARIABLE_SYMBOL = "Variable";
+    public static final String CONSTANT_SYMBOL = "Constant";
+    public static final String LIST_START_SYMBOL = "ListStart";
+    public static final String LIST_END_SYMBOL = "ListEnd";
+    public static final String MAKE_VARIABLE = "MakeVariable";
+    private static final String SYNTAX_FILE = "languages/Syntax";
     private static final String LANGUAGES_FILE = "languages/";
+    private static final String COMMANDS_PACKAGE_PATH = "Parsing.Commands.";
 
-    private List<Map.Entry<String, Pattern>> mySymbols;
+    public static List<Map.Entry<String, Pattern>> mySymbols;
+    private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
 
 
     public CommandParser(VariablesModel variablesModel) {
         mySymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
+        Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
     public double parseCommand(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException {
@@ -34,16 +37,14 @@ public class CommandParser {
         if(commandInputList.length==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
-        addPatterns(LANGUAGES_FILE + language);
-        addPatterns(LANGUAGES_SYNTAX_FILE);
-
+        Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
         Stack commandStack = new Stack();
         double currentReturnValue = -1;
         int i = 0;
 
         while(i<commandInputList.length || !commandStack.isEmpty()) {
             String rawInput = commandInputList[i];
-            String input = getRegexSymbol(rawInput);
+            String input = Regex.getRegexSymbol(rawInput, mySymbols);
 
             if(input.equals(COMMENT_SYMBOL)) {
                 i++;
@@ -59,7 +60,7 @@ public class CommandParser {
                 }
                 else {
                     rawInput = myVariablesModel.getVariable(rawInput.substring(1));
-                    input = getRegexSymbol(rawInput);
+                    input = Regex.getRegexSymbol(rawInput,mySymbols);
                 }
             }
             if(input.equals(CONSTANT_SYMBOL)) {
@@ -79,7 +80,8 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             else {
-                CommandsGeneral commandObject = getCommandObject(input);
+                String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
+                CommandsGeneral commandObject = (CommandsGeneral) getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
                 commandStack.push(commandObject);
                 i++;
             }
@@ -122,7 +124,7 @@ public class CommandParser {
         List<String> listContents = new ArrayList<>();
         while(currentIndex<commandInputList.length) {
             String rawInput = commandInputList[currentIndex];
-            String input = getRegexSymbol(rawInput);
+            String input = Regex.getRegexSymbol(rawInput,mySymbols);
             if(!input.equals(LIST_END_SYMBOL)) listContents.add(rawInput);
             else {
                 return listContents.toArray(new String[listContents.size()]);
@@ -132,72 +134,49 @@ public class CommandParser {
         throw new IllegalCommandException("Invalid List Parameter");
     }
 
-    private String getRegexSymbol(String rawInput) {
-        String input;
-        try {
-            input = getSymbol(rawInput);
-        }
-        catch (IllegalCommandException e){
-            throw e;
-        }
-        return input;
+
+
+
+
+    private Object getObject(String classPath, String className) {
+        Class classToInstantiate = findReflectionClass(classPath, className);
+        Object instantiatedObject = instantiateReflectionClass(classToInstantiate);
+        return instantiatedObject;
     }
 
-    private CommandsGeneral getCommandObject(String command) {
-        Class commandClass;
-        Object commandObject = null;
+    private Class findReflectionClass(String classPath, String classToFind) {
+        Class foundClass;
         try{
-            commandClass = Class.forName("Parsing.Commands."+command);
+            foundClass = Class.forName(classPath + classToFind);
         }
         catch (ClassNotFoundException e) {
-            throw new IllegalCommandException(command + " is not a valid command");
+            throw new IllegalCommandException(classToFind + " is not a valid command");
         }
+        return foundClass;
+    }
+
+    private Object instantiateReflectionClass(Class myClass) {
+        Object instantiatedObject = null;
         try{
-            commandObject = commandClass.getDeclaredConstructor().newInstance();
+            instantiatedObject = myClass.getDeclaredConstructor().newInstance();
         }
         catch (NoSuchMethodException e){
-            System.out.println(commandClass + " has no constructor");
+            System.out.println(myClass + " has no constructor");
         }
         catch (InstantiationException e) {
-            System.out.println("Could not instantiate " + commandClass);
+            System.out.println("Could not instantiate " + myClass);
         }
         catch (IllegalAccessException e) {
-            System.out.println("Could not instantiate " + commandClass);
+            System.out.println("Could not instantiate " + myClass);
         }
         catch (InvocationTargetException e) {
-            System.out.println("Could not instantiate " + commandClass);
+            System.out.println("Could not instantiate " + myClass);
         }
-        if(commandObject!=null) return (CommandsGeneral) commandObject;
+        if(instantiatedObject!=null) return myClass;
         else {
             throw new IllegalArgumentException();
         }
     }
 
-    private void addPatterns (String syntax) {
-        var resources = ResourceBundle.getBundle(syntax);
-        for (var key : Collections.list(resources.getKeys())) {
-            var regex = resources.getString(key);
-            mySymbols.add(new AbstractMap.SimpleEntry<>(key,
-                    Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
-        }
-    }
 
-    /**
-     * Returns language's type associated with the given text if one exists
-     */
-    public String getSymbol (String text) throws IllegalCommandException{
-        for (var e : mySymbols) {
-            if (match(text, e.getValue())) {
-                return e.getKey();
-            }
-        }
-        throw new IllegalCommandException(text + " is not a valid command");
-    }
-
-    /**
-     * Returns true if the given text matches the given regular expression pattern
-     */
-    private boolean match (String text, Pattern regex) {
-        return regex.matcher(text).matches();
-    }
     }
