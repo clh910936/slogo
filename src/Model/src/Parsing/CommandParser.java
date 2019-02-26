@@ -2,6 +2,7 @@ package Parsing;
 
 import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
+import Turtle.TurtleModel;
 import Variables.VariablesModel;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,11 +23,13 @@ public class CommandParser {
 
     private List<Map.Entry<String, Pattern>> mySymbols;
     private VariablesModel myVariablesModel;
+    private TurtleModel myTurtleModel;
 
 
-    public CommandParser(VariablesModel variablesModel) {
+    public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel) {
         mySymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
+        myTurtleModel = turtleModel;
     }
 
     public double parseCommand(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException {
@@ -55,7 +58,7 @@ public class CommandParser {
                 if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
                     commandObject.addParameterToCommand(rawInput.substring(1));
                     // TODO: add giveVariablesModel method
-                    commandObject.giveVariablesModel(myVariablesModel);
+                    //commandObject.giveVariablesModel(myVariablesModel);
                 }
                 else {
                     rawInput = myVariablesModel.getVariable(rawInput.substring(1));
