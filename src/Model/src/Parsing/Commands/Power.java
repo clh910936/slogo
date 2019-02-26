@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Power extends TwoParamCommand{
+public class Power extends TwoParamCommandDoubles {
     public Power() {
         super();
     }

@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Equal extends TwoParamCommand {
+public class Equal extends TwoParamCommandDoubles {
 
     public Equal() {
         super();

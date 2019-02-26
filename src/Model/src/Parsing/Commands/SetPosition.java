@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class SetPosition extends TwoParamCommand {
+public class SetPosition extends TwoParamCommandDoubles {
 
     public SetPosition() {
         super();

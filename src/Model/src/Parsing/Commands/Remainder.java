@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Remainder extends TwoParamCommand{
+public class Remainder extends TwoParamCommandDoubles {
     public Remainder() {
         super();
     }

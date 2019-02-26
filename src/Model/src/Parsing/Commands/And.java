@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class And extends TwoParamCommand{
+public class And extends TwoParamCommandDoubles{
 
     public And() {
         super();

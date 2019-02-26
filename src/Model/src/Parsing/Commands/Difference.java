@@ -1,6 +1,6 @@
 package Parsing.Commands;
 
-public class Difference extends TwoParamCommand{
+public class Difference extends TwoParamCommandDoubles {
 
     public Difference() {
         super();

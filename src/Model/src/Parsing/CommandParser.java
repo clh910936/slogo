@@ -2,6 +2,7 @@ package Parsing;
 
 import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
+import Turtle.TurtleModel;
 import Variables.VariablesModel;
 
 import java.util.*;
@@ -24,12 +25,14 @@ public class CommandParser {
     private List<Map.Entry<String, Pattern>> mySymbols;
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
+    private TurtleModel myTurtleModel;
 
 
-    public CommandParser(VariablesModel variablesModel) {
+    public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel) {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
+        myTurtleModel = turtleModel;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
@@ -53,7 +56,7 @@ public class CommandParser {
                 CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
                 if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
                     commandObject.addParameterToCommand(rawInput.substring(1));
-//                    commandObject.giveVariablesModel(myVariablesModel);
+                    //commandObject.giveVariablesModel(myVariablesModel);
                 }
                 else {
                     rawInput = Double.toString(parseCommand(myVariablesModel.getVariable(rawInput.substring(1)),language));
@@ -85,6 +88,7 @@ public class CommandParser {
     private void pushNewCommandObject(Stack commandStack, String input) {
         String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
         CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
+        commandObject.addParameterToCommand(myTurtleModel);
         commandStack.push(commandObject);
     }
 
