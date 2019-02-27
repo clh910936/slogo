@@ -1,14 +1,14 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class Forward extends OneParamCommand {
 
-    public Forward(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
+    public Forward(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtle, variablesModel, userCreatedCommandsModel);
     }
     @Override
     public double executeCommand() throws IllegalParametersException {

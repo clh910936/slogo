@@ -1,12 +1,12 @@
 package Commands;
 
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class Tangent extends OneParamCommand {
-    public Tangent(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
+    public Tangent(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtle, variablesModel, userCreatedCommandsModel);
     }
 
     @Override

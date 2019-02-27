@@ -1,10 +1,12 @@
 package Models;
 
+import BackExternal.Observer;
+
 public class TurtleListener extends Observer {
 
-    private TurtleModel myObservable;
+    private Turtle myObservable;
 
-    public TurtleListener(TurtleModel tm) {
+    public TurtleListener(Turtle tm) {
         this.myObservable = tm;
     }
 

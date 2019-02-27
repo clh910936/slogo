@@ -1,13 +1,13 @@
 package Commands;
 
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class SetHeading extends OneParamCommand {
 
-    public SetHeading(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
+    public SetHeading(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtle, variablesModel, userCreatedCommandsModel);
     }
 
     @Override

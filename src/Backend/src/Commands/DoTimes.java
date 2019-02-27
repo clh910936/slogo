@@ -1,20 +1,18 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 import Parsing.CommandParser;
-
-import java.util.Arrays;
 
 public class DoTimes extends TwoParamCommand{
     private CommandParser cp;
     public static final int VAR_LOC = 0;
     public static final int LIMIT_LOC = 1;
 
-    public DoTimes(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
+    public DoTimes(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtle, variablesModel, userCreatedCommandsModel);
         cp = new CommandParser(new VariablesModel(), myTurtle, myUserCreatedCommandsModel);
     }
 

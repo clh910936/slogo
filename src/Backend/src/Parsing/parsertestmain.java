@@ -1,7 +1,7 @@
 package Parsing;
 
 import Models.TurtleListener;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
@@ -53,7 +53,7 @@ public class parsertestmain {
 //                "  fd :dist\n" +
 //                "]", "English"));
 
-        TurtleModel tm = new TurtleModel(2000, 2000,false, 0, true);
+        Turtle tm = new Turtle(2000, 2000,false, 0, true);
         CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserCreatedCommandsModel());
         TurtleListener tl = new TurtleListener(tm);
         tm.add(tl);

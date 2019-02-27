@@ -1,4 +1,6 @@
-package Models;
+package BackExternal;
+
+import BackExternal.Observer;
 
 import java.util.List;
 

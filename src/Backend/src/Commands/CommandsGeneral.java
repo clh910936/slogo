@@ -2,7 +2,7 @@ package Commands;
 
 
 import BackExternal.IllegalParametersException;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CommandsGeneral {
-    protected TurtleModel myTurtle;
+    protected Turtle myTurtle;
     protected VariablesModel myVariablesModel;
     protected UserCreatedCommandsModel myUserCreatedCommandsModel;
     protected List<Object> myParams;
     protected String myLanguage;
 
-    public CommandsGeneral(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public CommandsGeneral(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
         myVariablesModel = variablesModel;
-        myTurtle = turtleModel;
+        myTurtle = turtle;
         myUserCreatedCommandsModel = userCreatedCommandsModel;
         myLanguage = language;
         myParams = new ArrayList<>();
@@ -27,8 +27,8 @@ public abstract class CommandsGeneral {
     public abstract boolean isCommandReadyToExecute();
     public abstract double executeCommand() throws ClassCastException;
     public void addParameterToCommand(Object val) throws IllegalParametersException {
-        if( val instanceof TurtleModel) {
-            myTurtle = (TurtleModel) val;
+        if( val instanceof Turtle) {
+            myTurtle = (Turtle) val;
             return;
         }
         myParams.add(val);
