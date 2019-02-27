@@ -1,8 +1,8 @@
 package Commands;
 
 public class Tangent extends OneParamCommand {
-    public Tangent() {
-        super();
+    public Tangent(String language) {
+        super(language);
     }
 
     @Override

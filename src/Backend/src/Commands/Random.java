@@ -1,8 +1,8 @@
 package Commands;
 
 public class Random extends OneParamCommand {
-    public Random() {
-        super();
+    public Random(String language) {
+        super(language);
     }
 
     @Override

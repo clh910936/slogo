@@ -2,8 +2,8 @@ package Commands;
 
 public class Sine extends OneParamCommand {
 
-    public Sine() {
-        super();
+    public Sine(String language) {
+        super(language);
     }
 
     @Override

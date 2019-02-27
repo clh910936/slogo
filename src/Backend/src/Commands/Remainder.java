@@ -1,8 +1,8 @@
 package Commands;
 
 public class Remainder extends TwoParamCommand {
-    public Remainder() {
-        super();
+    public Remainder(String language) {
+        super(language);
     }
 
     @Override
