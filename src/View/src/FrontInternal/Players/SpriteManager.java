@@ -1,4 +1,7 @@
 package FrontInternal.Players;
+import FrontInternal.Components.Board;
+import javafx.scene.canvas.Canvas;
+
 import java.util.*;
 
 
@@ -9,6 +12,10 @@ import java.util.*;
  * @author Feroze
  */
 public class SpriteManager {
+    public SpriteManager(Canvas c) {
+
+
+    }
     /** All the sprite objects currently in play */
     private final static List<Sprite> GAME_ACTORS = new ArrayList();
 

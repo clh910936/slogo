@@ -3,6 +3,7 @@ package FrontExternal;
 import java.awt.Dimension;
 import java.util.ResourceBundle;
 
+import BackExternal.BackExternalAPI;
 import FrontInternal.Components.Board;
 import FrontInternal.Components.Console;
 import FrontInternal.Components.ListView;
@@ -40,8 +41,7 @@ public class GUI {
         var right = makeRightView();
         myRoot = new HBox(left, right);
         myRoot.setHgrow(right, Priority.ALWAYS);
-//        root.setRight(makeRightView());
-//        root.setLeft(makeBoard());
+
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
@@ -55,13 +55,13 @@ public class GUI {
     }
 
     private Node makeConsoleButton() {
-        var b = makeButton("OpenConsole", e -> openConsole());
+        var b = makeButton("OpenConsole", e -> openConsole(null));
         b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
         return b;
     }
 
-    private void openConsole() {
-        myConsole = new Console();
+    private void openConsole(BackExternalAPI b) {
+        myConsole = new Console(b);
     }
 
 
