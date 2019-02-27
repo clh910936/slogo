@@ -1,8 +1,8 @@
 package Commands;
 
 public class ArcTangent extends OneParamCommand {
-    public ArcTangent() {
-        super();
+    public ArcTangent(String language) {
+        super(language);
     }
 
     @Override

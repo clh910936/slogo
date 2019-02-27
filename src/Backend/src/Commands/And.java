@@ -2,8 +2,8 @@ package Commands;
 
 public class And extends TwoParamCommand{
 
-    public And() {
-        super();
+    public And(String language) {
+        super(language);
     }
 
     @Override

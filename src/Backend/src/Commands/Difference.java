@@ -2,8 +2,8 @@ package Commands;
 
 public class Difference extends TwoParamCommand {
 
-    public Difference() {
-        super();
+    public Difference(String language) {
+        super(language);
     }
 
     @Override

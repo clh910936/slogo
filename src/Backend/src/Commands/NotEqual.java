@@ -2,8 +2,8 @@ package Commands;
 
 public class NotEqual extends TwoParamCommand {
 
-    public NotEqual() {
-        super();
+    public NotEqual(String language) {
+        super(language);
     }
 
     @Override

@@ -2,8 +2,8 @@ package Commands;
 
 public class Equal extends TwoParamCommand {
 
-    public Equal() {
-        super();
+    public Equal(String language) {
+        super(language);
     }
 
     @Override

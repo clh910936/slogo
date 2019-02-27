@@ -1,8 +1,8 @@
 package Commands;
 
 public class Cosine extends OneParamCommand {
-    public Cosine() {
-        super();
+    public Cosine(String language) {
+        super(language);
     }
 
     @Override

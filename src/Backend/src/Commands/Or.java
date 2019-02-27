@@ -2,8 +2,8 @@ package Commands;
 
 public class Or extends TwoParamCommand {
 
-    public Or() {
-        super();
+    public Or(String language) {
+        super(language);
     }
 
     @Override
