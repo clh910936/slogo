@@ -1,13 +1,13 @@
 package Commands;
 
-public class NotEqual extends TwoParamCommandDoubles {
+public class NotEqual extends TwoParamCommand {
 
     public NotEqual() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        return (input1 != input2)? 1 : 0;
+    public double executeCommand() throws ClassCastException {
+        return ((double) input1 != (double) input2)? 1 : 0;
     }
 }

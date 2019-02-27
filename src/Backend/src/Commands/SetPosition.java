@@ -1,15 +1,15 @@
 package Commands;
 
-public class SetPosition extends TwoParamCommandDoubles {
+public class SetPosition extends TwoParamCommand {
 
     public SetPosition() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        double dist = turtle.getDistToPoint(input1, input2);
-        turtle.updatePoints(input1, input2);
+    public double executeCommand() throws ClassCastException {
+        double dist = turtle.getDistToPoint((double) input1, (double) input2);
+        turtle.updatePoints((double) input1, (double) input2);
         return dist;
     }
 }

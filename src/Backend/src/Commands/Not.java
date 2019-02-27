@@ -8,8 +8,7 @@ public class Not extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand()  {
-        return (input == 0)? 1 : 0;
+    public double executeCommand() throws ClassCastException  {
+        return ((double) input == 0)? 1 : 0;
     }
-
 }

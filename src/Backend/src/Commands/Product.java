@@ -1,13 +1,13 @@
 package Commands;
 
-public class Product extends TwoParamCommandDoubles {
+public class Product extends TwoParamCommand {
 
     public Product() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        return input1 * input2;
+    public double executeCommand() throws ClassCastException {
+        return (double) input1 * (double) input2;
     }
 }

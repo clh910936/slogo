@@ -1,15 +1,13 @@
 package Commands;
 
-import BackExternal.InsufficientParamsException;
 
-public class Sum extends TwoParamCommandDoubles {
+public class Sum extends TwoParamCommand {
     public Sum() {
         super();
     }
 
     @Override
-    public double executeCommand() throws InsufficientParamsException {
-        if (! isCommandReadyToExecute()) throw new InsufficientParamsException();
-        return input1 + input2;
+    public double executeCommand() throws ClassCastException  {
+        return (double) input1 + (double) input2;
     }
 }

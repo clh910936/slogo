@@ -12,7 +12,7 @@ public abstract class CommandsGeneral {
 
     public abstract boolean isCommandReadyToExecute();
     public abstract double executeCommand() throws IllegalParametersException;
-    protected abstract void castParameters() throws IllegalParametersException;
+
     public void addParameterToCommand(Object val) throws IllegalParametersException {
         if( val instanceof TurtleModel) {
             myTurtle = (TurtleModel) val;

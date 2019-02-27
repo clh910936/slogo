@@ -6,7 +6,7 @@ public class Random extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() {
-        return (int)(Math.random() * (input));
+    public double executeCommand() throws ClassCastException {
+        return (int)(Math.random() * (double) (input));
     }
 }
