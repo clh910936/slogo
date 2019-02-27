@@ -1,4 +1,4 @@
-package FrontInternal;
+package FrontInternal.Components;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;

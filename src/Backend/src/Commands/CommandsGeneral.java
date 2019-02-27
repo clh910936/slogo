@@ -1,36 +1,32 @@
 package Commands;
 
-import Exceptions.InsufficientParamsException;
-import Exceptions.ParamsExceedLimitException;
+
+import BackExternal.InsufficientParamsException;
+import BackExternal.ParamsExceedLimitException;
 import Models.TurtleModel;
+
+import java.util.List;
 
 public abstract class CommandsGeneral {
     protected TurtleModel myTurtle;
+    protected List<Object> myParams;
 
     public abstract boolean isCommandReadyToExecute();
-    public abstract void addParameterToCommand(Object val) throws ParamsExceedLimitException;
     public abstract double executeCommand() throws InsufficientParamsException;
-    public abstract String getCommandName();
 
-    public void addParameterToCommand(TurtleModel val) throws ParamsExceedLimitException {
-        myTurtle = val;
-    }
-
-    public void addParameterToCommand(double val) throws ParamsExceedLimitException {
-        if (numOfInputs >= MAX_PARAMS) throw new ParamsExceedLimitException();
-        if (numOfInputs == 1) {
-            this.input2 = val;
-            numOfInputs++;
+    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
+        if( val instanceof TurtleModel) {
+            myTurtle = (TurtleModel) val;
+            return;
         }
+        myParams.add(val);
     }
 
-    public void addParameterToCommand(String val) throws ParamsExceedLimitException {
-        if (numOfInputs >= MAX_PARAMS) throw new ParamsExceedLimitException();
-        if (numOfInputs == 0) {
-            this.input1 = val;
-            numOfInputs++;
-        }
+    public String getCommandName() {
+        return this.getClass().getSimpleName();
     }
+
+
 
 
 }

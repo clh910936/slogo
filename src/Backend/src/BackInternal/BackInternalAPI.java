@@ -1,6 +1,6 @@
 package BackInternal;
 
-import Exceptions.IllegalCommandException;
+import BackExternal.IllegalCommandException;
 
 public interface BackInternalAPI {
 

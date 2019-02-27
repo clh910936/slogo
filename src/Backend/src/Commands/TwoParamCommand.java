@@ -1,26 +1,25 @@
 package Commands;
 
-import Exceptions.ParamsExceedLimitException;
 import Models.TurtleModel;
 
-public abstract class TwoParamCommand implements CommandsGeneral {
+public abstract class TwoParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 2;
     protected TurtleModel turtle;
-    private int numOfInputs;
     protected Object input1;
-    protected double input2;
+    protected Object input2;
 
     public TwoParamCommand() {
-        numOfInputs = 0;
     }
 
     @Override
     public boolean isCommandReadyToExecute() {
-        return (numOfInputs == MAX_PARAMS);
+        if(myParams.size() == MAX_PARAMS) {
+            input1 = myParams.get(0);
+            input2 = myParams.get(1);
+            return true;
+        }
+        return false;
     }
 
-    @Override
-    public String getCommandName() {
-        return this.getClass().getSimpleName();
-    }
+
 }

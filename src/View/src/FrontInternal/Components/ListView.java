@@ -1,4 +1,4 @@
-package FrontExternal;
+package FrontInternal.Components;
 
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -17,7 +17,7 @@ public class ListView implements ListChangeListener {
      * Creates a ListView object that can be linked as a listener to an ObserveableList
      * @param viewTitle String of the desired name to be displayed at the top of the pane.
      */
-    ListView(String viewTitle){
+    public ListView(String viewTitle){
         myViewPane = new ViewTemplate(viewTitle);
         myTitle = viewTitle;
     }

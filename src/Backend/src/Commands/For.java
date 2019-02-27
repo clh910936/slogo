@@ -1,6 +1,6 @@
 package Commands;
 
-import Exceptions.IllegalLoopParamsException;
+import BackExternal.IllegalLoopParamsException;
 import Parsing.CommandParser;
 import Models.TurtleModel;
 import Models.VariablesModel;

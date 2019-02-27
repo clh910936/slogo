@@ -1,4 +1,4 @@
-package FrontExternal;
+package FrontInternal.Components;
 
 import javafx.collections.MapChangeListener;
 import javafx.scene.layout.Pane;
@@ -20,7 +20,7 @@ public class MapView implements MapChangeListener {
      * Creates a MapView object that can be linked as a listener to an ObserveableMap
      * @param title String of the desired name to be displayed at the top of the pane.
      */
-    MapView(String title){
+    public MapView(String title){
         myViewTemplate = new ViewTemplate(title);
     }
 

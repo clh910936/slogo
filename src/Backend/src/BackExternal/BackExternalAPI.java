@@ -2,8 +2,7 @@ package BackExternal;
 
 import java.util.List;
 import java.util.Map;
-import Exceptions.IllegalCommandException;
-import Exceptions.ParamsExceedLimitException;
+
 import Models.TurtleModel;
 
 public interface BackExternalAPI {

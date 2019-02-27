@@ -8,7 +8,8 @@ public class SetPosition extends TwoParamCommandDoubles {
 
     @Override
     public double executeCommand() {
-        // TODO: talk to front-end and return the right thing
-        return input1;
+        double dist = turtle.getDistToPoint(input1, input2);
+        turtle.updatePoints(input1, input2);
+        return dist;
     }
 }

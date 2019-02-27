@@ -506,7 +506,7 @@
 											"top": 311,
 											"width": 102.96533203125,
 											"height": 13,
-											"text": "FrontInternal.Console"
+											"text": "FrontInternal.Components.Console"
 										},
 										{
 											"_type": "LabelView",
@@ -9052,7 +9052,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "FrontInternal.Console",
+					"name": "FrontInternal.Components.Console",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

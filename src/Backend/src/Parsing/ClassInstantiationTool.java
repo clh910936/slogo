@@ -1,6 +1,11 @@
 package Parsing;
 
+<<<<<<< HEAD
 import Exceptions.IllegalCommandException;
+=======
+import BackExternal.IllegalCommandException;
+import java.lang.reflect.InvocationTargetException;
+>>>>>>> 8bbba64743eb71cef94bd50532ce29cf6cc1285d
 
 public class ClassInstantiationTool {
 
