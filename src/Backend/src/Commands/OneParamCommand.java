@@ -1,14 +1,12 @@
 package Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsGeneral;
 import Models.TurtleModel;
 
 public abstract class OneParamCommand implements CommandsGeneral {
     protected double input;
     private boolean isReady;
     protected TurtleModel turtle;
-
     public OneParamCommand() {
         isReady = false;
     }

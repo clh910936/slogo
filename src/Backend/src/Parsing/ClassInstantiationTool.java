@@ -1,43 +1,33 @@
 package Parsing;
 
 import Exceptions.IllegalCommandException;
-import java.lang.reflect.InvocationTargetException;
 
 public class ClassInstantiationTool {
 
     public static Object getObject(String classPath, String className) {
-        Class classToInstantiate = findReflectionClass(classPath, className);
-        Object instantiatedObject = instantiateReflectionClass(classToInstantiate);
-        return instantiatedObject;
+        Class clazz = findReflectionClass(classPath, className);
+        Object o = instantiateReflectionClass(clazz);
+        return o;
     }
 
     private static Class findReflectionClass(String classPath, String classToFind) {
-        Class foundClass;
+        Class clazz;
         try{
-            foundClass = Class.forName(classPath + classToFind);
+            clazz = Class.forName(classPath + classToFind);
         }
         catch (ClassNotFoundException e) {
             throw new IllegalCommandException(classToFind + " is not a valid command");
         }
-        return foundClass;
+        return clazz;
     }
 
-    private static Object instantiateReflectionClass(Class myClass) {
+    private static Object instantiateReflectionClass(Class clazz) {
         Object instantiatedObject = null;
         try{
-            instantiatedObject = myClass.getDeclaredConstructor().newInstance();
+            instantiatedObject = clazz.getDeclaredConstructor().newInstance();
         }
-        catch (NoSuchMethodException e){
-            System.out.println(myClass + " has no constructor");
-        }
-        catch (InstantiationException e) {
-            System.out.println("Could not instantiate " + myClass);
-        }
-        catch (IllegalAccessException e) {
-            System.out.println("Could not instantiate " + myClass);
-        }
-        catch (InvocationTargetException e) {
-            System.out.println("Could not instantiate " + myClass);
+        catch (Exception e) {
+            System.out.println("Could not instantiate " + clazz);
         }
         if(instantiatedObject!=null) return instantiatedObject;
         else {

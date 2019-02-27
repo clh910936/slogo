@@ -1,7 +1,6 @@
 package Commands;
 
 import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsGeneral;
 import Models.TurtleModel;
 
 public abstract class LoopCommand implements CommandsGeneral {

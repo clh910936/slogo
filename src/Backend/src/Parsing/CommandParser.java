@@ -1,5 +1,6 @@
 package Parsing;
 
+import Commands.CommandsGeneral;
 import Exceptions.IllegalCommandException;
 import Exceptions.ParamsExceedLimitException;
 import Commands.MakeVariable;
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class CommandParser {
     public static final String WHITESPACE = "\\s+";
+    public static final String NEWLINE = "\\n+";
     public static final String COMMENT_SYMBOL = "Comment";
     public static final String VARIABLE_SYMBOL = "Variable";
     public static final String CONSTANT_SYMBOL = "Constant";
@@ -19,6 +21,7 @@ public class CommandParser {
     public static final String LIST_END_SYMBOL = "ListEnd";
     public static final String COMMAND_SYMBOL = "Command";
     public static final String MAKE_VARIABLE = "MakeVariable";
+
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
     private static final String COMMANDS_PACKAGE_PATH = "Commands.";
@@ -38,10 +41,12 @@ public class CommandParser {
     }
 
     public double parseCommand(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException {
-        String[] commandInputList = commandInput.split(WHITESPACE);
-        if(commandInputList.length==0) {
+        if(commandInput.length()==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
+        String[] commandInputList = commandInput.split(NEWLINE);
+        commandInputList = removeComments(commandInputList);
+
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
         Stack commandStack = new Stack();
         double currentReturnValue = -1;
@@ -85,6 +90,21 @@ public class CommandParser {
         }
         if(currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
         return currentReturnValue;
+    }
+
+    private String[] removeComments(String[] commandInputArray) {
+        for(int i = 0; i < commandInputArray.length ; i++) {
+            String input = commandInputArray[i];
+            System.out.println(input);
+
+            if (Regex.getRegexSymbol(input,mySymbols).equals(COMMENT_SYMBOL)) {
+
+                commandInputArray[i] = "";
+            }
+        }
+        return (String.join(" ",commandInputArray).split(WHITESPACE));
+
+
     }
 
     private void pushNewCommandObject(Stack commandStack, String input) {
