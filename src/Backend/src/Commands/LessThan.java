@@ -4,8 +4,8 @@ import BackExternal.IllegalParametersException;
 
 public class LessThan extends TwoParamCommand {
 
-    public LessThan() {
-        super();
+    public LessThan(String language) {
+        super(language);
     }
 
     @Override

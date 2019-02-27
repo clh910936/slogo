@@ -18,8 +18,8 @@ public class For extends TwoParamCommand {
     public static final int INCR_LOC = 3;
 
 
-    public For() {
-        super();
+    public For(String language) {
+        super(language);
     }
 
     @Override

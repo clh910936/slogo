@@ -3,7 +3,6 @@ package Commands;
 
 import BackExternal.IllegalParametersException;
 import Models.TurtleModel;
-
 import java.util.List;
 
 public abstract class CommandsGeneral {

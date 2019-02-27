@@ -3,8 +3,8 @@ package Commands;
 import BackExternal.IllegalParametersException;
 
 public class Left extends OneParamCommand {
-    public Left() {
-        super();
+    public Left(String language) {
+        super(language);
     }
 
     @Override

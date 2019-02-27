@@ -10,7 +10,7 @@ public interface BackExternalAPI {
     /**
      * Part of the controller. Front-end calls parse() to give unprocessed commands to back-end.
      */
-    public void parseCommand(String inputString, String language) throws IllegalCommandException, ParamsExceedLimitException;
+    public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException;
 
     /**
      * When the front-end gets told by TurtleModel that the turtle as been updated, the front-end calls getTurtle()

@@ -2,8 +2,8 @@ package Commands;
 
 public class Backward extends OneParamCommand {
 
-    public Backward() {
-        super();
+    public Backward(String language) {
+        super(language);
     }
 
     @Override

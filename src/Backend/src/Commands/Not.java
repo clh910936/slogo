@@ -3,8 +3,8 @@ package Commands;
 
 public class Not extends OneParamCommand {
 
-    public Not() {
-        super();
+    public Not(String language) {
+        super(language);
     }
 
     @Override

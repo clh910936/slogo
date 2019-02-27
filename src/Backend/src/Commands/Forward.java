@@ -4,8 +4,8 @@ import BackExternal.IllegalParametersException;
 
 public class Forward extends OneParamCommand {
 
-    public Forward() {
-        super();
+    public Forward(String language) {
+        super(language);
     }
 
     @Override

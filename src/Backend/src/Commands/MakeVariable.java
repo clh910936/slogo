@@ -6,8 +6,8 @@ import Models.VariablesModel;
 public class MakeVariable extends TwoParamCommand {
     private VariablesModel variablesModel;
 
-    public MakeVariable() {
-        super();
+    public MakeVariable(String language) {
+        super(language);
     }
 
     public void giveVariablesModel(VariablesModel vm) {

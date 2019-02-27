@@ -1,8 +1,8 @@
 package Commands;
 
 public class NaturalLog extends OneParamCommand {
-    public NaturalLog() {
-        super();
+    public NaturalLog(String language) {
+        super(language);
     }
 
     @Override

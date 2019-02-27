@@ -3,8 +3,8 @@ package Commands;
 import BackExternal.IllegalParametersException;
 
 public class Minus extends OneParamCommand {
-    public Minus() {
-        super();
+    public Minus(String language) {
+        super(language);
     }
 
     @Override

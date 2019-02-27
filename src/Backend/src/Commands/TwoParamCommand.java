@@ -8,7 +8,8 @@ public abstract class TwoParamCommand extends CommandsGeneral {
     protected Object input1;
     protected Object input2;
 
-    public TwoParamCommand() {
+    public TwoParamCommand(String language) {
+        super(language);
     }
 
     @Override
