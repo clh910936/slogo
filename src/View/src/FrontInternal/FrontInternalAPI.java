@@ -31,7 +31,7 @@ public interface FrontInternalAPI {
 
     /**
      * part of TurtleView class.
-     * updates the turtle based on changes made to the TurtleModel
+     * updates the turtle based on changes made to the Turtle
      * triggered by backend, using a listener event? (maybe need an external component)
      */
     public void updateTurtle();

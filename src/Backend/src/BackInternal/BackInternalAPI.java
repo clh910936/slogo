@@ -28,13 +28,13 @@ public interface BackInternalAPI {
     public void removeVariable(Object var) throws IllegalCommandException;
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * @return Java Pair object with x coordinate and y coordinate of the turtle
      */
     public Object getTurtleCoordinates();
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Places the turtle at a certain place on the board
      * @param coordinates
      * @throws if the coordinates are outside the bounds of the dimensions of the board
@@ -42,14 +42,14 @@ public interface BackInternalAPI {
     public void moveTurtleToCoordinates(Object coordinates) throws IllegalCommandException;
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Gets the current direction of the turtle on the board
      * @return direction of the turtle
      */
     public double getTurtleDirection();
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Sets the direction of the turtle to a certain direction
      * Should handle degrees greater than a value of 360
      * @param  direction of the turtle
@@ -57,25 +57,25 @@ public interface BackInternalAPI {
     public void setTurtleDirection(double direction);
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Sets the pen up
      */
     public void setPenUp();
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Sets the pen down
      */
     public void setPenDown();
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Shows the turtle
      */
     public void showTurtle();
 
     /**
-     * Defined within the TurtleModel
+     * Defined within the Turtle
      * Hides the turtle
      */
     public void hideTurtle();

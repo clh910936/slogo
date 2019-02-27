@@ -2,13 +2,11 @@ package BackExternal;
 
 import Commands.UserDefinedCommand;
 import Models.HistoryModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Parsing.CommandParser;
-import Models.TurtleModel;
 import Models.VariablesModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,16 +15,16 @@ public class Controller implements BackExternalAPI {
     public static final double STARTY = 2000;
     private final VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
-    private final TurtleModel myTurtleModel;
+    private final Turtle myTurtle;
     private final CommandParser myCommandParser;
     private final UserCreatedCommandsModel myUserCreatedCommandsModel;
 
     public Controller() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 0, true);
+        myTurtle = new Turtle(STARTX, STARTY,false, 0, true);
         myUserCreatedCommandsModel = new UserCreatedCommandsModel();
-        myCommandParser = new CommandParser(myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+        myCommandParser = new CommandParser(myVariablesModel, myTurtle, myUserCreatedCommandsModel);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
@@ -52,8 +50,8 @@ public class Controller implements BackExternalAPI {
         return myHistoryModel.getHistory();
     }
 
-    public TurtleModel getTurtle() {
-        return myTurtleModel;
+    public Turtle getTurtle() {
+        return myTurtle;
     }
 
     public List<UserDefinedCommand> getUserCreatedCommands() {

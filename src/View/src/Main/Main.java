@@ -18,6 +18,8 @@ public class Main extends Application {
         stage.show();
         Controller myController = new Controller ();
 
+
+
        // new Console();
 
     }

@@ -1,12 +1,12 @@
 package Parsing;
 
-import Models.TurtleModel;
+import Models.TurtleListener;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class parsertestmain {
     public static void main (String[] args) {
-        CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(1000,1000,true,90,true), new UserCreatedCommandsModel());
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
@@ -52,5 +52,11 @@ public class parsertestmain {
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]", "English"));
+
+        Turtle tm = new Turtle(2000, 2000,false, 0, true);
+        CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserCreatedCommandsModel());
+        TurtleListener tl = new TurtleListener(tm);
+        tm.add(tl);
+        System.out.println(cp.parseCommand("fd 10", "English"));
     }
 }

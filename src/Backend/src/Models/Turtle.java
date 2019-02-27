@@ -1,6 +1,10 @@
 package Models;
 
-public class TurtleModel {
+import BackExternal.Observable;
+
+import java.util.ArrayList;
+
+public class Turtle extends Observable {
     /*
     STATE INFORMATION:
     - NEXT POINT
@@ -18,7 +22,8 @@ public class TurtleModel {
     private double headingAngle;
     private boolean isDisplayed;
 
-    public TurtleModel(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
+    public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
+        myObservers = new ArrayList<>();
         this.nextPointX = nextPointX;
         this.nextPointY = nextPointY;
         this.isPenUp = isPenUp;
@@ -29,7 +34,8 @@ public class TurtleModel {
     public void moveForward(double dist) {
         nextPointX += dist * Math.cos(Math.toRadians(headingAngle));
         nextPointY += dist * Math.sin(Math.toRadians(headingAngle));
-        printTurtleStatus();
+        //printTurtleStatus();
+        notifyObservers();
     }
 
     private void printTurtleStatus() {

@@ -4,7 +4,7 @@ import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
 import BackExternal.IllegalCommandException;
 import Commands.UserDefinedCommand;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
@@ -30,17 +30,17 @@ public class CommandParser {
     private List<Map.Entry<String, Pattern>> mySymbols;
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
-    private TurtleModel myTurtleModel;
+    private Turtle myTurtle;
     private UserCreatedCommandsModel myUserCreatedCommandsModel;
     private String myLanguage;
 
 
-    public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public CommandParser(VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
         myUserCreatedCommandsModel = userCreatedCommandsModel;
-        myTurtleModel = turtleModel;
+        myTurtle = turtle;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
@@ -133,7 +133,7 @@ public class CommandParser {
             }
             if(commandObject==null) {
                 String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-                commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+                commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtle, myUserCreatedCommandsModel);
 
             }
             commandStack.push(commandObject);
