@@ -24,7 +24,6 @@ public class Console extends Stage {
     private BorderPane myBorderPane;
     private HBox myTextHBox;
     private GridPane myButtonGridPane;
-    private HBox myErrorBox;
     private ComboBox myLanguageDropDown;
 
     private ResourceBundle myResourcesBundle;
@@ -33,9 +32,11 @@ public class Console extends Stage {
     private List<Button> myButtonList;
     private List<String> myLanguages;
     private TextArea myUserInputField;
+    private ErrorPane myErrorPane;
 
     private final int CONSOLE_WIDTH = 500;
     private final int CONSOLE_HEIGHT = 300;
+    private final int ERROR_HEIGHT = CONSOLE_HEIGHT/8;
     private final int BUTTON_WIDTH = 80;
     private final int BUTTON_INSET = 5;
     private final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
@@ -59,6 +60,7 @@ public class Console extends Stage {
 
         myBorderPane.setCenter(myTextHBox);
         myBorderPane.setRight(myButtonGridPane);
+        myBorderPane.setBottom(myErrorPane);
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         this.setScene(consoleScene);
@@ -70,12 +72,11 @@ public class Console extends Stage {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
         myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
-        myErrorBox = new HBox();
 
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
-        myErrorBox = new HBox();
         myLanguageDropDown = new ComboBox();
+        myErrorPane = new ErrorPane(CONSOLE_WIDTH, ERROR_HEIGHT);
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
@@ -114,7 +115,6 @@ public class Console extends Stage {
         System.out.println(language);
         //TODO: Parse
         System.out.println(input);
-
         //parser.parse(language, input);
     }
 

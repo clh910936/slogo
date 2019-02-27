@@ -1,12 +1,12 @@
 package FrontInternal.Components;
 
 import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.geometry.Pos;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 
 /**
@@ -40,12 +40,17 @@ public class ErrorPane extends HBox {
     private void initializeText() {
         myText = new Text();
         this.getChildren().add(myText);
+        this.setAlignment(Pos.CENTER);
     }
 
     private void initializeBackgrounds() {
         myNoErrorBackground = createBackground(NO_ERROR_COLOR);
         myErrorBackground = createBackground(ERROR_COLOR);
         setErrorlessBackground();
+    }
+
+    private void initializeBorders(){
+        this.setBorder(Border.EMPTY);
     }
 
     private Background createBackground(Paint color){
