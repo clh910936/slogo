@@ -35,6 +35,8 @@ public class Regex {
      */
     public static String getRegexSymbol(String rawInput, List<Map.Entry<String, Pattern>> mySymbols) {
             for (var e : mySymbols) {
+//                System.out.println(e.getKey());
+//                System.out.println(rawInput);
                 if (match(rawInput, e.getValue())) {
                     return e.getKey();
                 }

@@ -9,7 +9,7 @@ public class Left extends OneParamCommand {
 
     @Override
     public double executeCommand() throws IllegalParametersException {
-        this.turtle.turnCounterClockwise((double) input);
+        this.myTurtle.turnCounterClockwise((double) input);
         return (double) input;
     }
 }

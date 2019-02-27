@@ -3,6 +3,8 @@ package Commands;
 
 import BackExternal.IllegalParametersException;
 import Models.TurtleModel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CommandsGeneral {
@@ -11,7 +13,9 @@ public abstract class CommandsGeneral {
     protected String myLanguage;
 
     public CommandsGeneral(String language) {
+
         myLanguage = language;
+        myParams = new ArrayList<>();
     }
 
     public abstract boolean isCommandReadyToExecute();

@@ -1,10 +1,7 @@
 package Commands;
 
-import Models.TurtleModel;
-
 public abstract class TwoParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 2;
-    protected TurtleModel turtle;
     protected Object input1;
     protected Object input2;
 
