@@ -100,7 +100,7 @@ public class CommandParser {
         return index;
     }
 
-    private boolean isCommand(String input) {
+    public boolean isCommand(String input) {
         try {
             return Regex.getRegexSymbol(input,mySymbols).equals(COMMAND_SYMBOL);
         }
