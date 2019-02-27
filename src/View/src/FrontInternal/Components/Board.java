@@ -21,6 +21,8 @@ public class Board extends Pane {
     private int myHeight;
     private TurtleView myTurtle;
 
+    private Path p;
+
     public Board(int width, int height) {
         myWidth = width;
         myHeight = height;
@@ -29,6 +31,10 @@ public class Board extends Pane {
         myTurtle = new TurtleView();
         myTurtle.place(myWidth / 2, myHeight / 2);
         getChildren().addAll(myCanvas, myTurtle);
+
+        p = new Path();
+        MoveTo m = new MoveTo(myTurtle.getCenterX(), myTurtle.getCenterY());
+        p.getElements().add(m);
     }
 
     private void createCanvas(int width, int height) {
@@ -49,13 +55,11 @@ public class Board extends Pane {
 
         pt.setDuration(Duration.seconds(2));
         pt.setNode(myTurtle);
-        Path p = new Path();
-        MoveTo m = new MoveTo(myTurtle.getCenterX(), myTurtle.getCenterY());
 
         LineTo l = new LineTo(myTurtle.getCenterX()+x,myTurtle.getCenterY()-y);
 
         //have to update turtle location after this
-        p.getElements().addAll(m, l);
+        p.getElements().addAll(l);
         pt.setPath(p);
         pt.setOrientation(PathTransition.OrientationType.NONE);
         //pt.setCycleCount(Timeline.INDEFINITE);
@@ -75,8 +79,8 @@ public class Board extends Pane {
                     return;
 
                 // get current location
-                double x = myTurtle.getX();
-                double y = myTurtle.getY();
+                double x = myTurtle.getCurrentX();
+                double y = myTurtle.getCurrentY();
 
                 // initialize the location
                 if( oldLocation == null) {
@@ -91,7 +95,7 @@ public class Board extends Pane {
                 gc.setFill(Color.YELLOW);
                 gc.setLineWidth(4);
                 gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
-
+                //System.out.printf("old x: %f\t new x: %f", oldLocation.x, x);
                 // update old location with current one
                 oldLocation.x = x;
                 oldLocation.y = y;
@@ -99,6 +103,8 @@ public class Board extends Pane {
         });
 
         pt.play();
+        p.getElements().clear();
+        p.getElements().addAll(new MoveTo(l.getX(), l.getY()));
     }
     public static class Location {
         double x;
