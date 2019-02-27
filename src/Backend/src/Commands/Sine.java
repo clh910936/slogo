@@ -7,7 +7,7 @@ public class Sine extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() {
-        return Math.sin(Math.toRadians(input));
+    public double executeCommand() throws ClassCastException {
+        return Math.sin(Math.toRadians((double) input));
     }
 }

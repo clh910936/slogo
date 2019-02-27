@@ -1,12 +1,12 @@
 package Commands;
 
-public class Power extends TwoParamCommandDoubles {
+public class Power extends TwoParamCommand {
     public Power() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        return Math.pow(input1, input2);
+    public double executeCommand() throws ClassCastException {
+        return Math.pow((double) input1, (double) input2);
     }
 }
