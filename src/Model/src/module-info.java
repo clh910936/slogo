@@ -1,4 +1,0 @@
-module Model {
-
-    exports BackExternal;
-}

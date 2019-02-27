@@ -4,13 +4,13 @@
 The primary goal our this project is to implement a MVC structure, with controller classes that co-ordinate the Model with the View. We want to make the code flexible so that we can internally create more commands and different GUI components. The View allows the user to enter commands, then the Controller parses the commands, and updates the Model. The View then queries the Model and displays the changes on-screen.
 
 ## Design overview
-We have broken our design into an MVC model. The View component will consist of a GUI class that will pull together all the components of the UI. Additionally, there will be classes such as HistoryView, VariableView, and TurtleView which will be observers of their respective models. When a command is passed through the FrontInternal.Console, it will be sent to a parser which will act as the controller. This can then update the appropriate models (Turtle, Variables, etc). When these models are updated, the observers will be notified and can update the graphics accordingly.
+We have broken our design into an MVC model. The View component will consist of a GUI class that will pull together all the components of the UI. Additionally, there will be classes such as HistoryView, VariableView, and TurtleView which will be observers of their respective models. When a command is passed through the FrontInternal.Components.Console, it will be sent to a parser which will act as the controller. This can then update the appropriate models (Turtle, Variables, etc). When these models are updated, the observers will be notified and can update the graphics accordingly.
 
 **Backend Internal API:** This includes all the necessary methods to update the models and their data. The methods in this API will all be called after the command entered by the user has been parsed.
 
-**Backend External API:** This includes the method necessary to pass a command entered into the UI FrontInternal.Console to the parser as well as methods necessary for an observer of models (TurtleModel, VariableModel, etc.) to get an object with the information necessary to update the graphics.
+**Backend External API:** This includes the method necessary to pass a command entered into the UI FrontInternal.Components.Console to the parser as well as methods necessary for an observer of models (TurtleModel, VariableModel, etc.) to get an object with the information necessary to update the graphics.
 
-**Frontend Internal API:** This includes the methods that are used to update each of the view classes (TurtleView, VariablesView, etc) as well  methods to print to the FrontInternal.Console, for example errors or any other message or statement that may need to be printed to the user. All of these will be called either when they are notified that a model is updated or if an error is thrown by the backend when parsing a command.
+**Frontend Internal API:** This includes the methods that are used to update each of the view classes (TurtleView, VariablesView, etc) as well  methods to print to the FrontInternal.Components.Console, for example errors or any other message or statement that may need to be printed to the user. All of these will be called either when they are notified that a model is updated or if an error is thrown by the backend when parsing a command.
 
 **FrontEnd External API:** This has methods such that the the backend can interact directly with the Board class, where the drawing and turtle are visible. For example, changing the background color of the Board or clearing the drawings on the Board. These will be called by the backend when commands are entered to change the color or clear the screen.
 
@@ -209,14 +209,14 @@ public interface FrontInternal.FrontInternalAPI {
     public void setBackgroundColor();
 
     /**
-     * part of FrontInternal.Console class
+     * part of FrontInternal.Components.Console class
      * prints an error to be seen by the user
      * will be used to print errors to user when catching thrown by backend
      */
     public void printError(String s);
 
     /**
-     * Part of FrontInternal.Console class.
+     * Part of FrontInternal.Components.Console class.
      * prints to the console
      */
     public void printToConsole(String s);
@@ -285,11 +285,11 @@ After this series of API calls, turtle move in the display window, rendering a l
 #### Feroze
 The user presses a button or enters a command to change the background color of the display window. This action is passed to the `Controller`, which access the front-end external API and calls the `setBackgroundColor()` method of the Board class. Alternatively, the `Controller` could enact a state change in a `Model` class after which an observer of that model could call its own internal API method to change the background color. These different control flows depend on the exact design we end up agreeing on.
 
-The user enters a bad command into the `FrontInternal.Console`. This command is parsed by the Controller and is recognized as a bad command. The `Controller` calls the `printError()` method of the `FrontInternal.Console` to notify the user of the mistake.
+The user enters a bad command into the `FrontInternal.Components.Console`. This command is parsed by the Controller and is recognized as a bad command. The `Controller` calls the `printError()` method of the `FrontInternal.Components.Console` to notify the user of the mistake.
 #### Carrie
-The user presses a button to run the single line of code they wrote into the terminal. The `FrontInternal.Console` will then read the line passed by the user and pass it to the `Controller` through the `parse()` method. The `FrontInternal.Console` will then clear the line and reset itself such that it is ready for the next command. Once the command has been parsed, the `Controller` will update the `HistoryModel`. This will then alert its receivers and the `HistoryView` class will call `updateHistoryView` to display the command.
+The user presses a button to run the single line of code they wrote into the terminal. The `FrontInternal.Components.Console` will then read the line passed by the user and pass it to the `Controller` through the `parse()` method. The `FrontInternal.Components.Console` will then clear the line and reset itself such that it is ready for the next command. Once the command has been parsed, the `Controller` will update the `HistoryModel`. This will then alert its receivers and the `HistoryView` class will call `updateHistoryView` to display the command.
 
-The user presses a button to toggle between entering a single line of code to multiple lines. The `FrontInternal.Console` will then have change how it interprets the user hitting the Enter key. For a single line, this will behave as though the user had hit run and the `FrontInternal.Console` will read the line and call `parse()` to pass it on to the `Controller`. When the button is clicked to switch to multiple lines, hitting enter will move to the next line and will no longer call `parse()`. The `FrontInternal.Console` will then only call `parse()` once the Run button is pressed and it will then pass the input to the parser line by line.
+The user presses a button to toggle between entering a single line of code to multiple lines. The `FrontInternal.Components.Console` will then have change how it interprets the user hitting the Enter key. For a single line, this will behave as though the user had hit run and the `FrontInternal.Components.Console` will read the line and call `parse()` to pass it on to the `Controller`. When the button is clicked to switch to multiple lines, hitting enter will move to the next line and will no longer call `parse()`. The `FrontInternal.Components.Console` will then only call `parse()` once the Run button is pressed and it will then pass the input to the parser line by line.
 #### Christina
 The `Controller` is passed the `TO` command, in which a new command is created. From here, the `Controller` will recognize that this command is something the `UserSetCommandModel` should handle. The `Controller` will then pass this new command name, the variables defined, and the commands into the `UserSetCommandModel` through the `addCommand()` method. Then, the model will store all of this data. Therefore, whenever this user-set command is called again, it can be retrieved from the model and it will run the associated commands.
 
