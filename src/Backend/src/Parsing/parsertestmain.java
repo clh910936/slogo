@@ -1,11 +1,12 @@
 package Parsing;
 
 import Models.TurtleModel;
+import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class parsertestmain {
     public static void main (String[] args) {
-        CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(200,200,true,90,true));
+        CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(200,200,true,90,true), new UserCreatedCommandsModel());
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
 //                "\n" +

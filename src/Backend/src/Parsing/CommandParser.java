@@ -77,8 +77,7 @@ public class CommandParser {
             else if(input.equals(LIST_START_SYMBOL)) {
                 String[] listContents = getListContents(commandInputList, i + 1);
                 currentReturnValue = executeCommandsOnStack(commandStack, listContents, currentReturnValue);
-                int listLength = listContents.length + 2;
-                i+=listLength;
+                i+=listContents.length + 2;
             }
             else if(input.equals(LIST_END_SYMBOL)) {
                 throw new IllegalCommandException("List parameter is invalid");
@@ -112,7 +111,7 @@ public class CommandParser {
 
     private void pushNewCommandObject(Stack commandStack, String input) {
         String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-        CommandsGeneral commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage);
+        CommandsGeneral commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
         commandObject.addParameterToCommand(myTurtleModel);
         commandStack.push(commandObject);
     }
