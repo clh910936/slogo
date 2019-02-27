@@ -1,5 +1,6 @@
 package BackExternal;
 
+import Commands.UserDefinedCommand;
 import Models.HistoryModel;
 import Models.UserCreatedCommandsModel;
 import Parsing.CommandParser;
@@ -50,7 +51,7 @@ public class Controller implements BackExternalAPI {
         return myTurtleModel;
     }
 
-    public Map<String, Map<String,String>> getUserCreatedCommands() {
+    public List<UserDefinedCommand> getUserCreatedCommands() {
         return myUserCreatedCommandsModel.getUserCreatedCommands();
     }
 

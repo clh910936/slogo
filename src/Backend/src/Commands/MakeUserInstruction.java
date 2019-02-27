@@ -1,12 +1,9 @@
 package Commands;
 
-import BackExternal.IllegalCommandException;
 import Models.TurtleModel;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MakeUserInstruction extends ThreeParamCommand {
 
@@ -26,7 +23,8 @@ public class MakeUserInstruction extends ThreeParamCommand {
             String[] commands = (String[]) input3;
             String commandString = String.join(" ", commands);
             UserDefinedCommand userCommand = new UserDefinedCommand(myLanguage, myTurtle, myVariablesModel,
-                    myUserCreatedCommandsModel, name, variables, commandString);
+                    myUserCreatedCommandsModel, name, commandString, variables);
+            myUserCreatedCommandsModel.addUserCreatedCommand(userCommand);
         }
         catch (Exception e) {
             return 0;

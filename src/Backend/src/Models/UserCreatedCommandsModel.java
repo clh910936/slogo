@@ -1,36 +1,23 @@
 package Models;
 
-import BackExternal.IllegalCommandException;
 import Commands.UserDefinedCommand;
 
 import java.util.*;
 
 public class UserCreatedCommandsModel {
 
-    List<UserDefinedCommand> listOfUserDefinedCommands;
-
-    // name : string
-    // vars : list
-    // commands : string
+    List<UserDefinedCommand> myUserDefinedCommands;
 
 
     public UserCreatedCommandsModel() {
-        listOfUserDefinedCommands = new ArrayList<>();
+        myUserDefinedCommands = new ArrayList<>();
     }
 
     public void addUserCreatedCommand(UserDefinedCommand command) {
-        listOfUserDefinedCommands.add(command);
+        myUserDefinedCommands.add(command);
     }
 
-    private Map<String, String> getUserCreatedCommand(String name) throws IllegalCommandException {
-        if (myUserCreatedCommands.containsKey(name)) {
-            return myUserCreatedCommands.get(name);
-        } else {
-            throw new IllegalCommandException("Command does not exist");
-        }
-    }
-
-    public Map<String, Map<String, String>> getUserCreatedCommands() {
-        return Collections.unmodifiableMap(myUserCreatedCommands);
+    public List<UserDefinedCommand> getUserCreatedCommands() {
+        return Collections.unmodifiableList(myUserDefinedCommands);
     }
 }

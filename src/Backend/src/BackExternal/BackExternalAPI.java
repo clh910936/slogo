@@ -3,6 +3,7 @@ package BackExternal;
 import java.util.List;
 import java.util.Map;
 
+import Commands.UserDefinedCommand;
 import Models.TurtleModel;
 
 public interface BackExternalAPI {
@@ -35,6 +36,6 @@ public interface BackExternalAPI {
      * Gets a list of the user defined commands
      * @return
      */
-    public Map<String,Map<String,String>> getUserCreatedCommands();
+    public List<UserDefinedCommand> getUserCreatedCommands();
 
 }

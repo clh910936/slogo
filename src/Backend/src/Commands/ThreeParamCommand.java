@@ -6,7 +6,7 @@ import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public abstract class ThreeParamCommand extends CommandsGeneral {
-    private static final int MAX_PARAMS = 2;
+    private static final int MAX_PARAMS = 3;
     protected Object input1;
     protected Object input2;
     protected Object input3;
