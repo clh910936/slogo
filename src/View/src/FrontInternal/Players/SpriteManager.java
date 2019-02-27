@@ -12,6 +12,8 @@ import java.util.*;
  * @author Feroze
  */
 public class SpriteManager {
+    private TurtleView myTurtle;
+
     public SpriteManager(Canvas c) {
 
 

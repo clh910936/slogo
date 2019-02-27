@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -46,7 +47,13 @@ public class GUI {
     }
 
     private Node makeRightView() {
-        return new VBox(makeListView(), makeMapView(), makeButton("Move", e -> myBoard.move()));
+        var x = new TextField();
+        var y = new TextField();
+        return new VBox(makeListView(),
+                makeMapView(),
+                x, y,
+                makeButton("Move", e -> myBoard.move(Integer.parseInt(x.getText()),
+                        Integer.parseInt(y.getText()))));
     }
 
     private Node makeBoard() {

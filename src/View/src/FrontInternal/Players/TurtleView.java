@@ -16,4 +16,11 @@ public class TurtleView extends Sprite {
     public void update() {
 
     }
+
+    public double getCenterX() {
+        return getX() + getBoundsInLocal().getWidth()/2;
+    }
+    public double getCenterY() {
+        return getY() + getBoundsInLocal().getHeight()/2;
+    }
 }
