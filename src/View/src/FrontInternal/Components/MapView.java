@@ -1,5 +1,6 @@
 package FrontInternal.Components;
 
+import FrontExternal.Observer;
 import javafx.scene.layout.Pane;
 
 /**
@@ -8,7 +9,7 @@ import javafx.scene.layout.Pane;
  * This class implements MapChangeListener and then displays the changes in a formatted
  * pane with a title and a scrollable view.
  */
-public class MapView {
+public class MapView implements Observer {
 
     private ViewTemplate myViewTemplate;
     private String FORMAT = ":\t";
@@ -34,8 +35,13 @@ public class MapView {
         return myViewTemplate;
     }
 
-    //TODO: write update method
+    //TODO: write this method
+    /**
+     * Called when the corresponding backend model updates the map.
+     * This updates the list seen by the user to match the model's map.
+     */
+    @Override
     public void update() {
-        myViewTemplate.addFinalLine("temp");
+
     }
 }
