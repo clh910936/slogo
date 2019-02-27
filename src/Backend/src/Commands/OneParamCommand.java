@@ -1,36 +1,24 @@
 package Commands;
 
-import Exceptions.ParamsExceedLimitException;
-import Parsing.CommandsGeneral;
 import Models.TurtleModel;
 
-public abstract class OneParamCommand implements CommandsGeneral {
-    protected double input;
-    private boolean isReady;
+public abstract class OneParamCommand extends CommandsGeneral {
+    private static final int MAX_PARAMS = 1;
+    protected Object input;
     protected TurtleModel turtle;
-
     public OneParamCommand() {
-        isReady = false;
+
     }
 
-    @Override
-    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
-        if (val instanceof TurtleModel) {
-            turtle = (TurtleModel) val;
-            return;
-        }
-        if (isReady) throw new ParamsExceedLimitException();
-        this.input = (double) val;
-        isReady = true;
-    }
 
     @Override
     public boolean isCommandReadyToExecute() {
-        return isReady;
+        if(myParams.size() == MAX_PARAMS) {
+            input = myParams.get(0);
+            return true;
+        }
+        return false;
     }
 
-    @Override
-    public String getCommandName() {
-        return this.getClass().getSimpleName();
-    }
+
 }

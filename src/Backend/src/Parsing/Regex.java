@@ -1,6 +1,6 @@
 package Parsing;
 
-import Exceptions.IllegalCommandException;
+import BackExternal.IllegalCommandException;
 
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -21,17 +21,7 @@ public class Regex {
         return mySymbols;
     }
 
-    /**
-     * Returns language's type associated with the given text if one exists
-     */
-    private static String getSymbol (String text, List<Map.Entry<String, Pattern>> mySymbols) throws IllegalCommandException {
-        for (var e : mySymbols) {
-            if (match(text, e.getValue())) {
-                return e.getKey();
-            }
-        }
-        throw new IllegalCommandException(text + " is not a valid command");
-    }
+
 
     /**
      * Returns true if the given text matches the given regular expression pattern
@@ -40,14 +30,15 @@ public class Regex {
         return regex.matcher(text).matches();
     }
 
+    /**
+     * Returns language's type associated with the given text if one exists
+     */
     public static String getRegexSymbol(String rawInput, List<Map.Entry<String, Pattern>> mySymbols) {
-        String input;
-        try {
-            input = getSymbol(rawInput, mySymbols);
-        }
-        catch (IllegalCommandException e){
-            throw e;
-        }
-        return input;
+            for (var e : mySymbols) {
+                if (match(rawInput, e.getValue())) {
+                    return e.getKey();
+                }
+            }
+        throw new IllegalCommandException(rawInput + " is not in the file");
     }
 }

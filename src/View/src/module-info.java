@@ -6,4 +6,5 @@ module View {
     requires javafx.web;
 
     exports Main;
+    requires Backend;
 }
