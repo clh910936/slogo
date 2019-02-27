@@ -1,7 +1,7 @@
 package Parsing;
 
-import Exceptions.InsufficientParamsException;
-import Exceptions.ParamsExceedLimitException;
+import BackExternal.InsufficientParamsException;
+import BackExternal.ParamsExceedLimitException;
 
 public interface CommandsGeneral {
     boolean isCommandReadyToExecute();

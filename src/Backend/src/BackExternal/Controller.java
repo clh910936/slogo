@@ -1,8 +1,5 @@
 package BackExternal;
 
-import BackExternal.BackExternalAPI;
-import Exceptions.IllegalCommandException;
-import Exceptions.ParamsExceedLimitException;
 import Models.HistoryModel;
 import Models.UserCreatedCommandsModel;
 import Parsing.CommandParser;

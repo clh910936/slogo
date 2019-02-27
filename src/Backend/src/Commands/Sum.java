@@ -1,6 +1,6 @@
 package Commands;
 
-import Exceptions.InsufficientParamsException;
+import BackExternal.InsufficientParamsException;
 
 public class Sum extends TwoParamCommandDoubles {
     public Sum() {

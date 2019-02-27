@@ -1,5 +1,6 @@
 package Main;
 
+import BackExternal.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import FrontExternal.GUI;
@@ -15,6 +16,7 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         stage.setScene(display.getScene());
         stage.show();
+        Controller myController = new Controller ();
 
        // new Console();
 
