@@ -35,7 +35,7 @@ public class MapView implements Observer {
         return myViewTemplate;
     }
 
-    //TODO: write this method
+    //TODO: update
     /**
      * Called when the corresponding backend model updates the map.
      * This updates the list seen by the user to match the model's map.

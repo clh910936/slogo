@@ -30,7 +30,7 @@ public class ListView implements Observer {
         return myViewPane;
     }
 
-    //TODO: write this method
+    //TODO: update()
     /**
      * Called when the corresponding backend model updates the list.
      * This updates the list seen by the user to match the model's list.
