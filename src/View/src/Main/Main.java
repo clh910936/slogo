@@ -1,9 +1,8 @@
 package Main;
 
-import FrontInternal.Console;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import FrontInternal.GUI;
+import FrontExternal.GUI;
 
 public class Main extends Application {
     public static final String TITLE = "SLOGO";

@@ -1,6 +1,6 @@
-package FrontInternal;
+package FrontInternal.Components;
 
-import javafx.scene.Group;
+import FrontInternal.Players.TurtleView;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;

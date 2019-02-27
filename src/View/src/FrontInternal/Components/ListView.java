@@ -1,4 +1,4 @@
-package FrontExternal;
+package FrontInternal.Components;
 
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;

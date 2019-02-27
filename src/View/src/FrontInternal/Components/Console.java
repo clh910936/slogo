@@ -1,4 +1,4 @@
-package FrontInternal;
+package FrontInternal.Components;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
