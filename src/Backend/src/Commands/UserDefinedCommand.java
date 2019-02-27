@@ -35,9 +35,9 @@ public class UserDefinedCommand extends CommandsGeneral {
         String commands = commandsToExecute;
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
-            String var = myVariables[i];
+            String variable = myVariables[i];
             String param = String.valueOf(myParams.get(i));
-            commands = commands.replaceAll(var, param);
+            commands = commands.replaceAll(variable, param);
         }
         return cp.parseCommand(commands, myLanguage);
     }

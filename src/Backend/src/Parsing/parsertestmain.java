@@ -26,14 +26,14 @@ public class parsertestmain {
 //                "  [\n" +
 //                "    pu fd 8 pd fd 8\n" +
 //                "  ]\n", "English"));
-        System.out.println(cp.parseCommand(
-                "to dash [ :count :size ]\n" +
-                "[\n" +
-                "  repeat :count\n" +
-                "  [\n" +
-                "    pu fd :size pd fd :size\n" +
-                "  ]\n" +
-                "]\ndash 20 8", "English"));
+//        System.out.println(cp.parseCommand(
+//                "to dash [ :count :size ]\n" +
+//                "[\n" +
+//                "  repeat :count\n" +
+//                "  [\n" +
+//                "    pu fd :size pd fd :size\n" +
+//                "  ]\n" +
+//                "]\ndash 20 8", "English"));
 //        System.out.println(cp.parseCommand("setxy 3 4", "English"));
         //System.out.println(cp.parseCommand("seth -90", "English"));
 
@@ -43,7 +43,11 @@ public class parsertestmain {
 //                "  rt 90\n" +
 //                "]", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
-//        System.out.println(cp.parseCommand("right 30", "English"));
+        //System.out.println(cp.parseCommand("sin 180", "English"));
+//        System.out.println(cp.parseCommand("dotimes [ :t 10 ] [\n" +
+//                "      fd 1\n" +
+//                "      rt / sin :t 2\n" +
+//                "   ]", "English"));
 //        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
