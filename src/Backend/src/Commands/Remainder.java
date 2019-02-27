@@ -1,12 +1,12 @@
 package Commands;
 
-public class Remainder extends TwoParamCommandDoubles {
+public class Remainder extends TwoParamCommand {
     public Remainder() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        return input1 % input2;
+    public double executeCommand() throws ClassCastException {
+        return (double) input1 % (double) input2;
     }
 }

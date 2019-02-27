@@ -1,13 +1,13 @@
 package Commands;
 
-public class Quotient extends TwoParamCommandDoubles {
+public class Quotient extends TwoParamCommand {
 
     public Quotient() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        return input1 / input2;
+    public double executeCommand() throws ClassCastException {
+        return (double) input1 / (double) input2;
     }
 }

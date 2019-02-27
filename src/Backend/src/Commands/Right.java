@@ -7,8 +7,8 @@ public class Right extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() {
-        this.turtle.turnCounterClockwise(-input);
-        return input;
+    public double executeCommand() throws ClassCastException {
+        this.turtle.turnCounterClockwise(-1 * (double) input);
+        return (double) input;
     }
 }

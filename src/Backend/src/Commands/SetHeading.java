@@ -7,9 +7,9 @@ public class SetHeading extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() {
-        double difference = this.turtle.getDegreesDifference(input);
-        this.turtle.setHeadingAngle(input);
+    public double executeCommand() throws ClassCastException {
+        double difference = this.turtle.getDegreesDifference((double) input);
+        this.turtle.setHeadingAngle((double) input);
         return difference;
     }
 }

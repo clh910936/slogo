@@ -23,7 +23,7 @@ public class Controller implements BackExternalAPI {
         myUserCreatedCommandsModel = new UserCreatedCommandsModel();
     }
 
-    public void parseCommand(String inputString, String language) throws IllegalCommandException, ParamsExceedLimitException {
+    public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             myCommandParser.parseCommand(inputString, language);
         }
@@ -31,7 +31,7 @@ public class Controller implements BackExternalAPI {
             myHistoryModel.addHistoryEntry(inputString, false);
             throw e;
         }
-        catch (ParamsExceedLimitException e) {
+        catch (IllegalParametersException e) {
             myHistoryModel.addHistoryEntry(inputString, false);
             throw e;
         }
