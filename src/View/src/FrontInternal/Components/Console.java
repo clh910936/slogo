@@ -1,5 +1,7 @@
 package FrontInternal.Components;
 
+import BackExternal.BackExternalAPI;
+import BackExternal.IllegalCommandException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,6 +25,7 @@ public class Console extends Stage {
     private ComboBox myLanguageDropDown;
 
     private ResourceBundle myResourcesBundle;
+    private BackExternalAPI myController;
 
     private Button myRunButton;
     private List<Button> myButtonList;
@@ -44,8 +47,8 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (){
-        //myParser = parser;
+    public Console (BackExternalAPI controller){
+        myController = controller;
         initializeInstanceVariables();
         initializeLanguageList();
 
@@ -106,12 +109,16 @@ public class Console extends Stage {
     }
 
     private void readText() {
+        myErrorPane.clearError();
         String input = myUserInputField.getText();
         String language = (String) myLanguageDropDown.getValue();
-        System.out.println(language);
-        //TODO: Parse
-        System.out.println(input);
-        //parser.parse(language, input);
+        //TODO: Add more catch statements as more exceptions are thrown
+        try{
+            myController.parseCommand(input, language);
+        }
+        catch(IllegalCommandException e){
+            myErrorPane.displayError(myResourcesBundle.getString("COMMAND"));
+        }
     }
 
     private void addButtons(){
