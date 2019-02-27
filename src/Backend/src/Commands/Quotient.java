@@ -2,8 +2,8 @@ package Commands;
 
 public class Quotient extends TwoParamCommand {
 
-    public Quotient() {
-        super();
+    public Quotient(String language) {
+        super(language);
     }
 
     @Override

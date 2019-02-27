@@ -2,8 +2,8 @@ package Commands;
 
 public class SetPosition extends TwoParamCommand {
 
-    public SetPosition() {
-        super();
+    public SetPosition(String language) {
+        super(language);
     }
 
     @Override

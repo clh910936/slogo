@@ -2,8 +2,8 @@ package Commands;
 
 public class SetTowards extends TwoParamCommand {
 
-    public SetTowards() {
-        super();
+    public SetTowards(String language) {
+        super(language);
     }
 
     @Override
