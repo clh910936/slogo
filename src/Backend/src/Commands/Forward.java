@@ -9,7 +9,6 @@ public class Forward extends OneParamCommand {
     @Override
     public double executeCommand() {
         this.turtle.moveForward(input);
-        this.turtle.printTurtleStatus();
         return input;
     }
 }

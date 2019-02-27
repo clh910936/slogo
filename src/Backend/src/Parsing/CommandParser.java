@@ -1,7 +1,7 @@
 package Parsing;
 
-import Exceptions.IllegalCommandException;
-import Exceptions.ParamsExceedLimitException;
+import BackExternal.IllegalCommandException;
+import BackExternal.ParamsExceedLimitException;
 import Commands.MakeVariable;
 import Models.TurtleModel;
 import Models.VariablesModel;

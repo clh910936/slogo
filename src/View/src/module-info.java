@@ -4,5 +4,5 @@ module View {
     requires javafx.controls;
     requires java.desktop;
     requires javafx.web;
-    exports Main;
+    requires Backend;
 }

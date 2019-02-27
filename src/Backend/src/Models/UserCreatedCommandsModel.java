@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.IllegalCommandException;
+import BackExternal.IllegalCommandException;
 
 import java.util.Collections;
 import java.util.HashMap;

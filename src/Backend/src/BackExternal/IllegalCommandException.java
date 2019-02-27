@@ -1,4 +1,4 @@
-package Exceptions;
+package BackExternal;
 
 public class IllegalCommandException extends RuntimeException {
 

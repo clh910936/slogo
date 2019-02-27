@@ -1,6 +1,6 @@
 package Commands;
 
-import Exceptions.ParamsExceedLimitException;
+import BackExternal.ParamsExceedLimitException;
 import Parsing.CommandsGeneral;
 import Models.TurtleModel;
 
