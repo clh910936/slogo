@@ -2,6 +2,8 @@ package Commands;
 
 import BackExternal.IllegalLoopParamsException;
 import BackExternal.IllegalParametersException;
+import Models.TurtleModel;
+import Models.UserCreatedCommandsModel;
 import Parsing.CommandParser;
 import Models.VariablesModel;
 
@@ -18,8 +20,8 @@ public class For extends TwoParamCommand {
     public static final int INCR_LOC = 3;
 
 
-    public For(String language) {
-        super(language);
+    public For(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
     }
 
     @Override
@@ -40,15 +42,16 @@ public class For extends TwoParamCommand {
 
         double out = 0.0;
         for (int i = 0; i < variableValues.size(); i++) {
-            String[] newCommandArray = Arrays.copyOf(((String[])input1), ((String[])input2).length);
-            for (int j = 0; j < ((String[])input1).length; j++) {
-                if (((String[])input1)[j].equals(tmpVar)) {
+            String[] newCommandArray = Arrays.copyOf(((String[])input2), ((String[])input2).length);
+            for (int j = 0; j < ((String[])input2).length; j++) {
+                if (((String[])input2)[j].equals(tmpVar)) {
                     newCommandArray[j] = variableValues.get(i).toString();
                 }
             }
             if(newCommandArray.length==0) return 0;
             String newCommand = String.join(" ", newCommandArray);
-            CommandParser cp = new CommandParser(new VariablesModel(), myTurtle);
+            CommandParser cp = new CommandParser(myVariablesModel, myTurtle, myUserCreatedCommandsModel);
+
             out = cp.parseCommand(newCommand, myLanguage);
         }
         return out;

@@ -19,8 +19,8 @@ public class Controller implements BackExternalAPI {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
         myTurtleModel = new TurtleModel(0,0,false, 0, true);
-        myCommandParser = new CommandParser(myVariablesModel, myTurtleModel);
         myUserCreatedCommandsModel = new UserCreatedCommandsModel();
+        myCommandParser = new CommandParser(myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {

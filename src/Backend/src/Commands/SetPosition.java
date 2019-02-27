@@ -1,9 +1,13 @@
 package Commands;
 
+import Models.TurtleModel;
+import Models.UserCreatedCommandsModel;
+import Models.VariablesModel;
+
 public class SetPosition extends TwoParamCommand {
 
-    public SetPosition(String language) {
-        super(language);
+    public SetPosition(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
     }
 
     @Override
