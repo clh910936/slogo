@@ -1,8 +1,8 @@
 package Commands;
 
 public class Power extends TwoParamCommand {
-    public Power() {
-        super();
+    public Power(String language) {
+        super(language);
     }
 
     @Override

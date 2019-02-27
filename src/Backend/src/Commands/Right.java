@@ -2,8 +2,8 @@ package Commands;
 
 public class Right extends OneParamCommand {
 
-    public Right() {
-        super();
+    public Right(String language) {
+        super(language);
     }
 
     @Override

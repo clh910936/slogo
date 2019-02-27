@@ -2,8 +2,8 @@ package Commands;
 
 public class Product extends TwoParamCommand {
 
-    public Product() {
-        super();
+    public Product(String language) {
+        super(language);
     }
 
     @Override

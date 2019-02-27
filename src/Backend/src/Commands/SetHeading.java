@@ -2,8 +2,8 @@ package Commands;
 
 public class SetHeading extends OneParamCommand {
 
-    public SetHeading() {
-        super();
+    public SetHeading(String language) {
+        super(language);
     }
 
     @Override

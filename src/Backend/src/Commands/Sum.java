@@ -2,8 +2,8 @@ package Commands;
 
 
 public class Sum extends TwoParamCommand {
-    public Sum() {
-        super();
+    public Sum(String language) {
+        super(language);
     }
 
     @Override
