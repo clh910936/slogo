@@ -1,22 +1,18 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
+import Models.TurtleModel;
+import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class MakeVariable extends TwoParamCommand {
-    private VariablesModel variablesModel;
 
-    public MakeVariable(String language) {
-        super(language);
+    public MakeVariable(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
     }
-
-    public void giveVariablesModel(VariablesModel vm) {
-        this.variablesModel = vm;
-    }
-
     @Override
     public double executeCommand() throws IllegalParametersException {
-        variablesModel.addVariable((String) input1, (String) input2);
+        myVariablesModel.addVariable((String) input1, (String) input2);
         return (double) input2;
     }
 }

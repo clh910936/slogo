@@ -3,8 +3,8 @@ package Parsing;
 import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
 import BackExternal.IllegalCommandException;
-import Commands.MakeVariable;
 import Models.TurtleModel;
+import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 import java.util.*;
@@ -29,13 +29,15 @@ public class CommandParser {
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
     private TurtleModel myTurtleModel;
+    private UserCreatedCommandsModel myUserCreatedCommandsModel;
     private String myLanguage;
 
 
-    public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel) {
+    public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel, UserCreatedCommandsModel userCreatedCommandsModel) {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
+        myUserCreatedCommandsModel = userCreatedCommandsModel;
         myTurtleModel = turtleModel;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
@@ -61,7 +63,6 @@ public class CommandParser {
                 CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
                 if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
                     commandObject.addParameterToCommand(rawInput.substring(1));
-                    ((MakeVariable) commandObject).giveVariablesModel(myVariablesModel);
                     i++;
                 }
                 else {
