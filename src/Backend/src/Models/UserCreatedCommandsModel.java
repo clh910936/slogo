@@ -1,15 +1,13 @@
 package Models;
 
 import BackExternal.IllegalCommandException;
+import Commands.UserDefinedCommand;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserCreatedCommandsModel {
 
-    Map<String, Map<String, String>> myUserCreatedCommands;
+    List<UserDefinedCommand> listOfUserDefinedCommands;
 
     // name : string
     // vars : list
@@ -17,13 +15,11 @@ public class UserCreatedCommandsModel {
 
 
     public UserCreatedCommandsModel() {
-        myUserCreatedCommands = new HashMap<>();
+        listOfUserDefinedCommands = new ArrayList<>();
     }
 
-    public void addUserCreatedCommand(String name, String variable, String command) {
-        Map<String, String> varAndCommands = new HashMap<>();
-        varAndCommands.put(variable, command);
-        myUserCreatedCommands.put(name, varAndCommands);
+    public void addUserCreatedCommand(UserDefinedCommand command) {
+        listOfUserDefinedCommands.add(command);
     }
 
     private Map<String, String> getUserCreatedCommand(String name) throws IllegalCommandException {

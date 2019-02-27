@@ -1,14 +1,18 @@
 package Commands;
 
 
+import Models.TurtleModel;
+import Models.UserCreatedCommandsModel;
+import Models.VariablesModel;
+
 public abstract class ThreeParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 2;
     protected Object input1;
     protected Object input2;
     protected Object input3;
 
-    public ThreeParamCommand(String language) {
-        super(language);
+    public ThreeParamCommand(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
     }
 
     @Override
