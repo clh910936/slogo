@@ -7,6 +7,7 @@ import Models.VariablesModel;
 import Parsing.CommandParser;
 import Parsing.Regex;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,9 +34,10 @@ public class UserDefinedCommand extends CommandsGeneral {
     public double executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
         for (int i = 0; i < myVariables.length; i++) {
-            commands.replace(myVariables[i], (String) myParams.get(i));
+            String var = myVariables[i];
+            String param = String.valueOf(myParams.get(i));
+            commands = commands.replaceAll(var, param);
         }
-
         return cp.parseCommand(commands, myLanguage);
     }
 

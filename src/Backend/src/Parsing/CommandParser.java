@@ -124,17 +124,20 @@ public class CommandParser {
 
     private void pushNewCommandObject(Stack commandStack, String input) {
         try{
-            String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-            CommandsGeneral commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+            CommandsGeneral commandObject=null;
+            for(UserDefinedCommand command : myUserCreatedCommandsModel.getUserCreatedCommands()) {
+                if(command.getCommandName().equals(input)) {
+                    commandObject = command;
+                }
+            }
+            if(commandObject==null) {
+                String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
+                commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+
+            }
             commandStack.push(commandObject);
         }
         catch (IllegalCommandException e) {
-            for(UserDefinedCommand command : myUserCreatedCommandsModel.getUserCreatedCommands()) {
-                if(command.getCommandName().equals(input)) {
-                    CommandsGeneral commandObject = command;
-                    commandStack.push(commandObject);
-                }
-            }
             throw e;
         }
     }

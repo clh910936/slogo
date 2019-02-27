@@ -31,7 +31,7 @@ public class parsertestmain {
                 "  [\n" +
                 "    pu fd :size pd fd :size\n" +
                 "  ]\n" +
-                "]", "English"));
+                "] dash 20 8", "English"));
 //        System.out.println(cp.parseCommand("setxy 3 4", "English"));
         //System.out.println(cp.parseCommand("seth -90", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
