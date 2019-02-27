@@ -43,4 +43,12 @@ public class UserDefinedCommand extends CommandsGeneral {
     public String getCommandName() {
         return commandName;
     }
+
+    public String[] getVariables() {
+        return myVariables;
+    }
+
+    public String getCommands() {
+        return commandsToExecute;
+    }
 }
