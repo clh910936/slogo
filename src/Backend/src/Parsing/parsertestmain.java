@@ -7,7 +7,7 @@ public class parsertestmain {
     public static void main (String[] args) {
         CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(0,0,true,90,true));
         //System.out.println(cp.parseCommand("towards 300 300", "English"));
-        System.out.println(cp.parseCommand("left 110", "English"));
+        System.out.println(cp.parseCommand("sum 110 [ 1 2 3 ]", "English"));
         System.out.println(cp.parseCommand("fd 20", "English"));
         System.out.println(cp.parseCommand("setxy 3 4", "English"));
         //System.out.println(cp.parseCommand("seth -90", "English"));
