@@ -1,9 +1,7 @@
 package FrontInternal.Components;
 
-import javafx.collections.MapChangeListener;
+import FrontExternal.Observer;
 import javafx.scene.layout.Pane;
-
-import java.util.Map;
 
 /**
  * @author Carrie Hunner
@@ -11,7 +9,7 @@ import java.util.Map;
  * This class implements MapChangeListener and then displays the changes in a formatted
  * pane with a title and a scrollable view.
  */
-public class MapView implements MapChangeListener {
+public class MapView implements Observer {
 
     private ViewTemplate myViewTemplate;
     private String FORMAT = ":\t";
@@ -22,28 +20,6 @@ public class MapView implements MapChangeListener {
      */
     public MapView(String title){
         myViewTemplate = new ViewTemplate(title);
-    }
-
-    /**
-     * Updates the graphics of the pane as the ObserveableMap it is linked to is changed.
-     * @param change object representing the change that was made
-     */
-    @Override
-    public void onChanged(Change change) {
-        if(change.wasAdded()){
-            handleAdded(change);
-        }
-        if(change.wasRemoved()){
-            myViewTemplate.clearLines();
-        }
-    }
-
-    private void handleAdded(Change change) {
-        Map<String, Integer> changeMap = change.getMap();
-        for(String s : changeMap.keySet()){
-            String print = formatString(s, changeMap.get(s));
-            myViewTemplate.addFinalLine(print);
-        }
     }
 
     //String is the variable name
@@ -57,5 +33,15 @@ public class MapView implements MapChangeListener {
      */
     public Pane getPane(){
         return myViewTemplate;
+    }
+
+    //TODO: update
+    /**
+     * Called when the corresponding backend model updates the map.
+     * This updates the list seen by the user to match the model's map.
+     */
+    @Override
+    public void update() {
+
     }
 }
