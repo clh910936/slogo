@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Controller implements BackExternalAPI {
+    public static final double STARTX = 2000;
+    public static final double STARTY = 2000;
     private final VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
     private final TurtleModel myTurtleModel;
@@ -19,7 +21,7 @@ public class Controller implements BackExternalAPI {
     public Controller() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel(0,0,false, 0, true);
+        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 0, true);
         myUserCreatedCommandsModel = new UserCreatedCommandsModel();
         myCommandParser = new CommandParser(myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
     }
