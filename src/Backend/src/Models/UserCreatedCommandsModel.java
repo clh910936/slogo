@@ -6,18 +6,18 @@ import java.util.*;
 
 public class UserCreatedCommandsModel {
 
-    List<UserDefinedCommand> myUserDefinedCommands;
+    Map<String,UserDefinedCommand> myUserDefinedCommands;
 
 
     public UserCreatedCommandsModel() {
-        myUserDefinedCommands = new ArrayList<>();
+        myUserDefinedCommands = new HashMap<>();
     }
 
     public void addUserCreatedCommand(UserDefinedCommand command) {
-        myUserDefinedCommands.add(command);
+        myUserDefinedCommands.put(command.getCommandName(),command);
     }
 
-    public List<UserDefinedCommand> getUserCreatedCommands() {
-        return Collections.unmodifiableList(myUserDefinedCommands);
+    public Map<String,UserDefinedCommand> getUserCreatedCommands() {
+        return Collections.unmodifiableMap(myUserDefinedCommands);
     }
 }
