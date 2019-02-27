@@ -1,6 +1,6 @@
 package Commands;
 
-public class And extends TwoParamCommandDoubles{
+public class And extends TwoParamCommand{
 
     public And() {
         super();
@@ -8,6 +8,10 @@ public class And extends TwoParamCommandDoubles{
 
     @Override
     public double executeCommand() {
+        castParameters();
+
         return (input1 != 0 && input2 != 0)? 1 : 0;
     }
+
+
 }
