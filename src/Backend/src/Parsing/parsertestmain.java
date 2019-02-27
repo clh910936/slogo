@@ -32,8 +32,12 @@ public class parsertestmain {
                 "    pu fd :size pd fd :size\n" +
                 "  ]\n" +
                 "]", "English"));
-//        System.out.println(cp.parseCommand("setxy 3 4", "English"));
-        //System.out.println(cp.parseCommand("seth -90", "English"));
+        System.out.println(cp.parseCommand("dash 20 8", "English"));
+
+//        System.out.println(cp.parseCommand("repeat 4 [\n" +
+//                "  fd 100\n" +
+//                "  rt 90\n" +
+//                "]", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
 //        System.out.println(cp.parseCommand("right 30", "English"));
 //        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));

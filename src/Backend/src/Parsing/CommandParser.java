@@ -57,7 +57,7 @@ public class CommandParser {
         while(i<commandInputList.length || !commandStack.isEmpty()) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput, mySymbols);
-            System.out.println(rawInput);
+            //System.out.println(rawInput);
             if(input.equals(COMMENT_SYMBOL)) {
                 i = getIndexAfterComment(i,commandInputList);
                 continue;
@@ -78,7 +78,7 @@ public class CommandParser {
             }
             else if(input.equals(LIST_START_SYMBOL)) {
                 String[] listContents = getListContents(commandInputList, i);
-                System.out.println(Arrays.toString(listContents));
+                //System.out.println(Arrays.toString(listContents));
                 currentReturnValue = executeCommandsOnStack(commandStack, listContents, currentReturnValue);
                 i+=listContents.length + 2;
             }
