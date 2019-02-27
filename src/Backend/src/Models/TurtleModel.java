@@ -33,7 +33,7 @@ public class TurtleModel {
     }
 
     private void printTurtleStatus() {
-        System.out.println("Located at: (" + nextPointX + ", " + nextPointY + ")");
+        System.out.println("Located at: (" + getNextPointX() + ", " + getNextPointY() + ")");
         System.out.println("pen?: " + isPenUp);
         System.out.println("angle: " + headingAngle);
         System.out.println("displayed?: +" + isDisplayed);
