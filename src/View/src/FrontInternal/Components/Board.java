@@ -60,6 +60,48 @@ public class Board extends Pane {
         pt.setOrientation(PathTransition.OrientationType.NONE);
         //pt.setCycleCount(Timeline.INDEFINITE);
         //pt.setAutoReverse(true);
+        pt.currentTimeProperty().addListener( new ChangeListener<Duration>() {
+
+            Location oldLocation = null;
+
+            /**
+             * Draw a line from the old location to the new location
+             */
+            @Override
+            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+
+                // skip starting at 0/0
+                if( oldValue == Duration.ZERO)
+                    return;
+
+                // get current location
+                double x = myTurtle.getX();
+                double y = myTurtle.getY();
+
+                // initialize the location
+                if( oldLocation == null) {
+                    oldLocation = new Location();
+                    oldLocation.x = x;
+                    oldLocation.y = y;
+                    return;
+                }
+
+                // draw line
+                gc.setStroke(Color.BLUE);
+                gc.setFill(Color.YELLOW);
+                gc.setLineWidth(4);
+                gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
+
+                // update old location with current one
+                oldLocation.x = x;
+                oldLocation.y = y;
+            }
+        });
+
         pt.play();
+    }
+    public static class Location {
+        double x;
+        double y;
     }
 }
