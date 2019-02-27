@@ -34,11 +34,11 @@ public class Regex {
      * Returns language's type associated with the given text if one exists
      */
     public static String getRegexSymbol(String rawInput, List<Map.Entry<String, Pattern>> mySymbols) throws IllegalCommandException {
-            for (var e : mySymbols) {
-                if (match(rawInput, e.getValue())) {
-                    return e.getKey();
-                }
+        for (var e : mySymbols) {
+            if (match(rawInput, e.getValue())) {
+                return e.getKey();
             }
+        }
         throw new IllegalCommandException(rawInput + " is not in the file");
     }
 }
