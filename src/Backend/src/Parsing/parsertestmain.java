@@ -22,18 +22,26 @@ public class parsertestmain {
 //                "  fd :dist\n" +
 //                "]\n", "English"));
 //        System.out.println(cp.parseCommand("sum 10 10", "English"));
-
-
-//        System.out.println(cp.parseCommand("sum 110 [ 1 2 3 ]", "English"));
-        System.out.println(cp.parseCommand("to dash [ :count :size ]\n" +
+//        System.out.println(cp.parseCommand("repeat 20\n" +
+//                "  [\n" +
+//                "    pu fd 8 pd fd 8\n" +
+//                "  ]\n", "English"));
+        System.out.println(cp.parseCommand(
+                "to dash [ :count :size ]\n" +
                 "[\n" +
                 "  repeat :count\n" +
                 "  [\n" +
                 "    pu fd :size pd fd :size\n" +
                 "  ]\n" +
-                "] dash 20 8", "English"));
+                "]\ndash 20 8", "English"));
 //        System.out.println(cp.parseCommand("setxy 3 4", "English"));
         //System.out.println(cp.parseCommand("seth -90", "English"));
+
+
+//        System.out.println(cp.parseCommand("repeat 4 [\n" +
+//                "  fd 100\n" +
+//                "  rt 90\n" +
+//                "]", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
 //        System.out.println(cp.parseCommand("right 30", "English"));
 //        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));

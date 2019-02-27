@@ -15,7 +15,7 @@ public class UserDefinedCommand extends CommandsGeneral {
     private String commandName;
     private String commandsToExecute;
     private String[] myVariables;
-    CommandParser cp;
+    private CommandParser cp;
 
 
     public UserDefinedCommand(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel,
@@ -33,6 +33,7 @@ public class UserDefinedCommand extends CommandsGeneral {
 
     public double executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
+        if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
             String var = myVariables[i];
             String param = String.valueOf(myParams.get(i));
