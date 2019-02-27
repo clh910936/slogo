@@ -1,8 +1,9 @@
 package Commands;
 
+import BackExternal.IllegalParametersException;
 import Models.VariablesModel;
 
-public class MakeVariable extends TwoParamCommandStrings {
+public class MakeVariable extends TwoParamCommand {
     private VariablesModel variablesModel;
 
     public MakeVariable() {
@@ -14,8 +15,8 @@ public class MakeVariable extends TwoParamCommandStrings {
     }
 
     @Override
-    public double executeCommand() {
-        variablesModel.addVariable(input1, Double.toString(input2));
-        return input2;
+    public double executeCommand() throws IllegalParametersException {
+        variablesModel.addVariable((String) input1, (String) input2);
+        return (double) input2;
     }
 }

@@ -6,7 +6,7 @@ public class Cosine extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() {
-        return Math.cos(Math.toRadians(input));
+    public double executeCommand() throws ClassCastException {
+        return Math.cos(Math.toRadians((double) input));
     }
 }

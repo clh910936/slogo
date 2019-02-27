@@ -1,13 +1,15 @@
 package Commands;
 
-public class LessThan extends TwoParamCommandDoubles {
+import BackExternal.IllegalParametersException;
+
+public class LessThan extends TwoParamCommand {
 
     public LessThan() {
         super();
     }
 
     @Override
-    public double executeCommand() {
-        return (input1 < input2)? 1 : 0;
+    public double executeCommand() throws IllegalParametersException {
+        return ((double) input1 < (double) input2)? 1 : 0;
     }
 }

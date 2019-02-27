@@ -1,17 +1,13 @@
 package Parsing;
 
-<<<<<<< HEAD
-import Exceptions.IllegalCommandException;
-=======
 import BackExternal.IllegalCommandException;
-import java.lang.reflect.InvocationTargetException;
->>>>>>> 8bbba64743eb71cef94bd50532ce29cf6cc1285d
+import Commands.CommandsGeneral;
 
-public class ClassInstantiationTool {
+public class CommandClassFinder {
 
-    public static Object getObject(String classPath, String className) {
+    public static CommandsGeneral getObject(String classPath, String className, String language) {
         Class clazz = findReflectionClass(classPath, className);
-        Object o = instantiateReflectionClass(clazz);
+        CommandsGeneral o = instantiateReflectionClass(clazz,language);
         return o;
     }
 
@@ -26,10 +22,10 @@ public class ClassInstantiationTool {
         return clazz;
     }
 
-    private static Object instantiateReflectionClass(Class clazz) {
-        Object instantiatedObject = null;
+    private static CommandsGeneral instantiateReflectionClass(Class clazz, String language) {
+        CommandsGeneral instantiatedObject = null;
         try{
-            instantiatedObject = clazz.getDeclaredConstructor().newInstance();
+            instantiatedObject = (CommandsGeneral) clazz.getDeclaredConstructor(String.class).newInstance(language);
         }
         catch (Exception e) {
             System.out.println("Could not instantiate " + clazz);

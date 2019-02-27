@@ -1,13 +1,8 @@
 package Parsing;
 
-<<<<<<< HEAD
+import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
-import Exceptions.IllegalCommandException;
-import Exceptions.ParamsExceedLimitException;
-=======
 import BackExternal.IllegalCommandException;
-import BackExternal.ParamsExceedLimitException;
->>>>>>> 8bbba64743eb71cef94bd50532ce29cf6cc1285d
 import Commands.MakeVariable;
 import Models.TurtleModel;
 import Models.VariablesModel;
@@ -35,6 +30,7 @@ public class CommandParser {
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
     private TurtleModel myTurtleModel;
+    private String myLanguage;
 
 
     public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel) {
@@ -45,10 +41,11 @@ public class CommandParser {
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
-    public double parseCommand(String commandInput, String language) throws IllegalCommandException, ParamsExceedLimitException {
+    public double parseCommand(String commandInput, String language) throws IllegalCommandException, IllegalParametersException {
         if(commandInput.length()==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
+        myLanguage = language;
         String[] commandInputList = commandInput.split(NEWLINE);
         commandInputList = removeComments(commandInputList);
 
@@ -114,24 +111,29 @@ public class CommandParser {
 
     private void pushNewCommandObject(Stack commandStack, String input) {
         String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-        CommandsGeneral commandObject = (CommandsGeneral) ClassInstantiationTool.getObject(COMMANDS_PACKAGE_PATH, regexCommandName);
+        CommandsGeneral commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage);
         commandObject.addParameterToCommand(myTurtleModel);
         commandStack.push(commandObject);
     }
 
-    private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) throws ParamsExceedLimitException {
+    private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) throws IllegalParametersException {
         if(commandStack.isEmpty()) {
-            throw new ParamsExceedLimitException();
+            throw new IllegalParametersException();
         }
         CommandsGeneral commandObject;
         try{
             commandObject = addParameterToLastCommand(commandStack, parameter);
         }
         catch (EmptyStackException e) {
-            throw new ParamsExceedLimitException();
+            throw new IllegalParametersException();
         }
         while(commandObject.isCommandReadyToExecute()) {
-            currentReturnValue = commandObject.executeCommand();
+            try{
+                currentReturnValue = commandObject.executeCommand();
+            }
+            catch (ClassCastException e){
+                throw new IllegalParametersException();
+            }
             commandStack.pop();
             if (commandStack.isEmpty()) break;
             commandObject = addParameterToLastCommand(commandStack, currentReturnValue);
@@ -145,7 +147,7 @@ public class CommandParser {
         try{
             commandObject.addParameterToCommand(value);
         }
-        catch (ParamsExceedLimitException e){
+        catch (IllegalParametersException e){
             throw e;
         }
         return commandObject;

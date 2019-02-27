@@ -7,11 +7,8 @@ public class And extends TwoParamCommand{
     }
 
     @Override
-    public double executeCommand() {
-        castParameters();
-
-        return (input1 != 0 && input2 != 0)? 1 : 0;
+    public double executeCommand() throws ClassCastException {
+        return ((double) input1 != 0 && (double) input2 != 0)? 1 : 0;
     }
-
 
 }
