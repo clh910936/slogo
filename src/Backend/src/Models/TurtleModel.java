@@ -9,6 +9,9 @@ public class TurtleModel {
     - IS SHOWN/ IS HIDDEN
      */
 
+    public static final double STARTX = 2000;
+    public static final double STARTY = 2000;
+
     private double nextPointX;
     private double nextPointY;
     private boolean isPenUp;
@@ -90,11 +93,11 @@ public class TurtleModel {
     }
 
     public double getNextPointX() {
-        return nextPointX;
+        return nextPointX - STARTX;
     }
 
     public double getNextPointY() {
-        return nextPointY;
+        return nextPointY - STARTY;
     }
 
     public double getHeadingAngle() {
