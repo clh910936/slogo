@@ -4,6 +4,7 @@ import Models.TurtleModel;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
+
 public abstract class TwoParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 2;
     protected Object input1;

@@ -9,7 +9,6 @@ public abstract class OneParamCommand extends CommandsGeneral {
     protected Object input;
     public OneParamCommand(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
         super(language, turtleModel, variablesModel, userCreatedCommandsModel);
-
     }
 
 
