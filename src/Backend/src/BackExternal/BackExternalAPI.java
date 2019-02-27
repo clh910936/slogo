@@ -35,6 +35,6 @@ public interface BackExternalAPI {
      * Gets a list of the user defined commands
      * @return
      */
-    public Map<String,String> getUserCreatedCommands();
+    public Map<String,Map<String,String>> getUserCreatedCommands();
 
 }
