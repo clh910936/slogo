@@ -1,8 +1,7 @@
 package Commands;
 
 
-import BackExternal.InsufficientParamsException;
-import BackExternal.ParamsExceedLimitException;
+import BackExternal.IllegalParametersException;
 import Models.TurtleModel;
 
 import java.util.List;
@@ -12,9 +11,9 @@ public abstract class CommandsGeneral {
     protected List<Object> myParams;
 
     public abstract boolean isCommandReadyToExecute();
-    public abstract double executeCommand() throws InsufficientParamsException;
-
-    public void addParameterToCommand(Object val) throws ParamsExceedLimitException {
+    public abstract double executeCommand() throws IllegalParametersException;
+    protected abstract void castParameters() throws IllegalParametersException;
+    public void addParameterToCommand(Object val) throws IllegalParametersException {
         if( val instanceof TurtleModel) {
             myTurtle = (TurtleModel) val;
             return;
