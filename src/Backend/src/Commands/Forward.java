@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/Model/src/Parsing/Commands/Forward.java
-package Parsing.Commands;
-=======
 package Commands;
->>>>>>> master:src/Backend/src/Commands/Forward.java
 
 public class Forward extends OneParamCommand {
 
