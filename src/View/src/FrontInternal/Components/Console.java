@@ -70,6 +70,7 @@ public class Console extends Stage {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
         myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
+        myErrorBox = new HBox();
 
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
