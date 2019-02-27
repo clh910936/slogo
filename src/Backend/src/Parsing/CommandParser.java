@@ -3,6 +3,7 @@ package Parsing;
 import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
 import BackExternal.IllegalCommandException;
+import Commands.UserDefinedCommand;
 import Models.TurtleModel;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
@@ -20,6 +21,7 @@ public class CommandParser {
     public static final String LIST_END_SYMBOL = "ListEnd";
     public static final String COMMAND_SYMBOL = "Command";
     public static final String MAKE_VARIABLE = "MakeVariable";
+    public static final String MAKE_COMMAND = "MakeUserInstruction";
 
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
@@ -55,14 +57,14 @@ public class CommandParser {
         while(i<commandInputList.length || !commandStack.isEmpty()) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput, mySymbols);
+            System.out.println(rawInput);
             if(input.equals(COMMENT_SYMBOL)) {
                 i = getIndexAfterComment(i,commandInputList);
                 continue;
             }
             if(input.equals(VARIABLE_SYMBOL)) {
-                CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
-                if(commandObject.getCommandName().equals(MAKE_VARIABLE)) {
-                    commandObject.addParameterToCommand(rawInput.substring(1));
+                if(checkLastCommand(MAKE_VARIABLE, commandStack)) {
+                    addParameterToLastCommand(commandStack, rawInput.substring(1));
                     i++;
                 }
                 else {
@@ -75,7 +77,8 @@ public class CommandParser {
                 i++;
             }
             else if(input.equals(LIST_START_SYMBOL)) {
-                String[] listContents = getListContents(commandInputList, i + 1);
+                String[] listContents = getListContents(commandInputList, i);
+                System.out.println(Arrays.toString(listContents));
                 currentReturnValue = executeCommandsOnStack(commandStack, listContents, currentReturnValue);
                 i+=listContents.length + 2;
             }
@@ -83,7 +86,12 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             else if (input.equals(COMMAND_SYMBOL)){
-                pushNewCommandObject(commandStack, rawInput);
+                if(checkLastCommand(MAKE_COMMAND, commandStack)) {
+                    addParameterToLastCommand(commandStack, rawInput);
+                }
+                else {
+                    pushNewCommandObject(commandStack, rawInput);
+                }
                 i++;
             }
         }
@@ -100,6 +108,11 @@ public class CommandParser {
         return index;
     }
 
+    private boolean checkLastCommand(String commandType, Stack commandStack) {
+        if(commandStack.isEmpty()) return false;
+        return ((CommandsGeneral) commandStack.peek()).getCommandName().equals(commandType);
+    }
+
     public boolean isCommand(String input) {
         try {
             return Regex.getRegexSymbol(input,mySymbols).equals(COMMAND_SYMBOL);
@@ -110,10 +123,20 @@ public class CommandParser {
     }
 
     private void pushNewCommandObject(Stack commandStack, String input) {
-        String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
-        CommandsGeneral commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
-        commandObject.addParameterToCommand(myTurtleModel);
-        commandStack.push(commandObject);
+        try{
+            String regexCommandName = Regex.getRegexSymbol(input, myCommandSymbols);
+            CommandsGeneral commandObject = CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+            commandStack.push(commandObject);
+        }
+        catch (IllegalCommandException e) {
+            for(UserDefinedCommand command : myUserCreatedCommandsModel.getUserCreatedCommands()) {
+                if(command.getCommandName().equals(input)) {
+                    CommandsGeneral commandObject = command;
+                    commandStack.push(commandObject);
+                }
+            }
+            throw e;
+        }
     }
 
     private double executeCommandsOnStack(Stack commandStack, Object parameter, double currentReturnValue) throws IllegalParametersException {
@@ -155,14 +178,22 @@ public class CommandParser {
 
     private String[] getListContents(String[] commandInputList, int currentIndex) throws IllegalCommandException{
         List<String> listContents = new ArrayList<>();
-        while(currentIndex<commandInputList.length) {
-            String rawInput = commandInputList[currentIndex];
+        int bracketCount = 0;
+        for(int i = currentIndex;i<commandInputList.length;i++) {
+            String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput,mySymbols);
-            if(!input.equals(LIST_END_SYMBOL)) listContents.add(rawInput);
-            else {
-                return listContents.toArray(new String[listContents.size()]);
+            if(input.equals(LIST_START_SYMBOL)) {
+                if(i!=currentIndex) listContents.add(rawInput);
+                bracketCount++;
             }
-            currentIndex++;
+            else if(!input.equals(LIST_END_SYMBOL)) {
+                listContents.add(rawInput);
+            }
+            else {
+                bracketCount--;
+                if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
+                else listContents.add(rawInput);
+            }
         }
         throw new IllegalCommandException("Invalid List Parameter");
     }

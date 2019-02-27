@@ -36,7 +36,7 @@ public class parsertestmain {
         //System.out.println(cp.parseCommand("seth -90", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
 //        System.out.println(cp.parseCommand("right 30", "English"));
-        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));
+//        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]", "English"));
