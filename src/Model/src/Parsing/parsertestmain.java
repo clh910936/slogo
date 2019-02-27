@@ -5,8 +5,10 @@ import Variables.VariablesModel;
 
 public class parsertestmain {
     public static void main (String[] args) {
-        CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(200,200,true,90,true));
-        System.out.println(cp.parseCommand("towards 300 300", "English"));
+        CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(0,0,true,90,true));
+        //System.out.println(cp.parseCommand("towards 300 300", "English"));
+        System.out.println(cp.parseCommand("left 0", "English"));
+        System.out.println(cp.parseCommand("setxy 3 4", "English"));
         //System.out.println(cp.parseCommand("seth -90", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
 //        System.out.println(cp.parseCommand("right 30", "English"));

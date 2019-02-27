@@ -29,6 +29,8 @@ public class TurtleModel {
         printTurtleStatus();
     }
 
+
+
     private void printTurtleStatus() {
         System.out.println("Located at: (" + nextPointX + ", " + nextPointY + ")");
         System.out.println("pen?: " + isPenUp);
@@ -55,8 +57,18 @@ public class TurtleModel {
     public double getAngleToPoint(double x, double y) {
         double rise = x - nextPointX;
         double run = y - nextPointY;
-        return keepAnglePositive(Math.atan(rise / run));
+        return keepAnglePositive(Math.toDegrees(Math.atan(rise / run)));
+    }
 
+    public double getDistToPoint(double x, double y) {
+        double rise = x - nextPointX;
+        double run = y - nextPointY;
+        return Math.sqrt(rise * rise + run * run);
+    }
+
+    public void updatePoints(double x, double y) {
+        this.nextPointX = x;
+        this.nextPointY = y;
     }
 
     private double keepAnglePositive(double angle) {
