@@ -50,7 +50,7 @@ public class Controller implements BackExternalAPI {
         return myTurtleModel;
     }
 
-    public Map<String,String> getUserCreatedCommands() {
+    public Map<String, Map<String,String>> getUserCreatedCommands() {
         return myUserCreatedCommandsModel.getUserCreatedCommands();
     }
 

@@ -48,7 +48,7 @@ public class For extends TwoParamCommand {
             }
             if(newCommandArray.length==0) return 0;
             String newCommand = String.join(" ", newCommandArray);
-            CommandParser cp = new CommandParser(new VariablesModel(), turtle);
+            CommandParser cp = new CommandParser(new VariablesModel(), myTurtle);
             out = cp.parseCommand(newCommand, myLanguage);
         }
         return out;

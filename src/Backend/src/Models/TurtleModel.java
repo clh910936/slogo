@@ -29,8 +29,6 @@ public class TurtleModel {
         printTurtleStatus();
     }
 
-
-
     private void printTurtleStatus() {
         System.out.println("Located at: (" + nextPointX + ", " + nextPointY + ")");
         System.out.println("pen?: " + isPenUp);
@@ -71,6 +69,42 @@ public class TurtleModel {
         this.nextPointY = y;
     }
 
+    public void setPenUp () {
+        this.isPenUp = true;
+    }
+
+    public void setPenDown () {
+        this.isPenUp = false;
+    }
+
+    public void setShowTurtle() {
+        this.isDisplayed = true;
+    }
+
+    public void setHideTurtle() {
+        this.isDisplayed = false;
+    }
+
+    public boolean getIsDisplayed() {
+        return isDisplayed;
+    }
+
+    public double getNextPointX() {
+        return nextPointX;
+    }
+
+    public double getNextPointY() {
+        return nextPointY;
+    }
+
+    public double getHeadingAngle() {
+        return headingAngle;
+    }
+
+    public boolean getIsPenUp() {
+        return isPenUp;
+    }
+
     private double keepAnglePositive(double angle) {
         while (angle < 0) {
             angle += 360;
@@ -80,9 +114,6 @@ public class TurtleModel {
         }
         return angle;
     }
-
-
-
 
 
 }

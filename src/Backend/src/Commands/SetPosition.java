@@ -8,8 +8,8 @@ public class SetPosition extends TwoParamCommand {
 
     @Override
     public double executeCommand() throws ClassCastException {
-        double dist = turtle.getDistToPoint((double) input1, (double) input2);
-        turtle.updatePoints((double) input1, (double) input2);
+        double dist = myTurtle.getDistToPoint((double) input1, (double) input2);
+        myTurtle.updatePoints((double) input1, (double) input2);
         return dist;
     }
 }
