@@ -6,8 +6,8 @@ public class NaturalLog extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() {
-        return Math.log(input);
+    public double executeCommand() throws ClassCastException {
+        return Math.log((double) input);
     }
 
 }
