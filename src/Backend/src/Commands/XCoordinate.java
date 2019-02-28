@@ -1,8 +1,6 @@
 package Commands;
 
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class XCoordinate extends ZeroParamCommand {
     public XCoordinate(String language, ModelManager modelManager) {
@@ -10,6 +8,6 @@ public class XCoordinate extends ZeroParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return myTurtle.getNextPointX();
+        return myTurtle.getUpdatedX();
     }
 }
