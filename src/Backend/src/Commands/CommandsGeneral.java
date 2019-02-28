@@ -33,6 +33,7 @@ public abstract class CommandsGeneral {
             return;
         }
         myParams.add(val);
+        System.out.println(myParams);
     }
 
     public String getCommandName() {
