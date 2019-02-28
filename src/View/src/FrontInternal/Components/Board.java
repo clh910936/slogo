@@ -133,12 +133,13 @@ public class Board extends Pane {
     }
 
     private void handleChange(TurtleView t1, ITurtle t2) {
-        double x = t2.getUpdatedX();
-        double y = t2.getUpdatedY();
+        for (int i = 0; i < t2.getUpdatedX().size(); i++) {
+            double x = t2.getUpdatedX().get(i);
+            double y = t2.getUpdatedY().get(i);
 
-        //System.out.println("pen up: " + t2.getIsPenUp());
-        t1.rotate(t2.getHeadingAngle() - 90);
-        move(t1, x, y, !t2.getIsPenUp());
-
+            //System.out.println("pen up: " + t2.getIsPenUp());
+            t1.rotate(t2.getHeadingAngle().get(i) - 90);
+            move(t1, x, y, !t2.getIsPenUp().get(i));
+        }
     }
 }
