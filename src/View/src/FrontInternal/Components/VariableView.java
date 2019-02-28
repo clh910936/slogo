@@ -1,7 +1,6 @@
 package FrontInternal.Components;
 
 import BackExternal.IModelManager;
-import BackExternal.ViewAPI;
 
 import java.util.Map;
 import java.util.ResourceBundle;
