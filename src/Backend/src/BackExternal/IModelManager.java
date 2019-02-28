@@ -7,8 +7,9 @@ public interface IModelManager {
 
     List<String> getUserDefinedCommands();
     Map<String,String> getVariables();
-    Map<String,Boolean> getHistory();
+    List<String> getHistory();
     void parseCommand(String input, String language);
+    boolean getWasSuccessfulHistory(int i);
     List<ITurtle> getTurtleList();
 
 
