@@ -2,7 +2,7 @@ package Parsing;
 
 import Observing.TurtleListener;
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class parsertestmain {
@@ -54,7 +54,7 @@ public class parsertestmain {
 //                "]", "English"));
 
         Turtle tm = new Turtle(2000, 2000,false, 0, true);
-        CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserCreatedCommandsModel());
+        CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserDefinedCommandsModel());
         TurtleListener tl = new TurtleListener(tm);
         tm.add(tl);
         System.out.println(cp.parseCommand("fd 10", "English"));

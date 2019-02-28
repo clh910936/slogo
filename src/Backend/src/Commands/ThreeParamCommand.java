@@ -2,7 +2,7 @@ package Commands;
 
 
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public abstract class ThreeParamCommand extends CommandsGeneral {
@@ -11,8 +11,8 @@ public abstract class ThreeParamCommand extends CommandsGeneral {
     protected Object input2;
     protected Object input3;
 
-    public ThreeParamCommand(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtle, variablesModel, userCreatedCommandsModel);
+    public ThreeParamCommand(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+        super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
 
     @Override

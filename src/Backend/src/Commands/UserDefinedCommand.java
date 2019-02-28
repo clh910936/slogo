@@ -1,7 +1,7 @@
 package Commands;
 
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 import Parsing.CommandParser;
 
@@ -12,13 +12,13 @@ public class UserDefinedCommand extends CommandsGeneral {
     private CommandParser cp;
 
 
-    public UserDefinedCommand(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel,
+    public UserDefinedCommand(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel,
                               String name, String commands, String[] var) {
-        super(language, turtle, variablesModel, userCreatedCommandsModel);
+        super(language, turtle, variablesModel, userDefinedCommandsModel);
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;
-        cp = new CommandParser(new VariablesModel(), myTurtle, myUserCreatedCommandsModel);
+        cp = new CommandParser(new VariablesModel(), myTurtle, myUserDefinedCommandsModel);
     }
 
     public boolean isCommandReadyToExecute() {

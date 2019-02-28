@@ -1,6 +1,5 @@
 package FrontInternal.Components;
 
-import FrontExternal.Observer;
 import javafx.scene.layout.Pane;
 
 /**

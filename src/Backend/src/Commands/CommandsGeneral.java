@@ -3,7 +3,7 @@ package Commands;
 
 import BackExternal.IllegalParametersException;
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 import java.util.ArrayList;
@@ -12,14 +12,14 @@ import java.util.List;
 public abstract class CommandsGeneral {
     protected Turtle myTurtle;
     protected VariablesModel myVariablesModel;
-    protected UserCreatedCommandsModel myUserCreatedCommandsModel;
+    protected UserDefinedCommandsModel myUserDefinedCommandsModel;
     protected List<Object> myParams;
     protected String myLanguage;
 
-    public CommandsGeneral(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public CommandsGeneral(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
         myVariablesModel = variablesModel;
         myTurtle = turtle;
-        myUserCreatedCommandsModel = userCreatedCommandsModel;
+        myUserDefinedCommandsModel = userDefinedCommandsModel;
         myLanguage = language;
         myParams = new ArrayList<>();
     }
