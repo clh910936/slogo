@@ -2,7 +2,7 @@ package FrontInternal.Components;
 
 import BackExternal.IModelManager;
 
-import java.util.Map;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -31,9 +31,9 @@ public class HistoryView extends View {
     @Override
     public void update() {
         myViewTemplate.clearLines();
-        Map<String, Boolean> history = myManager.getHistory();
-        for(String s: history.keySet()){
-            myViewTemplate.addFinalLine(s, history.get(s));
+        List<String> history = myManager.getHistory();
+        for(String s: history){
+            myViewTemplate.addFinalLine(s);
         }
     }
 }

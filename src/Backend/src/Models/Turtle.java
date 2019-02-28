@@ -19,11 +19,11 @@ public class Turtle implements ITurtle {
     public static final double STARTY = 2000;
 
 
-    private List<Double> nextPointX;
-    private List<Double> nextPointY;
-    private List<Boolean> isPenUp;
-    private List<Double> headingAngle;
-    private List<Boolean> isDisplayed;
+    private List<Double> nextPointX = new ArrayList<>();
+    private List<Double> nextPointY = new ArrayList<>();
+    private List<Boolean> isPenUp = new ArrayList<>();
+    private List<Double> headingAngle = new ArrayList<>();
+    private List<Boolean> isDisplayed = new ArrayList<>();
 
 
     //.size()-1
