@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -26,7 +27,7 @@ public class Board extends Pane {
     private GraphicsContext gc;
     private int myWidth;
     private int myHeight;
-    private List<TurtleView> myTurtles;
+    private List<TurtleView> myTurtles = new ArrayList();
 
     private Path p;
     private IModelManager myController;
