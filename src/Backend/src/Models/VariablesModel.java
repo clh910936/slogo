@@ -15,6 +15,7 @@ public class VariablesModel {
     }
 
     public void addVariable(String variable, String value) {
+        System.out.println("adding");
         myVariables.put(variable, value);
     }
 

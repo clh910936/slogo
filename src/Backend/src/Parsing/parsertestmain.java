@@ -30,6 +30,18 @@ public class parsertestmain {
 //                "  [\n" +
 //                "    pu fd 8 pd fd 8\n" +
 //                "  ]\n", "English"));
+
+        System.out.println(cp.parseCommand(
+                "to dash [ :count :size ]\n" +
+                "[\n" +
+                "  repeat :count\n" +
+                "  [\n" +
+                "    pu fd :size pd fd :size\n" +
+                "  ]\n" +
+                "]\ndash 20 8", "English"));
+//        System.out.println(cp.parseCommand("setxy 3 4", "English"));
+        //System.out.println(cp.parseCommand("make :random 2", "English"));
+
 //        System.out.println(cp.parseCommand(
 //                "to dash [ :count :size ]\n" +
 //                "[\n" +
@@ -50,6 +62,7 @@ public class parsertestmain {
 //                "rt 90\n" +
 //                "fd :distance\n" +
 //                "rt 90\n", "English"));
+>>>>>>> master
 
 
 //        System.out.println(cp.parseCommand("repeat 4 [\n" +
