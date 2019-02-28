@@ -4,6 +4,8 @@ import Models.ModelManager;
 import Models.ModelManager;
 import Parsing.CommandParser;
 
+import java.util.Arrays;
+
 public class UserDefinedCommand extends CommandsGeneral {
     private String commandName;
     private String commandsToExecute;
@@ -31,6 +33,7 @@ public class UserDefinedCommand extends CommandsGeneral {
             String param = String.valueOf(myParams.get(i));
             commands = commands.replaceAll(variable, param);
         }
+        myParams.clear();
         return cp.parseCommand(commands, myLanguage);
     }
 
@@ -48,6 +51,6 @@ public class UserDefinedCommand extends CommandsGeneral {
     }
 
     public String toString() {
-        return (getCommandName() + "\n\t" + getVariables().toString()+ "\n\t[ " + getCommands() + " ]");
+        return (getCommandName() + "\n\t" + Arrays.toString(getVariables())+ "\n\t[ " + getCommands() + " ]");
     }
 }
