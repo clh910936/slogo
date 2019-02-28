@@ -1,6 +1,6 @@
 package Commands;
 
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
@@ -10,8 +10,8 @@ public abstract class TwoParamCommand extends CommandsGeneral {
     protected Object input1;
     protected Object input2;
 
-    public TwoParamCommand(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
+    public TwoParamCommand(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+        super(language, turtle, variablesModel, userCreatedCommandsModel);
     }
 
     @Override

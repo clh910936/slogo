@@ -2,15 +2,15 @@ package Parsing;
 
 import BackExternal.IllegalCommandException;
 import Commands.CommandsGeneral;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class CommandClassFinder {
 
-    public static CommandsGeneral getObject(String classPath, String className, String language, VariablesModel variablesModel, TurtleModel turtleModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public static CommandsGeneral getObject(String classPath, String className, String language, VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
         Class clazz = findReflectionClass(classPath, className);
-        CommandsGeneral o = instantiateReflectionClass(clazz,language, variablesModel, turtleModel, userCreatedCommandsModel);
+        CommandsGeneral o = instantiateReflectionClass(clazz,language, variablesModel, turtle, userCreatedCommandsModel);
         return o;
     }
 
@@ -25,10 +25,10 @@ public class CommandClassFinder {
         return clazz;
     }
 
-    private static CommandsGeneral instantiateReflectionClass(Class clazz, String language, VariablesModel variablesModel, TurtleModel turtleModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+    private static CommandsGeneral instantiateReflectionClass(Class clazz, String language, VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
         CommandsGeneral instantiatedObject = null;
         try{
-            instantiatedObject = (CommandsGeneral) clazz.getDeclaredConstructor(String.class, TurtleModel.class, VariablesModel.class, UserCreatedCommandsModel.class).newInstance(language,turtleModel,variablesModel, userCreatedCommandsModel);
+            instantiatedObject = (CommandsGeneral) clazz.getDeclaredConstructor(String.class, Turtle.class, VariablesModel.class, UserCreatedCommandsModel.class).newInstance(language, turtle,variablesModel, userCreatedCommandsModel);
         }
         catch (Exception e) {
             System.out.println("Could not instantiate " + clazz);

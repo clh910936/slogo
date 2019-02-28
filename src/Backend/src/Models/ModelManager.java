@@ -1,30 +1,33 @@
-package BackExternal;
+package Models;
 
+import BackExternal.IModelManager;
+import BackExternal.IllegalCommandException;
+import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
 import Models.HistoryModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Parsing.CommandParser;
-import Models.TurtleModel;
 import Models.VariablesModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Controller implements BackExternalAPI {
+public class ModelManager implements IModelManager {
+    public static final double STARTX = 2000;
+    public static final double STARTY = 2000;
     private final VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
-    private final TurtleModel myTurtleModel;
+    private final Turtle myTurtle;
     private final CommandParser myCommandParser;
     private final UserCreatedCommandsModel myUserCreatedCommandsModel;
 
-    public Controller() {
+    public ModelManager() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel(0,0,false, 0, true);
+        myTurtle = new Turtle(STARTX, STARTY,false, 0, true);
         myUserCreatedCommandsModel = new UserCreatedCommandsModel();
-        myCommandParser = new CommandParser(myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+        myCommandParser = new CommandParser(myVariablesModel, myTurtle, myUserCreatedCommandsModel);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
@@ -50,8 +53,8 @@ public class Controller implements BackExternalAPI {
         return myHistoryModel.getHistory();
     }
 
-    public TurtleModel getTurtle() {
-        return myTurtleModel;
+    public Turtle getTurtle() {
+        return myTurtle;
     }
 
     public Map<String,UserDefinedCommand> getUserCreatedCommands() {

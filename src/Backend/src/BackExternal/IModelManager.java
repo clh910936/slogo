@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import Commands.UserDefinedCommand;
-import Models.TurtleModel;
+import Models.Turtle;
 
-public interface BackExternalAPI {
+public interface IModelManager {
 
     /**
      * Part of the controller. Front-end calls parse() to give unprocessed commands to back-end.
@@ -14,11 +14,11 @@ public interface BackExternalAPI {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException;
 
     /**
-     * When the front-end gets told by TurtleModel that the turtle as been updated, the front-end calls getTurtle()
+     * When the front-end gets told by Turtle that the turtle as been updated, the front-end calls getTurtle()
      * to get the latest turtle with updated parameters
      * @return a turtle object
      */
-    public TurtleModel getTurtle();
+    public Turtle getTurtle();
 
     /**
      * To update the history view, the front-end calls getHistory() to get the latest history of commands

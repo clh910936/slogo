@@ -3,6 +3,7 @@ package FrontExternal;
 import java.awt.Dimension;
 import java.util.ResourceBundle;
 
+import BackExternal.IModelManager;
 import FrontInternal.Components.Board;
 import FrontInternal.Components.Console;
 import FrontInternal.Components.ListView;
@@ -13,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -40,13 +42,18 @@ public class GUI {
         var right = makeRightView();
         myRoot = new HBox(left, right);
         myRoot.setHgrow(right, Priority.ALWAYS);
-//        root.setRight(makeRightView());
-//        root.setLeft(makeBoard());
+
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
     private Node makeRightView() {
-        return new VBox(makeListView(), makeMapView(), makeButton("Move", e -> myBoard.move()));
+        var x = new TextField();
+        var y = new TextField();
+        return new VBox(makeListView(),
+                makeMapView(),
+                x, y,
+                makeButton("Move", e -> myBoard.move(Integer.parseInt(x.getText()),
+                        Integer.parseInt(y.getText()))));
     }
 
     private Node makeBoard() {
@@ -55,13 +62,13 @@ public class GUI {
     }
 
     private Node makeConsoleButton() {
-        var b = makeButton("OpenConsole", e -> openConsole());
+        var b = makeButton("OpenConsole", e -> openConsole(null));
         b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
         return b;
     }
 
-    private void openConsole() {
-        myConsole = new Console();
+    private void openConsole(IModelManager b) {
+        myConsole = new Console(b);
     }
 
 

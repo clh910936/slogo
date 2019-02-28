@@ -3,7 +3,7 @@ package Parsing;
 import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
 import BackExternal.IllegalCommandException;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
@@ -29,17 +29,17 @@ public class CommandParser {
     private List<Map.Entry<String, Pattern>> mySymbols;
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private VariablesModel myVariablesModel;
-    private TurtleModel myTurtleModel;
+    private Turtle myTurtleModel;
     private UserCreatedCommandsModel myUserCreatedCommandsModel;
     private String myLanguage;
 
 
-    public CommandParser(VariablesModel variablesModel, TurtleModel turtleModel, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public CommandParser(VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
         myVariablesModel = variablesModel;
         myUserCreatedCommandsModel = userCreatedCommandsModel;
-        myTurtleModel = turtleModel;
+        myTurtleModel = turtle;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 

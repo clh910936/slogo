@@ -1,6 +1,10 @@
 package Models;
 
-public class TurtleModel {
+import Observing.Observable;
+
+import java.util.ArrayList;
+
+public class Turtle extends Observable {
     /*
     STATE INFORMATION:
     - NEXT POINT
@@ -9,13 +13,17 @@ public class TurtleModel {
     - IS SHOWN/ IS HIDDEN
      */
 
+    public static final double STARTX = 2000;
+    public static final double STARTY = 2000;
+
     private double nextPointX;
     private double nextPointY;
     private boolean isPenUp;
     private double headingAngle;
     private boolean isDisplayed;
 
-    public TurtleModel(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
+    public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
+        myObservers = new ArrayList<>();
         this.nextPointX = nextPointX;
         this.nextPointY = nextPointY;
         this.isPenUp = isPenUp;
@@ -26,11 +34,12 @@ public class TurtleModel {
     public void moveForward(double dist) {
         nextPointX += dist * Math.cos(Math.toRadians(headingAngle));
         nextPointY += dist * Math.sin(Math.toRadians(headingAngle));
-        printTurtleStatus();
+        //printTurtleStatus();
+        notifyObservers();
     }
 
     private void printTurtleStatus() {
-        System.out.println("Located at: (" + nextPointX + ", " + nextPointY + ")");
+        System.out.println("Located at: (" + getNextPointX() + ", " + getNextPointY() + ")");
         System.out.println("pen?: " + isPenUp);
         System.out.println("angle: " + headingAngle);
         System.out.println("displayed?: +" + isDisplayed);
@@ -90,11 +99,11 @@ public class TurtleModel {
     }
 
     public double getNextPointX() {
-        return nextPointX;
+        return nextPointX - STARTX;
     }
 
     public double getNextPointY() {
-        return nextPointY;
+        return nextPointY - STARTY;
     }
 
     public double getHeadingAngle() {

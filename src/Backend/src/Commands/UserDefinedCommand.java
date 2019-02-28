@@ -1,15 +1,9 @@
 package Commands;
 
-import BackExternal.IllegalParametersException;
-import Models.TurtleModel;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 import Parsing.CommandParser;
-import Parsing.Regex;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
 
 public class UserDefinedCommand extends CommandsGeneral {
     private String commandName;
@@ -18,9 +12,9 @@ public class UserDefinedCommand extends CommandsGeneral {
     private CommandParser cp;
 
 
-    public UserDefinedCommand(String language, TurtleModel turtleModel, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel,
+    public UserDefinedCommand(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel,
                               String name, String commands, String[] var) {
-        super(language, turtleModel, variablesModel, userCreatedCommandsModel);
+        super(language, turtle, variablesModel, userCreatedCommandsModel);
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;
@@ -35,9 +29,9 @@ public class UserDefinedCommand extends CommandsGeneral {
         String commands = commandsToExecute;
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
-            String var = myVariables[i];
+            String variable = myVariables[i];
             String param = String.valueOf(myParams.get(i));
-            commands = commands.replaceAll(var, param);
+            commands = commands.replaceAll(variable, param);
         }
         return cp.parseCommand(commands, myLanguage);
     }

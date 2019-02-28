@@ -1,12 +1,12 @@
 package Parsing;
 
-import Models.TurtleModel;
+import Observing.TurtleListener;
+import Models.Turtle;
 import Models.UserCreatedCommandsModel;
 import Models.VariablesModel;
 
 public class parsertestmain {
     public static void main (String[] args) {
-        CommandParser cp = new CommandParser(new VariablesModel(), new TurtleModel(200,200,true,90,true), new UserCreatedCommandsModel());
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
@@ -26,14 +26,14 @@ public class parsertestmain {
 //                "  [\n" +
 //                "    pu fd 8 pd fd 8\n" +
 //                "  ]\n", "English"));
-        System.out.println(cp.parseCommand(
-                "to dash [ :count :size ]\n" +
-                "[\n" +
-                "  repeat :count\n" +
-                "  [\n" +
-                "    pu fd :size pd fd :size\n" +
-                "  ]\n" +
-                "]\ndash 20 8", "English"));
+//        System.out.println(cp.parseCommand(
+//                "to dash [ :count :size ]\n" +
+//                "[\n" +
+//                "  repeat :count\n" +
+//                "  [\n" +
+//                "    pu fd :size pd fd :size\n" +
+//                "  ]\n" +
+//                "]\ndash 20 8", "English"));
 //        System.out.println(cp.parseCommand("setxy 3 4", "English"));
         //System.out.println(cp.parseCommand("seth -90", "English"));
 
@@ -43,10 +43,20 @@ public class parsertestmain {
 //                "  rt 90\n" +
 //                "]", "English"));
 //        System.out.println(cp.parseCommand("left -360", "English"));
-//        System.out.println(cp.parseCommand("right 30", "English"));
+        //System.out.println(cp.parseCommand("sin 180", "English"));
+//        System.out.println(cp.parseCommand("dotimes [ :t 10 ] [\n" +
+//                "      fd 1\n" +
+//                "      rt / sin :t 2\n" +
+//                "   ]", "English"));
 //        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]", "English"));
+
+        Turtle tm = new Turtle(2000, 2000,false, 0, true);
+        CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserCreatedCommandsModel());
+        TurtleListener tl = new TurtleListener(tm);
+        tm.add(tl);
+        System.out.println(cp.parseCommand("fd 10", "English"));
     }
 }
