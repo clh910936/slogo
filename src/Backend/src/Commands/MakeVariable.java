@@ -11,7 +11,7 @@ public class MakeVariable extends TwoParamCommand {
     }
     @Override
     public double executeCommand() throws IllegalParametersException {
-        myVariablesModel.addVariable((String) input1, (String) input2);
+        myVariablesModel.addVariable(String.valueOf(input1), String.valueOf(input2));
         return (double) input2;
     }
 }

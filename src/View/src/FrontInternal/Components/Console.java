@@ -124,7 +124,7 @@ public class Console extends Stage {
     private void readText() {
         myErrorPane.clearError();
         String input = myUserInputField.getText();
-        String language = (String) myLanguageDropDown.getValue();
+        String language = String.valueOf(myLanguageDropDown.getValue());
         //TODO: Add more catch statements as more exceptions are thrown
         try{
             myManager.parseCommand(input, language);

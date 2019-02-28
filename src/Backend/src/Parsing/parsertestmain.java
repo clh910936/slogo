@@ -7,9 +7,9 @@ public class parsertestmain {
     public static void main (String[] args) {
         CommandParser cp = new CommandParser(new ModelManager());
 
-        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
-                "[ sum 2 3 ] \n" +
-                "[ sum 20 30 ]", "English"));
+//        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
+//                "[ sum 2 3 ] \n" +
+//                "[ sum 20 30 ]", "English"));
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
