@@ -27,8 +27,8 @@ public abstract class View implements ViewAPI {
      * Returns the visual associated with the View object
      * @return Pane object
      */
+
     public Pane getPane(){
-        System.out.println(myViewTemplate == null);
         return myViewTemplate;
     }
 
