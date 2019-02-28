@@ -21,7 +21,7 @@ public class HistoryView extends View {
         myViewTemplate.clearLines();
         Map<String, Boolean> history = myManager.getHistory();
         for(String s: history.keySet()){
-
+            myViewTemplate.addFinalLine(s, history.get(s));
         }
     }
 }

@@ -1,15 +1,14 @@
 package FrontInternal.Components;
 
 import BackExternal.IModelManager;
-import BackExternal.ViewAPI;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserDefinedCommandsView extends View {
     private ViewTemplate myViewTemplate;
     private ResourceBundle myBundle;
 
-    //TODO: take in modelManager
     UserDefinedCommandsView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
@@ -17,6 +16,10 @@ public class UserDefinedCommandsView extends View {
     }
     @Override
     public void update() {
-
+        myViewTemplate.clearLines();
+        List<String> list = myManager.getUserDefinedCommands();
+        for(String s : list){
+            myViewTemplate.addFinalLine(s);
+        }
     }
 }
