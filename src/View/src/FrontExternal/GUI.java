@@ -36,7 +36,7 @@ public class GUI {
     private ResourceBundle myResources;
 
     // private
-    public GUI() {
+    public GUI(IModelManager controller) {
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
         var right = makeRightView();

@@ -1,22 +1,20 @@
 package Models;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class HistoryModel {
 
-    private List<String> myHistory;
+    private Map<String,Boolean> myHistory;
 
     public HistoryModel() {
-        myHistory = new ArrayList<>();
+        myHistory = new HashMap<>();
     }
 
     public void addHistoryEntry(String command, Boolean successful) {
-        myHistory.add(command);
+        myHistory.put(command, successful);
     }
 
-    public List<String> getHistory() {
-        return Collections.unmodifiableList(myHistory);
+    public Map<String,Boolean> getHistory() {
+        return Collections.unmodifiableMap(myHistory);
     }
 }
