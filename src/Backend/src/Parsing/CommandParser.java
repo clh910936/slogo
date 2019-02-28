@@ -169,6 +169,7 @@ public class CommandParser {
                     break;
                 }
                 addParameterToLastCommand(commandStack, currentReturnValue);
+                commandObject = (CommandsGeneral) commandStack.peek();
             }
             catch (ClassCastException e){
                 throw new IllegalParametersException();
@@ -179,8 +180,8 @@ public class CommandParser {
 
 
     private void addParameterToLastCommand(Stack commandStack, Object value) {
-        System.out.println("Adding parameter to last command: " + String.valueOf(value));
         CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+
         try{
             commandObject.addParameterToCommand(value);
         }
