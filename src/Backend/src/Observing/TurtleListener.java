@@ -13,6 +13,6 @@ public class TurtleListener extends Observer {
 
     @Override
     public void update() {
-        System.out.println("Observed: (" + myObservable.getNextPointX() + "," + myObservable.getNextPointY() + ")");
+        System.out.println("Observed: (" + myObservable.getUpdatedX() + "," + myObservable.getUpdatedY() + ")");
     }
 }

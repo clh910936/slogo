@@ -1,8 +1,6 @@
 package Commands;
 
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class Power extends TwoParamCommand {
     public Power(String language, ModelManager modelManager) {

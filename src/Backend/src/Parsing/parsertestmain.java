@@ -1,12 +1,11 @@
 package Parsing;
 
-import Observing.TurtleListener;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+
+import Models.ModelManager;
 
 public class parsertestmain {
     public static void main (String[] args) {
+        CommandParser cp = new CommandParser(new ModelManager());
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
@@ -22,10 +21,10 @@ public class parsertestmain {
 //                "  fd :dist\n" +
 //                "]\n", "English"));
 //        System.out.println(cp.parseCommand("sum 10 10", "English"));
-//        System.out.println(cp.parseCommand("repeat 20\n" +
-//                "  [\n" +
-//                "    pu fd 8 pd fd 8\n" +
-//                "  ]\n", "English"));
+        System.out.println(cp.parseCommand("repeat 20\n" +
+                "  [\n" +
+                "    pu fd 8 pd fd 8\n" +
+                "  ]\n", "English"));
 //        System.out.println(cp.parseCommand(
 //                "to dash [ :count :size ]\n" +
 //                "[\n" +
@@ -53,10 +52,10 @@ public class parsertestmain {
 //                "  fd :dist\n" +
 //                "]", "English"));
 
-        Turtle tm = new Turtle(2000, 2000,false, 0, true);
-        CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserDefinedCommandsModel());
-        TurtleListener tl = new TurtleListener(tm);
-        tm.add(tl);
-        System.out.println(cp.parseCommand("fd 10", "English"));
+        //OBSERVER
+//        Turtle tm = new Turtle(2000, 2000,false, 0, true);
+//        TurtleListener tl = new TurtleListener(tm);
+//        tm.add(tl);
+//        System.out.println(cp.parseCommand("fd 10", "English"));
     }
 }

@@ -1,9 +1,7 @@
 package Commands;
 
 
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class Sum extends TwoParamCommand {
     public Sum(String language, ModelManager modelManager) {
