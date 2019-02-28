@@ -21,7 +21,7 @@ public class Main extends Application {
         stage.setScene(display.getScene());
         stage.show();
 
-        var console = new Console(display, creator.getModelManager());
+        new Console(creator.getModelManager(), display);
 
 
     }

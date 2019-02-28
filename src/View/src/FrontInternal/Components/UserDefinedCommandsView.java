@@ -15,11 +15,12 @@ public class UserDefinedCommandsView extends View {
     private ViewTemplate myViewTemplate;
     private ResourceBundle myBundle;
 
+
     /**
      * Creates a pane that can be updated based on the manager passed through
      * @param manager implementation of IModelManager
      */
-    UserDefinedCommandsView(IModelManager manager){
+    public UserDefinedCommandsView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));

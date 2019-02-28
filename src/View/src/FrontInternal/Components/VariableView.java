@@ -20,7 +20,7 @@ public class VariableView extends View {
      * Creates a pane that can be updated based on the manager passed through
      * @param manager implementation of IModelManager
      */
-    VariableView(IModelManager manager){
+    public VariableView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
