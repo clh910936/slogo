@@ -62,7 +62,7 @@ public class parsertestmain {
 //                "rt 90\n" +
 //                "fd :distance\n" +
 //                "rt 90\n", "English"));
->>>>>>> master
+
 
 
 //        System.out.println(cp.parseCommand("repeat 4 [\n" +
