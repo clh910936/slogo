@@ -1,12 +1,10 @@
 package Commands;
 
-import Models.ModelManager;
 import Models.Turtle;
 import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class SetTowards extends TwoParamCommand {
-
 
     public SetTowards(String language, ModelManager modelManager) {
         super(language, modelManager);

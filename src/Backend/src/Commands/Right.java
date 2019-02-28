@@ -1,12 +1,10 @@
 package Commands;
 
-import Models.ModelManager;
 import Models.Turtle;
 import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class Right extends OneParamCommand {
-
 
     public Right(String language, ModelManager modelManager) {
         super(language, modelManager);
