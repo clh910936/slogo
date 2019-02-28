@@ -1,6 +1,7 @@
-package Models;
+package Observing;
 
-import BackExternal.Observer;
+import Models.Turtle;
+import Observing.Observer;
 
 public class TurtleListener extends Observer {
 

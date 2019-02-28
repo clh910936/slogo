@@ -3,7 +3,7 @@ package FrontExternal;
 import java.awt.Dimension;
 import java.util.ResourceBundle;
 
-import BackExternal.BackExternalAPI;
+import BackExternal.IModelManager;
 import FrontInternal.Components.Board;
 import FrontInternal.Components.Console;
 import FrontInternal.Components.ListView;
@@ -67,7 +67,7 @@ public class GUI {
         return b;
     }
 
-    private void openConsole(BackExternalAPI b) {
+    private void openConsole(IModelManager b) {
         myConsole = new Console(b);
     }
 

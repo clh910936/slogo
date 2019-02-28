@@ -1,16 +1,14 @@
 package Parsing;
 
+import BackExternal.IModelManager;
 import BackExternal.IllegalCommandException;
 import Commands.CommandsGeneral;
-import Models.Turtle;
-import Models.UserCreatedCommandsModel;
-import Models.VariablesModel;
 
 public class CommandClassFinder {
 
-    public static CommandsGeneral getObject(String classPath, String className, String language, VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public static CommandsGeneral getObject(String classPath, String className, String language, IModelManager modelManager) {
         Class clazz = findReflectionClass(classPath, className);
-        CommandsGeneral o = instantiateReflectionClass(clazz,language, variablesModel, turtle, userCreatedCommandsModel);
+        CommandsGeneral o = instantiateReflectionClass(clazz,language, modelManager);
         return o;
     }
 
@@ -25,10 +23,10 @@ public class CommandClassFinder {
         return clazz;
     }
 
-    private static CommandsGeneral instantiateReflectionClass(Class clazz, String language, VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
+    private static CommandsGeneral instantiateReflectionClass(Class clazz, String language, IModelManager modelManager) {
         CommandsGeneral instantiatedObject = null;
         try{
-            instantiatedObject = (CommandsGeneral) clazz.getDeclaredConstructor(String.class, Turtle.class, VariablesModel.class, UserCreatedCommandsModel.class).newInstance(language, turtle,variablesModel, userCreatedCommandsModel);
+            instantiatedObject = (CommandsGeneral) clazz.getDeclaredConstructor(String.class, IModelManager.class).newInstance(language, modelManager);
         }
         catch (Exception e) {
             System.out.println("Could not instantiate " + clazz);

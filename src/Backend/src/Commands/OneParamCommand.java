@@ -1,14 +1,14 @@
 package Commands;
 
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public abstract class OneParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 1;
     protected Object input;
-    public OneParamCommand(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtle, variablesModel, userCreatedCommandsModel);
+    public OneParamCommand(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+        super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
 
 

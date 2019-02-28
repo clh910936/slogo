@@ -2,13 +2,13 @@ package Commands;
 
 import BackExternal.IllegalParametersException;
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class LessThan extends TwoParamCommand {
 
-    public LessThan(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtle, variablesModel, userCreatedCommandsModel);
+    public LessThan(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+        super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
 
     @Override

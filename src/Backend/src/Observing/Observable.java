@@ -1,6 +1,4 @@
-package BackExternal;
-
-import BackExternal.Observer;
+package Observing;
 
 import java.util.List;
 
