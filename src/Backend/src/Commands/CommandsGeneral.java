@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class CommandsGeneral {
     protected TurtleModel myTurtleModel;
     protected VariablesModel myVariablesModel;
+    protected ModelManager myModelManager;
     protected UserDefinedCommandsModel myUserDefinedCommandsModel;
     protected List<Object> myParams;
     protected String myLanguage;
@@ -17,7 +18,8 @@ public abstract class CommandsGeneral {
     public CommandsGeneral(String language, ModelManager modelManager) {
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
-        myTurtle = myTurtleModel.get
+        myModelManager = modelManager;
+        myTurtle = myTurtleModel.getCurrentTurtle();
         myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
         myLanguage = language;
         myParams = new ArrayList<>();
