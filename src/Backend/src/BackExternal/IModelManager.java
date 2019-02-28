@@ -6,7 +6,7 @@ import java.util.Map;
 import Commands.UserDefinedCommand;
 import Models.Turtle;
 
-public interface BackExternalAPI {
+public interface IModelManager {
 
     /**
      * Part of the controller. Front-end calls parse() to give unprocessed commands to back-end.
@@ -36,6 +36,6 @@ public interface BackExternalAPI {
      * Gets a list of the user defined commands
      * @return
      */
-    public List<UserDefinedCommand> getUserCreatedCommands();
+    public Map<String,UserDefinedCommand> getUserCreatedCommands();
 
 }

@@ -1,6 +1,6 @@
 package FrontInternal.Components;
 
-import BackExternal.BackExternalAPI;
+import BackExternal.IModelManager;
 import BackExternal.IllegalCommandException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,7 +25,7 @@ public class Console extends Stage {
     private ComboBox myLanguageDropDown;
 
     private ResourceBundle myResourcesBundle;
-    private BackExternalAPI myController;
+    private IModelManager myController;
 
     private Button myRunButton;
     private List<Button> myButtonList;
@@ -47,7 +47,7 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (BackExternalAPI controller){
+    public Console (IModelManager controller){
         myController = controller;
         initializeInstanceVariables();
         initializeLanguageList();

@@ -1,6 +1,6 @@
 package Models;
 
-import BackExternal.Observable;
+import Observing.Observable;
 
 import java.util.ArrayList;
 
