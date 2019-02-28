@@ -9,6 +9,6 @@ public class IsShowing extends ZeroParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return (myTurtle.getIsDisplayed().get(myTurtle.getIsDisplayed().size()-1)) ? 1 : 0;
+        return myTurtle.getIsDisplayed() ? 1 : 0;
     }
 }
