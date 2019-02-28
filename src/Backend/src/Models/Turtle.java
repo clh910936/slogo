@@ -18,28 +18,28 @@ public class Turtle implements ITurtle {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
 
-
-    private List<Double> nextPointX = new ArrayList<>();
-    private List<Double> nextPointY = new ArrayList<>();
-    private List<Boolean> isPenUp = new ArrayList<>();
-    private List<Double> headingAngle = new ArrayList<>();
-    private List<Boolean> isDisplayed = new ArrayList<>();
-
-
-    //.size()-1
+    private double nextPointX;
+    private double nextPointY;
+    private boolean isPenUp;
+    private double headingAngle;
+    private boolean isDisplayed;
+    private List<TurtleStates> listOfStates;
 
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
         //myObservers = new ArrayList<>();
-        this.nextPointX.add(nextPointX);
-        this.nextPointY.add(nextPointY);
-        this.isPenUp.add(isPenUp);
-        this.headingAngle.add(headingAngle);
-        this.isDisplayed.add(isDisplayed);
+        this.nextPointX = nextPointX;
+        this.nextPointY = nextPointY;
+        this.isPenUp = isPenUp;
+        this.headingAngle = headingAngle;
+        this.isDisplayed = isDisplayed;
+        listOfStates = new ArrayList<>();
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void moveForward(double dist) {
-        nextPointX.add(nextPointX.get(nextPointX.size()-1) + dist * Math.cos(Math.toRadians(headingAngle.get(headingAngle.size()-1))));
-        nextPointY.add(nextPointY.get(nextPointY.size()-1) + dist * Math.sin(Math.toRadians(headingAngle.get(headingAngle.size()-1))));
+        nextPointX += dist * Math.cos(Math.toRadians(headingAngle));
+        nextPointY += dist * Math.sin(Math.toRadians(headingAngle));
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
         //printTurtleStatus();
         //notifyObservers();
     }
@@ -52,79 +52,80 @@ public class Turtle implements ITurtle {
     }
 
     public void turnCounterClockwise(double degrees) {
-        double sum = headingAngle.get(headingAngle.size()-1) + degrees;
-        sum = keepAnglePositive(sum);
-        headingAngle.add(sum);
-        printTurtleStatus();
+        headingAngle += degrees;
+        headingAngle = keepAnglePositive(headingAngle);
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        //printTurtleStatus();
     }
 
     public void setHeadingAngle(double degrees) {
-        headingAngle.add(keepAnglePositive(degrees));
+        headingAngle = degrees;
+        headingAngle = keepAnglePositive(headingAngle);
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public double getDegreesDifference(double newAngle) {
         newAngle = keepAnglePositive(newAngle);
-        return keepAnglePositive(newAngle - headingAngle.get(headingAngle.size()-1));
+        double output = keepAnglePositive(newAngle - headingAngle);
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        return output;
     }
 
     public double getAngleToPoint(double x, double y) {
-        double rise = x - nextPointX.get(nextPointX.size()-1);
-        double run = y - nextPointY.get(nextPointY.size()-1);
+        double rise = x - nextPointX;
+        double run = y - nextPointY;
         return keepAnglePositive(Math.toDegrees(Math.atan(rise / run)));
     }
 
     public double getDistToPoint(double x, double y) {
-        double rise = x - nextPointX.get(nextPointX.size()-1);
-        double run = y - nextPointY.get(nextPointY.size()-1);
+        double rise = x - nextPointX;
+        double run = y - nextPointY;
         return Math.sqrt(rise * rise + run * run);
     }
 
     public void updatePoints(double x, double y) {
-        nextPointX.add(x);
-        nextPointY.add(y);
+        this.nextPointX = x;
+        this.nextPointY = y;
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setPenUp () {
-        this.isPenUp.add(true);
+        this.isPenUp = true;
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setPenDown () {
-        this.isPenUp.add(false);
+        this.isPenUp = false;
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setShowTurtle() {
-        this.isDisplayed.add(true);
+        this.isDisplayed = true;
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setHideTurtle() {
-        this.isDisplayed.add(false);
+        this.isDisplayed = false;
+        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
-    public List<Boolean> getIsDisplayed() {
+    public boolean getIsDisplayed() {
         return isDisplayed;
     }
 
-    public List<Double> getUpdatedX() {
-        return getUpdatedPoints(nextPointX, STARTX);
+    public double getUpdatedX() {
+        return nextPointX - STARTX;
     }
 
-    public List<Double> getUpdatedY() {
-        return getUpdatedPoints(nextPointY, STARTY);
+    public double getUpdatedY() {
+        return nextPointY - STARTY;
     }
 
-    private List<Double> getUpdatedPoints(List<Double> nextPointX, double startx) {
-        List<Double> newList = deepCopy(nextPointX);
-        for (int i = 0; i < newList.size(); i++) {
-            newList.set(i, newList.get(i) - startx);
-        }
-        return newList;
-    }
-
-    public List<Double> getHeadingAngle() {
+    public double getHeadingAngle() {
         return headingAngle;
     }
 
-    public List<Boolean> getIsPenUp() {
+    public boolean getIsPenUp() {
         return isPenUp;
     }
 
@@ -138,11 +139,4 @@ public class Turtle implements ITurtle {
         return angle;
     }
 
-    private List<Double> deepCopy (List<Double> l) {
-        List<Double> newList = new ArrayList<Double>();
-        for (Double num : l) {
-            newList.add(num);
-        }
-        return newList;
-    }
 }
