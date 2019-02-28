@@ -12,7 +12,7 @@ public class VariableView implements ViewAPI {
     private ResourceBundle myBundle;
     private IModelManager myManager;
 
-    VariableView(IModelManager manager){
+    public VariableView(IModelManager manager){
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
     }
