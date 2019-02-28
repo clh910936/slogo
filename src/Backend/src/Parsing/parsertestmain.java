@@ -1,11 +1,15 @@
 package Parsing;
 
-
 import Models.ModelManager;
+
 
 public class parsertestmain {
     public static void main (String[] args) {
         CommandParser cp = new CommandParser(new ModelManager());
+
+//        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
+//                "[ sum 2 3 ] \n" +
+//                "[ sum 20 30 ]", "English"));
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
@@ -21,10 +25,10 @@ public class parsertestmain {
 //                "  fd :dist\n" +
 //                "]\n", "English"));
 //        System.out.println(cp.parseCommand("sum 10 10", "English"));
-        System.out.println(cp.parseCommand("repeat 20\n" +
-                "  [\n" +
-                "    pu fd 8 pd fd 8\n" +
-                "  ]\n", "English"));
+//        System.out.println(cp.parseCommand("repeat 20\n" +
+//                "  [\n" +
+//                "    pu fd 8 pd fd 8\n" +
+//                "  ]\n", "English"));
 //        System.out.println(cp.parseCommand(
 //                "to dash [ :count :size ]\n" +
 //                "[\n" +
@@ -34,7 +38,16 @@ public class parsertestmain {
 //                "  ]\n" +
 //                "]\ndash 20 8", "English"));
 //        System.out.println(cp.parseCommand("setxy 3 4", "English"));
-        //System.out.println(cp.parseCommand("seth -90", "English"));
+        System.out.println(cp.parseCommand("make :distance 50\n" +
+                "\n" +
+                "fd :distance\n" +
+                "rt 90\n" +
+                "fd :distance\n" +
+                "rt 90\n" +
+                "fd :distance\n" +
+                "rt 90\n" +
+                "fd :distance\n" +
+                "rt 90\n", "English"));
 
 
 //        System.out.println(cp.parseCommand("repeat 4 [\n" +
@@ -51,6 +64,7 @@ public class parsertestmain {
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]", "English"));
+
 
         //OBSERVER
 //        Turtle tm = new Turtle(2000, 2000,false, 0, true);

@@ -17,7 +17,7 @@ public class MakeUserInstruction extends ThreeParamCommand {
     @Override
     public double executeCommand() throws ClassCastException {
         try {
-            String name = (String) input1;
+            String name = String.valueOf(input1);
             String[] variables = (String[]) input2;
             String[] commands = (String[]) input3;
             String commandString = String.join(" ", commands);
