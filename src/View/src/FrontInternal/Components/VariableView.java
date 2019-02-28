@@ -19,9 +19,10 @@ public class VariableView implements ViewAPI {
 
     @Override
     public void update() {
+        myViewTemplate.clearLines();
         Map<String, Boolean> map = myManager.getHistory();
         for(String s : map.keySet()){
-
+            myViewTemplate.addFinalLine(s, map.get(s));
         }
     }
 }
