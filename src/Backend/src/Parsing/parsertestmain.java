@@ -38,7 +38,16 @@ public class parsertestmain {
 //                "  ]\n" +
 //                "]\ndash 20 8", "English"));
 //        System.out.println(cp.parseCommand("setxy 3 4", "English"));
-        //System.out.println(cp.parseCommand("seth -90", "English"));
+        System.out.println(cp.parseCommand("make :distance 50\n" +
+                "\n" +
+                "fd :distance\n" +
+                "rt 90\n" +
+                "fd :distance\n" +
+                "rt 90\n" +
+                "fd :distance\n" +
+                "rt 90\n" +
+                "fd :distance\n" +
+                "rt 90\n", "English"));
 
 
 //        System.out.println(cp.parseCommand("repeat 4 [\n" +
