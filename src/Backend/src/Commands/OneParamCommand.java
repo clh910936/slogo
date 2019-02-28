@@ -1,17 +1,13 @@
 package Commands;
 
-import BackExternal.IModelManager;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public abstract class OneParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 1;
     protected Object input;
-    public OneParamCommand(String language, IModelManager iModelManager) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public OneParamCommand(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
-
 
     @Override
     public boolean isCommandReadyToExecute() {

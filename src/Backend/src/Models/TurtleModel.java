@@ -17,6 +17,10 @@ public class TurtleModel {
         listOfTurtles.add(t);
     }
 
+    public void addTurtleToList(Turtle t) {
+        listOfTurtles.add(t);
+    }
+
     public int getCurrentTurtleIndex() {
         return currentTurtleIndex;
     }
