@@ -128,7 +128,6 @@ public class Console extends Stage {
         //TODO: Add more catch statements as more exceptions are thrown
         try{
             myManager.parseCommand(input, language);
-            System.out.println("Allegedly parsed");
         }
         catch(IllegalCommandException e){
             myErrorPane.displayError(myResourcesBundle.getString("COMMAND"));
@@ -137,10 +136,8 @@ public class Console extends Stage {
     }
 
     private void addButtons(){
-        System.out.println(myButtonList.size());
         for(int k = 0; k < myButtonList.size(); k++){
             myButtonGridPane.add(myButtonList.get(k), 0, k);
-            System.out.println("added button");
         }
     }
 
@@ -149,7 +146,6 @@ public class Console extends Stage {
         temp.setPrefWidth(BUTTON_WIDTH);
         temp.setPadding(myButtonInsets);
         myButtonList.add(temp);
-        System.out.println("created new button");
         return temp;
     }
 

@@ -28,7 +28,6 @@ public abstract class View implements ViewAPI {
      * @return Pane object
      */
     public Pane getPane(){
-        System.out.println(myViewTemplate == null);
         return myViewTemplate;
     }
 
