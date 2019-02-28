@@ -1,33 +1,32 @@
 package Models;
 
 import BackExternal.IModelManager;
+import BackExternal.ITurtle;
 import BackExternal.IllegalCommandException;
 import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
-import Models.HistoryModel;
-import Models.Turtle;
-import Models.UserCreatedCommandsModel;
 import Parsing.CommandParser;
-import Models.VariablesModel;
 
 import java.util.List;
 import java.util.Map;
 
 public class ModelManager implements IModelManager {
+
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
+
     private final VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
-    private final Turtle myTurtle;
+    private final TurtleModel myTurtleModel;
     private final CommandParser myCommandParser;
-    private final UserCreatedCommandsModel myUserCreatedCommandsModel;
+    private final UserDefinedCommandsModel myUserDefinedCommandsModel;
 
     public ModelManager() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtle = new Turtle(STARTX, STARTY,false, 0, true);
-        myUserCreatedCommandsModel = new UserCreatedCommandsModel();
-        myCommandParser = new CommandParser(myVariablesModel, myTurtle, myUserCreatedCommandsModel);
+        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true);
+        myUserDefinedCommandsModel = new UserDefinedCommandsModel();
+        myCommandParser = new CommandParser(this);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
@@ -53,12 +52,17 @@ public class ModelManager implements IModelManager {
         return myHistoryModel.getHistory();
     }
 
-    public Turtle getTurtle() {
-        return myTurtle;
+//    public Turtle getTurtle() {
+//        return myTurtle;
+//    }
+
+
+    public List<ITurtle> getTurtleList() {
+        return myTurtleModel.getListOfTurtles();
     }
 
     public Map<String,UserDefinedCommand> getUserCreatedCommands() {
-        return myUserCreatedCommandsModel.getUserCreatedCommands();
+        return myUserDefinedCommandsModel.getUserCreatedCommands();
     }
 
 }

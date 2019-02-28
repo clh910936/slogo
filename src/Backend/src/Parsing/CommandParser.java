@@ -1,10 +1,11 @@
 package Parsing;
 
+import BackExternal.IModelManager;
 import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
 import BackExternal.IllegalCommandException;
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 import java.util.*;
@@ -28,18 +29,12 @@ public class CommandParser {
 
     private List<Map.Entry<String, Pattern>> mySymbols;
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
-    private VariablesModel myVariablesModel;
-    private Turtle myTurtleModel;
-    private UserCreatedCommandsModel myUserCreatedCommandsModel;
     private String myLanguage;
 
 
-    public CommandParser(VariablesModel variablesModel, Turtle turtle, UserCreatedCommandsModel userCreatedCommandsModel) {
+    public CommandParser(IModelManager modelManager) {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
-        myVariablesModel = variablesModel;
-        myUserCreatedCommandsModel = userCreatedCommandsModel;
-        myTurtleModel = turtle;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
@@ -124,7 +119,7 @@ public class CommandParser {
     }
 
     private boolean isUserCommand(String input) {
-        return myUserCreatedCommandsModel.getUserCreatedCommands().containsKey(input);
+        return myUserDefinedCommandsModel.getUserCreatedCommands().containsKey(input);
     }
 
 
@@ -144,8 +139,8 @@ public class CommandParser {
     }
 
     private CommandsGeneral checkUserCreatedCommands(String commandName) throws IllegalCommandException {
-        if(myUserCreatedCommandsModel.getUserCreatedCommands().containsKey(commandName)) {
-            return myUserCreatedCommandsModel.getUserCreatedCommands().get(commandName);
+        if(myUserDefinedCommandsModel.getUserCreatedCommands().containsKey(commandName)) {
+            return myUserDefinedCommandsModel.getUserCreatedCommands().get(commandName);
         }
         else {
             throw new IllegalCommandException("Command not defined");
@@ -155,7 +150,7 @@ public class CommandParser {
     private CommandsGeneral checkNormalCommands(String commandName) throws IllegalCommandException {
         try{
             String regexCommandName = Regex.getRegexSymbol(commandName, myCommandSymbols);
-            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserCreatedCommandsModel);
+            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserDefinedCommandsModel);
         }
         catch (IllegalCommandException e) {
             throw e;

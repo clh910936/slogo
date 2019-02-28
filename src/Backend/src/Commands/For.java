@@ -3,7 +3,7 @@ package Commands;
 import BackExternal.IllegalLoopParamsException;
 import BackExternal.IllegalParametersException;
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Parsing.CommandParser;
 import Models.VariablesModel;
 
@@ -20,8 +20,8 @@ public class For extends TwoParamCommand {
     public static final int INCR_LOC = 3;
 
 
-    public For(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtle, variablesModel, userCreatedCommandsModel);
+    public For(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+        super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class For extends TwoParamCommand {
             }
             if(newCommandArray.length==0) return 0;
             String newCommand = String.join(" ", newCommandArray);
-            CommandParser cp = new CommandParser(myVariablesModel, myTurtle, myUserCreatedCommandsModel);
+            CommandParser cp = new CommandParser(myVariablesModel, myTurtle, myUserDefinedCommandsModel);
 
             out = cp.parseCommand(newCommand, myLanguage);
         }
