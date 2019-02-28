@@ -101,7 +101,7 @@ public class Console extends Stage {
         myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
         myLanguageDropDown.getItems().addAll(myLanguages);
         myLanguageDropDown.setValue(myResourcesBundle.getString("DEFAULT_LANGUAGE"));
-        myButtonGridPane.add(myLanguageDropDown, 0, 1);
+        myButtonGridPane.add(myLanguageDropDown, 0, myButtonList.size());
     }
 
     private void formatButtonGridPane() {
@@ -137,8 +137,10 @@ public class Console extends Stage {
     }
 
     private void addButtons(){
+        System.out.println(myButtonList.size());
         for(int k = 0; k < myButtonList.size(); k++){
             myButtonGridPane.add(myButtonList.get(k), 0, k);
+            System.out.println("added button");
         }
     }
 
@@ -147,6 +149,7 @@ public class Console extends Stage {
         temp.setPrefWidth(BUTTON_WIDTH);
         temp.setPadding(myButtonInsets);
         myButtonList.add(temp);
+        System.out.println("created new button");
         return temp;
     }
 
