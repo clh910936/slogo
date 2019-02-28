@@ -1,12 +1,9 @@
 package Parsing;
 
-import BackExternal.IModelManager;
 import BackExternal.IllegalParametersException;
 import Commands.CommandsGeneral;
 import BackExternal.IllegalCommandException;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -30,11 +27,13 @@ public class CommandParser {
     private List<Map.Entry<String, Pattern>> mySymbols;
     private List<Map.Entry<String, Pattern>> myCommandSymbols;
     private String myLanguage;
+    private ModelManager myModelManager;
 
 
-    public CommandParser(IModelManager modelManager) {
+    public CommandParser(ModelManager modelManager) {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
+        myModelManager = modelManager;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
@@ -63,7 +62,7 @@ public class CommandParser {
                     addParameterToLastCommand(commandStack, rawInput.substring(1));
                 }
                 else {
-                    rawInput = myVariablesModel.getVariable(rawInput.substring(1));
+                    rawInput = myModelManager.getVariablesModel().getVariable(rawInput.substring(1));
                     input = Regex.getRegexSymbol(rawInput, mySymbols);
                 }
             }
@@ -119,7 +118,7 @@ public class CommandParser {
     }
 
     private boolean isUserCommand(String input) {
-        return myUserDefinedCommandsModel.getUserCreatedCommands().containsKey(input);
+        return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().containsKey(input);
     }
 
 
@@ -139,8 +138,8 @@ public class CommandParser {
     }
 
     private CommandsGeneral checkUserCreatedCommands(String commandName) throws IllegalCommandException {
-        if(myUserDefinedCommandsModel.getUserCreatedCommands().containsKey(commandName)) {
-            return myUserDefinedCommandsModel.getUserCreatedCommands().get(commandName);
+        if(myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().containsKey(commandName)) {
+            return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().get(commandName);
         }
         else {
             throw new IllegalCommandException("Command not defined");
@@ -150,7 +149,7 @@ public class CommandParser {
     private CommandsGeneral checkNormalCommands(String commandName) throws IllegalCommandException {
         try{
             String regexCommandName = Regex.getRegexSymbol(commandName, myCommandSymbols);
-            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myVariablesModel, myTurtleModel, myUserDefinedCommandsModel);
+            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myModelManager);
         }
         catch (IllegalCommandException e) {
             throw e;
