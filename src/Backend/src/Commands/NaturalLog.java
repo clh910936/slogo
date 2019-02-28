@@ -1,9 +1,7 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class NaturalLog extends OneParamCommand {
     public NaturalLog(String language, ModelManager modelManager) {
