@@ -14,8 +14,7 @@ import java.util.ResourceBundle;
  * In creating an instanve of ReferencePage, it will initialize all the necessary variables
  * and display the screen. It is coompletely self-contained.
  */
-public class ReferencePage {
-    private Stage myStage;
+public class ReferencePage extends Stage{
     private TabPane myTabPane;
     private ResourceBundle myResourceBundle;
     private Scene myScene;
@@ -27,19 +26,17 @@ public class ReferencePage {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
 
-    ReferencePage(Stage stage) {
-        myStage = stage;
+    ReferencePage() {
         initializeVariables();
-        stage.setScene(myScene);
+        this.setScene(myScene);
         createAllTabs();
-        myStage.show();
     }
 
     private void initializeVariables() {
         myTabPane = new TabPane();
         myScene = new Scene(myTabPane, WIDTH, HEIGHT);
         myResourceBundle = ResourceBundle.getBundle(RESOURCE_NAME);
-        myStage.setTitle(myResourceBundle.getString("Title"));
+        this.setTitle(myResourceBundle.getString("Title"));
     }
 
     private void createAllTabs() {
