@@ -5,6 +5,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 /**
@@ -23,6 +25,8 @@ class ViewTemplate extends BorderPane {
     private ScrollPane myVariableScroll;
     private String myTitle;
     private int myGridIndex;
+    private static final Paint PARSED = Color.GREEN;
+    private static final Paint NOT_PARSED = Color.RED;
 
     /**
      * Creates a ListView object with the Title set and no content text
@@ -57,7 +61,12 @@ class ViewTemplate extends BorderPane {
     }
     protected void addFinalLine(String s, Boolean bool){
         Text temp = createTextLine(s);
-
+        if(bool){
+            temp.setFill(PARSED);
+        }
+        else{
+            temp.setFill(NOT_PARSED);
+        }
     }
 
     private Text createTextLine(String s) {

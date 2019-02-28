@@ -2,6 +2,7 @@ package FrontInternal.Components;
 
 import BackExternal.IModelManager;
 import BackExternal.IllegalCommandException;
+import FrontExternal.GUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,6 +24,8 @@ public class Console extends Stage {
     private HBox myTextHBox;
     private GridPane myButtonGridPane;
     private ComboBox myLanguageDropDown;
+    private IModelManager myManager;
+    private GUI myGUI;
 
     private ResourceBundle myResourcesBundle;
     private IModelManager myController;
@@ -47,8 +50,10 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (IModelManager controller){
-        myController = controller;
+    public Console (IModelManager manager, GUI gui){
+        myManager = manager;
+        myGUI = gui;
+
         initializeInstanceVariables();
         initializeLanguageList();
 
@@ -114,11 +119,12 @@ public class Console extends Stage {
         String language = (String) myLanguageDropDown.getValue();
         //TODO: Add more catch statements as more exceptions are thrown
         try{
-            myController.parseCommand(input, language);
+            myManager.parseCommand(input, language);
         }
         catch(IllegalCommandException e){
             myErrorPane.displayError(myResourcesBundle.getString("COMMAND"));
         }
+        myGUI.update();
     }
 
     private void addButtons(){
