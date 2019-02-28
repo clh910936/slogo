@@ -17,12 +17,10 @@ public class IfElse extends ThreeParamCommand {
     public double executeCommand() throws ClassCastException {
         double out;
         try {
-            double expr =  Double.parseDouble((String) input1);
+            double expr =  Double.parseDouble(String.valueOf(input1));
             String[] commandsTrue = (String[]) input2;
             String[] commandsFalse = (String[]) input3;
-
             String[] commandsToExecute;
-
             if (expr != 0) {
                 commandsToExecute = commandsTrue;
             } else {

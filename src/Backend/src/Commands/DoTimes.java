@@ -2,9 +2,7 @@ package Commands;
 
 import BackExternal.IllegalParametersException;
 import Models.ModelManager;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 import Parsing.CommandParser;
 
 public class DoTimes extends TwoParamCommand{

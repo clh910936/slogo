@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 public class HistoryView extends View {
 
 
-    HistoryView(IModelManager manager){
+    public HistoryView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));

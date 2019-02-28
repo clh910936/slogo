@@ -1,13 +1,11 @@
 package FrontExternal;
 
 import java.awt.Dimension;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import BackExternal.IModelManager;
-import FrontInternal.Components.Board;
-import FrontInternal.Components.Console;
-import FrontInternal.Components.ListView;
-import FrontInternal.Components.MapView;
+import FrontInternal.Components.*;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,13 +25,19 @@ public class GUI {
     private static final Dimension DEFAULT_SIZE = new Dimension(800,600);
     public static final String RESOURCE_FILENAME = "GUI";
     private Scene myScene;
-    private ListView myListView;
-    private MapView myMapView;
+    private HistoryView history;
+    private VariableView variables;
+    private UserDefinedCommandsView commands;
+
+    private List<View> views = List.of(history, variables, commands);
+
     private Console myConsole;
     private Board myBoard;
     private HBox myRoot;
 
     private ResourceBundle myResources;
+    private IModelManager myController;
+
 
     // private
     public GUI(IModelManager controller) {
@@ -42,6 +46,7 @@ public class GUI {
         var right = makeRightView();
         myRoot = new HBox(left, right);
         myRoot.setHgrow(right, Priority.ALWAYS);
+        myController = controller;
 
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
@@ -49,15 +54,21 @@ public class GUI {
     private Node makeRightView() {
         var x = new TextField();
         var y = new TextField();
-        return new VBox(makeListView(),
-                makeMapView(),
+        return new VBox(makeHistory(),
+                makeVariables(),
+                makeCommands(),
                 x, y,
                 makeButton("Move", e -> myBoard.move(Integer.parseInt(x.getText()),
                         Integer.parseInt(y.getText()))));
     }
 
+    private Node makeCommands() {
+        commands = new UserDefinedCommandsView(myController);
+        return commands.getPane();
+    }
+
     private Node makeBoard() {
-        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height);
+        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myController);
         return new HBox(myBoard);
     }
 
@@ -68,20 +79,19 @@ public class GUI {
     }
 
     private void openConsole(IModelManager b) {
-        myConsole = new Console(b);
+        myConsole = new Console(b, this);
     }
 
 
-    private Node makeMapView() {
-        myMapView = new MapView("Variables");
-        return myMapView.getPane();
+    private Node makeHistory() {
+        history = new HistoryView(myController);
+        return history.getPane();
     }
 
-    private Node makeListView() {
-        myListView = new ListView("History");
-        return myListView.getPane();
+    private Node makeVariables() {
+        variables = new VariableView(myController);
+        return variables.getPane();
     }
-
 
     // might not need this
     public void beginLoop() {
@@ -111,4 +121,10 @@ public class GUI {
         return result;
     }
 
+    public void update() {
+        for (View v: views) {
+            v.update();
+        }
+        myBoard.update();
+    }
 }

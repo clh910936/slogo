@@ -1,9 +1,7 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class Home extends ZeroParamCommand {
     public static final double STARTX = 2000;

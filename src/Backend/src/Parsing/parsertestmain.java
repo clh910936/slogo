@@ -1,17 +1,16 @@
 package Parsing;
 
 import Models.ModelManager;
-import Observing.TurtleListener;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+
 
 public class parsertestmain {
     public static void main (String[] args) {
         CommandParser cp = new CommandParser(new ModelManager());
-        System.out.println(cp.parseCommand("IFELSE 1 \n" +
+
+        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
                 "[ sum 2 3 ] \n" +
                 "[ sum 20 30 ]", "English"));
+
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
 //                "\n" +
@@ -58,9 +57,8 @@ public class parsertestmain {
 //                "]", "English"));
 
 
-
+        //OBSERVER
 //        Turtle tm = new Turtle(2000, 2000,false, 0, true);
-//        CommandParser cp = new CommandParser(new VariablesModel(), tm, new UserDefinedCommandsModel());
 //        TurtleListener tl = new TurtleListener(tm);
 //        tm.add(tl);
 //        System.out.println(cp.parseCommand("fd 10", "English"));
