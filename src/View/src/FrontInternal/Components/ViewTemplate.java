@@ -53,12 +53,23 @@ class ViewTemplate extends BorderPane {
      * @param s String of text to be added
      */
     protected void addFinalLine(String s){
+        createTextLine(s);
+    }
+    protected void addFinalLine(String s, Boolean bool){
+        Text temp = createTextLine(s);
+
+    }
+
+    private Text createTextLine(String s) {
         HBox tempHBox = new HBox();
         Text tempText = new Text(s);
         tempHBox.getChildren().add(tempText);
         myGridPane.add(tempHBox, 0, myGridIndex);
         myGridIndex++;
+        return tempText;
     }
+
+
 
     /**
      * Removes all lines of text from the pane
