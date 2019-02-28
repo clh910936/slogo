@@ -1,5 +1,6 @@
 package Commands;
 
+import BackExternal.IModelManager;
 import Models.Turtle;
 import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
@@ -7,7 +8,7 @@ import Models.VariablesModel;
 public abstract class OneParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 1;
     protected Object input;
-    public OneParamCommand(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+    public OneParamCommand(String language, IModelManager iModelManager) {
         super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
 
