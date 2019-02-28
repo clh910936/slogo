@@ -25,6 +25,8 @@ public class TurtleModel {
         return currentTurtleIndex;
     }
 
+    public Turtle getCurrentTurtle() { return (Turtle) listOfTurtles.get(currentTurtleIndex); }
+
     public List<ITurtle> getListOfTurtles() {
         return listOfTurtles;
     }
