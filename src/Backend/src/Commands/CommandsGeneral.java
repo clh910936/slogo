@@ -12,10 +12,12 @@ public abstract class CommandsGeneral {
     protected UserDefinedCommandsModel myUserDefinedCommandsModel;
     protected List<Object> myParams;
     protected String myLanguage;
+    protected Turtle myTurtle;
 
     public CommandsGeneral(String language, ModelManager modelManager) {
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
+        myTurtle = myTurtleModel.get
         myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
         myLanguage = language;
         myParams = new ArrayList<>();
