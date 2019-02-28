@@ -62,7 +62,7 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             if(input.equals(VARIABLE_SYMBOL)) {
-                if(CommandParameterPredicate.checkNeedsVariableParameter((CommandsGeneral) commandStack.peek())) {
+                if(CommandParameterPredicate.checkNeedsVariableParameter(commandStack)) {
                     addParameterToLastCommand(commandStack, rawInput.substring(1));
                 }
                 else {
@@ -71,7 +71,7 @@ public class CommandParser {
                 }
             }
             if(input.equals(CONSTANT_SYMBOL)) {
-                addParameterToLastCommand(commandStack, Double.parseDouble(rawInput));
+                addParameterToLastCommand(commandStack, rawInput);
             }
             else if(input.equals(LIST_START_SYMBOL)) {
                 String[] listContents = getListContents(commandInputList, i);
@@ -79,7 +79,7 @@ public class CommandParser {
                 i+=listContents.length + 1;
             }
             else if (input.equals(COMMAND_SYMBOL)){
-                if(CommandParameterPredicate.checkNeedsWordParameter((CommandsGeneral) commandStack.peek())) {
+                if(CommandParameterPredicate.checkNeedsWordParameter(commandStack)) {
                     addParameterToLastCommand(commandStack, rawInput);
                 }
                 else {
@@ -100,11 +100,6 @@ public class CommandParser {
             input = commandInputArray[index];
         }
         return index;
-    }
-
-    private boolean isOfSpecificCommandType(String commandType, Stack commandStack) {
-        if(commandStack.isEmpty()) return false;
-        return ((CommandsGeneral) commandStack.peek()).getCommandName().equals(commandType);
     }
 
     public boolean isCommand(String input) {
