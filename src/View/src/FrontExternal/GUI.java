@@ -29,6 +29,8 @@ public class GUI {
     private VariableView variables;
     private UserDefinedCommandsView commands;
 
+    private List<View> views = List.of(history, variables, commands);
+
     private Console myConsole;
     private Board myBoard;
     private HBox myRoot;
@@ -60,8 +62,13 @@ public class GUI {
                         Integer.parseInt(y.getText()))));
     }
 
+    private Node makeCommands() {
+        commands = new UserDefinedCommandsView(myController);
+        return commands.getPane();
+    }
+
     private Node makeBoard() {
-        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height);
+        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myController);
         return new HBox(myBoard);
     }
 
@@ -115,5 +122,9 @@ public class GUI {
     }
 
     public void update() {
+        for (View v: views) {
+            v.update();
+        }
+        myBoard.update();
     }
 }

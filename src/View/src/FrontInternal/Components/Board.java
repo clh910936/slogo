@@ -1,5 +1,7 @@
 package FrontInternal.Components;
 
+import BackExternal.IModelManager;
+import BackExternal.ITurtle;
 import FrontInternal.Players.SpriteManager;
 import FrontInternal.Players.TurtleView;
 import javafx.animation.Animation;
@@ -14,6 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
+import java.util.List;
+
 /*
     Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
  */
@@ -22,22 +26,25 @@ public class Board extends Pane {
     private GraphicsContext gc;
     private int myWidth;
     private int myHeight;
-    private TurtleView myTurtle;
+    private List<TurtleView> myTurtles;
 
     private Path p;
+    private IModelManager myController;
 
-    public Board(int width, int height) {
+    public Board(int width, int height, IModelManager controller) {
+        myController = controller;
         myWidth = width;
         myHeight = height;
         createCanvas(myWidth, myHeight);
 
-        myTurtle = new TurtleView();
-        myTurtle.place(myWidth / 2, myHeight / 2);
-        getChildren().addAll(myCanvas, myTurtle);
+        var t = new TurtleView();
+        t.place(myWidth / 2, myHeight / 2);
+        getChildren().addAll(myCanvas, t);
 
         p = new Path();
-        MoveTo m = new MoveTo(myTurtle.getCenterX(), myTurtle.getCenterY());
+        MoveTo m = new MoveTo(t.getCenterX(), t.getCenterY());
         p.getElements().add(m);
+        myTurtles.add(t);
     }
 
     private void createCanvas(int width, int height) {
@@ -52,14 +59,14 @@ public class Board extends Pane {
         gc.fillRect(0, 0, myWidth, myHeight);
     }
 
-    public void move(int x, int y) {
+    public void move(TurtleView turtle, double x, double y, boolean penDown) {
 
         PathTransition pt = new PathTransition();
 
         pt.setDuration(Duration.seconds(2));
-        pt.setNode(myTurtle);
+        pt.setNode(turtle);
 
-        LineTo l = new LineTo(myTurtle.getCenterX()+x,myTurtle.getCenterY()-y);
+        LineTo l = new LineTo(turtle.getCenterX()+x,turtle.getCenterY()-y);
 
         //have to update turtle location after this
         p.getElements().addAll(l);
@@ -82,8 +89,8 @@ public class Board extends Pane {
                     return;
 
                 // get current location
-                double x = myTurtle.getCurrentX();
-                double y = myTurtle.getCurrentY();
+                double x = turtle.getCurrentX();
+                double y = turtle.getCurrentY();
 
                 // initialize the location
                 if( oldLocation == null) {
@@ -94,12 +101,13 @@ public class Board extends Pane {
                 }
 
                 // draw line
-                gc.setStroke(Color.BLUE);
-                gc.setFill(Color.YELLOW);
-                gc.setLineWidth(4);
-                gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
-                //System.out.printf("old x: %f\t new x: %f", oldLocation.x, x);
-                // update old location with current one
+                if (penDown) {
+                    gc.setStroke(Color.BLUE);
+                    gc.setFill(Color.YELLOW);
+                    gc.setLineWidth(4);
+                    gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
+                }
+
                 oldLocation.x = x;
                 oldLocation.y = y;
             }
@@ -112,5 +120,20 @@ public class Board extends Pane {
     public static class Location {
         double x;
         double y;
+    }
+
+    public void update() {
+        List<ITurtle> myTurtleModels = myController.getTurtleList();
+        for (int i = 0; i < myTurtles.size(); i++) {
+            handleChange(myTurtles.get(i), myTurtleModels.get(i));
+        }
+    }
+
+    private void handleChange(TurtleView t1, ITurtle t2) {
+        double x = t2.getUpdatedX();
+        double y = t2.getUpdatedY();
+
+        move(t1, x, y, t2.getIsPenUp());
+
     }
 }
