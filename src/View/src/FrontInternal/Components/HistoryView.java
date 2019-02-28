@@ -24,6 +24,7 @@ public class HistoryView extends View {
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));
+        System.out.println("HistoryView == null: " + myViewTemplate == null);
     }
 
     /**
