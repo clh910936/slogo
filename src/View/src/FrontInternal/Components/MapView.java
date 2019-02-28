@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
  */
 public class MapView {
 
-    private ViewTemplate myViewTemplate;
+
     private String FORMAT = ":\t";
 
     /**
@@ -18,7 +18,7 @@ public class MapView {
      * @param title String of the desired name to be displayed at the top of the pane.
      */
     public MapView(String title){
-        myViewTemplate = new ViewTemplate(title);
+
     }
 
     //String is the variable name
@@ -31,7 +31,7 @@ public class MapView {
      * @return Pane associated with the MapView
      */
     public Pane getPane(){
-        return myViewTemplate;
+        return new Pane();
     }
 
     //TODO: update
@@ -39,8 +39,4 @@ public class MapView {
      * Called when the corresponding backend model updates the map.
      * This updates the list seen by the user to match the model's map.
      */
-    @Override
-    public void update() {
 
-    }
-}

@@ -1,9 +1,6 @@
 package Models;
 
 import BackExternal.ITurtle;
-import Observing.Observable;
-
-import java.util.ArrayList;
 
 public class Turtle implements ITurtle {
     /*
@@ -24,7 +21,7 @@ public class Turtle implements ITurtle {
     private boolean isDisplayed;
 
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
-        myObservers = new ArrayList<>();
+        //myObservers = new ArrayList<>();
         this.nextPointX = nextPointX;
         this.nextPointY = nextPointY;
         this.isPenUp = isPenUp;
@@ -36,11 +33,11 @@ public class Turtle implements ITurtle {
         nextPointX += dist * Math.cos(Math.toRadians(headingAngle));
         nextPointY += dist * Math.sin(Math.toRadians(headingAngle));
         //printTurtleStatus();
-        notifyObservers();
+        //notifyObservers();
     }
 
     private void printTurtleStatus() {
-        System.out.println("Located at: (" + getNextPointX() + ", " + getNextPointY() + ")");
+        System.out.println("Located at: (" + getUpdatedX() + ", " + getUpdatedY() + ")");
         System.out.println("pen?: " + isPenUp);
         System.out.println("angle: " + headingAngle);
         System.out.println("displayed?: +" + isDisplayed);
@@ -99,11 +96,11 @@ public class Turtle implements ITurtle {
         return isDisplayed;
     }
 
-    public double getNextPointX() {
+    public double getUpdatedX() {
         return nextPointX - STARTX;
     }
 
-    public double getNextPointY() {
+    public double getUpdatedY() {
         return nextPointY - STARTY;
     }
 
