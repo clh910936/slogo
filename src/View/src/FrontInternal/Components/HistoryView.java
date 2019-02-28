@@ -1,11 +1,8 @@
 package FrontInternal.Components;
 
 import BackExternal.IModelManager;
-import BackExternal.ViewAPI;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -25,7 +22,6 @@ public class HistoryView extends View {
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));
-        System.out.println("HistoryView == null: " + myViewTemplate == null);
     }
 
     /**
@@ -36,8 +32,8 @@ public class HistoryView extends View {
     public void update() {
         myViewTemplate.clearLines();
         List<String> history = myManager.getHistory();
-        for(String s: history){
-            myViewTemplate.addFinalLine(s);
+        for(int k =0; k <history.size(); k++){
+            myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
 }

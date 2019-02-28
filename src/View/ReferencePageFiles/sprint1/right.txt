@@ -1,14 +1,12 @@
-Variables, Control Structures, and User-Defined Commands:
-REPEAT expr [ command(s) ]
+Turtle Commands:
+RIGHT degrees
+RT degrees
 
 Description:
-Runs command(s) given in the list the value of expr number of times;
-the value of the current iteration, starting at 1, is automatically assigned to the variable, repcount, so that it can be accessed by the command(s)
+Turns turtle clockwise by degrees angle
 
 Parameters:
-expr - any integer
-command(s) - any command
+degrees - clockwise angle
 
 Returns:
-The value of the final command executed
-0 if no commands are executed
+The value of degrees

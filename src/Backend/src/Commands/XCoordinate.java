@@ -8,6 +8,6 @@ public class XCoordinate extends ZeroParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return myTurtle.getUpdatedX().get(myTurtle.getUpdatedX().size() - 1);
+        return myTurtle.getUpdatedX();
     }
 }

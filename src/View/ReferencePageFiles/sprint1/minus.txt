@@ -1,13 +1,12 @@
-Variables, Control Structures, and User-Defined Commands:
-MAKE variable expr
-SET variable expr
+Math Operations:
+MINUS expr1 expr2
+~ expr1 expr2
 
 Description:
-Assigns the value of expr to variable, creating the variable if necessary
+N/A
 
 Parameters:
-variable - name of variable
 expr - any value
 
 Returns:
-Expr
+Negative of the values of expr

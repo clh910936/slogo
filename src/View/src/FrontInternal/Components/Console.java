@@ -101,7 +101,7 @@ public class Console extends Stage {
         myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
         myLanguageDropDown.getItems().addAll(myLanguages);
         myLanguageDropDown.setValue(myResourcesBundle.getString("DEFAULT_LANGUAGE"));
-        myButtonGridPane.add(myLanguageDropDown, 0, 1);
+        myButtonGridPane.add(myLanguageDropDown, 0, myButtonList.size());
     }
 
     private void formatButtonGridPane() {
@@ -128,7 +128,6 @@ public class Console extends Stage {
         //TODO: Add more catch statements as more exceptions are thrown
         try{
             myManager.parseCommand(input, language);
-            System.out.println("Allegedly parsed");
         }
         catch(IllegalCommandException e){
             myErrorPane.displayError(myResourcesBundle.getString("COMMAND"));
