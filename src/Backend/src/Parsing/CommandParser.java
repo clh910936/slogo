@@ -58,6 +58,7 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             if(input.equals(VARIABLE_SYMBOL)) {
+                // FIXME:
                 if(isOfSpecificCommandType(MAKE_VARIABLE, commandStack)) {
                     addParameterToLastCommand(commandStack, rawInput.substring(1));
                 }
@@ -176,6 +177,7 @@ public class CommandParser {
 
 
     private void addParameterToLastCommand(Stack commandStack, Object value) {
+        System.out.println("Adding parameter to last command: " + String.valueOf(value));
         CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
         try{
             commandObject.addParameterToCommand(value);
