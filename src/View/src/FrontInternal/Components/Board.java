@@ -143,10 +143,7 @@ public class Board extends Pane {
 //            t1.rotate(t2.getHeadingAngle().get(i) - 90);
 //            move(t1, x, y, !t2.getIsPenUp().get(i));
 //        }
-        System.out.println(t2.getUpdatedX().size());
-        System.out.println(t2.getUpdatedY().size());
-        System.out.println(t2.getHeadingAngle().size());
-        System.out.println(t2.getIsPenUp().size());
+
 
     }
 }
