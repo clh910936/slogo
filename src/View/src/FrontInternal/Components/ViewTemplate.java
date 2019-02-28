@@ -32,6 +32,9 @@ class ViewTemplate extends BorderPane {
      * @param title String of the name to appear at the top of the pane
      */
     public ViewTemplate(String title){
+        this.setPrefHeight(100);
+        this.setPrefWidth(100);
+
         myGridPane = new GridPane();
         myTitleBox = new HBox();
         myVariableScroll = new ScrollPane();
