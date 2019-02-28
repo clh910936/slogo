@@ -22,6 +22,7 @@ public class ModelManager implements IModelManager {
     private final CommandParser myCommandParser;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
 
+
     public ModelManager() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
@@ -45,9 +46,13 @@ public class ModelManager implements IModelManager {
         return myVariablesModel.getVariables();
     }
 
-    public Map<String,Boolean> getHistory() {
+    public List<String> getHistory() {
         return myHistoryModel.getHistory();
     }
+    public boolean getWasSuccessfulHistory(int i) {
+        return myHistoryModel.wasSuccessful.test(i);
+    }
+
 
     public List<ITurtle> getTurtleList() {
         return myTurtleModel.getListOfTurtles();

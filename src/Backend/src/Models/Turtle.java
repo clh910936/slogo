@@ -100,8 +100,8 @@ public class Turtle implements ITurtle {
         this.isDisplayed.add(false);
     }
 
-    public boolean getIsDisplayed() {
-        return isDisplayed.get(isDisplayed.size()-1);
+    public List<Boolean> getIsDisplayed() {
+        return isDisplayed;
     }
 
     public List<Double> getUpdatedX() {

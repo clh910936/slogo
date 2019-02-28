@@ -17,8 +17,12 @@ public class CommandParser {
     public static final String LIST_START_SYMBOL = "ListStart";
     public static final String LIST_END_SYMBOL = "ListEnd";
     public static final String COMMAND_SYMBOL = "Command";
-    public static final String MAKE_VARIABLE = "MakeVariable";
+    public static final String MAKE_VARIABLE_COMMAND = "MakeVariable";
     public static final String MAKE_COMMAND = "MakeUserInstruction";
+    public static final String IFELSE_COMMAND = "IfElse";
+    public static final String IF_COMMAND = "If";
+    public static final String REPEAT_COMMAND = "Repeat";
+
 
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
@@ -58,8 +62,7 @@ public class CommandParser {
                 throw new IllegalCommandException("List parameter is invalid");
             }
             if(input.equals(VARIABLE_SYMBOL)) {
-                // FIXME:
-                if(isOfSpecificCommandType(MAKE_VARIABLE, commandStack)) {
+                if(CommandParameterPredicate.checkNeedsVariableParameter(commandStack)) {
                     addParameterToLastCommand(commandStack, rawInput.substring(1));
                 }
                 else {
@@ -68,7 +71,7 @@ public class CommandParser {
                 }
             }
             if(input.equals(CONSTANT_SYMBOL)) {
-                addParameterToLastCommand(commandStack, Double.parseDouble(rawInput));
+                addParameterToLastCommand(commandStack, rawInput);
             }
             else if(input.equals(LIST_START_SYMBOL)) {
                 String[] listContents = getListContents(commandInputList, i);
@@ -76,7 +79,7 @@ public class CommandParser {
                 i+=listContents.length + 1;
             }
             else if (input.equals(COMMAND_SYMBOL)){
-                if(isOfSpecificCommandType(MAKE_COMMAND, commandStack)) {
+                if(CommandParameterPredicate.checkNeedsWordParameter(commandStack)) {
                     addParameterToLastCommand(commandStack, rawInput);
                 }
                 else {
@@ -97,11 +100,6 @@ public class CommandParser {
             input = commandInputArray[index];
         }
         return index;
-    }
-
-    private boolean isOfSpecificCommandType(String commandType, Stack commandStack) {
-        if(commandStack.isEmpty()) return false;
-        return ((CommandsGeneral) commandStack.peek()).getCommandName().equals(commandType);
     }
 
     public boolean isCommand(String input) {
@@ -205,6 +203,7 @@ public class CommandParser {
         }
         throw new IllegalCommandException("Invalid List Parameter");
     }
+
 
 
 }

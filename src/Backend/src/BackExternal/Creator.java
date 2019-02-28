@@ -3,7 +3,8 @@ package BackExternal;
 import Models.ModelManager;
 
 public class Creator {
-    private IModelManager modelManager;
+    private final IModelManager modelManager;
+
 
     public Creator() {
         modelManager = new ModelManager();
