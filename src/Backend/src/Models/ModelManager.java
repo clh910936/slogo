@@ -45,7 +45,7 @@ public class ModelManager implements IModelManager {
         return myVariablesModel.getVariables();
     }
 
-    public List<String> getHistory() {
+    public Map<String,Boolean> getHistory() {
         return myHistoryModel.getHistory();
     }
 
