@@ -1,12 +1,14 @@
 package Commands;
 
+import BackExternal.IModelManager;
+import Models.ModelManager;
 import Models.Turtle;
 import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class And extends TwoParamCommand{
 
-    public And(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+    public And(String language, IModelManager modelManager) {
         super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
     @Override
