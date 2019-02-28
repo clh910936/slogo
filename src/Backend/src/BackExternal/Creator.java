@@ -9,7 +9,7 @@ public class Creator {
         modelManager = new ModelManager();
     }
 
-    public IModelManager getModelManger() {
+    public IModelManager getModelManager() {
         return modelManager;
     }
 }
