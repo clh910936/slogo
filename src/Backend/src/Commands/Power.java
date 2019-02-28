@@ -5,8 +5,8 @@ import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class Power extends TwoParamCommand {
-    public Power(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public Power(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {

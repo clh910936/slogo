@@ -6,8 +6,8 @@ import Models.VariablesModel;
 
 public class Product extends TwoParamCommand {
 
-    public Product(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public Product(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {
