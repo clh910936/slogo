@@ -4,7 +4,8 @@ package Commands;
 import Models.ModelManager;
 
 public class Sum extends TwoParamCommand {
-    public Sum (String language, ModelManager modelManager) {
+
+    public Sum(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override

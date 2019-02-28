@@ -7,7 +7,7 @@ import Models.VariablesModel;
 
 public class SetHeading extends OneParamCommand {
 
-    public SetHeading (String language, ModelManager modelManager) {
+    public SetHeading(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
 

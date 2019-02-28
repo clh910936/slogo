@@ -6,7 +6,8 @@ import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 public class Tangent extends OneParamCommand {
-    public Tangent (String language, ModelManager modelManager) {
+
+    public Tangent(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
 

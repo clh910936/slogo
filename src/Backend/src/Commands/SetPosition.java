@@ -7,7 +7,7 @@ import Models.VariablesModel;
 
 public class SetPosition extends TwoParamCommand {
 
-    public SetPosition (String language, ModelManager modelManager) {
+    public SetPosition(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
 

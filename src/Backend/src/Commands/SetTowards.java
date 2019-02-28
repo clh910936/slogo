@@ -7,7 +7,8 @@ import Models.VariablesModel;
 
 public class SetTowards extends TwoParamCommand {
 
-    public SetTowards (String language, ModelManager modelManager) {
+
+    public SetTowards(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override

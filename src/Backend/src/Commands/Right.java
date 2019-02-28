@@ -7,7 +7,8 @@ import Models.VariablesModel;
 
 public class Right extends OneParamCommand {
 
-    public Right (String language, ModelManager modelManager) {
+
+    public Right(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override

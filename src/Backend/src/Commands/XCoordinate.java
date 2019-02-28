@@ -3,7 +3,8 @@ package Commands;
 import Models.ModelManager;
 
 public class XCoordinate extends ZeroParamCommand {
-    public XCoordinate (String language, ModelManager modelManager) {
+
+    public XCoordinate(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override

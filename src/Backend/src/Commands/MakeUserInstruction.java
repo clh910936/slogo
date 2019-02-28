@@ -1,5 +1,6 @@
 package Commands;
 
+import Models.ModelManager;
 import Models.Turtle;
 import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
@@ -22,8 +23,7 @@ public class MakeUserInstruction extends ThreeParamCommand {
             String[] variables = (String[]) input2;
             String[] commands = (String[]) input3;
             String commandString = String.join(" ", commands);
-            UserDefinedCommand userCommand = new UserDefinedCommand(myLanguage, myTurtle, myVariablesModel,
-                    myUserDefinedCommandsModel, name, commandString, variables);
+            UserDefinedCommand userCommand = new UserDefinedCommand(myLanguage, myModelManager, name, commandString, variables);
             myUserDefinedCommandsModel.addUserCreatedCommand(userCommand);
         }
         catch (Exception e) {

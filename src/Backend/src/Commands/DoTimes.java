@@ -1,6 +1,7 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
+import Models.ModelManager;
 import Models.Turtle;
 import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
@@ -13,7 +14,7 @@ public class DoTimes extends TwoParamCommand{
 
     public DoTimes(String language, ModelManager modelManager) {
         super(language, modelManager);
-        cp = new CommandParser(new VariablesModel(), myTurtle, myUserDefinedCommandsModel);
+        cp = new CommandParser(modelManager);
     }
 
     @Override
