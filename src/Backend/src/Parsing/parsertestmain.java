@@ -5,7 +5,8 @@ import Models.ModelManager;
 
 public class parsertestmain {
     public static void main (String[] args) {
-        CommandParser cp = new CommandParser(new ModelManager());
+        ModelManager mm = new ModelManager();
+        CommandParser cp = new CommandParser(mm);
 
 //        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
 //                "[ sum 2 3 ] \n" +
@@ -49,7 +50,8 @@ public class parsertestmain {
 //                "    pu fd :size pd fd :size\n" +
 //                "  ]\n" +
 //                "]\ndash 20 8", "English"));
-        System.out.println(cp.parseCommand("make :x sum 10 10", "English"));
+        System.out.println(cp.parseCommand("make :x sum 2 2", "English"));
+        System.out.println(mm.getVariables());
 //        System.out.println(cp.parseCommand("make :distance 50\n" +
 //                "\n" +
 //                "fd :distance\n" +

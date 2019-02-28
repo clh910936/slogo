@@ -1,7 +1,6 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.ModelManager;
 
 
 public abstract class TwoParamCommand extends CommandsGeneral {

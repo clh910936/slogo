@@ -51,7 +51,7 @@ public class CommandParser {
         Stack commandStack = new Stack();
         double currentReturnValue = -1;
         int i = 0;
-        while(i<commandInputList.length || !commandStack.isEmpty()) {
+        while((i<commandInputList.length || !commandStack.isEmpty())) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput, mySymbols);
             if(input.equals(COMMENT_SYMBOL)) {
@@ -71,7 +71,7 @@ public class CommandParser {
                 }
             }
             if(input.equals(CONSTANT_SYMBOL)) {
-                addParameterToLastCommand(commandStack, rawInput);
+                addParameterToLastCommand(commandStack, Double.parseDouble(rawInput));
             }
             else if(input.equals(LIST_START_SYMBOL)) {
                 String[] listContents = getListContents(commandInputList, i);
@@ -157,13 +157,17 @@ public class CommandParser {
 
 
     private double executeCommandIfPossible(Stack commandStack,double currentReturnValue) {
-        if(commandStack.isEmpty()) return currentReturnValue;
+        if(commandStack.isEmpty()) {
+            return currentReturnValue;
+        }
         CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
         while(commandObject.isCommandReadyToExecute()) {
             try{
                 currentReturnValue = commandObject.executeCommand();
                 commandStack.pop();
-                if (commandStack.isEmpty()) break;
+                if (commandStack.isEmpty()) {
+                    break;
+                }
                 addParameterToLastCommand(commandStack, currentReturnValue);
             }
             catch (ClassCastException e){
