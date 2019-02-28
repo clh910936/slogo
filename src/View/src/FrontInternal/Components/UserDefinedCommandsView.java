@@ -9,7 +9,7 @@ public class UserDefinedCommandsView extends View {
     private ViewTemplate myViewTemplate;
     private ResourceBundle myBundle;
 
-    UserDefinedCommandsView(IModelManager manager){
+    public UserDefinedCommandsView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));

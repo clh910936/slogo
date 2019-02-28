@@ -10,7 +10,8 @@ public class VariableView extends View {
     private ViewTemplate myViewTemplate;
     private ResourceBundle myBundle;
 
-    VariableView(IModelManager manager){
+
+    public VariableView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
