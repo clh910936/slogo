@@ -1,16 +1,20 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.ModelManager;
+import Models.Turtle;
+import Models.UserDefinedCommandsModel;
+import Models.VariablesModel;
 import Parsing.CommandParser;
+
+import java.util.Arrays;
 
 public class Repeat extends TwoParamCommand{
     public static final String REPCOUNT = ":repcount";
     private CommandParser cp;
 
-    public Repeat (String language, ModelManager modelManager) {
+    public Repeat(String language, ModelManager modelManager) {
         super(language, modelManager);
-        cp = new CommandParser(modelManager);
+        cp = new CommandParser(new VariablesModel(), myTurtle, myUserDefinedCommandsModel);
     }
 
     @Override
@@ -19,6 +23,8 @@ public class Repeat extends TwoParamCommand{
         try {
             double numOfTimes = (double) input1;
             String[] commands = (String[]) input2;
+            System.out.println(numOfTimes);
+            System.out.println(Arrays.toString(commands));
 
             double lastValue = 0;
             for (int i = 1; i <= numOfTimes; i++) {

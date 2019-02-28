@@ -7,7 +7,6 @@ import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
 import Parsing.CommandParser;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,12 +52,8 @@ public class ModelManager implements IModelManager {
         return myTurtleModel.getListOfTurtles();
     }
 
-    public List<String> getUserDefinedCommands() {
-        List<String> commandsList = new ArrayList<>();
-        for(Map.Entry<String,UserDefinedCommand> command : myUserDefinedCommandsModel.getUserCreatedCommands().entrySet()) {
-            commandsList.add(command.getValue().toString());
-        }
-        return commandsList;
+    public Map<String,UserDefinedCommand> getUserDefinedCommands() {
+        return myUserDefinedCommandsModel.getUserCreatedCommands();
     }
 
     public VariablesModel getVariablesModel() {

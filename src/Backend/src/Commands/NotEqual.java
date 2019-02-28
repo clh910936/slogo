@@ -1,6 +1,8 @@
 package Commands;
 
-import Models.ModelManager;
+import Models.Turtle;
+import Models.UserDefinedCommandsModel;
+import Models.VariablesModel;
 
 public class NotEqual extends TwoParamCommand {
 

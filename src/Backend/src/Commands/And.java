@@ -4,7 +4,6 @@ import Models.ModelManager;
 
 public class And extends TwoParamCommand{
 
-
     public And(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
