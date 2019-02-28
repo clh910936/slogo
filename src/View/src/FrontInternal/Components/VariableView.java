@@ -13,8 +13,6 @@ import java.util.ResourceBundle;
  * that is created in View.
  */
 public class VariableView extends View {
-    private ViewTemplate myViewTemplate;
-    private ResourceBundle myBundle;
 
     /**
      * Creates a pane that can be updated based on the manager passed through
@@ -24,6 +22,7 @@ public class VariableView extends View {
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
+        System.out.println("Variable View == null: " + myViewTemplate == null);
     }
 
     /**

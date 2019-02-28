@@ -1,6 +1,6 @@
 package FrontExternal;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -66,7 +66,9 @@ public class GUI {
     }
 
     private Node makeCommands() {
+        System.out.println("Made it to makeCommands");
         commands = new UserDefinedCommandsView(myController);
+        System.out.println("Made it to setting commands");
         views.add(commands);
         return commands.getPane();
     }
