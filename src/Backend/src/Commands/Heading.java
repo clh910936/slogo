@@ -9,6 +9,6 @@ public class Heading extends ZeroParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return myTurtle.getHeadingAngle().get(myTurtle.getHeadingAngle().size() - 1);
+        return myTurtle.getHeadingAngle();
     }
 }

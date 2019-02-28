@@ -32,8 +32,8 @@ public class HistoryView extends View {
     public void update() {
         myViewTemplate.clearLines();
         List<String> history = myManager.getHistory();
-        for(String s: history){
-            myViewTemplate.addFinalLine(s);
+        for(int k =0; k <history.size(); k++){
+            myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
 }

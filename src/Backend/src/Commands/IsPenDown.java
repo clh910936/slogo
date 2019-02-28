@@ -9,6 +9,6 @@ public class IsPenDown extends ZeroParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return (! myTurtle.getIsPenUp().get(myTurtle.getIsPenUp().size() - 1)) ? 1 : 0;
+        return ! myTurtle.getIsPenUp() ? 1 : 0;
     }
 }

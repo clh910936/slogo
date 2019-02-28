@@ -9,6 +9,6 @@ public class YCoordinate extends ZeroParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return myTurtle.getUpdatedY().get(myTurtle.getUpdatedY().size() - 1);
+        return myTurtle.getUpdatedY();
     }
 }
