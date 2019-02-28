@@ -48,4 +48,8 @@ public class UserDefinedCommand extends CommandsGeneral {
     public String getCommands() {
         return commandsToExecute;
     }
+
+    public String toString() {
+        return getCommandName() + "\n\t" + getVariables().toString() + "\n\t[ " + getCommands() + " ]";
+    }
 }
