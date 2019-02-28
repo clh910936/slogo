@@ -23,7 +23,6 @@ public class UserDefinedCommandsView extends View {
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));
-        System.out.println("User Commands == null: " + myViewTemplate == null);
     }
     //TODO: Fix this
     /**

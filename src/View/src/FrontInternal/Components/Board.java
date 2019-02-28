@@ -2,18 +2,17 @@ package FrontInternal.Components;
 
 import BackExternal.IModelManager;
 import BackExternal.ITurtle;
-import FrontInternal.Players.SpriteManager;
 import FrontInternal.Players.TurtleView;
-import javafx.animation.Animation;
 import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
