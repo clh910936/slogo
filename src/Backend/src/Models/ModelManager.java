@@ -1,6 +1,7 @@
 package Models;
 
 import BackExternal.IModelManager;
+import BackExternal.ITurtle;
 import BackExternal.IllegalCommandException;
 import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
@@ -10,8 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelManager implements IModelManager {
+
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
+
     private final VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
     private final TurtleModel myTurtleModel;
@@ -21,7 +24,7 @@ public class ModelManager implements IModelManager {
     public ModelManager() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 0, true);
+        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
     }
@@ -49,8 +52,13 @@ public class ModelManager implements IModelManager {
         return myHistoryModel.getHistory();
     }
 
-    public Turtle getTurtle() {
-        return myTurtle;
+//    public Turtle getTurtle() {
+//        return myTurtle;
+//    }
+
+
+    public List<ITurtle> getTurtleList() {
+        return myTurtleModel.getListOfTurtles();
     }
 
     public Map<String,UserDefinedCommand> getUserCreatedCommands() {
