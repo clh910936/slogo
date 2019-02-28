@@ -4,12 +4,12 @@ import Commands.UserDefinedCommand;
 
 import java.util.*;
 
-public class UserCreatedCommandsModel {
+public class UserDefinedCommandsModel {
 
     Map<String,UserDefinedCommand> myUserDefinedCommands;
 
 
-    public UserCreatedCommandsModel() {
+    public UserDefinedCommandsModel() {
         myUserDefinedCommands = new HashMap<>();
     }
 

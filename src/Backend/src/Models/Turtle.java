@@ -1,10 +1,11 @@
 package Models;
 
+import BackExternal.ITurtle;
 import Observing.Observable;
 
 import java.util.ArrayList;
 
-public class Turtle extends Observable {
+public class Turtle implements ITurtle {
     /*
     STATE INFORMATION:
     - NEXT POINT

@@ -1,14 +1,14 @@
 package Commands;
 
 import Models.Turtle;
-import Models.UserCreatedCommandsModel;
+import Models.UserDefinedCommandsModel;
 import Models.VariablesModel;
 
 
 public class MakeUserInstruction extends ThreeParamCommand {
 
-    public MakeUserInstruction(String language, Turtle turtle, VariablesModel variablesModel, UserCreatedCommandsModel userCreatedCommandsModel) {
-        super(language, turtle, variablesModel, userCreatedCommandsModel);
+    public MakeUserInstruction(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
+        super(language, turtle, variablesModel, userDefinedCommandsModel);
     }
 
     //input1 : name
@@ -23,8 +23,8 @@ public class MakeUserInstruction extends ThreeParamCommand {
             String[] commands = (String[]) input3;
             String commandString = String.join(" ", commands);
             UserDefinedCommand userCommand = new UserDefinedCommand(myLanguage, myTurtle, myVariablesModel,
-                    myUserCreatedCommandsModel, name, commandString, variables);
-            myUserCreatedCommandsModel.addUserCreatedCommand(userCommand);
+                    myUserDefinedCommandsModel, name, commandString, variables);
+            myUserDefinedCommandsModel.addUserCreatedCommand(userCommand);
         }
         catch (Exception e) {
             return 0;
