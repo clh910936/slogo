@@ -6,8 +6,8 @@ import Models.VariablesModel;
 
 public class NotEqual extends TwoParamCommand {
 
-    public NotEqual(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public NotEqual(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {

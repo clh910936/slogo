@@ -1,15 +1,11 @@
 package Commands;
 
-import BackExternal.IModelManager;
 import Models.ModelManager;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
 
 public class And extends TwoParamCommand{
 
-    public And(String language, IModelManager modelManager) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public And(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {

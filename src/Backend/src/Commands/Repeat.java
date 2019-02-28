@@ -12,8 +12,8 @@ public class Repeat extends TwoParamCommand{
     public static final String REPCOUNT = ":repcount";
     private CommandParser cp;
 
-    public Repeat(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public Repeat(String language, ModelManager modelManager) {
+        super(language, modelManager);
         cp = new CommandParser(new VariablesModel(), myTurtle, myUserDefinedCommandsModel);
     }
 
