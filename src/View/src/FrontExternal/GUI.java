@@ -1,6 +1,7 @@
 package FrontExternal;
 
-import java.awt.Dimension;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,7 +30,7 @@ public class GUI {
     private VariableView variables;
     private UserDefinedCommandsView commands;
 
-    private List<View> views = List.of(history, variables, commands);
+    private List<View> views = new ArrayList<>();
 
     private Console myConsole;
     private Board myBoard;
@@ -48,6 +49,7 @@ public class GUI {
         myRoot.setHgrow(right, Priority.ALWAYS);
         myController = controller;
 
+
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
@@ -56,14 +58,18 @@ public class GUI {
         var y = new TextField();
         return new VBox(makeHistory(),
                 makeVariables(),
-                makeCommands(),
-                x, y,
-                makeButton("Move", e -> myBoard.move(Integer.parseInt(x.getText()),
-                        Integer.parseInt(y.getText()))));
+                makeCommands()
+//                x, y,
+//                makeButton("Move", e -> myBoard.move(Double.parseDouble(x.getText()),
+//                        Double.parseDouble(y.getText())))
+                 );
     }
 
     private Node makeCommands() {
+        System.out.println("Made it to makeCommands");
         commands = new UserDefinedCommandsView(myController);
+        System.out.println("Made it to setting commands");
+        views.add(commands);
         return commands.getPane();
     }
 
@@ -85,11 +91,13 @@ public class GUI {
 
     private Node makeHistory() {
         history = new HistoryView(myController);
+        views.add(history);
         return history.getPane();
     }
 
     private Node makeVariables() {
         variables = new VariableView(myController);
+        views.add(variables);
         return variables.getPane();
     }
 
