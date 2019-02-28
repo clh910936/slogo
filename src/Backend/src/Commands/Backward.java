@@ -6,8 +6,8 @@ import Models.VariablesModel;
 
 public class Backward extends OneParamCommand {
 
-    public Backward(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public Backward(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {

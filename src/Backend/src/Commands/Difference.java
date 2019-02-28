@@ -6,8 +6,8 @@ import Models.VariablesModel;
 
 public class Difference extends TwoParamCommand {
 
-    public Difference(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public Difference(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {

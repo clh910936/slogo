@@ -17,7 +17,7 @@ public abstract class CommandsGeneral {
     public CommandsGeneral(String language, ModelManager modelManager) {
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
-        myTurtle = myTurtleModel.get
+        myTurtle = myTurtleModel.getCurrentTurtle();
         myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
         myLanguage = language;
         myParams = new ArrayList<>();

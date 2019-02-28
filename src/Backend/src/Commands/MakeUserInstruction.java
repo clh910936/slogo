@@ -7,8 +7,8 @@ import Models.VariablesModel;
 
 public class MakeUserInstruction extends ThreeParamCommand {
 
-    public MakeUserInstruction(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public MakeUserInstruction(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
 
     //input1 : name

@@ -9,7 +9,7 @@ import Models.VariablesModel;
 public class And extends TwoParamCommand{
 
     public And(String language, IModelManager modelManager) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException {

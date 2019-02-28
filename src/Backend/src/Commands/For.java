@@ -20,8 +20,8 @@ public class For extends TwoParamCommand {
     public static final int INCR_LOC = 3;
 
 
-    public For(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public For(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
 
     @Override

@@ -11,8 +11,8 @@ public class DoTimes extends TwoParamCommand{
     public static final int VAR_LOC = 0;
     public static final int LIMIT_LOC = 1;
 
-    public DoTimes(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public DoTimes(String language, ModelManager modelManager) {
+        super(language, modelManager);
         cp = new CommandParser(new VariablesModel(), myTurtle, myUserDefinedCommandsModel);
     }
 

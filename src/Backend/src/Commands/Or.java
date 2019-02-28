@@ -1,13 +1,11 @@
 package Commands;
 
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class Or extends TwoParamCommand {
 
-    public Or(String language, Turtle turtle, VariablesModel variablesModel, UserDefinedCommandsModel userDefinedCommandsModel) {
-        super(language, turtle, variablesModel, userDefinedCommandsModel);
+    public Or(String language, ModelManager modelManager) {
+        super(language, modelManager);
     }
     @Override
     public double executeCommand() throws ClassCastException  {
