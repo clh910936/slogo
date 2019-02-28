@@ -3,16 +3,16 @@ package FrontInternal.Components;
 import BackExternal.IModelManager;
 import BackExternal.ViewAPI;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class VariableView implements ViewAPI {
+
+public class VariableView extends View {
     private ViewTemplate myViewTemplate;
     private ResourceBundle myBundle;
-    private IModelManager myManager;
 
     VariableView(IModelManager manager){
+        super(manager);
         myBundle = ResourceBundle.getBundle("View");
         myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
     }
@@ -20,9 +20,10 @@ public class VariableView implements ViewAPI {
     @Override
     public void update() {
         myViewTemplate.clearLines();
-        Map<String, Boolean> map = myManager.getHistory();
+        Map<String, String> map = myManager.getVariables();
         for(String s : map.keySet()){
-            myViewTemplate.addFinalLine(s, map.get(s));
+            String line = s + "\t" + map.get(s);
+            myViewTemplate.addFinalLine(line);
         }
     }
 }
