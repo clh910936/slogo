@@ -26,11 +26,12 @@ public class Console extends Stage {
     private ComboBox myLanguageDropDown;
     private IModelManager myManager;
     private GUI myGUI;
+    private ReferencePage myReferencePage;
 
     private ResourceBundle myResourcesBundle;
-    private IModelManager myController;
 
     private Button myRunButton;
+    private Button myReferencePageButton;
     private List<Button> myButtonList;
     private List<String> myLanguages;
     private TextArea myUserInputField;
@@ -58,6 +59,7 @@ public class Console extends Stage {
         initializeLanguageList();
 
         createRunButton();
+        createReferencePageButton();
         addButtons();
         initializeDropDown();
         formatButtonGridPane();
@@ -84,6 +86,7 @@ public class Console extends Stage {
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
+        myReferencePage = new ReferencePage();
     }
 
     private void initializeLanguageList(){
@@ -111,6 +114,11 @@ public class Console extends Stage {
     private void createRunButton() {
         myRunButton = createAndFormatButton(myResourcesBundle.getString(RUN_BUTTON));
         myRunButton.setOnMouseClicked(e -> readText());
+    }
+
+    private void createReferencePageButton(){
+        myReferencePageButton = createAndFormatButton(myResourcesBundle.getString("REFERENCE_BUTTON"));
+        myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
     }
 
     private void readText() {
