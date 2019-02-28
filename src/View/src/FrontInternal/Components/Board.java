@@ -14,6 +14,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
+/*
+    Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
+ */
 public class Board extends Pane {
     private Canvas myCanvas;
     private GraphicsContext gc;
