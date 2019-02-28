@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 public class TurtleView extends Sprite {
     private double myX;
     private double myY;
+    private double myAngle;
 
     public TurtleView(){
         setImage(new Image(getClass().getClassLoader().getResourceAsStream("turtle_default.png")));
@@ -17,6 +18,7 @@ public class TurtleView extends Sprite {
 
         myX = getX() + getBoundsInLocal().getWidth()/2;
         myY = getY() + getBoundsInLocal().getHeight()/2;
+        myAngle = 90;
     }
 
     public void update() {
@@ -43,5 +45,9 @@ public class TurtleView extends Sprite {
 
     public double getCurrentY() {
         return getTranslateY() + getCenterY();
+    }
+
+    public void rotate(double angle) {
+        setRotate(angle);
     }
 }

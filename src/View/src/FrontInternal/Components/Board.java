@@ -92,6 +92,9 @@ public class Board extends Pane {
                 // get current location
                 double x = turtle.getCurrentX();
                 double y = turtle.getCurrentY();
+                System.out.println("current x: " + x);
+                System.out.println("current y: " + y);
+                System.out.println("angle: " + turtle.getRotate());
 
                 // initialize the location
                 if( oldLocation == null) {
@@ -134,7 +137,9 @@ public class Board extends Pane {
         double x = t2.getUpdatedX();
         double y = t2.getUpdatedY();
 
-        move(t1, x, y, t2.getIsPenUp());
+        //System.out.println("pen up: " + t2.getIsPenUp());
+        t1.rotate(t2.getHeadingAngle() - 90);
+        move(t1, x, y, !t2.getIsPenUp());
 
     }
 }
