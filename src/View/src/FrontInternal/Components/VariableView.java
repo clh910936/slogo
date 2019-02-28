@@ -4,6 +4,7 @@ import BackExternal.IModelManager;
 import BackExternal.ViewAPI;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class VariableView implements ViewAPI {
@@ -18,6 +19,9 @@ public class VariableView implements ViewAPI {
 
     @Override
     public void update() {
+        Map<String, Boolean> map = myManager.getHistory();
+        for(String s : map.keySet()){
 
+        }
     }
 }
