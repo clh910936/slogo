@@ -42,12 +42,14 @@ public class GUI {
 
     // private
     public GUI(IModelManager controller) {
+        myController = controller;
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
         var right = makeRightView();
         myRoot = new HBox(left, right);
         myRoot.setHgrow(right, Priority.ALWAYS);
-        myController = controller;
+
+
 
 
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
