@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  *
  * It extends BorderPane such that it is a Pane object that can be easily addded to a scene.
  *
- * This is used in both ListView and MapView to format the HistoryView, VariablesView,
+ * This is used to format the HistoryView, VariablesView,
  * and UserDefinedCommandsView
  */
 class ViewTemplate extends BorderPane {
@@ -29,7 +29,6 @@ class ViewTemplate extends BorderPane {
     private static final Paint NOT_PARSED = Color.RED;
 
     /**
-     * Creates a ListView object with the Title set and no content text
      * @param title String of the name to appear at the top of the pane
      */
     ViewTemplate(String title){
