@@ -1,12 +1,10 @@
 package Commands;
 
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class Quotient extends TwoParamCommand {
 
-    public Quotient(String language, ModelManager modelManager) {
+    public Quotient (String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override

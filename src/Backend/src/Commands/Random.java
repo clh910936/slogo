@@ -1,10 +1,9 @@
 package Commands;
 
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.ModelManager;
 
 public class Random extends OneParamCommand {
+
     public Random(String language, ModelManager modelManager) {
         super(language, modelManager);
     }

@@ -1,10 +1,6 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.Turtle;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
-
 
 public abstract class TwoParamCommand extends CommandsGeneral {
     private static final int MAX_PARAMS = 2;
