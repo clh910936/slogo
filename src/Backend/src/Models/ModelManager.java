@@ -33,11 +33,7 @@ public class ModelManager implements IModelManager {
         try {
             myCommandParser.parseCommand(inputString, language);
         }
-        catch (IllegalCommandException e) {
-            myHistoryModel.addHistoryEntry(inputString, false);
-            throw e;
-        }
-        catch (IllegalParametersException e) {
+        catch (Exception e) {
             myHistoryModel.addHistoryEntry(inputString, false);
             throw e;
         }
@@ -52,17 +48,28 @@ public class ModelManager implements IModelManager {
         return myHistoryModel.getHistory();
     }
 
-//    public Turtle getTurtle() {
-//        return myTurtle;
-//    }
-
-
     public List<ITurtle> getTurtleList() {
         return myTurtleModel.getListOfTurtles();
     }
 
-    public Map<String,UserDefinedCommand> getUserCreatedCommands() {
+    public Map<String,UserDefinedCommand> getUserDefinedCommands() {
         return myUserDefinedCommandsModel.getUserCreatedCommands();
+    }
+
+    public VariablesModel getVariablesModel() {
+        return myVariablesModel;
+    }
+
+    public UserDefinedCommandsModel getUserDefinedCommandsModel() {
+        return myUserDefinedCommandsModel;
+    }
+
+    public HistoryModel getHistoryModel() {
+        return myHistoryModel;
+    }
+
+    public TurtleModel getTurtleModel() {
+        return myTurtleModel;
     }
 
 }
