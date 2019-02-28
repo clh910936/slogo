@@ -33,6 +33,7 @@ public class UserDefinedCommandsView extends View {
     public void update() {
         myViewTemplate.clearLines();
         for(String s : list){
+
             myViewTemplate.addFinalLine(s);
         }
     }
