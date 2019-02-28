@@ -28,6 +28,7 @@ public class ModelManager implements IModelManager {
         myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, 0);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
+        System.out.println("got here");
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {

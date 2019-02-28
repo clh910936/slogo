@@ -31,6 +31,7 @@ public class VariableView extends View {
      */
     @Override
     public void update() {
+        System.out.println(myManager == null);
         myViewTemplate.clearLines();
         Map<String, String> map = myManager.getVariables();
         for(String s : map.keySet()){
