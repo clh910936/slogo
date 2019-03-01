@@ -75,6 +75,10 @@ public class GUI {
         return commands.getPane();
     }
 
+    public IModelManager getModelManager() {
+        return myController;
+    }
+
     private Node makeBoard() {
         myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myController);
         return new HBox(myBoard);
