@@ -15,4 +15,24 @@ public class TurtleStates {
         this.getIsDisplayed = isDisplayed;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public boolean getIsPenUp() {
+        return isPenUp;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public boolean getIsDisplayed() {
+        return getIsDisplayed;
+    }
+
 }
