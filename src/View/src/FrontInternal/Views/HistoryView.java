@@ -1,4 +1,4 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
 import BackExternal.IModelManager;
 
@@ -9,22 +9,21 @@ import java.util.ResourceBundle;
  * @author Carrie Hunner
  * This class extends the View superclass.
  * It is dependent on a backend implementation of IModelManager to get
- * the UserDefinedCommands. It then displays these on a pane
+ * the History. It then displays these on a pane
  * that is created in View.
  */
-public class UserDefinedCommandsView extends View {
-
+public class HistoryView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
      * @param manager implementation of IModelManager
      */
-    public UserDefinedCommandsView(IModelManager manager){
+    public HistoryView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));
+        myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));
     }
-    //TODO: Fix this
+
     /**
      * Updates the pane by getting the necessary information from the
      * manager.
@@ -32,9 +31,9 @@ public class UserDefinedCommandsView extends View {
     @Override
     public void update() {
         myViewTemplate.clearLines();
-        List<String> list = myManager.getUserDefinedCommands();
-        for(String s : list){
-            myViewTemplate.addFinalLine(s);
+        List<String> history = myManager.getHistory();
+        for(int k =0; k <history.size(); k++){
+            myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
 }

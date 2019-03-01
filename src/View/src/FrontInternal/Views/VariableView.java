@@ -1,27 +1,27 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
 import BackExternal.IModelManager;
 
-import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
  * @author Carrie Hunner
  * This class extends the View superclass.
  * It is dependent on a backend implementation of IModelManager to get
- * the History. It then displays these on a pane
+ * the Variable. It then displays these on a pane
  * that is created in View.
  */
-public class HistoryView extends View {
+public class VariableView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
      * @param manager implementation of IModelManager
      */
-    public HistoryView(IModelManager manager){
+    public VariableView(IModelManager manager){
         super(manager);
         myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));
+        myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
     }
 
     /**
@@ -31,9 +31,10 @@ public class HistoryView extends View {
     @Override
     public void update() {
         myViewTemplate.clearLines();
-        List<String> history = myManager.getHistory();
-        for(int k =0; k <history.size(); k++){
-            myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
+        Map<String, String> map = myManager.getVariables();
+        for(String s : map.keySet()){
+            String line = s + "\t" + map.get(s);
+            myViewTemplate.addFinalLine(line);
         }
     }
 }

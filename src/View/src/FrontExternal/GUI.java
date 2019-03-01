@@ -7,6 +7,10 @@ import java.util.ResourceBundle;
 
 import BackExternal.IModelManager;
 import FrontInternal.Components.*;
+import FrontInternal.Views.HistoryView;
+import FrontInternal.Views.UserDefinedCommandsView;
+import FrontInternal.Views.VariableView;
+import FrontInternal.Views.View;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
