@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import BackExternal.IModelManager;
 import FrontInternal.Components.*;
+import FrontInternal.ViewAPI;
 import FrontInternal.Views.HistoryView;
 import FrontInternal.Views.UserDefinedCommandsView;
 import FrontInternal.Views.VariableView;
@@ -34,7 +35,7 @@ public class GUI {
     private VariableView variables;
     private UserDefinedCommandsView commands;
 
-    private List<View> views = new ArrayList<>();
+    private List<ViewAPI> views = new ArrayList<>();
 
     private Console myConsole;
     private Board myBoard;
@@ -85,6 +86,7 @@ public class GUI {
 
     private Node makeBoard() {
         myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myController);
+        views.add(myBoard);
         return new HBox(myBoard);
     }
 
@@ -111,11 +113,6 @@ public class GUI {
         return variables.getPane();
     }
 
-    // might not need this
-    public void beginLoop() {
-        return;
-    }
-
     public Scene getScene() {
         return myScene;
     }
@@ -140,9 +137,8 @@ public class GUI {
     }
 
     public void update() {
-        for (View v: views) {
+        for (ViewAPI v: views) {
             v.update();
         }
-        myBoard.update();
     }
 }

@@ -3,6 +3,7 @@ package FrontInternal.Components;
 import BackExternal.IModelManager;
 import BackExternal.ITurtle;
 import FrontInternal.Players.TurtleView;
+import FrontInternal.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,7 +22,7 @@ import java.util.List;
 /*
     Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
  */
-public class Board extends Pane {
+public class Board extends Pane implements ViewAPI {
     private Canvas myCanvas;
     private GraphicsContext gc;
     private int myWidth;

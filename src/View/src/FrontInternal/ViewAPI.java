@@ -1,4 +1,4 @@
-package BackExternal;
+package FrontInternal;
 
 /**
  * Implemented by any view that has a corresponding backend model

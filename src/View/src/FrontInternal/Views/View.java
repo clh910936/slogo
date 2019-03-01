@@ -1,7 +1,7 @@
 package FrontInternal.Views;
 
 import BackExternal.IModelManager;
-import BackExternal.ViewAPI;
+import FrontInternal.ViewAPI;
 import javafx.scene.layout.Pane;
 
 import java.util.ResourceBundle;
