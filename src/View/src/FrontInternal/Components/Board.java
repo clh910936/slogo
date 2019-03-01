@@ -144,6 +144,9 @@ public class Board extends Pane implements ViewAPI {
 //            t1.rotate(t2.getHeadingAngle().get(i) - 90);
 //            move(t1, x, y, !t2.getIsPenUp().get(i));
 //        }
+        t2.getUpdatedX().forEach(x -> System.out.print(x+"\t"));
+        System.out.println("");
+        t2.getUpdatedY().forEach(y -> System.out.print(y+"\t"));
 
 
     }
