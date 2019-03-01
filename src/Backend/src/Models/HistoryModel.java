@@ -24,5 +24,7 @@ public class HistoryModel {
         return Collections.unmodifiableList(history);
     }
 
-    public boolean getWasSuccessful(int i) { return wasSuccessful.test(i);}
+    public boolean getWasSuccessful(int i) throws IndexOutOfBoundsException {
+        if(myHistory.size()<i) throw new IndexOutOfBoundsException();
+        return wasSuccessful.test(i);}
 }

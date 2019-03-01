@@ -1,4 +1,4 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
