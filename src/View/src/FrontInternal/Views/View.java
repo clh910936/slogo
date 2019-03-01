@@ -1,4 +1,4 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
 import BackExternal.IModelManager;
 import BackExternal.ViewAPI;
