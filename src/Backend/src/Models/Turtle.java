@@ -109,24 +109,64 @@ public class Turtle implements ITurtle {
         listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
-    public boolean getIsDisplayed() {
-        return isDisplayed;
+    public double getCurrentX() {
+        return nextPointX;
     }
 
-    public double getUpdatedX() {
-        return nextPointX - STARTX;
+    public double getCurrentY() {
+        return nextPointY;
     }
 
-    public double getUpdatedY() {
-        return nextPointY - STARTY;
-    }
-
-    public double getHeadingAngle() {
+    public double getCurrentHeadingAngle() {
         return headingAngle;
     }
 
-    public boolean getIsPenUp() {
+    public boolean getCurrentIsPenUp() {
         return isPenUp;
+    }
+
+    public boolean getCurrentIsDisplayed() {
+        return isDisplayed;
+    }
+
+    public List<Double> getUpdatedX() {
+        List<Double> listOfX = new ArrayList<>();
+        for (TurtleStates ts : listOfStates) {
+            listOfX.add(ts.getX() - STARTX);
+        }
+        return listOfX;
+    }
+
+    public List<Double> getUpdatedY() {
+        List<Double> listOfY = new ArrayList<>();
+        for (TurtleStates ts : listOfStates) {
+            listOfY.add(ts.getX() - STARTY);
+        }
+        return listOfY;
+    }
+
+    public List<Double> getHeadingAngle() {
+        List<Double> listOfAngles = new ArrayList<>();
+        for (TurtleStates ts : listOfStates) {
+            listOfAngles.add(ts.getAngle());
+        }
+        return listOfAngles;
+    }
+
+    public List<Boolean> getIsPenUp() {
+        List<Boolean> listOfPenUp = new ArrayList<>();
+        for (TurtleStates ts : listOfStates) {
+            listOfPenUp.add(ts.getIsDisplayed());
+        }
+        return listOfPenUp;
+    }
+
+    public List<Boolean> getIsDisplayed() {
+        List<Boolean> listOfIsDisplayed = new ArrayList<>();
+        for (TurtleStates ts : listOfStates) {
+            listOfIsDisplayed.add(ts.getIsDisplayed());
+        }
+        return listOfIsDisplayed;
     }
 
     private double keepAnglePositive(double angle) {
