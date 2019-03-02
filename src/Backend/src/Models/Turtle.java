@@ -3,7 +3,9 @@ package Models;
 import BackExternal.ITurtle;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Turtle implements ITurtle {
     /*
@@ -24,6 +26,9 @@ public class Turtle implements ITurtle {
     private boolean isDisplayed;
     private List<TurtleState> listOfStates;
 
+    //private Queue<TurtleState> listOfStates;
+
+
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
         //myObservers = new ArrayList<>();
         this.nextPointX = nextPointX;
@@ -31,6 +36,7 @@ public class Turtle implements ITurtle {
         this.isPenUp = isPenUp;
         this.headingAngle = headingAngle;
         this.isDisplayed = isDisplayed;
+        //listOfStates = new LinkedList<>();
         listOfStates = new ArrayList<>();
         listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
@@ -131,7 +137,6 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfX.add(listOfStates.get(i).getX() - STARTX);
         }
-        resetModelAfterExecuting();
         return listOfX;
     }
 
@@ -140,7 +145,6 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfY.add(listOfStates.get(i).getY() - STARTY);
         }
-        resetModelAfterExecuting();
         return listOfY;
     }
 
@@ -149,7 +153,6 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfAngles.add(listOfStates.get(i).getAngle());
         }
-        resetModelAfterExecuting();
         return listOfAngles;
     }
 
@@ -158,7 +161,6 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfPenUp.add(listOfStates.get(i).getIsPenUp());
         }
-        resetModelAfterExecuting();
         return listOfPenUp;
     }
 
@@ -167,7 +169,6 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfIsDisplayed.add(listOfStates.get(i).getIsDisplayed());
         }
-        resetModelAfterExecuting();
         return listOfIsDisplayed;
     }
 
@@ -181,12 +182,12 @@ public class Turtle implements ITurtle {
         return angle;
     }
 
-    private void resetModelAfterExecuting() {
-        List<TurtleState> oldStates = new ArrayList<>();
-        oldStates = listOfStates;
-        listOfStates = new ArrayList<>();
-        listOfStates.add(oldStates.get(oldStates.size()-1));
-        System.out.println("STATES IN MODEL: " + listOfStates.size());
-    }
+//    private void resetModelAfterExecuting() {
+//        List<TurtleState> oldStates = new ArrayList<>();
+//        oldStates = listOfStates;
+//        listOfStates = new ArrayList<>();
+//        listOfStates.add(oldStates.get(oldStates.size()-1));
+//        System.out.println("STATES IN MODEL: " + listOfStates.size());
+//    }
 
 }
