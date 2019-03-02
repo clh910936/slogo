@@ -11,17 +11,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //var model = new model();
-        // should pass model into this maybe
-        var creator = new Creator();
-        var display = new GUI(creator.getModelManager());
+        var display = new GUI();
 
 
         stage.setTitle(TITLE);
         stage.setScene(display.getScene());
         stage.show();
 
-        new Console(creator.getModelManager(), display);
+        new Console(display);
 
 
     }

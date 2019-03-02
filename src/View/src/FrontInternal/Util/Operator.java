@@ -2,7 +2,7 @@ package FrontInternal.Util;
 
 import BackExternal.Creator;
 import BackExternal.IModelManager;
-import BackExternal.ViewAPI;
+import FrontInternal.ViewAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Operator {
     List<ViewAPI> myViews;
     String DEFAULT_LANGAUGE = "English";
 
-    Operator(){
+    public Operator(){
         myViews = new ArrayList<>();
         Creator creator = new Creator();
         myManager = creator.getModelManager();

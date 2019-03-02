@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import BackExternal.IModelManager;
 import FrontInternal.Components.*;
+import FrontInternal.Util.Operator;
 import FrontInternal.ViewAPI;
 import FrontInternal.Views.HistoryView;
 import FrontInternal.Views.UserDefinedCommandsView;
@@ -46,8 +47,10 @@ public class GUI {
 
 
     // private
-    public GUI(IModelManager controller) {
-        myController = controller;
+    public GUI() {
+        var myop = new Operator();
+        myController = myop.getManager();
+
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
         var right = makeRightView();
@@ -97,7 +100,7 @@ public class GUI {
     }
 
     private void openConsole(IModelManager b) {
-        myConsole = new Console(b, this);
+        myConsole = new Console(this);
     }
 
 

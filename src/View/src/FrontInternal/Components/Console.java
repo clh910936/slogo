@@ -51,8 +51,8 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (IModelManager manager, GUI gui){
-        myManager = manager;
+    public Console (GUI gui){
+        myManager = gui.getModelManager();
         myGUI = gui;
 
         initializeInstanceVariables();
