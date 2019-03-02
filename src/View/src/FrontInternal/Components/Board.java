@@ -5,7 +5,6 @@ import BackExternal.ITurtle;
 import BackExternal.IllegalTurtleStateException;
 import FrontInternal.Players.TurtleView;
 import FrontInternal.Util.Operator;
-import FrontInternal.Views.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +23,7 @@ import java.util.List;
 /*
     Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
  */
-public class Board extends Pane implements ViewAPI {
+public class Board extends Pane {
     private Canvas myCanvas;
     private GraphicsContext gc;
     private int myWidth;
@@ -68,65 +67,62 @@ public class Board extends Pane implements ViewAPI {
 
         PathTransition pt = new PathTransition();
 
-        pt.setDuration(Duration.seconds(0.5));
+        pt.setDuration(Duration.seconds(2));
         pt.setNode(turtle);
 
         LineTo l = new LineTo(turtle.getCenterX()+x,turtle.getCenterY()-y);
 
         //have to update turtle location after this
-        // nothing to animate
-        if (x != 0 && y != 0) {
-            p.getElements().addAll(l);
-            pt.setPath(p);
-            pt.setOrientation(PathTransition.OrientationType.NONE);
-            //pt.setCycleCount(Timeline.INDEFINITE);
-            //pt.setAutoReverse(true);
-            pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+        p.getElements().addAll(l);
+        pt.setPath(p);
+        pt.setOrientation(PathTransition.OrientationType.NONE);
+        //pt.setCycleCount(Timeline.INDEFINITE);
+        //pt.setAutoReverse(true);
+        pt.currentTimeProperty().addListener( new ChangeListener<Duration>() {
 
-                Location oldLocation = null;
+            Location oldLocation = null;
 
-                /**
-                 * Draw a line from the old location to the new location
-                 */
-                @Override
-                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+            /**
+             * Draw a line from the old location to the new location
+             */
+            @Override
+            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
 
-                    // skip starting at 0/0
-                    if (oldValue == Duration.ZERO)
-                        return;
+                // skip starting at 0/0
+                if( oldValue == Duration.ZERO)
+                    return;
 
-                    // get current location
-                    double x = turtle.getCurrentX();
-                    double y = turtle.getCurrentY();
-                    //                System.out.println("current x: " + x);
-                    //                System.out.println("current y: " + y);
-                    //                System.out.println("angle: " + turtle.getRotate());
+                // get current location
+                double x = turtle.getCurrentX();
+                double y = turtle.getCurrentY();
+//                System.out.println("current x: " + x);
+//                System.out.println("current y: " + y);
+//                System.out.println("angle: " + turtle.getRotate());
 
-                    // initialize the location
-                    if (oldLocation == null) {
-                        oldLocation = new Location();
-                        oldLocation.x = x;
-                        oldLocation.y = y;
-                        return;
-                    }
-
-                    // draw line
-                    if (penDown) {
-                        gc.setStroke(Color.BLUE);
-                        gc.setFill(Color.YELLOW);
-                        gc.setLineWidth(4);
-                        gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
-                    }
-
+                // initialize the location
+                if( oldLocation == null) {
+                    oldLocation = new Location();
                     oldLocation.x = x;
                     oldLocation.y = y;
+                    return;
                 }
-            });
 
-            pt.play();
-            p.getElements().clear();
-            p.getElements().addAll(new MoveTo(l.getX(), l.getY()));
-        }
+                // draw line
+                if (penDown) {
+                    gc.setStroke(Color.BLUE);
+                    gc.setFill(Color.YELLOW);
+                    gc.setLineWidth(4);
+                    gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
+                }
+
+                oldLocation.x = x;
+                oldLocation.y = y;
+            }
+        });
+
+        pt.play();
+        p.getElements().clear();
+        p.getElements().addAll(new MoveTo(l.getX(), l.getY()));
     }
     public static class Location {
         double x;
@@ -140,12 +136,8 @@ public class Board extends Pane implements ViewAPI {
         }
     }
 
-    @Override
-    public Pane getPane() {
-        return null;
-    }
-
     private void handleChange(TurtleView t1, ITurtle t2) {
+
         if (t2.getUpdatedX().size() != t2.getIsPenUp().size()) throw new IllegalTurtleStateException();
 
         for (int i = 0; i < t2.getUpdatedX().size(); i++) {
@@ -160,12 +152,9 @@ public class Board extends Pane implements ViewAPI {
             boolean penDown = !t2.getIsPenUp().get(i);
 
             //FIXME: angle rotation
-            t1.rotate(angle);
-            System.out.println(t1.getCurrentX());
-            System.out.println(t1.getCurrentY());
+            //t1.rotate(angle);
+
             move(t1, x, y, penDown);
-            System.out.println(t1.getCurrentX());
-            System.out.println(t1.getCurrentY());
         }
 
 

@@ -4,7 +4,6 @@ import BackExternal.*;
 import FrontInternal.Views.ErrorView;
 import FrontInternal.Views.ViewAPI;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
