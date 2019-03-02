@@ -3,7 +3,6 @@ package FrontInternal.Views;
 import FrontInternal.Util.Operator;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * @author Carrie Hunner
@@ -21,10 +20,8 @@ public class UserDefinedCommandsView extends View {
      */
     public UserDefinedCommandsView(Operator operator){
         super(operator);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));
     }
-    //TODO: Fix this
+
     /**
      * Updates the pane by getting the necessary information from the
      * manager.

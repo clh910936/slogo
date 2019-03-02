@@ -20,8 +20,6 @@ public class HistoryView extends View {
      */
     public HistoryView(Operator operator){
         super(operator);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));
     }
 
     /**
@@ -36,4 +34,6 @@ public class HistoryView extends View {
             myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
+
+
 }

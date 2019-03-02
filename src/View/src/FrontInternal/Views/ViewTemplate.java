@@ -23,35 +23,25 @@ class ViewTemplate extends BorderPane {
     private GridPane myGridPane;
     private HBox myTitleBox;
     private ScrollPane myVariableScroll;
-    private String myTitle;
     private int myGridIndex;
     private static final Paint PARSED = Color.GREEN;
     private static final Paint NOT_PARSED = Color.RED;
 
     /**
-     * @param title String of the name to appear at the top of the pane
+     * Used to create a template for the Variable,User Defined Commands, and History view
      */
-    public ViewTemplate(String title){
+    public ViewTemplate(){
         this.setPrefHeight(100);
         this.setPrefWidth(100);
 
         myGridPane = new GridPane();
-        myTitleBox = new HBox();
         myVariableScroll = new ScrollPane();
         myGridIndex = 0;
 
-        myTitle = title;
-        initializeTitleBox();
         myVariableScroll.setContent(myGridPane);
         this.setCenter(myVariableScroll);
     }
 
-    private void initializeTitleBox(){
-        Text title = new Text(myTitle);
-        myTitleBox.getChildren().add(title);
-        myTitleBox.setAlignment(Pos.TOP_CENTER);
-        this.setTop(myTitleBox);
-    }
 
     /**
      * Adds a line of text to the bottom of the existing text

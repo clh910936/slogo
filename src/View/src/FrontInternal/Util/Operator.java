@@ -2,6 +2,7 @@ package FrontInternal.Util;
 
 import BackExternal.*;
 import FrontInternal.Views.ErrorView;
+import FrontInternal.Views.ViewAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,6 @@ public class Operator {
     private static final String DEFAULT_LANGAUGE = "English";
     private ErrorView myErrorView;
     private ResourceBundle myErrorResources;
-    private ResourceBundle myViewClassesResourceBundle;
     private final int ERROR_HEIGHT = 100;
 
     /**
@@ -34,8 +34,6 @@ public class Operator {
         myManager = creator.getModelManager();
         myErrorView = new ErrorView(ERROR_HEIGHT);
         myErrorResources = ResourceBundle.getBundle("Errors");
-        myViewClassesResourceBundle = ResourceBundle.getBundle("ViewClasses");
-
     }
 
     /**
