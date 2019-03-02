@@ -143,14 +143,17 @@ public class Board extends Pane implements ViewAPI {
     }
 
     private void handleChange(TurtleView t1, ITurtle t2) {
-        System.out.println("LOC: (" + t2.getUpdatedX() + "," + t2.getUpdatedY() + ")");
-        System.out.println("ANGLE: " + t2.getHeadingAngle());
-        System.out.println("PEN UP?: " + t2.getIsPenUp());
-        System.out.println("DISPLAY?: " + t2.getIsDisplayed());
-        System.out.println("LENGTH: " + t2.getUpdatedX().size());
+//        System.out.println("LOC: (" + t2.getUpdatedX() + "," + t2.getUpdatedY() + ")");
+//        System.out.println("ANGLE: " + t2.getHeadingAngle());
+//        System.out.println("PEN UP?: " + t2.getIsPenUp());
+//        System.out.println("DISPLAY?: " + t2.getIsDisplayed());
+//        System.out.println("LENGTH: " + t2.getUpdatedX().size());
+
+//        if (t2.getUpdatedX().size() != t2.getIsDisplayed().size()) {
+//            //throw new IllegalTurtleStateException();
+//        }
 
         for (int i = 0; i < t2.getUpdatedX().size(); i++) {
-
 
             double x = t2.getUpdatedX().get(i);
             double xdisp = x-t1.getLastX();
@@ -163,8 +166,8 @@ public class Board extends Pane implements ViewAPI {
             System.out.printf("xdisp: %f, ydisp: %f\n", xdisp, ydisp);
             double angle = 90-t2.getHeadingAngle().get(i);
             boolean penDown = !t2.getIsPenUp().get(i);
-
-            //FIXME: angle rotation
+            boolean diplay = t2.getIsDisplayed().get(i);
+            
             t1.rotate(angle);
             if (!(xdisp==0&&ydisp==0)) {
                 System.out.println("entering");
