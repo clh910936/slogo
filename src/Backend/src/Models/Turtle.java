@@ -3,7 +3,6 @@ package Models;
 import BackExternal.ITurtle;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Turtle implements ITurtle {
@@ -23,7 +22,7 @@ public class Turtle implements ITurtle {
     private boolean isPenUp;
     private double headingAngle;
     private boolean isDisplayed;
-    private List<TurtleStates> listOfStates;
+    private List<TurtleState> listOfStates;
 
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed) {
         //myObservers = new ArrayList<>();
@@ -33,13 +32,13 @@ public class Turtle implements ITurtle {
         this.headingAngle = headingAngle;
         this.isDisplayed = isDisplayed;
         listOfStates = new ArrayList<>();
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void moveForward(double dist) {
         nextPointX += dist * Math.cos(Math.toRadians(headingAngle));
         nextPointY += dist * Math.sin(Math.toRadians(headingAngle));
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
         //printTurtleStatus();
         //notifyObservers();
     }
@@ -54,20 +53,20 @@ public class Turtle implements ITurtle {
     public void turnCounterClockwise(double degrees) {
         headingAngle += degrees;
         headingAngle = keepAnglePositive(headingAngle);
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
         //printTurtleStatus();
     }
 
     public void setHeadingAngle(double degrees) {
         headingAngle = degrees;
         headingAngle = keepAnglePositive(headingAngle);
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public double getDegreesDifference(double newAngle) {
         newAngle = keepAnglePositive(newAngle);
         double output = keepAnglePositive(newAngle - headingAngle);
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
         return output;
     }
 
@@ -86,27 +85,27 @@ public class Turtle implements ITurtle {
     public void updatePoints(double x, double y) {
         this.nextPointX = x;
         this.nextPointY = y;
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setPenUp () {
         this.isPenUp = true;
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setPenDown () {
         this.isPenUp = false;
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setShowTurtle() {
         this.isDisplayed = true;
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public void setHideTurtle() {
         this.isDisplayed = false;
-        listOfStates.add(new TurtleStates(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
+        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
     }
 
     public double getCurrentX() {
@@ -131,7 +130,7 @@ public class Turtle implements ITurtle {
 
     public List<Double> getUpdatedX() {
         List<Double> listOfX = new ArrayList<>();
-        for (TurtleStates ts : listOfStates) {
+        for (TurtleState ts : listOfStates) {
             listOfX.add(ts.getX() - STARTX);
         }
         return listOfX;
@@ -139,7 +138,7 @@ public class Turtle implements ITurtle {
 
     public List<Double> getUpdatedY() {
         List<Double> listOfY = new ArrayList<>();
-        for (TurtleStates ts : listOfStates) {
+        for (TurtleState ts : listOfStates) {
             listOfY.add(ts.getX() - STARTY);
         }
         return listOfY;
@@ -147,7 +146,7 @@ public class Turtle implements ITurtle {
 
     public List<Double> getHeadingAngle() {
         List<Double> listOfAngles = new ArrayList<>();
-        for (TurtleStates ts : listOfStates) {
+        for (TurtleState ts : listOfStates) {
             listOfAngles.add(ts.getAngle());
         }
         return listOfAngles;
@@ -155,7 +154,7 @@ public class Turtle implements ITurtle {
 
     public List<Boolean> getIsPenUp() {
         List<Boolean> listOfPenUp = new ArrayList<>();
-        for (TurtleStates ts : listOfStates) {
+        for (TurtleState ts : listOfStates) {
             listOfPenUp.add(ts.getIsDisplayed());
         }
         return listOfPenUp;
@@ -163,7 +162,7 @@ public class Turtle implements ITurtle {
 
     public List<Boolean> getIsDisplayed() {
         List<Boolean> listOfIsDisplayed = new ArrayList<>();
-        for (TurtleStates ts : listOfStates) {
+        for (TurtleState ts : listOfStates) {
             listOfIsDisplayed.add(ts.getIsDisplayed());
         }
         return listOfIsDisplayed;
