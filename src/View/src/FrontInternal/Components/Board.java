@@ -74,56 +74,59 @@ public class Board extends Pane implements ViewAPI {
         LineTo l = new LineTo(turtle.getCenterX()+x,turtle.getCenterY()-y);
 
         //have to update turtle location after this
-        p.getElements().addAll(l);
-        pt.setPath(p);
-        pt.setOrientation(PathTransition.OrientationType.NONE);
-        //pt.setCycleCount(Timeline.INDEFINITE);
-        //pt.setAutoReverse(true);
-        pt.currentTimeProperty().addListener( new ChangeListener<Duration>() {
+        // nothing to animate
+        if (x != 0 && y != 0) {
+            p.getElements().addAll(l);
+            pt.setPath(p);
+            pt.setOrientation(PathTransition.OrientationType.NONE);
+            //pt.setCycleCount(Timeline.INDEFINITE);
+            //pt.setAutoReverse(true);
+            pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
 
-            Location oldLocation = null;
+                Location oldLocation = null;
 
-            /**
-             * Draw a line from the old location to the new location
-             */
-            @Override
-            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                /**
+                 * Draw a line from the old location to the new location
+                 */
+                @Override
+                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
 
-                // skip starting at 0/0
-                if( oldValue == Duration.ZERO)
-                    return;
+                    // skip starting at 0/0
+                    if (oldValue == Duration.ZERO)
+                        return;
 
-                // get current location
-                double x = turtle.getCurrentX();
-                double y = turtle.getCurrentY();
-//                System.out.println("current x: " + x);
-//                System.out.println("current y: " + y);
-//                System.out.println("angle: " + turtle.getRotate());
+                    // get current location
+                    double x = turtle.getCurrentX();
+                    double y = turtle.getCurrentY();
+                    //                System.out.println("current x: " + x);
+                    //                System.out.println("current y: " + y);
+                    //                System.out.println("angle: " + turtle.getRotate());
 
-                // initialize the location
-                if( oldLocation == null) {
-                    oldLocation = new Location();
+                    // initialize the location
+                    if (oldLocation == null) {
+                        oldLocation = new Location();
+                        oldLocation.x = x;
+                        oldLocation.y = y;
+                        return;
+                    }
+
+                    // draw line
+                    if (penDown) {
+                        gc.setStroke(Color.BLUE);
+                        gc.setFill(Color.YELLOW);
+                        gc.setLineWidth(4);
+                        gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
+                    }
+
                     oldLocation.x = x;
                     oldLocation.y = y;
-                    return;
                 }
+            });
 
-                // draw line
-                if (penDown) {
-                    gc.setStroke(Color.BLUE);
-                    gc.setFill(Color.YELLOW);
-                    gc.setLineWidth(4);
-                    gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
-                }
-
-                oldLocation.x = x;
-                oldLocation.y = y;
-            }
-        });
-
-        pt.play();
-        p.getElements().clear();
-        p.getElements().addAll(new MoveTo(l.getX(), l.getY()));
+            pt.play();
+            p.getElements().clear();
+            p.getElements().addAll(new MoveTo(l.getX(), l.getY()));
+        }
     }
     public static class Location {
         double x;
@@ -157,9 +160,12 @@ public class Board extends Pane implements ViewAPI {
             boolean penDown = !t2.getIsPenUp().get(i);
 
             //FIXME: angle rotation
-            //t1.rotate(angle);
-
+            t1.rotate(angle);
+            System.out.println(t1.getCurrentX());
+            System.out.println(t1.getCurrentY());
             move(t1, x, y, penDown);
+            System.out.println(t1.getCurrentX());
+            System.out.println(t1.getCurrentY());
         }
 
 
