@@ -5,6 +5,7 @@ import BackExternal.ITurtle;
 import BackExternal.IllegalTurtleStateException;
 import FrontInternal.Players.TurtleView;
 import FrontInternal.Util.Operator;
+import FrontInternal.Views.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,7 +24,7 @@ import java.util.List;
 /*
     Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
  */
-public class Board extends Pane {
+public class Board extends Pane implements ViewAPI {
     private Canvas myCanvas;
     private GraphicsContext gc;
     private int myWidth;
@@ -67,7 +68,7 @@ public class Board extends Pane {
 
         PathTransition pt = new PathTransition();
 
-        pt.setDuration(Duration.seconds(2));
+        pt.setDuration(Duration.seconds(0.5));
         pt.setNode(turtle);
 
         LineTo l = new LineTo(turtle.getCenterX()+x,turtle.getCenterY()-y);
@@ -136,8 +137,12 @@ public class Board extends Pane {
         }
     }
 
-    private void handleChange(TurtleView t1, ITurtle t2) {
+    @Override
+    public Pane getPane() {
+        return null;
+    }
 
+    private void handleChange(TurtleView t1, ITurtle t2) {
         if (t2.getUpdatedX().size() != t2.getIsPenUp().size()) throw new IllegalTurtleStateException();
 
         for (int i = 0; i < t2.getUpdatedX().size(); i++) {

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import BackExternal.IModelManager;
 import FrontInternal.Components.*;
 import FrontInternal.Util.Operator;
+
 import FrontInternal.Views.*;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -32,7 +33,7 @@ public class GUI {
     private VariableView variables;
     private UserDefinedCommandsView commands;
 
-    private List<View> views = new ArrayList<>();
+    private List<ViewAPI> views = new ArrayList<>();
 
     private Console myConsole;
     private Board myBoard;
@@ -42,7 +43,7 @@ public class GUI {
     private Operator myOperator;
 
 
-    // private
+
     public GUI(Operator operator) {
         myOperator = operator;
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
@@ -50,6 +51,7 @@ public class GUI {
         //var right = makeRightView();
         //myRoot = new HBox(left, right);
         var right = new AllUserViews(myOperator);
+        myOperator.addViewToUpdate(myBoard);
         myRoot = new HBox(left, right);
         //myRoot.setHgrow(right, Priority.ALWAYS);
 
@@ -59,25 +61,10 @@ public class GUI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
-//    private Node makeRightView() {
-//        var x = new TextField();
-//        var y = new TextField();
-////        return new VBox(makeHistory(),
-////                makeVariables(),
-////                makeCommands()
-//////                x, y,
-//////                makeButton("Move", e -> myBoard.move(Double.parseDouble(x.getText()),
-//////                        Double.parseDouble(y.getText())))
-////                 );
-//    }
 
-//    private Node makeCommands() {
-//        System.out.println("Made it to makeCommands");
-//        commands = new UserDefinedCommandsView(myController);
-//        System.out.println("Made it to setting commands");
-//        views.add(commands);
-//        return commands.getPane();
-//    }
+    public IModelManager getModelManager() {
+        return myOperator.getManager();
+    }
 
     private Node makeBoard() {
         myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myOperator);
@@ -86,7 +73,7 @@ public class GUI {
 
     private Node makeConsoleButton() {
         var b = makeButton("OpenConsole", e -> openConsole(null));
-        b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
+        //b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
         return b;
     }
 
@@ -94,23 +81,6 @@ public class GUI {
         myConsole = new Console(myOperator);
     }
 
-
-//    private Node makeHistory() {
-//        history = new HistoryView(myController);
-//        views.add(history);
-//        return history.getPane();
-//    }
-
-//    private Node makeVariables() {
-//        variables = new VariableView(myController);
-//        views.add(variables);
-//        return variables.getPane();
-//    }
-
-    // might not need this
-    public void beginLoop() {
-        return;
-    }
 
     public Scene getScene() {
         return myScene;
@@ -135,10 +105,9 @@ public class GUI {
         return result;
     }
 
-    public void update() {
-        for (View v: views) {
-            v.update();
-        }
-        myBoard.update();
-    }
+//    public void update() {
+//        for (ViewAPI v: views) {
+//            v.update();
+//        }
+//    }
 }
