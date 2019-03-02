@@ -3,7 +3,8 @@ package FrontInternal.Components;
 import BackExternal.IModelManager;
 import BackExternal.ITurtle;
 import FrontInternal.Players.TurtleView;
-import FrontInternal.ViewAPI;
+import FrontInternal.Util.Operator;
+import FrontInternal.Views.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,10 +31,12 @@ public class Board extends Pane implements ViewAPI {
     private List<TurtleView> myTurtles = new ArrayList();
 
     private Path p;
+    private Operator myOperator;
     private IModelManager myController;
 
-    public Board(int width, int height, IModelManager controller) {
-        myController = controller;
+    public Board(int width, int height, Operator operator) {
+        myOperator = operator;
+        myController = operator.getManager();
         myWidth = width;
         myHeight = height;
         createCanvas(myWidth, myHeight);
@@ -133,17 +136,22 @@ public class Board extends Pane implements ViewAPI {
         }
     }
 
+    @Override
+    public Pane getPane() {
+        return null;
+    }
+
     private void handleChange(TurtleView t1, ITurtle t2) {
 
-//        for (int i = 0; i < t2.getUpdatedX().size(); i++) {
-//            System.out.println();
-//            double x = t2.getUpdatedX().get(i);
-//            double y = t2.getUpdatedY().get(i);
-//
-//            //System.out.println("pen up: " + t2.getIsPenUp());
-//            t1.rotate(t2.getHeadingAngle().get(i) - 90);
-//            move(t1, x, y, !t2.getIsPenUp().get(i));
-//        }
+        for (int i = 0; i < t2.getUpdatedX().size(); i++) {
+            System.out.println();
+            double x = t2.getUpdatedX().get(i);
+            double y = t2.getUpdatedY().get(i);
+
+            //System.out.println("pen up: " + t2.getIsPenUp());
+            t1.rotate(t2.getHeadingAngle().get(i) - 90);
+            move(t1, x, y, !t2.getIsPenUp().get(i));
+        }
         t2.getUpdatedX().forEach(x -> System.out.print(x+"\t"));
         System.out.println("");
         t2.getUpdatedY().forEach(y -> System.out.print(y+"\t"));

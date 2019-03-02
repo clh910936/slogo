@@ -1,6 +1,6 @@
 package FrontInternal.Views;
 
-import BackExternal.IModelManager;
+import FrontInternal.Util.Operator;
 
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -16,12 +16,10 @@ public class VariableView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
-     * @param manager implementation of IModelManager
+     * @param operator implementation of IModelManager
      */
-    public VariableView(IModelManager manager){
-        super(manager);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
+    public VariableView(Operator operator){
+        super(operator);
     }
 
     /**
