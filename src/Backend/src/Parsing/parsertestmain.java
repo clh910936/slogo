@@ -78,7 +78,6 @@ public class parsertestmain {
                 "\n" +
                 "\n" +
                 "face\n", "English"));
-        System.out.println(mm.getVariables());
 //        System.out.println(cp.parseCommand("make :distance 50\n" +
 //                "\n" +
 //                "fd :distance\n" +

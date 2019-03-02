@@ -54,8 +54,6 @@ public class CommandParser {
         while((i<commandInputList.length || !commandStack.isEmpty())) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput, mySymbols);
-            System.out.println("currindex:" + i);
-            System.out.println(rawInput + " " + commandStack);
             if(input.equals(COMMENT_SYMBOL)) {
                 i = getIndexAfterComment(i,commandInputList);
                 continue;
@@ -127,9 +125,10 @@ public class CommandParser {
         try{
             CommandsGeneral commandObject;
             if(isNormalCommand(commandName)) {
-                commandObject = checkNormalCommands(commandName);
-            } else {
-                commandObject=checkUserCreatedCommands(commandName);
+                commandObject = getNormalCommand(commandName);
+            }
+            else {
+                commandObject=getUserCreatedCommand(commandName);
             }
             commandStack.push(commandObject);
         }
@@ -138,23 +137,13 @@ public class CommandParser {
         }
     }
 
-    private CommandsGeneral checkUserCreatedCommands(String commandName) throws IllegalCommandException {
-        if(myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().containsKey(commandName)) {
-            return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().get(commandName);
-        }
-        else {
-            throw new IllegalCommandException("Command not defined");
-        }
+    private CommandsGeneral getUserCreatedCommand(String commandName) {
+        return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().get(commandName);
     }
 
-    private CommandsGeneral checkNormalCommands(String commandName) throws IllegalCommandException {
-        try{
-            String regexCommandName = Regex.getRegexSymbol(commandName, myCommandSymbols);
-            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myModelManager);
-        }
-        catch (IllegalCommandException e) {
-            throw e;
-        }
+    private CommandsGeneral getNormalCommand(String commandName) {
+        String regexCommandName = Regex.getRegexSymbol(commandName, myCommandSymbols);
+        return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myModelManager);
     }
 
 
@@ -210,7 +199,5 @@ public class CommandParser {
         }
         throw new IllegalCommandException("Invalid List Parameter");
     }
-
-
 
 }
