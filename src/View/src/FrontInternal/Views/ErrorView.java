@@ -1,4 +1,4 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
  * This class extends HBox and creates an error box to be used in a scene for the UI.
  * It can be used to display an error message to the user.
  */
-public class ErrorPane extends HBox {
+public class ErrorView extends HBox {
 
     private Background myNoErrorBackground;
     private Background myErrorBackground;
@@ -25,12 +25,10 @@ public class ErrorPane extends HBox {
     private final String EMPTY_TEXT = "";
 
     /**
-     * @param width int of the preferred errorBox width
      * @param height int of the preferred errorBox height
      */
-    ErrorPane(int width, int height){
+    public ErrorView(int height){
         this.setPrefHeight(height);
-        this.setPrefWidth(width);
         initializeBackgrounds();
         initializeText();
     }
