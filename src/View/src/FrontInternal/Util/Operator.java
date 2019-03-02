@@ -28,7 +28,7 @@ public class Operator {
      *  Creates an instance of Operator and operator creates an isntance of Creator such that
      *  the backend is initialized
      */
-    Operator(){
+    public Operator(){
         myViews = new ArrayList<>();
         Creator creator = new Creator();
         myManager = creator.getModelManager();

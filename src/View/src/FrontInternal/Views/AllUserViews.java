@@ -18,7 +18,7 @@ public class  AllUserViews extends ComboBox implements ViewAPI  {
     private List<ViewAPI> myViews;
     private TabPane myTabPane;
 
-    AllUserViews(Operator operator){
+    public AllUserViews(Operator operator){
         myResources = ResourceBundle.getBundle("ViewDropDown");
         myOperator = operator;
         myAlertBox = new Alert(Alert.AlertType.ERROR);
@@ -31,18 +31,21 @@ public class  AllUserViews extends ComboBox implements ViewAPI  {
         HistoryView history = new HistoryView(myOperator);
         myViews.add(history);
         Tab temp1 = new Tab();
+        temp1.setText("History");
         temp1.setContent(history.getPane());
         myTabPane.getTabs().add(temp1);
 
         UserDefinedCommandsView use = new UserDefinedCommandsView(myOperator);
         myViews.add(use);
         Tab temp2 = new Tab();
+        temp2.setText("User Defined Commands");
         temp1.setContent(use.getPane());
         myTabPane.getTabs().add(temp2);
 
         VariableView var = new VariableView(myOperator);
         myViews.add(var);
         Tab temp3 = new Tab();
+        temp3.setText("Variables");
         temp1.setContent(var.getPane());
         myTabPane.getTabs().add(temp3);
     }
