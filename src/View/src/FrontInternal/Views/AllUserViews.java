@@ -2,6 +2,7 @@ package FrontInternal.Views;
 
 import FrontInternal.Util.Operator;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -17,13 +18,15 @@ import java.util.*;
  * and the value is the text displayed to the User
  */
 public class  AllUserViews extends VBox implements ViewAPI  {
-    private ResourceBundle myResources;
+    private ResourceBundle myViewClassResources;
+    private ResourceBundle myErrorResources;
     private Operator myOperator;
     private Alert myAlertBox;
     private List<ViewAPI> myViews;
 
     public AllUserViews(Operator operator){
-        myResources = ResourceBundle.getBundle("ViewDropDown");
+        myViewClassResources = ResourceBundle.getBundle("ViewDropDown");
+        myErrorResources = ResourceBundle.getBundle("Errors");
         myOperator = operator;
         myAlertBox = new Alert(Alert.AlertType.ERROR);
         myViews = new ArrayList<>();
@@ -32,7 +35,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
 
     //Initializes all views in the ViewDropDown.properties file
     private void initializeViews(){
-        TreeSet<String> set =new TreeSet<>(myResources.keySet());
+        TreeSet<String> set =new TreeSet<>(myViewClassResources.keySet());
         for(String s : set){
             ViewAPI view = makeView(s);
             myViews.add(view);
@@ -51,21 +54,9 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             var constructor = c.getConstructor(Operator.class);
 
             return (ViewAPI) constructor.newInstance(myOperator);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+           return makeUnkownView();
         }
-        //TODO: This needs to go
-        HistoryView temp = new HistoryView(myOperator);
-        return temp;
-
     }
 
     /**
@@ -99,14 +90,13 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         ViewAPI temp = new ViewAPI() {
             @Override
             public void update() {
-
             }
-
             @Override
-            public Pane getPane() {
-                Pane temp = new Pane();
+            public HBox getPane() {
+                HBox temp = new HBox();
                 Text text = new Text();
-                //text.setText();
+                text.setText(myErrorResources.getString("UNKOWN_CLASS"));
+                temp.getChildren().add(text);
                 return temp;
             }
         };
