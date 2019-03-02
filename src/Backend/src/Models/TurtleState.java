@@ -1,13 +1,15 @@
 package Models;
 
-public class TurtleStates {
+import BackExternal.ITurtle;
+
+public class TurtleState {
     private double x;
     private double y;
     private boolean isPenUp;
     private double angle;
     private boolean getIsDisplayed;
 
-    public TurtleStates(double x, double y, boolean isPenUp, double angle, boolean isDisplayed) {
+    public TurtleState(double x, double y, boolean isPenUp, double angle, boolean isDisplayed) {
         this.x = x;
         this.y = y;
         this.isPenUp = isPenUp;

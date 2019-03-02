@@ -4,7 +4,6 @@ import BackExternal.IModelManager;
 import FrontInternal.Util.Operator;
 import javafx.scene.layout.Pane;
 
-import java.util.ResourceBundle;
 
 /**
  * This Behaves as a superclass for the History, Variable, and UserDefinedCommand view.
