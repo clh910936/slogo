@@ -1,82 +1,83 @@
 package FrontInternal.Views;
 
-import BackExternal.ViewAPI;
 import FrontInternal.Util.Operator;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
-public class  AllUserViews extends ComboBox implements ViewAPI  {
+/**
+ * Extends Accordion and implements ViewAPI.
+ * It creates an Accordion of all the Views listed in the
+ * ViewDropDown.properties file.
+ * In this file, the key is the name of the class
+ * and the value is the text displayed to the User
+ */
+public class  AllUserViews extends Accordion implements ViewAPI  {
     private ResourceBundle myResources;
     private Operator myOperator;
     private Alert myAlertBox;
     private List<ViewAPI> myViews;
-    private TabPane myTabPane;
+    private Pane myPane;
 
     public AllUserViews(Operator operator){
         myResources = ResourceBundle.getBundle("ViewDropDown");
         myOperator = operator;
         myAlertBox = new Alert(Alert.AlertType.ERROR);
         myViews = new ArrayList<>();
-        myTabPane = new TabPane();
+        myPane = new Pane();
+        myPane.getChildren().add(this);
         initializeViews();
     }
 
-    private void initializeViews() {
-        HistoryView history = new HistoryView(myOperator);
-        myViews.add(history);
-        Tab temp1 = new Tab();
-        temp1.setText("History");
-        temp1.setContent(history.getPane());
-        myTabPane.getTabs().add(temp1);
-
-        UserDefinedCommandsView use = new UserDefinedCommandsView(myOperator);
-        myViews.add(use);
-        Tab temp2 = new Tab();
-        temp2.setText("User Defined Commands");
-        temp1.setContent(use.getPane());
-        myTabPane.getTabs().add(temp2);
-
-        VariableView var = new VariableView(myOperator);
-        myViews.add(var);
-        Tab temp3 = new Tab();
-        temp3.setText("Variables");
-        temp1.setContent(var.getPane());
-        myTabPane.getTabs().add(temp3);
+    private void initializeViews(){
+        TreeSet<String> set =new TreeSet<>(myResources.keySet());
+        for(String s : set){
+            ViewAPI view = makeView(s);
+            myViews.add(view);
+            TitledPane pane = new TitledPane();
+            pane.setText(s);
+            pane.setContent(view.getPane());
+            this.getPanes().add(pane);
+            myOperator.addViewToUpdate(view);
+        }
     }
-//    private ViewAPI makeView(String s) {
-//        Class c = null;
-//        try {
-//            c = Class.forName("FrontInternal.Views." + s);
-//            var constructor = c.getConstructor(Operator.class);
-//
-//            return (ViewAPI) constructor.newInstance(myOperator);
-//
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+
+
+    private ViewAPI makeView(String s) {
+        try {
+            Class c = Class.forName("FrontInternal.Views." + s);
+            var constructor = c.getConstructor(Operator.class);
+
+            return (ViewAPI) constructor.newInstance(myOperator);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        //TODO: This needs to go
+        HistoryView temp = new HistoryView(myOperator);
+        return temp;
+
+    }
 
     @Override
     public void update() {
         for(ViewAPI v : myViews){
             v.update();
         }
+    }
+
+    @Override
+    public Pane getPane() {
+        return myPane;
     }
 
 

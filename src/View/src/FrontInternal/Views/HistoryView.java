@@ -36,4 +36,6 @@ public class HistoryView extends View {
             myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
+
+
 }
