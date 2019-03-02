@@ -100,8 +100,8 @@ public class parsertestmain {
                 "[\n" +
                 "  if greater? :x 10\n" +
                 "  [\n" +
-                "    example difference :x 10\n" +
-                "  ]\n" +
+//                "    example difference :x 10\n" +
+                "  sum 10 10 ]\n" +
                 "  fd 50\n" +
                 "  right 10\n" +
                 "]\n" +
