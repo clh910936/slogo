@@ -3,6 +3,7 @@ package FrontInternal.Components;
 import BackExternal.IModelManager;
 import BackExternal.ITurtle;
 import FrontInternal.Players.TurtleView;
+import FrontInternal.Util.Operator;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,10 +30,12 @@ public class Board extends Pane {
     private List<TurtleView> myTurtles = new ArrayList();
 
     private Path p;
+    private Operator myOperator;
     private IModelManager myController;
 
-    public Board(int width, int height, IModelManager controller) {
-        myController = controller;
+    public Board(int width, int height, Operator operator) {
+        myOperator = operator;
+        myController = operator.getManager();
         myWidth = width;
         myHeight = height;
         createCanvas(myWidth, myHeight);

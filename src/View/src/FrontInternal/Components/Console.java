@@ -1,8 +1,8 @@
 package FrontInternal.Components;
 
-import BackExternal.IModelManager;
 import BackExternal.IllegalCommandException;
-import FrontExternal.GUI;
+import FrontInternal.Util.Operator;
+import FrontInternal.Views.ErrorView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,8 +24,7 @@ public class Console extends Stage {
     private HBox myTextHBox;
     private GridPane myButtonGridPane;
     private ComboBox myLanguageDropDown;
-    private IModelManager myManager;
-    private GUI myGUI;
+    private Operator myOperator;
     private ReferencePage myReferencePage;
 
     private ResourceBundle myResourcesBundle;
@@ -35,11 +34,11 @@ public class Console extends Stage {
     private List<Button> myButtonList;
     private List<String> myLanguages;
     private TextArea myUserInputField;
-    private ErrorPane myErrorPane;
+    private ErrorView myErrorView;
 
     private final int CONSOLE_WIDTH = 500;
     private final int CONSOLE_HEIGHT = 300;
-    private final int ERROR_HEIGHT = CONSOLE_HEIGHT/8;
+
     private final int BUTTON_WIDTH = 80;
     private final int BUTTON_INSET = 5;
     private final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
@@ -51,9 +50,8 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (IModelManager manager, GUI gui){
-        myManager = manager;
-        myGUI = gui;
+    public Console (Operator operator){
+        myOperator = operator;
 
         initializeInstanceVariables();
         initializeLanguageList();
@@ -66,7 +64,7 @@ public class Console extends Stage {
 
         myBorderPane.setCenter(myTextHBox);
         myBorderPane.setRight(myButtonGridPane);
-        myBorderPane.setBottom(myErrorPane);
+        myBorderPane.setBottom(myErrorView);
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         this.setScene(consoleScene);
@@ -82,7 +80,7 @@ public class Console extends Stage {
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
         myLanguageDropDown = new ComboBox();
-        myErrorPane = new ErrorPane(CONSOLE_WIDTH, ERROR_HEIGHT);
+        myErrorView = myOperator.getErrorPane();
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
@@ -122,17 +120,18 @@ public class Console extends Stage {
     }
 
     private void readText() {
-        myErrorPane.clearError();
+        myErrorView.clearError();
         String input = myUserInputField.getText();
         String language = String.valueOf(myLanguageDropDown.getValue());
-        //TODO: Add more catch statements as more exceptions are thrown
-        try{
-            myManager.parseCommand(input, language);
-        }
-        catch(IllegalCommandException e){
-            myErrorPane.displayError(myResourcesBundle.getString("COMMAND"));
-        }
-        myGUI.update();
+        myOperator.parse(input, language);
+    }
+
+    /**
+     * Displays input text to the user on the bottom of the Console
+     * @param s Text displayed to user
+     */
+    public void showError(String s){
+        myErrorView.displayError(s);
     }
 
     private void addButtons(){

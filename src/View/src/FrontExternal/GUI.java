@@ -7,10 +7,8 @@ import java.util.ResourceBundle;
 
 import BackExternal.IModelManager;
 import FrontInternal.Components.*;
-import FrontInternal.Views.HistoryView;
-import FrontInternal.Views.UserDefinedCommandsView;
-import FrontInternal.Views.VariableView;
-import FrontInternal.Views.View;
+import FrontInternal.Util.Operator;
+import FrontInternal.Views.*;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,17 +39,19 @@ public class GUI {
     private HBox myRoot;
 
     private ResourceBundle myResources;
-    private IModelManager myController;
+    private Operator myOperator;
 
 
     // private
-    public GUI(IModelManager controller) {
-        myController = controller;
+    public GUI(Operator operator) {
+        myOperator = operator;
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
-        var right = makeRightView();
+        //var right = makeRightView();
+        //myRoot = new HBox(left, right);
+        var right = new AllUserViews(myOperator);
         myRoot = new HBox(left, right);
-        myRoot.setHgrow(right, Priority.ALWAYS);
+        //myRoot.setHgrow(right, Priority.ALWAYS);
 
 
 
@@ -59,28 +59,28 @@ public class GUI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
-    private Node makeRightView() {
-        var x = new TextField();
-        var y = new TextField();
-        return new VBox(makeHistory(),
-                makeVariables(),
-                makeCommands()
-//                x, y,
-//                makeButton("Move", e -> myBoard.move(Double.parseDouble(x.getText()),
-//                        Double.parseDouble(y.getText())))
-                 );
-    }
+//    private Node makeRightView() {
+//        var x = new TextField();
+//        var y = new TextField();
+////        return new VBox(makeHistory(),
+////                makeVariables(),
+////                makeCommands()
+//////                x, y,
+//////                makeButton("Move", e -> myBoard.move(Double.parseDouble(x.getText()),
+//////                        Double.parseDouble(y.getText())))
+////                 );
+//    }
 
-    private Node makeCommands() {
-        System.out.println("Made it to makeCommands");
-        commands = new UserDefinedCommandsView(myController);
-        System.out.println("Made it to setting commands");
-        views.add(commands);
-        return commands.getPane();
-    }
+//    private Node makeCommands() {
+//        System.out.println("Made it to makeCommands");
+//        commands = new UserDefinedCommandsView(myController);
+//        System.out.println("Made it to setting commands");
+//        views.add(commands);
+//        return commands.getPane();
+//    }
 
     private Node makeBoard() {
-        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myController);
+        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myOperator);
         return new HBox(myBoard);
     }
 
@@ -91,21 +91,21 @@ public class GUI {
     }
 
     private void openConsole(IModelManager b) {
-        myConsole = new Console(b, this);
+        myConsole = new Console(myOperator);
     }
 
 
-    private Node makeHistory() {
-        history = new HistoryView(myController);
-        views.add(history);
-        return history.getPane();
-    }
+//    private Node makeHistory() {
+//        history = new HistoryView(myController);
+//        views.add(history);
+//        return history.getPane();
+//    }
 
-    private Node makeVariables() {
-        variables = new VariableView(myController);
-        views.add(variables);
-        return variables.getPane();
-    }
+//    private Node makeVariables() {
+//        variables = new VariableView(myController);
+//        views.add(variables);
+//        return variables.getPane();
+//    }
 
     // might not need this
     public void beginLoop() {

@@ -1,21 +1,41 @@
 package FrontInternal.Util;
 
-import BackExternal.Creator;
-import BackExternal.IModelManager;
-import BackExternal.ViewAPI;
+import BackExternal.*;
+import FrontInternal.Views.ErrorView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
+/**
+ * @author Carrie Hunner
+ * This class was created such that all of the times parse needs to be called,
+ * whether by the user or a Front End programmer, it all funnels through the same
+ * method. Any class that implements the ViewAPI can add itself to be updated
+ * whenever parse is called. This ensures that every time parse is called, the Views
+ * respond correctly.
+ */
 public class Operator {
-    IModelManager myManager;
-    List<ViewAPI> myViews;
-    String DEFAULT_LANGAUGE = "English";
+    private IModelManager myManager;
+    private List<ViewAPI> myViews;
+    private static final String DEFAULT_LANGAUGE = "English";
+    private ErrorView myErrorView;
+    private ResourceBundle myErrorResources;
+    private ResourceBundle myViewClassesResourceBundle;
+    private final int ERROR_HEIGHT = 100;
 
-    Operator(){
+    /**
+     *  Creates an instance of Operator and operator creates an isntance of Creator such that
+     *  the backend is initialized
+     */
+    public Operator(){
         myViews = new ArrayList<>();
         Creator creator = new Creator();
         myManager = creator.getModelManager();
+        myErrorView = new ErrorView(ERROR_HEIGHT);
+        myErrorResources = ResourceBundle.getBundle("Errors");
+        myViewClassesResourceBundle = ResourceBundle.getBundle("ViewClasses");
+
     }
 
     /**
@@ -45,10 +65,19 @@ public class Operator {
      * @param language String of Langauge to execute
      */
     public void parse(String command, String language){
-        myManager.parseCommand(command, language);
-        for(ViewAPI v : myViews){
-            v.update();
+        try{
+            myManager.parseCommand(command, language);
+            for(ViewAPI v : myViews){
+                v.update();
+            }
         }
+        catch (IllegalCommandException e){
+            myErrorView.displayError(myErrorResources.getString("COMMAND"));
+        }
+        catch (IllegalParametersException e){
+            myErrorView.displayError(myErrorResources.getString("UNKOWN"));
+        }
+
     }
 
     /**
@@ -57,5 +86,14 @@ public class Operator {
      */
     public IModelManager getManager(){
         return myManager;
+    }
+
+    /**
+     * Allows the operator to call showError() and for the Console
+     * to actually display it
+     * @return ErrorView which extends an HBox
+     */
+    public ErrorView getErrorPane(){
+        return myErrorView;
     }
 }
