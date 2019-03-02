@@ -49,5 +49,7 @@ public class TurtleView extends Sprite {
 
     public void rotate(double angle) {
         setRotate(angle);
+        System.out.println("X is: " + getCenterX());
+        System.out.println("Y is " + getCenterY());
     }
 }
