@@ -10,6 +10,8 @@ public class Equal extends TwoParamCommand {
     }
     @Override
     public double executeCommand() throws ClassCastException {
-        return (input1 == input2)? 1 : 0;
+        double one = Double.parseDouble(String.valueOf(input1));
+        double two = Double.parseDouble(String.valueOf(input2));
+        return (one == two) ? 1 : 0;
     }
 }

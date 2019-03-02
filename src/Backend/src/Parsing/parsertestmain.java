@@ -95,18 +95,20 @@ public class parsertestmain {
 //                "  fd 100\n" +
 //                "  rt 90\n" +
 //                "]", "English"));
-//        System.out.println(cp.parseCommand("left -360", "English"));
-        System.out.println(cp.parseCommand("to example [ :x ]\n" +
-                "[\n" +
-                "  if greater? :x 10\n" +
-                "  [\n" +
+//        System.out.println(cp.parseCommand("ifelse equal? 10 10 [ sum 10 0 ] [ sum 1 1 ]", "English"));
+//        System.out.println(cp.parseCommand("to example [ :x ] [ ifelse equal? :x 10 [ sum 10 0 ] [ example + :x 1 ] ]", "English"));
+//        System.out.println((cp.parseCommand("example 9", "English")));
+//        System.out.println(cp.parseCommand("to example [ :x ]\n" +
+//                "[\n" +
+//                "  if greater? :x 10\n" +
+//                "  [\n" +
 //                "    example difference :x 10\n" +
-                "  sum 10 10 ]\n" +
-                "  fd 50\n" +
-                "  right 10\n" +
-                "]\n" +
-                "\n" +
-                "example 100", "English"));
+//                "  sum 10 10 ]\n" +
+//                "  fd 50\n" +
+//                "  right 10\n" +
+//                "]\n" +
+//                "\n" +
+//                "example 100", "English"));
 //        System.out.println(cp.parseCommand("dotimes [ :t 10 ] [\n" +
 //                "      fd 1\n" +
 //                "      rt / sin :t 2\n" +
