@@ -143,27 +143,36 @@ public class Board extends Pane implements ViewAPI {
     }
 
     private void handleChange(TurtleView t1, ITurtle t2) {
-
-        if (t2.getUpdatedX().size() != t2.getIsPenUp().size()) throw new IllegalTurtleStateException();
+        System.out.println("LOC: (" + t2.getUpdatedX() + "," + t2.getUpdatedY() + ")");
+        System.out.println("ANGLE: " + t2.getHeadingAngle());
+        System.out.println("PEN UP?: " + t2.getIsPenUp());
+        System.out.println("DISPLAY?: " + t2.getIsDisplayed());
+        System.out.println("LENGTH: " + t2.getUpdatedX().size());
 
         for (int i = 0; i < t2.getUpdatedX().size(); i++) {
-            System.out.println("LOC: (" + t2.getUpdatedX() + "," + t2.getUpdatedY() + ")");
-            System.out.println("ANGLE: " + t2.getHeadingAngle().get(i));
-            System.out.println("PEN UP?: " + t2.getIsPenUp().get(i));
-            System.out.println("DISPLAY?: " + t2.getIsDisplayed().get(i));
-            System.out.println("LENGTH: " + t2.getUpdatedX().size());
+
 
             double x = t2.getUpdatedX().get(i);
+            double xdisp = x-t1.getLastX();
+
+
             double y = t2.getUpdatedY().get(i);
-            double angle = t2.getHeadingAngle().get(i) - 90;
+            double ydisp = y-t1.getLastY();
+
+
+            System.out.printf("xdisp: %f, ydisp: %f\n", xdisp, ydisp);
+            double angle = 90-t2.getHeadingAngle().get(i);
             boolean penDown = !t2.getIsPenUp().get(i);
 
             //FIXME: angle rotation
             t1.rotate(angle);
-
-            move(t1, x, y, penDown);
+            if (!(xdisp==0&&ydisp==0)) {
+                System.out.println("entering");
+                t1.setLastX(x);
+                t1.setLastY(y);
+                move(t1, x, y, penDown);
+            }
         }
-
 
     }
 }
