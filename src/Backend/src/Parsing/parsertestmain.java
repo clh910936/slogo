@@ -102,7 +102,11 @@ public class parsertestmain {
 //                "      fd 1\n" +
 //                "      rt / sin :t 2\n" +
 //                "   ]", "English"));
-//        System.out.println(cp.parseCommand("rt for [ :x 10 40 10 ] [ sum :x 10 ]", "English"));
+//        System.out.println(cp.parseCommand("ifelse less? random 10 5 [\n" +
+//                "    rt 60\n" +
+//                "  ] [\n" +
+//                "    lt 60\n" +
+//                "  ]", "English"));
 //        System.out.println(cp.parse("rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]", "English"));
