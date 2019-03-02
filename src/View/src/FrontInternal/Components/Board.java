@@ -64,7 +64,7 @@ public class Board extends Pane implements ViewAPI {
         gc.fillRect(0, 0, myWidth, myHeight);
     }
 
-    public void move(TurtleView turtle, double x, double y, boolean penDown) {
+    private void move(TurtleView turtle, double x, double y, boolean penDown) {
 
         PathTransition pt = new PathTransition();
 
@@ -157,7 +157,7 @@ public class Board extends Pane implements ViewAPI {
             boolean penDown = !t2.getIsPenUp().get(i);
 
             //FIXME: angle rotation
-            //t1.rotate(angle);
+            t1.rotate(angle);
 
             move(t1, x, y, penDown);
         }
