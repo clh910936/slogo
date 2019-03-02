@@ -3,6 +3,8 @@ package FrontInternal.Views;
 import FrontInternal.Util.Operator;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -14,23 +16,21 @@ import java.util.*;
  * In this file, the key is the name of the class
  * and the value is the text displayed to the User
  */
-public class  AllUserViews extends Accordion implements ViewAPI  {
+public class  AllUserViews extends VBox implements ViewAPI  {
     private ResourceBundle myResources;
     private Operator myOperator;
     private Alert myAlertBox;
     private List<ViewAPI> myViews;
-    private Pane myPane;
 
     public AllUserViews(Operator operator){
         myResources = ResourceBundle.getBundle("ViewDropDown");
         myOperator = operator;
         myAlertBox = new Alert(Alert.AlertType.ERROR);
         myViews = new ArrayList<>();
-        myPane = new Pane();
-        myPane.getChildren().add(this);
         initializeViews();
     }
 
+    //Initializes all views in the ViewDropDown.properties file
     private void initializeViews(){
         TreeSet<String> set =new TreeSet<>(myResources.keySet());
         for(String s : set){
@@ -39,7 +39,7 @@ public class  AllUserViews extends Accordion implements ViewAPI  {
             TitledPane pane = new TitledPane();
             pane.setText(s);
             pane.setContent(view.getPane());
-            this.getPanes().add(pane);
+            this.getChildren().add(pane);
             myOperator.addViewToUpdate(view);
         }
     }
@@ -68,6 +68,9 @@ public class  AllUserViews extends Accordion implements ViewAPI  {
 
     }
 
+    /**
+     * Updates all the views that are displayed in the Accordion of User Views
+     */
     @Override
     public void update() {
         for(ViewAPI v : myViews){
@@ -75,9 +78,13 @@ public class  AllUserViews extends Accordion implements ViewAPI  {
         }
     }
 
+    /**
+     * @return Pane containing the accordion off all
+     *      user views
+     */
     @Override
     public Pane getPane() {
-        return myPane;
+        return this;
     }
 
 
@@ -87,4 +94,22 @@ public class  AllUserViews extends Accordion implements ViewAPI  {
 //        this.myAlertBox.setHeaderText(header);
 //        this.myAlertBox.setContentText(content);
 //    }
+
+    private ViewAPI makeUnkownView(){
+        ViewAPI temp = new ViewAPI() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public Pane getPane() {
+                Pane temp = new Pane();
+                Text text = new Text();
+                //text.setText();
+                return temp;
+            }
+        };
+        return temp;
+    }
 }

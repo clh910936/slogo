@@ -21,8 +21,6 @@ public class UserDefinedCommandsView extends View {
      */
     public UserDefinedCommandsView(Operator operator){
         super(operator);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));
     }
     //TODO: Fix this
     /**

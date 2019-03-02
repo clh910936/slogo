@@ -20,8 +20,6 @@ public class VariableView extends View {
      */
     public VariableView(Operator operator){
         super(operator);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("VariableTitle"));
     }
 
     /**

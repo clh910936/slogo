@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
  */
 public abstract class View implements ViewAPI  {
     protected ViewTemplate myViewTemplate;
-    protected ResourceBundle myBundle;
     protected Operator myOperator;
     protected IModelManager myManager;
 
@@ -22,6 +21,7 @@ public abstract class View implements ViewAPI  {
     View(Operator operator){
         myOperator = operator;
         myManager = operator.getManager();
+        myViewTemplate = new ViewTemplate();
     }
 
     /**
