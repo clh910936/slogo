@@ -131,7 +131,7 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfX.add(listOfStates.get(i).getX() - STARTX);
         }
-        resetModelAfterExecuting();
+        //resetModelAfterExecuting();
         return listOfX;
     }
 
@@ -140,7 +140,7 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfY.add(listOfStates.get(i).getY() - STARTY);
         }
-        resetModelAfterExecuting();
+        //resetModelAfterExecuting();
         return listOfY;
     }
 
@@ -149,7 +149,7 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfAngles.add(listOfStates.get(i).getAngle());
         }
-        resetModelAfterExecuting();
+        //resetModelAfterExecuting();
         return listOfAngles;
     }
 
@@ -158,7 +158,7 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfPenUp.add(listOfStates.get(i).getIsPenUp());
         }
-        resetModelAfterExecuting();
+        //resetModelAfterExecuting();
         return listOfPenUp;
     }
 
@@ -167,7 +167,7 @@ public class Turtle implements ITurtle {
         for (int i = 0; i < listOfStates.size(); i++) {
             listOfIsDisplayed.add(listOfStates.get(i).getIsDisplayed());
         }
-        resetModelAfterExecuting();
+        //resetModelAfterExecuting();
         return listOfIsDisplayed;
     }
 
