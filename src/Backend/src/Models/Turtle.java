@@ -38,7 +38,6 @@ public class Turtle implements ITurtle {
     public void moveForward(double dist) {
         nextPointX += dist * Math.cos(Math.toRadians(headingAngle));
         nextPointY += dist * Math.sin(Math.toRadians(headingAngle));
-        System.out.println("move forward: " + nextPointX + "|" + nextPointY);
         listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
         //printTurtleStatus();
         //notifyObservers();
@@ -55,7 +54,6 @@ public class Turtle implements ITurtle {
         headingAngle += degrees;
         headingAngle = keepAnglePositive(headingAngle);
         listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
-        //printTurtleStatus();
     }
 
     public void setHeadingAngle(double degrees) {
@@ -67,7 +65,6 @@ public class Turtle implements ITurtle {
     public double getDegreesDifference(double newAngle) {
         newAngle = keepAnglePositive(newAngle);
         double output = keepAnglePositive(newAngle - headingAngle);
-        listOfStates.add(new TurtleState(this.nextPointX, this.nextPointY, this.isPenUp, this.headingAngle, this.isDisplayed));
         return output;
     }
 
