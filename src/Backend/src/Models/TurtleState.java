@@ -8,13 +8,15 @@ public class TurtleState {
     private boolean isPenUp;
     private double angle;
     private boolean getIsDisplayed;
+    private boolean isCS;
 
-    public TurtleState(double x, double y, boolean isPenUp, double angle, boolean isDisplayed) {
+    public TurtleState(double x, double y, boolean isPenUp, double angle, boolean isDisplayed, boolean isCS) {
         this.x = x;
         this.y = y;
         this.isPenUp = isPenUp;
         this.angle = angle;
         this.getIsDisplayed = isDisplayed;
+        this.isCS = isCS;
     }
 
     public double getX() {
@@ -35,6 +37,10 @@ public class TurtleState {
 
     public boolean getIsDisplayed() {
         return getIsDisplayed;
+    }
+
+    public boolean getIsCS() {
+        return isCS;
     }
 
 }
