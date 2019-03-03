@@ -189,7 +189,7 @@ public class Board extends Pane implements ViewAPI {
         gc.clearRect(0, 0, myWidth, myHeight);
 
         // add stuff to update front end turtles
-        List<ITurtle> myTurtleModels = myController.getTurtleList();
-        attachModels(myTurtleModels);
+        //List<ITurtle> myTurtleModels = myController.getTurtleList();
+        myTurtles.add(new TurtleView());
     }
 }
