@@ -97,7 +97,6 @@ public class parsertestmain {
 //                "]", "English"));
 //        System.out.println(cp.parseCommand("ifelse equal? 10 10 [ sum 10 0 ] [ sum 1 1 ]", "English"));
 //        System.out.println(cp.parseCommand("to example [ :x ] [ ifelse equal? :x 10 [ sum 10 0 ] [ example + :x 1 ] ]", "English"));
-//        System.out.println((cp.parseCommand("example 9", "English")));
 //        System.out.println(cp.parseCommand("to example [ :x ]\n" +
 //                "[\n" +
 //                "  if greater? :x 10\n" +
