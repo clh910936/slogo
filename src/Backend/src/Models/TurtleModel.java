@@ -49,13 +49,13 @@ public class TurtleModel {
     public static final boolean CLEAR_SCREEN = false;
 
 
-    List<Integer> currentActiveTurtles;
-    Map<Integer, ITurtle> allTurtles;
-    int currentTurtleIndex;
+    private List<Integer> currentActiveTurtles;
+    private Map<Integer, ITurtle> allTurtles;
+    private int currentTurtleIndex;
 
     public TurtleModel() {
         allTurtles = new HashMap<>();
-        allTurtles.put(1, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,CLEAR_SCREEN));
+        allTurtles.put(1, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED, CLEAR_SCREEN));
         currentActiveTurtles = new ArrayList<>();
         currentActiveTurtles.add(1);
         currentTurtleIndex = 1;
