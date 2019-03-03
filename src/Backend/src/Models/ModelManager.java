@@ -18,7 +18,7 @@ public class ModelManager implements IModelManager {
 
     private final VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
-    private final TurtleModel myTurtleModel;
+    private TurtleModel myTurtleModel;
     private final CommandParser myCommandParser;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
 
@@ -80,6 +80,10 @@ public class ModelManager implements IModelManager {
 
     public TurtleModel getTurtleModel() {
         return myTurtleModel;
+    }
+
+    public void createNewTurtleModel() {
+        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, 0);
     }
 
 }
