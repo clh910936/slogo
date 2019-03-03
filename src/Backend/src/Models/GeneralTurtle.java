@@ -1,8 +1,8 @@
 package Models;
 
 public abstract class GeneralTurtle {
-//    public static final double STARTX = 2000;
-//    public static final double STARTY = 2000;
+    public static final double STARTX = 2000;
+    public static final double STARTY = 2000;
 
     protected double myPointX;
     protected double myPointY;

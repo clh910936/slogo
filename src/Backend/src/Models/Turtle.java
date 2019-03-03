@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Turtle extends GeneralTurtle implements ITurtle {
 
-    public static final double STARTX = 2000;
-    public static final double STARTY = 2000;
     private List<TurtleState> listOfStates;
 
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed, boolean isClearScreen) {
