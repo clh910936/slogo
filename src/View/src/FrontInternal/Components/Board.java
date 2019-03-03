@@ -170,7 +170,9 @@ public class Board extends Pane implements ViewAPI {
             double angle = 90-t2.getHeadingAngle().get(i);
             boolean penDown = !t2.getIsPenUp().get(i);
             boolean diplay = t2.getIsDisplayed().get(i);
-            if(t2.getCle)
+            if(t2.getClearScreen().get(i)) {
+                clearScreen();
+            }
 
             t1.rotate(angle);
             if (!(xdisp==0&&ydisp==0)) {
@@ -185,5 +187,9 @@ public class Board extends Pane implements ViewAPI {
 
     private void clearScreen() {
         gc.clearRect(0, 0, myWidth, myHeight);
+
+        // add stuff to update front end turtles
+        List<ITurtle> myTurtleModels = myController.getTurtleList();
+        attachModels(myTurtleModels);
     }
 }
