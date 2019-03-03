@@ -13,12 +13,9 @@ import java.util.Map;
 
 public class ModelManager implements IModelManager {
 
-    public static final double STARTX = 2000;
-    public static final double STARTY = 2000;
-
-    private final VariablesModel myVariablesModel;
+    private VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
-    private TurtleModel myTurtleModel;
+    private final TurtleModel myTurtleModel;
     private final CommandParser myCommandParser;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
 
@@ -26,7 +23,7 @@ public class ModelManager implements IModelManager {
     public ModelManager() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, 0);
+        myTurtleModel = new TurtleModel();
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
     }
@@ -42,6 +39,10 @@ public class ModelManager implements IModelManager {
         myHistoryModel.addHistoryEntry(inputString, true);
     }
 
+    public void setVariablesModel(VariablesModel vm) {
+        myVariablesModel = vm;
+    }
+
     public Map<String, String> getVariables() {
         return myVariablesModel.getVariables();
     }
@@ -54,8 +55,8 @@ public class ModelManager implements IModelManager {
     }
 
 
-    public List<ITurtle> getTurtleList() {
-        return myTurtleModel.getListOfTurtles();
+    public Map<Integer,ITurtle> getTurtleList() {
+        return myTurtleModel.getAllTurtles();
     }
 
     public List<String> getUserDefinedCommands() {
@@ -74,16 +75,12 @@ public class ModelManager implements IModelManager {
         return myUserDefinedCommandsModel;
     }
 
-    public HistoryModel getHistoryModel() {
-        return myHistoryModel;
-    }
+//    public HistoryModel getHistoryModel() {
+//        return myHistoryModel;
+//    }
 
     public TurtleModel getTurtleModel() {
         return myTurtleModel;
-    }
-
-    public void createNewTurtleModel() {
-        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, 0);
     }
 
 }
