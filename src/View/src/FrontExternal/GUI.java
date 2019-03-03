@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import BackExternal.IModelManager;
 import FrontInternal.Components.*;
 import FrontInternal.Util.Operator;
-
 import FrontInternal.Views.*;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -29,11 +28,6 @@ public class GUI {
     private static final Dimension DEFAULT_SIZE = new Dimension(800,600);
     public static final String RESOURCE_FILENAME = "GUI";
     private Scene myScene;
-    private HistoryView history;
-    private VariableView variables;
-    private UserDefinedCommandsView commands;
-
-    private List<ViewAPI> views = new ArrayList<>();
 
     private Console myConsole;
     private Board myBoard;
@@ -43,7 +37,7 @@ public class GUI {
     private Operator myOperator;
 
 
-
+    // private
     public GUI(Operator operator) {
         myOperator = operator;
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
@@ -62,10 +56,6 @@ public class GUI {
     }
 
 
-    public IModelManager getModelManager() {
-        return myOperator.getManager();
-    }
-
     private Node makeBoard() {
         myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myOperator);
         return new HBox(myBoard);
@@ -73,7 +63,7 @@ public class GUI {
 
     private Node makeConsoleButton() {
         var b = makeButton("OpenConsole", e -> openConsole(null));
-        //b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
+        b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
         return b;
     }
 
@@ -105,9 +95,4 @@ public class GUI {
         return result;
     }
 
-//    public void update() {
-//        for (ViewAPI v: views) {
-//            v.update();
-//        }
-//    }
 }
