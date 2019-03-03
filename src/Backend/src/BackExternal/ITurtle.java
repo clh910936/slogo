@@ -12,6 +12,7 @@ public interface ITurtle {
     List<Boolean> getIsPenUp();
     List<Double> getHeadingAngle();
     List<Boolean> getIsDisplayed();
+    List<Boolean> getClearScreen();
 
 
 //    1  2  3  4  5  6
