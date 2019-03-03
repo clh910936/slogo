@@ -1,9 +1,8 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
-import BackExternal.IModelManager;
+import FrontInternal.Util.Operator;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * @author Carrie Hunner
@@ -17,14 +16,12 @@ public class UserDefinedCommandsView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
-     * @param manager implementation of IModelManager
+     * @param operator used for updating
      */
-    public UserDefinedCommandsView(IModelManager manager){
-        super(manager);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("UserCommandsTitle"));
+    public UserDefinedCommandsView(Operator operator){
+        super(operator);
     }
-    //TODO: Fix this
+
     /**
      * Updates the pane by getting the necessary information from the
      * manager.

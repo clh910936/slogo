@@ -1,6 +1,6 @@
-package FrontInternal.Components;
+package FrontInternal.Views;
 
-import BackExternal.IModelManager;
+import FrontInternal.Util.Operator;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,12 +16,10 @@ public class HistoryView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
-     * @param manager implementation of IModelManager
+     * @param operator Handles parsing and updating
      */
-    public HistoryView(IModelManager manager){
-        super(manager);
-        myBundle = ResourceBundle.getBundle("View");
-        myViewTemplate = new ViewTemplate(myBundle.getString("HistoryTitle"));
+    public HistoryView(Operator operator){
+        super(operator);
     }
 
     /**
@@ -36,4 +34,6 @@ public class HistoryView extends View {
             myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
+
+
 }

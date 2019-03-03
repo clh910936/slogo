@@ -171,13 +171,15 @@ public class CommandParser {
 
 
     private void addParameterToLastCommand(Stack commandStack, Object value) {
-        CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
-
         try{
+            CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
             commandObject.addParameterToCommand(value);
         }
         catch (IllegalParametersException e){
             throw e;
+        }
+        catch (EmptyStackException e){
+            throw new IllegalParametersException();
         }
     }
 

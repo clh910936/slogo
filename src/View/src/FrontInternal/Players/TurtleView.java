@@ -8,6 +8,9 @@ public class TurtleView extends Sprite {
     private double myY;
     private double myAngle;
 
+    private double myLastX;
+    private double myLastY;
+
     public TurtleView(){
         setImage(new Image(getClass().getClassLoader().getResourceAsStream("turtle_default.png")));
     }
@@ -19,6 +22,9 @@ public class TurtleView extends Sprite {
         myX = getX() + getBoundsInLocal().getWidth()/2;
         myY = getY() + getBoundsInLocal().getHeight()/2;
         myAngle = 90;
+
+        myLastX = 0;
+        myLastY = 0;
     }
 
     public void update() {
@@ -34,11 +40,6 @@ public class TurtleView extends Sprite {
         return myY;
     }
 
-    public void setCenterXY(double x, double y) {
-        myX = x;
-        myY = y;
-    }
-
     public double getCurrentX() {
         return getTranslateX() + getCenterX();
     }
@@ -49,5 +50,21 @@ public class TurtleView extends Sprite {
 
     public void rotate(double angle) {
         setRotate(angle);
+    }
+
+    public double getLastX() {
+        return myLastX;
+    }
+
+    public double getLastY() {
+        return myLastY;
+    }
+
+    public void setLastX(double x) {
+        myLastX = x;
+    }
+
+    public void setLastY(double y) {
+        myLastY = y;
     }
 }

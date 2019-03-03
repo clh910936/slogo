@@ -2,7 +2,10 @@ package FrontInternal.Components;
 
 import BackExternal.IModelManager;
 import BackExternal.ITurtle;
+import BackExternal.IllegalTurtleStateException;
 import FrontInternal.Players.TurtleView;
+import FrontInternal.Util.Operator;
+import FrontInternal.Views.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,7 +24,7 @@ import java.util.List;
 /*
     Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
  */
-public class Board extends Pane {
+public class Board extends Pane implements ViewAPI {
     private Canvas myCanvas;
     private GraphicsContext gc;
     private int myWidth;
@@ -29,10 +32,12 @@ public class Board extends Pane {
     private List<TurtleView> myTurtles = new ArrayList();
 
     private Path p;
+    private Operator myOperator;
     private IModelManager myController;
 
-    public Board(int width, int height, IModelManager controller) {
-        myController = controller;
+    public Board(int width, int height, Operator operator) {
+        myOperator = operator;
+        myController = operator.getManager();
         myWidth = width;
         myHeight = height;
         createCanvas(myWidth, myHeight);
@@ -59,11 +64,11 @@ public class Board extends Pane {
         gc.fillRect(0, 0, myWidth, myHeight);
     }
 
-    public void move(TurtleView turtle, double x, double y, boolean penDown) {
+    private void move(TurtleView turtle, double x, double y, boolean penDown) {
 
         PathTransition pt = new PathTransition();
 
-        pt.setDuration(Duration.seconds(2));
+        pt.setDuration(Duration.seconds(0.1));
         pt.setNode(turtle);
 
         LineTo l = new LineTo(turtle.getCenterX()+x,turtle.getCenterY()-y);
@@ -91,9 +96,9 @@ public class Board extends Pane {
                 // get current location
                 double x = turtle.getCurrentX();
                 double y = turtle.getCurrentY();
-                System.out.println("current x: " + x);
-                System.out.println("current y: " + y);
-                System.out.println("angle: " + turtle.getRotate());
+//                System.out.println("current x: " + x);
+//                System.out.println("current y: " + y);
+//                System.out.println("angle: " + turtle.getRotate());
 
                 // initialize the location
                 if( oldLocation == null) {
@@ -132,18 +137,45 @@ public class Board extends Pane {
         }
     }
 
-    private void handleChange(TurtleView t1, ITurtle t2) {
+    @Override
+    public Pane getPane() {
+        return null;
+    }
 
-//        for (int i = 0; i < t2.getUpdatedX().size(); i++) {
-//            System.out.println();
-//            double x = t2.getUpdatedX().get(i);
-//            double y = t2.getUpdatedY().get(i);
-//
-//            //System.out.println("pen up: " + t2.getIsPenUp());
-//            t1.rotate(t2.getHeadingAngle().get(i) - 90);
-//            move(t1, x, y, !t2.getIsPenUp().get(i));
+    private void handleChange(TurtleView t1, ITurtle t2) {
+//        System.out.println("LOC: (" + t2.getUpdatedX() + "," + t2.getUpdatedY() + ")");
+//        System.out.println("ANGLE: " + t2.getHeadingAngle());
+//        System.out.println("PEN UP?: " + t2.getIsPenUp());
+//        System.out.println("DISPLAY?: " + t2.getIsDisplayed());
+//        System.out.println("LENGTH: " + t2.getUpdatedX().size());
+
+//        if (t2.getUpdatedX().size() != t2.getIsDisplayed().size()) {
+//            //throw new IllegalTurtleStateException();
 //        }
 
+        for (int i = 0; i < t2.getUpdatedX().size(); i++) {
+
+            double x = t2.getUpdatedX().get(i);
+            double xdisp = x-t1.getLastX();
+
+
+            double y = t2.getUpdatedY().get(i);
+            double ydisp = y-t1.getLastY();
+
+
+            System.out.printf("xdisp: %f, ydisp: %f\n", xdisp, ydisp);
+            double angle = 90-t2.getHeadingAngle().get(i);
+            boolean penDown = !t2.getIsPenUp().get(i);
+            boolean diplay = t2.getIsDisplayed().get(i);
+            
+            t1.rotate(angle);
+            if (!(xdisp==0&&ydisp==0)) {
+                System.out.println("entering");
+                t1.setLastX(x);
+                t1.setLastY(y);
+                move(t1, x, y, penDown);
+            }
+        }
 
     }
 }
