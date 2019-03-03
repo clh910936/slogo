@@ -25,7 +25,11 @@ public class parsertestmain {
 //                "rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]\n", "English"));
-//        System.out.println(cp.parseCommand("sum 10 10", "English"));
+        System.out.println(cp.parseCommand("for [ :dist 1 110 1 ] \n" +
+                "[\n" +
+                "  fd :dist\n" +
+                "  rt product :dist 3\n" +
+                "]", "English"));
 //        System.out.println(cp.parseCommand("repeat 20\n" +
 //                "  [\n" +
 //                "    pu fd 8 pd fd 8\n" +

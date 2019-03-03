@@ -3,6 +3,7 @@ package Models;
 import BackExternal.ITurtle;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TurtleModel {
@@ -22,13 +23,9 @@ public class TurtleModel {
         listOfTurtles.add(t);
     }
 
-    public int getCurrentTurtleIndex() {
-        return currentTurtleIndex;
-    }
-
     public Turtle getCurrentTurtle() { return (Turtle) listOfTurtles.get(currentTurtleIndex); }
 
     public List<ITurtle> getListOfTurtles() {
-        return listOfTurtles;
+        return Collections.unmodifiableList(listOfTurtles);
     }
 }

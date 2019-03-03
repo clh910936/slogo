@@ -1,8 +1,11 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.*;
-
+import Models.Turtle;
+import Models.ModelManager;
+import Models.TurtleModel;
+import Models.UserDefinedCommandsModel;
+import Models.VariablesModel;
 import java.util.ArrayList;
 import java.util.List;
 
