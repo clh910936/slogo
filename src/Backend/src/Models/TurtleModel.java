@@ -13,7 +13,7 @@ public class TurtleModel {
     public TurtleModel(double firstTurtleX, double firstTurtleY, boolean isPenUp, double headingAngle, boolean isDisplayed, int turtleId) {
         listOfTurtles = new ArrayList<>();
         currentTurtleIndex = turtleId;
-        //FIXME: don't hardcode
+        //FIXME: maybe a better way to make new turtle
         Turtle t = new Turtle(firstTurtleX, firstTurtleY, isPenUp, headingAngle, isDisplayed, false);
         listOfTurtles.add(t);
     }
