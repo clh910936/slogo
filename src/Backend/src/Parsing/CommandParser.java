@@ -60,7 +60,7 @@ public class CommandParser {
             String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
             CommandNode child = getChildNode(rawInput, regexInput);
             command.addChild(child);
-        }
+        }p
         command.evaluate();
 
     }
