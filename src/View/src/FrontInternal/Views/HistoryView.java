@@ -3,7 +3,6 @@ package FrontInternal.Views;
 import FrontInternal.Util.Operator;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * @author Carrie Hunner
@@ -28,10 +27,10 @@ public class HistoryView extends View {
      */
     @Override
     public void update() {
-        myViewTemplate.clearLines();
+        this.clearLines();
         List<String> history = myManager.getHistory();
         for(int k =0; k <history.size(); k++){
-            myViewTemplate.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
+            this.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
     }
 

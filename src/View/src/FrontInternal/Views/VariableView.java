@@ -27,11 +27,11 @@ public class VariableView extends View {
      */
     @Override
     public void update() {
-        myViewTemplate.clearLines();
+        this.clearLines();
         Map<String, String> map = myManager.getVariables();
         for(String s : map.keySet()){
             String line = s + "\t" + map.get(s);
-            myViewTemplate.addFinalLine(line);
+            this.addFinalLine(line);
         }
     }
 }

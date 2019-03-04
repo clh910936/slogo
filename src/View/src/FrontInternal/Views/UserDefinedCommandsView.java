@@ -28,10 +28,10 @@ public class UserDefinedCommandsView extends View {
      */
     @Override
     public void update() {
-        myViewTemplate.clearLines();
+        this.clearLines();
         List<String> list = myManager.getUserDefinedCommands();
         for(String s : list){
-            myViewTemplate.addFinalLine(s);
+            this.addFinalLine(s);
         }
     }
 }
