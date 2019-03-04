@@ -1,6 +1,5 @@
 package Main;
 
-import BackExternal.Creator;
 import FrontInternal.Components.Console;
 import FrontInternal.Util.Operator;
 import javafx.application.Application;
@@ -14,15 +13,14 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         //var model = new model();
         // should pass model into this maybe
-        Operator operator = new Operator();
-        var display = new GUI(operator);
+        var display = new GUI();
 
 
         stage.setTitle(TITLE);
         stage.setScene(display.getScene());
         stage.show();
 
-        new Console(operator);
+        new Console(display.getOperator());
 
 
     }

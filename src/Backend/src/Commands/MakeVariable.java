@@ -1,7 +1,7 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class MakeVariable extends TwoParamCommand {
 

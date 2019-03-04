@@ -229,7 +229,7 @@ public interface FrontInternal.FrontInternalAPI {
 The Front-end external has methods that allow for the backend to interact directly with the Board Class. The Board Class will be where the drawing occurs. Through this API, the backend will be able to call `setBackgroundColor()` as well as  `clearBoard()`. We may also choose to implement another external API that controls the actions of the Turtle(s) specifically, since the backend/controller classes will be responsible for that as well.
 
 ```
-public interface FrontExternalAPI {
+public interface API.FrontExternalAPI {
     /**
      * part of Board class
      * clears the drawings off of the board

@@ -1,6 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
+import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
 import java.util.Arrays;
@@ -45,8 +45,25 @@ public class UserDefinedCommand extends CommandNode {
         return commandsToExecute;
     }
 
+    public String getVariablesToString() {
+        return String.join(" ",myVariables);
+    }
+
+
+    public String getVariablesListToString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[ ");
+        sb.append(getVariablesToString());
+        sb.append(" ]");
+        return sb.toString();
+    }
+
+    public String getCommandsToString() {
+        return "[ " + getCommands() + " ]";
+    }
+
     public String toString() {
-        return (getCommandName() + "\n\t" + Arrays.toString(getVariables())+ "\n\t[ " + getCommands() + " ]");
+        return (getCommandName() + " " + getVariablesListToString()+ " " + getCommandsToString());
     }
     @Override
     public boolean isCommandReadyToExecute() {

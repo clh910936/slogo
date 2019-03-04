@@ -1,8 +1,7 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.ModelManager;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class Minus extends OneParamCommand {
     public Minus(String language, ModelManager modelManager) {

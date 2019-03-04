@@ -1,7 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class Cosine extends OneParamCommand {
     public Cosine(String language, ModelManager modelManager) {

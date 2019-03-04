@@ -2,7 +2,7 @@ package Parsing;
 
 import BackExternal.IllegalCommandException;
 import Commands.CommandNode;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class CommandClassFinder {
 

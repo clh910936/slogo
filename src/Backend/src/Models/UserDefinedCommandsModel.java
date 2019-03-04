@@ -22,4 +22,5 @@ public class UserDefinedCommandsModel {
     public Map<String,UserDefinedCommand> getUserCreatedCommands() {
         return Collections.unmodifiableMap(myUserDefinedCommands);
     }
+
 }
