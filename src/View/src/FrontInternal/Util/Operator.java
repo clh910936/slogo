@@ -19,10 +19,10 @@ import java.util.ResourceBundle;
 public class Operator {
     private IModelManager myManager;
     private List<ViewAPI> myViews;
-    private static final String DEFAULT_LANGAUGE = "English";
+    private static final String DEFAULT_LANGUAGE = "English";
     private ErrorView myErrorView;
     private ResourceBundle myErrorResources;
-    private final int ERROR_HEIGHT = 100;
+    private final int ERROR_HEIGHT = 50;
 
     /**
      *  Creates an instance of Operator and operator creates an isntance of Creator such that
@@ -53,7 +53,7 @@ public class Operator {
      * @param command String of the command to execute.
      */
     public void parse(String command){
-        parse(command, DEFAULT_LANGAUGE);
+        parse(command, DEFAULT_LANGUAGE);
     }
 
 
