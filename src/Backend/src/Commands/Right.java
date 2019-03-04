@@ -1,6 +1,7 @@
 package Commands;
 
 import Models.ModelManager;
+import Models.Turtle;
 
 public class Right extends OneParamCommand {
 
@@ -9,7 +10,9 @@ public class Right extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        this.myTurtle.turnCounterClockwise(-1 * (double) myParams.get(0));
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
+        myTurtle.turnCounterClockwise(-1 * (double) myParams.get(0));
         return (double) myParams.get(0);
     }
 }

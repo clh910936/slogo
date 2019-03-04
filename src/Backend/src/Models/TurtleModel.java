@@ -60,11 +60,14 @@ public class TurtleModel {
         currentTurtleIndex = 1;
     }
 
-    public void addCurrentActiveTurtles(int turtleId) {
-        currentActiveTurtles.add(turtleId);
-        if (!allTurtles.containsKey(turtleId)) {
-            allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,CLEAR_SCREEN));
+    public void setCurrentActiveTurtles(List<Integer> turtleIds) {
+        currentActiveTurtles = turtleIds;
+        for(int turtleId : turtleIds) {
+            if (!allTurtles.containsKey(turtleId)) {
+                allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,CLEAR_SCREEN));
+            }
         }
+
     }
 
 

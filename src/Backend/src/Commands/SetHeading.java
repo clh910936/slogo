@@ -1,6 +1,7 @@
 package Commands;
 
 import Models.ModelManager;
+import Models.Turtle;
 
 public class SetHeading extends OneParamCommand {
 
@@ -10,8 +11,10 @@ public class SetHeading extends OneParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        double difference = this.myTurtle.getDegreesDifference((double) myParams.get(0));
-        this.myTurtle.setHeadingAngle((double) myParams.get(0));
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
+        double difference = myTurtle.getDegreesDifference((double) myParams.get(0));
+        myTurtle.setHeadingAngle((double) myParams.get(0));
         return difference;
     }
 }

@@ -2,6 +2,7 @@ package Commands;
 
 import Models.ModelManager;
 import Models.ModelManager;
+import Models.Turtle;
 
 public class IsPenDown extends ZeroParamCommand {
     public IsPenDown(String language, ModelManager modelManager) {
@@ -9,6 +10,7 @@ public class IsPenDown extends ZeroParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
         return ! myTurtle.getCurrentIsPenUp() ? 1 : 0;
     }
 }

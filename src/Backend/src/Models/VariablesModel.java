@@ -10,6 +10,10 @@ public class VariablesModel {
 
     private Map<String, String> myVariables;
 
+    public VariablesModel(VariablesModel vm) {
+        this.myVariables = vm.myVariables;
+    }
+
     public VariablesModel() {
         myVariables = new HashMap<>();
     }
@@ -30,5 +34,6 @@ public class VariablesModel {
     public Map<String, String> getVariables() {
         return Collections.unmodifiableMap(myVariables);
     }
+
 
 }
