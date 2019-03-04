@@ -155,7 +155,7 @@ public class Board extends Pane implements ViewAPI {
 //        if (t2.getUpdatedX().size() != t2.getIsDisplayed().size()) {
 //            //throw new IllegalTurtleStateException();
 //        }
-
+        System.out.println(t2.getClearScreen());
         for (int i = 0; i < t2.getUpdatedX().size(); i++) {
 
             double x = t2.getUpdatedX().get(i);
@@ -171,7 +171,9 @@ public class Board extends Pane implements ViewAPI {
             boolean penDown = !t2.getIsPenUp().get(i);
             boolean diplay = t2.getIsDisplayed().get(i);
             if(t2.getClearScreen().get(i)) {
+                System.out.println("gonna clear screen now");
                 clearScreen();
+                continue;
             }
 
             t1.rotate(angle);
@@ -186,7 +188,9 @@ public class Board extends Pane implements ViewAPI {
     }
 
     private void clearScreen() {
-        gc.clearRect(0, 0, myWidth, myHeight);
+        getChildren().clear();
+        //gc.clearRect(0, 0, myWidth, myHeight);
+        setBackground(Color.BEIGE);
 
         // add stuff to update front end turtles
         //List<ITurtle> myTurtleModels = myController.getTurtleList();

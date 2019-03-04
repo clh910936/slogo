@@ -10,11 +10,12 @@ public class TurtleModel {
     int currentTurtleIndex;
     List<ITurtle> listOfTurtles;
 
-    public TurtleModel(double firstTurtleX, double firstTurtleY, boolean isPenUp, double headingAngle, boolean isDisplayed, int turtleId) {
+    public TurtleModel(double firstTurtleX, double firstTurtleY, boolean isPenUp, double headingAngle,
+                       boolean isDisplayed, boolean isClearScreen, int turtleId) {
         listOfTurtles = new ArrayList<>();
         currentTurtleIndex = turtleId;
         //FIXME: maybe a better way to make new turtle
-        Turtle t = new Turtle(firstTurtleX, firstTurtleY, isPenUp, headingAngle, isDisplayed, false);
+        Turtle t = new Turtle(firstTurtleX, firstTurtleY, isPenUp, headingAngle, isDisplayed, isClearScreen);
         listOfTurtles.add(t);
     }
 

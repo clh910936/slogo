@@ -26,7 +26,7 @@ public class ModelManager implements IModelManager {
     public ModelManager() {
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, 0);
+        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, false, 0);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
     }
@@ -83,7 +83,7 @@ public class ModelManager implements IModelManager {
     }
 
     public void createNewTurtleModel() {
-        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, 0);
+        myTurtleModel = new TurtleModel(STARTX, STARTY,false, 90, true, true, 0);
     }
 
 }
