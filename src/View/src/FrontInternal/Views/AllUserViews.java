@@ -61,23 +61,9 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             System.out.println("\t constructor");
 
             return (ViewAPI) constructor.newInstance(myOperator);
-        } catch (InstantiationException e) {
-            System.out.println("\t Instantiation exception");
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            System.out.println("\t Invocation exception");
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            System.out.println("\t no such method exception");
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            System.out.println("\t illegal access");
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.out.println("\t class not found");
-            e.printStackTrace();
+        } catch (Exception e) {
+            return makeUnkownView();
         }
-        return makeUnkownView();
     }
 
     /**

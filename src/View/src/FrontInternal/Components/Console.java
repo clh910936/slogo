@@ -95,7 +95,6 @@ public class Console extends Stage {
         } catch (FileNotFoundException e) {
             myErrorView.displayError(myResourcesBundle.getString("FILE_NOT_FOUND"));
         }
-
     }
 
     private File getFile() {
