@@ -25,13 +25,14 @@ public class VariableView extends View {
      * Updates the pane by getting the necessary information from the
      * manager.
      */
+    //TODO: fixme
     @Override
     public void update() {
         this.clearLines();
         Map<String, String> map = myManager.getVariables();
         for(String s : map.keySet()){
             String line = s + "\t" + map.get(s);
-            this.addFinalLine(line);
+            //this.addFinalLine(line);
         }
     }
 }
