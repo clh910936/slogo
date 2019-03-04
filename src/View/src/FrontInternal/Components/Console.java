@@ -1,6 +1,5 @@
 package FrontInternal.Components;
 
-import BackExternal.IllegalCommandException;
 import FrontInternal.Util.Operator;
 import FrontInternal.Views.ErrorView;
 import javafx.geometry.Insets;
@@ -12,11 +11,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class Console extends Stage {
     //private CommandParser myParser;
@@ -31,6 +35,7 @@ public class Console extends Stage {
 
     private Button myRunButton;
     private Button myReferencePageButton;
+    private Button myLoadFileButton;
     private List<Button> myButtonList;
     private List<String> myLanguages;
     private TextArea myUserInputField;
@@ -58,6 +63,7 @@ public class Console extends Stage {
 
         createRunButton();
         createReferencePageButton();
+        createLoadFileButton();
         addButtons();
         initializeDropDown();
         formatButtonGridPane();
@@ -70,6 +76,35 @@ public class Console extends Stage {
         this.setScene(consoleScene);
         setOnCloseRequest(e -> displaying = false);
         this.show();
+    }
+
+    private void createLoadFileButton() {
+        myLoadFileButton = createAndFormatButton(myResourcesBundle.getString("LOAD_BUTTON"));
+        myLoadFileButton.setOnMouseClicked(e -> loadFile());
+    }
+
+    private void loadFile() {
+        File file = getFile();
+        try {
+            Scanner scanner = new Scanner(file);
+            String fileContents = new String();
+            while(scanner.hasNext()){
+                fileContents += scanner.nextLine() + "\n";
+            }
+            myUserInputField.setText(fileContents);
+        } catch (FileNotFoundException e) {
+            myErrorView.displayError(myResourcesBundle.getString("FILE_NOT_FOUND"));
+        }
+
+    }
+
+    private File getFile() {
+        Stage stage = new Stage();
+        FileChooser chooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("Slogo files (*.logo)", "*.logo");
+        chooser.getExtensionFilters().addAll(extFilter2, extFilter);
+        return chooser.showOpenDialog(stage);
     }
 
     private void initializeInstanceVariables() {
