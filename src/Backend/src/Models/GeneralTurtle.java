@@ -1,5 +1,7 @@
 package Models;
 
+import API.FrontExternalAPI;
+
 public abstract class GeneralTurtle {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
@@ -14,11 +16,11 @@ public abstract class GeneralTurtle {
     protected int myPenColourIndex;
     protected double myPenSize;
     protected int myShapeIndex;
-
+    protected FrontExternalAPI myFrontExternalAPI;
 
     public GeneralTurtle(double nextPointX, double nextPointY, boolean isPenUp,
                          double headingAngle, boolean isDisplayed, boolean isClearScreen,
-                         int id, int pcIndex, double ps, int si) {
+                         int id, int pcIndex, double ps, int si, FrontExternalAPI myFrontExternal) {
         this.myPointX = nextPointX;
         this.myPointY = nextPointY;
         this.myIsPenUp = isPenUp;
@@ -29,6 +31,7 @@ public abstract class GeneralTurtle {
         this.myPenColourIndex = pcIndex;
         this.myPenSize = ps;
         this.myShapeIndex = si;
+        this.myFrontExternalAPI = myFrontExternal;
     }
 
     public double getCurrentX() {

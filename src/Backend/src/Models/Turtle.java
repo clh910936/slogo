@@ -1,15 +1,15 @@
 package Models;
 
-import BackExternal.ITurtle;
-import java.util.ArrayList;
-import java.util.List;
+import API.FrontExternalAPI;
 
-public class Turtle extends GeneralTurtle implements ITurtle {
+public class Turtle extends GeneralTurtle {
 
     public static final int FULL_CIRCLE_DEGREES = 360;
 
-    public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed, boolean isClearScreen, int id, int pcIndex, double ps, int si) {
-        super(nextPointX, nextPointY, isPenUp, headingAngle, isDisplayed, isClearScreen, id, pcIndex, ps, si);
+    public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle,
+                  boolean isDisplayed, boolean isClearScreen, int id, int pcIndex,
+                  double ps, int si, FrontExternalAPI myFrontExternal) {
+        super(nextPointX, nextPointY, isPenUp, headingAngle, isDisplayed, isClearScreen, id, pcIndex, ps, si, myFrontExternal);
     }
 
     public void moveForward(double dist) {
@@ -17,6 +17,7 @@ public class Turtle extends GeneralTurtle implements ITurtle {
         myPointY += dist * Math.sin(Math.toRadians(myHeadingAngle));
         printTurtleStatus();
         // TODO: call feroze
+        myFrontExternalAPI.move(myPointX, myPointY, myId);
         //notifyObservers();
     }
 

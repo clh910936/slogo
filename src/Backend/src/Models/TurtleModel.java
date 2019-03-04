@@ -33,7 +33,8 @@
 //    }
 //}
 package Models;
-import BackExternal.ITurtle;
+import API.FrontExternalAPI;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,13 +53,15 @@ public class TurtleModel {
 
 
     private List<Integer> currentActiveTurtles;
-    private Map<Integer, ITurtle> allTurtles;
+    private Map<Integer, Turtle> allTurtles;
     private int currentTurtleIndex;
+    private FrontExternalAPI myFrontExternalAPI;
 
-    public TurtleModel() {
+    public TurtleModel(FrontExternalAPI frontExternalAPI) {
+        myFrontExternalAPI = frontExternalAPI;
         allTurtles = new HashMap<>();
         allTurtles.put(1, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
-                                    CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX));
+                                    CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
         currentActiveTurtles = new ArrayList<>();
         currentActiveTurtles.add(1);
         currentTurtleIndex = 1;
@@ -69,16 +72,16 @@ public class TurtleModel {
         for(int turtleId : turtleIds) {
             if (!allTurtles.containsKey(turtleId)) {
                 allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
-                        IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX));
+                        IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
             }
         }
     }
 
-    public Map<Integer, ITurtle> getAllTurtles() {
+    public Map<Integer, Turtle> getAllTurtles() {
         return allTurtles;
     }
 
-    public ITurtle getCurrentTurtle() {
+    public Turtle getCurrentTurtle() {
         return allTurtles.get(currentTurtleIndex);
     }
 
