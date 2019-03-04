@@ -8,7 +8,7 @@ public class IsPenDown extends ZeroParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         return ! myTurtle.getCurrentIsPenUp() ? 1 : 0;
     }
 }

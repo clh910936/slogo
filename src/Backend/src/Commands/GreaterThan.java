@@ -10,7 +10,7 @@ public class GreaterThan extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         return ((double) input1 > (double) input2)? 1 : 0;
     }
 }

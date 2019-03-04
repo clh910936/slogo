@@ -9,7 +9,7 @@ public class Equal extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         double one = Double.parseDouble(String.valueOf(input1));
         double two = Double.parseDouble(String.valueOf(input2));
         return (one == two) ? 1 : 0;

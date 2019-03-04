@@ -22,7 +22,7 @@ public class For extends TwoParamCommand {
     }
 
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         double out = 0.0;
         try {
             String[] variablesInfo = (String[]) input1;
