@@ -16,7 +16,7 @@ public class DoTimes extends TwoParamCommand{
     }
 
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
             String[] varAndLimit = (String[]) input1;

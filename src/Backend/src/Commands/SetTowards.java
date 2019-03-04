@@ -8,7 +8,7 @@ public class SetTowards extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         double newAngle = myTurtle.getAngleToPoint((double) input1, (double) input2);
         double diff = myTurtle.getDegreesDifference(newAngle);
         myTurtle.setHeadingAngle(newAngle);

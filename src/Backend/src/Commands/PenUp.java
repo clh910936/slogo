@@ -8,7 +8,7 @@ public class PenUp extends ZeroParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         myTurtle.setPenUp();
         return 0;
     }

@@ -7,7 +7,7 @@ public class Random extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         return (int)(Math.random() * (double) (input));
     }
 }

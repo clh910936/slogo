@@ -8,7 +8,7 @@ public class NotEqual extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         return ((double) input1 != (double) input2)? 1 : 0;
     }
 }

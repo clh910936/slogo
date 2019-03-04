@@ -63,7 +63,7 @@ public class CommandParser {
                 continue;
             }
             else if(input.equals(LIST_END_SYMBOL)) {
-                throw new IllegalCommandException("List parameter is invalid");
+                throw new IllegalCommandException("ListInput parameter is invalid");
             }
             if(input.equals(VARIABLE_SYMBOL)) {
                 if(CommandTypePredicate.checkNeedsVariableParameter(commandStack)) {
@@ -245,7 +245,7 @@ public class CommandParser {
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
             listContents.add(rawInput);
         }
-        throw new IllegalCommandException("Invalid List Parameter");
+        throw new IllegalCommandException("Invalid ListInput Parameter");
     }
 
 

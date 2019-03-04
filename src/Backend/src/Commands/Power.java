@@ -7,7 +7,7 @@ public class Power extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         return Math.pow((double) input1, (double) input2);
     }
 }

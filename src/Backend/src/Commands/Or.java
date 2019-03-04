@@ -8,7 +8,7 @@ public class Or extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException  {
+    public Object executeCommand() throws ClassCastException  {
         return ((double) input1 != 0 || (double) input2 != 0)? 1 : 0;
     }
 }

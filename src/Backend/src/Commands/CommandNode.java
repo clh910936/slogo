@@ -37,6 +37,6 @@ public abstract class CommandNode {
 
     public abstract boolean isCommandReadyToExecute();
 
-    public abstract double executeCommand();
+    public abstract Object executeCommand();
 }
 
