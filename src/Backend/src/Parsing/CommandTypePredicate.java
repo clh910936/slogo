@@ -5,7 +5,6 @@ import Commands.CommandNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 import java.util.function.Predicate;
 
 public class CommandTypePredicate {
@@ -29,12 +28,10 @@ public class CommandTypePredicate {
         return isTurtleCommand.test(input);
     }
 
-    public static boolean checkNeedsWordParameter(Stack commandStack) {
-        if(commandStack.isEmpty()) return false;
-        return needsWordParameter.test((CommandNode) commandStack.peek());
+    public static boolean checkNeedsWordParameter(CommandNode input) {
+        return needsWordParameter.test(input);
     }
 
-    public static boolean checkNeedsVariableParameter(Stack commandStack) {
-        if(commandStack.isEmpty()) return false;
-        return needsVariableParameter.test((CommandNode) commandStack.peek());    }
+    public static boolean checkNeedsVariableParameter(CommandNode input) {
+        return needsVariableParameter.test(input);    }
 }

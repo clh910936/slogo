@@ -13,8 +13,9 @@ public class ClearScreen extends ZeroParamCommand {
     @Override
     public double executeCommand() throws ClassCastException {
         double dist = myTurtle.getDistToPoint(STARTX,STARTY);
-        myTurtle.setClearScreen();
-        myModelManager.createNewTurtleModel();
+//        myTurtle.setClearScreen();
+//        myModelManager.createNewTurtleModel();
         return dist;
+
     }
 }

@@ -4,7 +4,6 @@ import BackExternal.IllegalParametersException;
 import Commands.CommandNode;
 import BackExternal.IllegalCommandException;
 import Models.ModelManager;
-import Models.Turtle;
 import Models.TurtleModel;
 import Models.VariablesModel;
 import java.util.*;
@@ -30,7 +29,7 @@ public class CommandParser {
     private ModelManager myModelManager;
     private String[] commandInputList;
     private int currentListIndex;
-//    private double currentReturnValue;
+    private double currentReturnValue;
 
     public CommandParser(ModelManager modelManager) {
         mySymbols = new ArrayList<>();
@@ -46,25 +45,59 @@ public class CommandParser {
         myLanguage = language;
         commandInputList = commandInput.split(WHITESPACE);
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
-        double currentReturnValue = -1;
+        currentReturnValue = -1;
         currentListIndex = 0;
+        //TODO: check if the first one is a comment
         CommandNode commandHead = getNewCommandObject(commandInputList[currentListIndex]);
         currentListIndex++;
         while(currentListIndex<commandInputList.length) {
-            currentReturnValue = parseTree(commandHead,myModelManager.getVariablesModel(), currentReturnValue);
+             parseTree(commandHead,myModelManager.getVariablesModel());
         }
         return currentReturnValue;
     }
 
-    private double parseTree(CommandNode command, VariablesModel vm, double currentReturnValue) {
+
+    private void parseTree(CommandNode command, VariablesModel vm) throws IllegalParametersException {
         while(!command.isCommandReadyToExecute()) {
+            if(currentListIndex>=commandInputList.length) {
+                throw new IllegalParametersException();
+            }
             String rawInput = commandInputList[currentListIndex];
             String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
-            CommandNode child = getChildNode(rawInput, regexInput);
-            command.add(child);
+            if(regexInput.equals(COMMENT_SYMBOL)) {
+                currentListIndex = getIndexAfterComment(currentListIndex,commandInputList);
+                continue;
+            }
+            else if(regexInput.equals(LIST_END_SYMBOL)) {
+                throw new IllegalCommandException("List parameter is invalid");
+            }
+
+//            if(regexInput.equals(CONSTANT_SYMBOL)) {
+//
+//                addParameterToLastCommand(commandStack, Double.parseDouble(rawInput));
+//            }
+//            else if(input.equals(LIST_START_SYMBOL)) {
+//                String[] listContents = getListContents(commandInputList, currentListIndex);
+//                addParameterToLastCommand(commandStack, listContents);
+//                currentListIndex+=listContents.length + 1;
+//            }
+            else if (input.equals(COMMAND_SYMBOL)){
+                if(CommandTypePredicate.checkNeedsWordParameter(command)) {
+                    addParameterToLastCommand(commandStack, rawInput);
+                }
+                else {
+                    pushNewCommandObject(commandStack, rawInput);
+                }
+            }
+            currentListIndex++;
+            myModelManager.getTurtleModel().setCurrentTurtle(currentTurtle);
+            currentReturnValue = executeCommandIfPossible(commandStack,currentReturnValue);
+
+            CommandNode child = getChildNode(rawInput, regexInput, command);
+            command.addChild(child);
+            currentListIndex++;
         }
         currentReturnValue = evaluate(command);
-        return currentReturnValue;
     }
 
     private double evaluate(CommandNode command) {
@@ -72,27 +105,50 @@ public class CommandParser {
             turtleEvaluate(command);
         }
         for (CommandNode child : command.getChildren()) {
-            myParams.add(child.evaluate());
+            command.addParam(evaluate(child));
         }
-        myParams.clear();
+        command.clearMyParams();
         return command.executeCommand();
     }
 
     private double turtleEvaluate(CommandNode command) {
         double currentValue = 0.0;
         TurtleModel turtleModel = myModelManager.getTurtleModel();
+        VariablesModel currVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
         for (int id : turtleModel.getCurrentActiveTurtles()) {
             turtleModel.setCurrentTurtle(id);
             currentValue = evaluate(command);
+            myModelManager.setVariablesModel(new VariablesModel(currVariablesModel));
         }
         return currentValue;
     }
 
-    private CommandNode getChildNode(String rawInput, String regexInput) {
+    private CommandNode getChildNode(String rawInput, String regexInput, CommandNode currCommand) {
         if (regexInput.equals(COMMAND_SYMBOL)) {
             regexInput = Regex.getRegexSymbol(rawInput, myCommandSymbols);
+            return getNewCommandObject(regexInput);
         }
-        return getNewCommandObject(regexInput);
+        else if (isUserCommand(rawInput)) {
+            return getNewCommandObject(regexInput);
+        }
+        else if(regexInput.equals(CONSTANT_SYMBOL)) {
+            return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
+        }
+        else if(regexInput.equals(LIST_START_SYMBOL)) {
+            String[] listContents = getListContents(commandInputList, currentListIndex);
+            currentListIndex+=listContents.length + 1;
+            return new ListInput(myLanguage, myModelManager, listContents);
+        }
+        else if(regexInput.equals(VARIABLE_SYMBOL)) {
+            if(CommandTypePredicate.checkNeedsVariableParameter(currCommand)) {
+
+                addParameterToLastCommand(commandStack, rawInput.substring(1));
+            }
+            else {
+                rawInput = vm.getVariable(rawInput.substring(1));
+                regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
+            }
+        }
     }
 
 //    private double parseStack(Stack commandStack, VariablesModel vm) {
@@ -202,7 +258,6 @@ public class CommandParser {
 
     private CommandNode getNewCommandObject(String commandName) {
         try{
-            CommandNode commandObject;
             if(isNormalCommand(commandName)) {
                 return getNormalCommand(commandName);
             }
