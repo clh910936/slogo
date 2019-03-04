@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface IModelManager {
 
-    List<String> getUserDefinedCommands();
+    Map<String,String> getUserDefinedCommands();
     Map<String,String> getVariables();
     List<String> getHistory();
     void parseCommand(String input, String language);

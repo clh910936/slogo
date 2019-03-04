@@ -8,6 +8,7 @@ import Commands.UserDefinedCommand;
 import Parsing.CommandParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public class ModelManager implements IModelManager {
     private final TurtleModel myTurtleModel;
     private final CommandParser myCommandParser;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
+    private final CurrentStateFileModel myCurrentStateFileModel;
 
 
     public ModelManager() {
@@ -26,6 +28,7 @@ public class ModelManager implements IModelManager {
         myTurtleModel = new TurtleModel();
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
+        myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
@@ -50,6 +53,7 @@ public class ModelManager implements IModelManager {
     public List<String> getHistory() {
         return myHistoryModel.getHistory();
     }
+
     public boolean getWasSuccessfulHistory(int i) {
         return myHistoryModel.wasSuccessful.test(i);
     }
@@ -59,10 +63,10 @@ public class ModelManager implements IModelManager {
         return myTurtleModel.getAllTurtles();
     }
 
-    public List<String> getUserDefinedCommands() {
-        List<String> commandsList = new ArrayList<>();
+    public Map<String,String> getUserDefinedCommands() {
+        Map<String,String> commandsList = new HashMap<>();
         for(Map.Entry<String,UserDefinedCommand> command : myUserDefinedCommandsModel.getUserCreatedCommands().entrySet()) {
-            commandsList.add(command.getValue().toString());
+            commandsList.put(command.getKey(),command.getValue().toString());
         }
         return commandsList;
     }
@@ -81,6 +85,14 @@ public class ModelManager implements IModelManager {
 
     public TurtleModel getTurtleModel() {
         return myTurtleModel;
+    }
+
+    public void saveCurrentState(String fileName) {
+        myCurrentStateFileModel.save(fileName);
+    }
+
+    public void setStateFromFile(String fileName, String language) {
+        myCurrentStateFileModel.setStateFromFile(fileName,language);
     }
 
 }
