@@ -4,11 +4,9 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import API.FrontExternalAPI;
-import API.IModelManager;
 import FrontInternal.Components.*;
 import FrontInternal.Util.Operator;
 import FrontInternal.Views.*;
-import BackExternal.ModelManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -17,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 
@@ -93,7 +90,9 @@ public class GUI implements FrontExternalAPI {
         return result;
     }
 
-
+    /**
+     * THE FOLLOWING ARE TURTLE/BOARD COMMANDS, FEROZE WILL TAKE CARE OF THEM
+     */
     @Override
     public void clearBoard() {
         myBoard.clear();
@@ -144,6 +143,9 @@ public class GUI implements FrontExternalAPI {
         myBoard.addTurtle(turtleId);
     }
 
+    /**
+     * TODO: @Carrie pls add these methods to ur AllUserViews which updates each specific view accordingly.
+     */
     @Override
     public void updateHistory() {
         myToolBar.updateHistory();

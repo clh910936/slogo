@@ -5,11 +5,13 @@ import java.util.Map;
 
 public interface IModelManager {
 
-    List<String> getUserDefinedCommands();
+    Map<String,String> getUserDefinedCommands();
     Map<String,String> getVariables();
     List<String> getHistory();
     void parseCommand(String input, String language);
     boolean getWasSuccessfulHistory(int i);
-
+    void saveCurrentState(String fileName);
+    void setStateFromFile(String fileName, String language);
+    void changeVariable(String variableName, String value);
 
 }

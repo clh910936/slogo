@@ -86,13 +86,6 @@ public class CommandParser {
 
 
     private Object evaluate(CommandNode command) {
-//        if(command instanceof StringInput && isUserCommand(String.valueOf(command.executeCommand()))) {
-//            CommandNode newCommand=getUserCreatedCommand(String.valueOf(command.executeCommand()));
-//            for(CommandNode child : command.getChildren()) {
-//                newCommand.addChild(child);
-//            }
-//            command = newCommand;
-//        }
         if(CommandTypePredicate.isTurtleCommand(command)&&!turtleEvaluated) {
             return turtleEvaluate(command);
         }
@@ -125,7 +118,6 @@ public class CommandParser {
         if(regexInput.equals(COMMENT_SYMBOL)) {
             currentListIndex = getIndexAfterComment(currentListIndex,commandInputList);
         }
-
         else if(regexInput.equals(LIST_END_SYMBOL)) {
             throw new IllegalCommandException("List parameter is invalid");
         }
