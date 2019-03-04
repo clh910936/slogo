@@ -1,13 +1,12 @@
 package Commands;
 
-import BackExternal.IllegalParametersException;
 import Models.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CommandsGeneral {
+public abstract class CommandNode {
     protected TurtleModel myTurtleModel;
     protected VariablesModel myVariablesModel;
     protected ModelManager myModelManager;
@@ -16,7 +15,7 @@ public abstract class CommandsGeneral {
     protected String myLanguage;
     protected Turtle myTurtle;
 
-    public CommandsGeneral(String language, ModelManager modelManager) {
+    public CommandNode(String language, ModelManager modelManager) {
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
         myModelManager = modelManager;
@@ -28,11 +27,6 @@ public abstract class CommandsGeneral {
 
     public abstract boolean isCommandReadyToExecute();
     public abstract double executeCommand() throws ClassCastException;
-    public void addParameterToCommand(Object val) throws IllegalParametersException {
-        myParams.add(val);
-        System.out.println(myParams);
-    }
-
     public String getCommandName() {
         return this.getClass().getSimpleName();
     }
