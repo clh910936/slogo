@@ -8,7 +8,7 @@ public class Heading extends ZeroParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         return myTurtle.getCurrentAngle();
     }
 }

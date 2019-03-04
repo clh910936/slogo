@@ -11,7 +11,7 @@ public class If extends TwoParamCommand {
     }
 
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         double out = 0.0;
 
         try {
