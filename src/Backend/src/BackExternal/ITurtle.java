@@ -25,10 +25,10 @@ public interface ITurtle {
 
     //boolean getReceive();
 
-//    List<Integer> getBackGroundIndex();
-//    List<Integer> getPenColorIndex();
-//    List<Double> getPenSize();
-//    List<Integer> getShapeIndex();
+//    ListInput<Integer> getBackGroundIndex();
+//    ListInput<Integer> getPenColorIndex();
+//    ListInput<Double> getPenSize();
+//    ListInput<Integer> getShapeIndex();
 
 
 }

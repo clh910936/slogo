@@ -7,18 +7,19 @@ public class parsertestmain {
     public static void main (String[] args) {
         ModelManager mm = new ModelManager();
         CommandParser cp = new CommandParser(mm);
-        System.out.println(cp.parseCommand(
-                "to example [ :x ]\n" +
-                        "[\n" +
-                        "  if greater? :x 10\n" +
-                        "  [\n" +
-                        "    example difference :x 10\n" +
-                        "  ]\n" +
-                        "  fd 50\n" +
-                        "  right 10\n" +
-                        "]\n" +
-                        "\n" +
-                        "example 100", "English"));
+        System.out.println(cp.parseCommand("sum 10 10", "English"));
+//        System.out.println(cp.parseCommand(
+//                "to example [ :x ]\n" +
+//                        "[\n" +
+//                        "  if greater? :x 10\n" +
+//                        "  [\n" +
+//                        "    example difference :x 10\n" +
+//                        "  ]\n" +
+//                        "  fd 50\n" +
+//                        "  right 10\n" +
+//                        "]\n" +
+//                        "\n" +
+//                        "example 100", "English"));
 //        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
 //                "[ sum 2 3 ] \n" +
 //                "[ sum 20 30 ]", "English"));
@@ -36,11 +37,11 @@ public class parsertestmain {
 //                "rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]\n", "English"));
-        System.out.println(cp.parseCommand("for [ :dist 1 110 1 ] \n" +
-                "[\n" +
-                "  fd :dist\n" +
-                "  rt product :dist 3\n" +
-                "]", "English"));
+//        System.out.println(cp.parseCommand("for [ :dist 1 110 1 ] \n" +
+//                "[\n" +
+//                "  fd :dist\n" +
+//                "  rt product :dist 3\n" +
+//                "]", "English"));
 //        System.out.println(cp.parseCommand("repeat 20\n" +
 //                "  [\n" +
 //                "    pu fd 8 pd fd 8\n" +

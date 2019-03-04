@@ -24,7 +24,7 @@ public class UserDefinedCommand extends CommandNode {
         return myParams.size()==myVariables.length;
     }
 
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {

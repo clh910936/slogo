@@ -10,7 +10,7 @@ public class Forward extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         this.myTurtle.moveForward((double) myParams.get(0));
         return (double) myParams.get(0);
     }

@@ -9,7 +9,7 @@ public class Backward extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         this.myTurtle.moveForward(-(double) input);
         return (double) input;
     }
