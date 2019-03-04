@@ -9,7 +9,7 @@ public class Right extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        this.myTurtle.turnCounterClockwise(-1 * (double) input);
-        return (double) input;
+        this.myTurtle.turnCounterClockwise(-1 * (double) myParams.get(0));
+        return (double) myParams.get(0);
     }
 }

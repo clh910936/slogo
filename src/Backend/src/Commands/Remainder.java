@@ -8,6 +8,6 @@ public class Remainder extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return (double) input1 % (double) input2;
+        return (double) myParams.get(0) % (double) myParams.get(1);
     }
 }

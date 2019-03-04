@@ -9,6 +9,6 @@ public class Cosine extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return Math.cos(Math.toRadians((double) input));
+        return Math.cos(Math.toRadians((double) myParams.get(0)));
     }
 }
