@@ -10,6 +10,6 @@ public class Sine extends OneParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        return Math.sin(Math.toRadians((double) input));
+        return Math.sin(Math.toRadians((double) myParams.get(0)));
     }
 }

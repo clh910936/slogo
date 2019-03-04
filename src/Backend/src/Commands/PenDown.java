@@ -1,6 +1,7 @@
 package Commands;
 
 import Models.ModelManager;
+import Models.Turtle;
 
 public class PenDown extends ZeroParamCommand {
 
@@ -9,6 +10,8 @@ public class PenDown extends ZeroParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
         myTurtle.setPenDown();
         return 1;
     }

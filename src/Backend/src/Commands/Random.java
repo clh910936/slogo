@@ -8,6 +8,6 @@ public class Random extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return (int)(Math.random() * (double) (input));
+        return (int)(Math.random() * (double) (myParams.get(0)));
     }
 }

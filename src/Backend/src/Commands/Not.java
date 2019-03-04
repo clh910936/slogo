@@ -10,6 +10,6 @@ public class Not extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException  {
-        return ((double) input == 0)? 1 : 0;
+        return ((double) myParams.get(0) == 0)? 1 : 0;
     }
 }

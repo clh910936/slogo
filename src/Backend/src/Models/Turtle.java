@@ -64,6 +64,7 @@ public class Turtle extends GeneralTurtle implements ITurtle {
         this.myPointX = x;
         this.myPointY = y;
         listOfStates.add(new TurtleState(this.myPointX, this.myPointY, this.myIsPenUp, this.myHeadingAngle, this.myIsDisplayed, this.myIsClearScreen));
+        printTurtleStatus();
     }
 
     public void setPenUp () {

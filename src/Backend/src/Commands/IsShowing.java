@@ -2,6 +2,7 @@ package Commands;
 
 import Models.ModelManager;
 import Models.ModelManager;
+import Models.Turtle;
 
 public class IsShowing extends ZeroParamCommand {
     public IsShowing(String language, ModelManager modelManager) {
@@ -9,6 +10,8 @@ public class IsShowing extends ZeroParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
         return myTurtle.getCurrentIsDisplayed() ? 1 : 0;
     }
 }

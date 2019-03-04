@@ -25,8 +25,8 @@ public class For extends TwoParamCommand {
     public Object executeCommand() throws IllegalParametersException {
         double out = 0.0;
         try {
-            String[] variablesInfo = (String[]) input1;
-            String[] commands = (String[]) input2;
+            String[] variablesInfo = (String[]) myParams.get(0);
+            String[] commands = (String[]) myParams.get(1);
 
             if (variablesInfo.length != NUM_PARAMS) {
                 throw new IllegalLoopParamsException();
@@ -59,9 +59,9 @@ public class For extends TwoParamCommand {
 
 //    double out = 0.0;
 //        for (int i = 0; i < variableValues.size(); i++) {
-//        String[] newCommandArray = Arrays.copyOf(((String[])input2), ((String[])input2).length);
-//        for (int j = 0; j < ((String[])input2).length; j++) {
-//            if (((String[])input2)[j].equals(tmpVar)) {
+//        String[] newCommandArray = Arrays.copyOf(((String[])myParams.get(1)), ((String[])myParams.get(1)).length);
+//        for (int j = 0; j < ((String[])myParams.get(1)).length; j++) {
+//            if (((String[])myParams.get(1))[j].equals(tmpVar)) {
 //                newCommandArray[j] = variableValues.get(i).toString();
 //            }
 //        }

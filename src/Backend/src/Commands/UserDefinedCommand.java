@@ -20,9 +20,6 @@ public class UserDefinedCommand extends CommandNode {
         cp = new CommandParser(modelManager);
     }
 
-    public boolean isCommandReadyToExecute() {
-        return myParams.size()==myVariables.length;
-    }
 
     public Object executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
@@ -51,4 +48,9 @@ public class UserDefinedCommand extends CommandNode {
     public String toString() {
         return (getCommandName() + "\n\t" + Arrays.toString(getVariables())+ "\n\t[ " + getCommands() + " ]");
     }
+    @Override
+    public boolean isCommandReadyToExecute() {
+        return myChildren.size()==myVariables.length;
+    }
+
 }

@@ -7,7 +7,7 @@ public class parsertestmain {
     public static void main (String[] args) {
         ModelManager mm = new ModelManager();
         CommandParser cp = new CommandParser(mm);
-        System.out.println(cp.parseCommand("sum 10 10", "English"));
+//        System.out.println(cp.parseCommand("sum 10 sum 10 10", "English"));
 //        System.out.println(cp.parseCommand(
 //                "to example [ :x ]\n" +
 //                        "[\n" +
@@ -20,9 +20,14 @@ public class parsertestmain {
 //                        "]\n" +
 //                        "\n" +
 //                        "example 100", "English"));
-//        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
-//                "[ sum 2 3 ] \n" +
-//                "[ sum 20 30 ]", "English"));
+        //TODO
+        System.out.println(cp.parseCommand("to square [ :distance ]\n" +
+                "[\n" +
+                "  repeat 4 [\n" +
+                "    fd :distance\n" +
+                "    rt 90\n" +
+                "  ]\n" +
+                "] square 3", "English"));
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
@@ -37,12 +42,17 @@ public class parsertestmain {
 //                "rt for [ :dist 10 40 10 ] [ \n" +
 //                "  fd :dist\n" +
 //                "]\n", "English"));
-//        System.out.println(cp.parseCommand("for [ :dist 1 110 1 ] \n" +
+//        System.out.println(cp.parseCommand("tell [ 1 2 3 ] for [ :dist 1 110 1 ] \n" +
 //                "[\n" +
 //                "  fd :dist\n" +
 //                "  rt product :dist 3\n" +
 //                "]", "English"));
-//        System.out.println(cp.parseCommand("repeat 20\n" +
+//        System.out.println(cp.parseCommand(
+//                "for [ :dist 1 110 1 ] \n" +
+//                "[\n" +
+//                "  fd :dist\n" +
+//                "tell [ 1 2 3 ] fd product 3 3 ]" , "English"));
+//        System.out.println(cp.parseCommand("tell [ 1 2 3 ] repeat 20\n" +
 //                "  [\n" +
 //                "    pu fd 8 pd fd 8\n" +
 //                "  ]\n", "English"));
@@ -55,8 +65,8 @@ public class parsertestmain {
 //                "    pu fd :size pd fd :size\n" +
 //                "  ]\n" +
 //                "]\ndash 20 8", "English"));
-//        System.out.println(cp.parseCommand("setxy 3 4", "English"));
-        //System.out.println(cp.parseCommand("make :random 2", "English"));
+//        System.out.println(cp.parseCommand("tell [ 1 2 3 ] setxy 3 4", "English"));
+//        System.out.println(cp.parseCommand("make :random 2", "English"));
 
 //        System.out.println(cp.parseCommand(
 //                "to dash [ :count :size ]\n" +

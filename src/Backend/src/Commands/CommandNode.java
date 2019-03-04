@@ -15,7 +15,7 @@ public abstract class CommandNode {
     protected UserDefinedCommandsModel myUserDefinedCommandsModel;
     protected List<Object> myParams;
     protected List<CommandNode> myChildren;
-    protected Turtle myTurtle;
+    protected int MAX_PARAMS;
 
     public CommandNode(String language, ModelManager modelManager) {
         myModelManager = modelManager;
@@ -25,7 +25,6 @@ public abstract class CommandNode {
         myLanguage = language;
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
-        myTurtle = (Turtle) myTurtleModel.getCurrentTurtle();
     }
 
     public void addChild(CommandNode node) {
@@ -52,7 +51,9 @@ public abstract class CommandNode {
         return this.getClass().getSimpleName();
     }
 
-    public abstract boolean isCommandReadyToExecute();
+    public boolean isCommandReadyToExecute() {
+        return myChildren.size()==MAX_PARAMS;
+    }
 
     public abstract Object executeCommand();
 }

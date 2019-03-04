@@ -19,8 +19,8 @@ public class DoTimes extends TwoParamCommand{
     public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
-            String[] varAndLimit = (String[]) input1;
-            String[] commands = (String[]) input2;
+            String[] varAndLimit = (String[]) myParams.get(0);
+            String[] commands = (String[]) myParams.get(1);
             String variable = varAndLimit[VAR_LOC];
             double limit = Double.parseDouble(varAndLimit[LIMIT_LOC]);
 
