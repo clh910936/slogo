@@ -1,9 +1,8 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.ModelManager;
 
-public abstract class ZeroParamCommand extends CommandsGeneral {
+public abstract class ZeroParamCommand extends CommandNode {
 
     public ZeroParamCommand(String language, ModelManager modelManager) {
         super(language, modelManager);

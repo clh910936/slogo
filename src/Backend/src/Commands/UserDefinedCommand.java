@@ -1,12 +1,11 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.ModelManager;
 import Parsing.CommandParser;
 
 import java.util.Arrays;
 
-public class UserDefinedCommand extends CommandsGeneral {
+public class UserDefinedCommand extends CommandNode {
     private String commandName;
     private String commandsToExecute;
     private String[] myVariables;
