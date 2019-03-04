@@ -1,7 +1,12 @@
 package FrontInternal.Views;
 
 import FrontInternal.Util.Operator;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,6 +17,8 @@ import java.util.List;
  * that is created in View.
  */
 public class HistoryView extends View {
+    private static final Paint PARSED = Color.GREEN;
+    private static final Paint NOT_PARSED = Color.RED;
 
     /**
      * Creates a pane that can be updated based on the manager passed through
@@ -32,6 +39,32 @@ public class HistoryView extends View {
         for(int k =0; k <history.size(); k++){
             this.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
         }
+    }
+
+    private void addFinalLine(String s, Boolean bool){
+        Paint color = determineColor(bool);
+        Text text = new Text();
+        HBox tempHBox = new HBox();
+        text.setFill(color);
+        text.setText(s);
+        createTextLine(tempHBox, text);
+        tempHBox.setOnMouseClicked(e -> handleClick(text));
+    }
+
+    private void handleClick(Text text) {
+        String command = text.getText();
+        myOperator.parse(command);
+    }
+
+    private Paint determineColor(Boolean bool) {
+        Paint color;
+        if(bool){
+            color = PARSED;
+        }
+        else{
+            color = NOT_PARSED;
+        }
+        return color;
     }
 
 
