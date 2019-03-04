@@ -43,12 +43,8 @@ public class HistoryView extends View {
 
     private void addFinalLine(String s, Boolean bool){
         Paint color = determineColor(bool);
-        Text text = new Text();
-        HBox tempHBox = new HBox();
-        text.setFill(color);
-        text.setText(s);
-        createTextLine(tempHBox, text);
-        tempHBox.setOnMouseClicked(e -> handleClick(text));
+        Text text = createTextLine(s, color);
+        text.setOnMouseClicked(e -> handleClick(text));
     }
 
     private void handleClick(Text text) {

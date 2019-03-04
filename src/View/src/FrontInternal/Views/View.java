@@ -53,10 +53,15 @@ public abstract class View implements ViewAPI {
 
 
 
-    protected void createTextLine(HBox tempHBox, Text tempText) {
-        tempHBox.getChildren().add(tempText);
+    protected Text createTextLine(String s, Paint color) {
+        Text text = new Text();
+        HBox tempHBox = new HBox();
+        text.setFill(color);
+        text.setText(s);
+        tempHBox.getChildren().add(text);
         myGridPane.add(tempHBox, 0, myGridIndex);
         myGridIndex++;
+        return text;
     }
 
 
