@@ -1,7 +1,7 @@
 package Parsing;
 
 import BackExternal.IllegalParametersException;
-import Commands.CommandsGeneral;
+import Commands.CommandNode;
 import BackExternal.IllegalCommandException;
 import Models.ModelManager;
 import Models.VariablesModel;
@@ -128,6 +128,7 @@ public class CommandParser {
 
     private void pushNewCommandObject(Stack commandStack, String commandName) {
         try{
+            CommandNode commandObject;
             if(isNormalCommand(commandName)) {
 
                 if(CommandTypePredicate.isTurtleCommand(Regex.getRegexSymbol(commandName, myCommandSymbols))&&!branched) {
@@ -159,7 +160,7 @@ public class CommandParser {
         }
     }
 
-    private CommandsGeneral checkUserCreatedCommands(String commandName) throws IllegalCommandException {
+    private CommandNode checkUserCreatedCommands(String commandName) throws IllegalCommandException {
         if(myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().containsKey(commandName)) {
             return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().get(commandName);
         }
@@ -168,7 +169,7 @@ public class CommandParser {
         }
     }
 
-    private CommandsGeneral checkNormalCommands(String commandName) throws IllegalCommandException {
+    private CommandNode checkNormalCommands(String commandName) throws IllegalCommandException {
         try{
             String regexCommandName = Regex.getRegexSymbol(commandName, myCommandSymbols);
             return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, regexCommandName, myLanguage, myModelManager);
@@ -195,7 +196,7 @@ public class CommandParser {
         if(commandStack.isEmpty()) {
             return currentReturnValue;
         }
-        CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+        CommandNode commandObject = (CommandNode) commandStack.peek();
         while(commandObject.isCommandReadyToExecute()) {
             try{
                 System.out.println("Current turtle: " + currentTurtle);
@@ -205,7 +206,7 @@ public class CommandParser {
                     break;
                 }
                 addParameterToLastCommand(commandStack, currentReturnValue);
-                commandObject = (CommandsGeneral) commandStack.peek();
+                commandObject = (CommandNode) commandStack.peek();
             }
             catch (ClassCastException e){
                 throw new IllegalParametersException();
@@ -217,7 +218,7 @@ public class CommandParser {
 
     private void addParameterToLastCommand(Stack commandStack, Object value) {
         try{
-            CommandsGeneral commandObject = (CommandsGeneral) commandStack.peek();
+            CommandNode commandObject = (CommandNode) commandStack.peek();
             commandObject.addParameterToCommand(value);
         }
         catch (IllegalParametersException e){

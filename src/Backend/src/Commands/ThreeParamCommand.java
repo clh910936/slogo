@@ -3,7 +3,7 @@ package Commands;
 
 import Models.ModelManager;
 
-public abstract class ThreeParamCommand extends CommandsGeneral {
+public abstract class ThreeParamCommand extends CommandNode {
     private static final int MAX_PARAMS = 3;
     protected Object input1;
     protected Object input2;
