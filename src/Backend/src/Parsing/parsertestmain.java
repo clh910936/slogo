@@ -20,8 +20,7 @@ public class parsertestmain {
 //                        "]\n" +
 //                        "\n" +
 //                        "example 100", "English"));
-        //TODO
-        System.out.println(cp.parseCommand("to square [ :distance ]\n" +
+        System.out.println(cp.parseCommand("tell [ 1 2 3 ] to square [ :distance ]\n" +
                 "[\n" +
                 "  repeat 4 [\n" +
                 "    fd :distance\n" +
