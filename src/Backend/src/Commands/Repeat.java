@@ -14,7 +14,7 @@ public class Repeat extends TwoParamCommand{
     }
 
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
             double numOfTimes = (double) input1;

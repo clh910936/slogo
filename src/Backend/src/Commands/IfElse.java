@@ -14,7 +14,7 @@ public class IfElse extends ThreeParamCommand {
     //input3 : commands - false
 
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         double out;
         try {
             double expr =  Double.parseDouble(String.valueOf(input1));

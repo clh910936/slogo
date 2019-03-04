@@ -8,7 +8,7 @@ public class Right extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         this.myTurtle.turnCounterClockwise(-1 * (double) input);
         return (double) input;
     }

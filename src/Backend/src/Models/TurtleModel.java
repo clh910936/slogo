@@ -3,12 +3,12 @@
 //import BackExternal.ITurtle;
 //
 //import java.util.ArrayList;
-//import java.util.List;
+//import java.util.ListInput;
 //
 //public class TurtleModel {
 //
 //    int currentTurtleIndex;
-//    List<ITurtle> listOfTurtles;
+//    ListInput<ITurtle> listOfTurtles;
 //
 //    public TurtleModel(double firstTurtleX, double firstTurtleY, boolean isPenUp, double headingAngle, boolean isDisplayed, int turtleId) {
 //        listOfTurtles = new ArrayList<>();
@@ -28,7 +28,7 @@
 //
 //    public Turtle getCurrentTurtle() { return (Turtle) listOfTurtles.get(currentTurtleIndex); }
 //
-//    public List<ITurtle> getListOfTurtles() {
+//    public ListInput<ITurtle> getListOfTurtles() {
 //        return listOfTurtles;
 //    }
 //}

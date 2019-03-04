@@ -9,7 +9,7 @@ public class Tell extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         String[] activeTurtles = (String[]) input;
         for(String i : activeTurtles) {
             myTurtleModel.addCurrentActiveTurtles(Integer.parseInt(i));
