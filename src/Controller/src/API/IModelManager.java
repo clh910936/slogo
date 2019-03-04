@@ -12,6 +12,7 @@ public interface IModelManager {
     boolean getWasSuccessfulHistory(int i);
     void saveCurrentState(String fileName);
     void setStateFromFile(String fileName, String language);
+    List<String> getSavedFilesList();
     void changeVariable(String variableName, String value);
 
 }

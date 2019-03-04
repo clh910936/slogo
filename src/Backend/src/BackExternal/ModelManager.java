@@ -6,10 +6,7 @@ import BackExternal.ITurtle;
 import BackExternal.IllegalCommandException;
 import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
-import Models.HistoryModel;
-import Models.TurtleModel;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.*;
 import Parsing.CommandParser;
 
 import java.util.ArrayList;
@@ -107,6 +104,10 @@ public class ModelManager implements IModelManager {
 
     public void changeVariable(String variableName, String value) {
         myVariablesModel.addVariable(variableName, value);
+    }
+
+    public List<String> getSavedFilesList() {
+        return myCurrentStateFileModel.getSavedFilesList();
     }
 
 }
