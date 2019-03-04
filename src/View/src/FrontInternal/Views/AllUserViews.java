@@ -102,7 +102,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             public HBox getPane() {
                 HBox temp = new HBox();
                 Text text = new Text();
-                text.setText(myErrorResources.getString("UNKOWN_CLASS"));
+                text.setText(myErrorResources.getString("UNKNOWN_CLASS"));
                 temp.getChildren().add(text);
                 return temp;
             }

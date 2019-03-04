@@ -1,10 +1,15 @@
-package Models;
+package BackExternal;
 
-import BackExternal.IModelManager;
+import API.FrontExternalAPI;
+import API.IModelManager;
 import BackExternal.ITurtle;
 import BackExternal.IllegalCommandException;
 import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
+import Models.HistoryModel;
+import Models.TurtleModel;
+import Models.UserDefinedCommandsModel;
+import Models.VariablesModel;
 import Parsing.CommandParser;
 
 import java.util.ArrayList;
@@ -12,6 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelManager implements IModelManager {
+    /*
+    For each turtle, call myFrontEnd.move() or whatever
+     */
+    private FrontExternalAPI myFrontEnd;
 
     private VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
@@ -20,7 +29,8 @@ public class ModelManager implements IModelManager {
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
 
 
-    public ModelManager() {
+    public ModelManager(FrontExternalAPI frontend) {
+        myFrontEnd = frontend;
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
         myTurtleModel = new TurtleModel();

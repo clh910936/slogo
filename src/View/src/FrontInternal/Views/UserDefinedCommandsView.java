@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Carrie Hunner
  * This class extends the View superclass.
- * It is dependent on a backend implementation of IModelManager to get
+ * It is dependent on a backend implementation of API.IModelManager to get
  * the UserDefinedCommands. It then displays these on a pane
  * that is created in View.
  */

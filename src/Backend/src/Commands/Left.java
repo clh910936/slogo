@@ -1,8 +1,7 @@
 package Commands;
 
 import BackExternal.IllegalParametersException;
-import Models.ModelManager;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Left extends OneParamCommand {

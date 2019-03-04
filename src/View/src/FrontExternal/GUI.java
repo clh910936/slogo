@@ -1,30 +1,27 @@
 package FrontExternal;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import BackExternal.IModelManager;
+import API.FrontExternalAPI;
+import API.IModelManager;
 import FrontInternal.Components.*;
 import FrontInternal.Util.Operator;
 import FrontInternal.Views.*;
-import javafx.beans.binding.Bindings;
+import BackExternal.ModelManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 
-public class GUI {
+public class GUI implements FrontExternalAPI {
     private static final Dimension DEFAULT_SIZE = new Dimension(800,600);
     public static final String RESOURCE_FILENAME = "GUI";
     private Scene myScene;
@@ -35,18 +32,19 @@ public class GUI {
 
     private ResourceBundle myResources;
     private Operator myOperator;
+    private AllUserViews myToolBar;
 
 
     // private
-    public GUI(Operator operator) {
-        myOperator = operator;
+    public GUI() {
+        myOperator = new Operator(this);
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
         //var right = makeRightView();
         //myRoot = new HBox(left, right);
-        var right = new AllUserViews(myOperator);
+        myToolBar = new AllUserViews(myOperator);
         myOperator.addViewToUpdate(myBoard);
-        myRoot = new HBox(left, right);
+        myRoot = new HBox(left, myToolBar);
         //myRoot.setHgrow(right, Priority.ALWAYS);
 
 
@@ -55,21 +53,21 @@ public class GUI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
+    public Operator getOperator() {
+        return myOperator;
+    }
+
 
     private Node makeBoard() {
         myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myOperator);
         return new HBox(myBoard);
     }
 
-    private Node makeConsoleButton() {
-        var b = makeButton("OpenConsole", e -> openConsole(null));
-        b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
-        return b;
-    }
-
-    private void openConsole(IModelManager b) {
-        myConsole = new Console(myOperator);
-    }
+//    private Node makeConsoleButton() {
+//        var b = makeButton("OpenConsole", e -> openConsole(null));
+//        b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
+//        return b;
+//    }
 
 
     public Scene getScene() {
@@ -95,4 +93,69 @@ public class GUI {
         return result;
     }
 
+
+    @Override
+    public void clearBoard() {
+        myBoard.clear();
+    }
+
+    @Override
+    public void setBackgroundColor(int index) {
+        myBoard.setBackgroundColor(index);
+    }
+
+    @Override
+    public void penUp(boolean true_is_penup, int turtleId) {
+        myBoard.penUp(true_is_penup, turtleId);
+    }
+
+    @Override
+    public void rotate(double degrees, int turtleId) {
+        myBoard.rotate(degrees, turtleId);
+    }
+
+    @Override
+    public void move(double x, double y, int turtleId) {
+        myBoard.move(x, y, turtleId);
+    }
+
+    @Override
+    public void setPenColor(int index, int turtleId) {
+        myBoard.setPenColor(index, turtleId);
+    }
+
+    @Override
+    public void setPenSize(double pixels, int turtleId) {
+        myBoard.setPenSize(pixels, turtleId);
+    }
+
+    @Override
+    public void setShape(int index, int turtleId) {
+        myBoard.setShape(index, turtleId);
+    }
+
+    @Override
+    public void setPalette(int index, int r, int g, int b) {
+        myToolBar.setPalette(index, r, g, b);
+    }
+
+    @Override
+    public void addTurtle(int turtleId) {
+        myBoard.addTurtle(turtleId);
+    }
+
+    @Override
+    public void updateHistory() {
+        myToolBar.updateHistory();
+    }
+
+    @Override
+    public void updateVariables() {
+        myToolBar.updateVariables();
+    }
+
+    @Override
+    public void updateUserDefinedCommands() {
+        myToolBar.updateUserDefinedCommands();
+    }
 }

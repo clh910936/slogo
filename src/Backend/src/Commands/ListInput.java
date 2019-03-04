@@ -1,8 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
-
-import java.util.List;
+import BackExternal.ModelManager;
 
 public class ListInput extends ZeroParamCommand {
 

@@ -4,11 +4,8 @@ import BackExternal.IModelManager;
 import FrontInternal.Util.Operator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-
-import java.util.Map;
 
 /**
  * @author Carrie Hunner

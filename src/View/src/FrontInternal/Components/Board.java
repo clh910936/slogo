@@ -1,6 +1,6 @@
 package FrontInternal.Components;
 
-import BackExternal.IModelManager;
+import API.IModelManager;
 import BackExternal.ITurtle;
 
 import FrontInternal.Players.TurtleView;
