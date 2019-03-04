@@ -1,8 +1,8 @@
 package FrontInternal.Components;
 
-import BackExternal.IModelManager;
+import API.IModelManager;
 import BackExternal.ITurtle;
-import BackExternal.IllegalTurtleStateException;
+
 import FrontInternal.Players.TurtleView;
 import FrontInternal.Util.Operator;
 import FrontInternal.Views.ViewAPI;
@@ -29,7 +29,7 @@ public class Board extends Pane implements ViewAPI {
     private GraphicsContext gc;
     private int myWidth;
     private int myHeight;
-    private List<TurtleView> myTurtles = new ArrayList();
+    private List<TurtleView> myTurtles = new ArrayList<TurtleView>();
 
     private Path p;
     private Operator myOperator;
@@ -50,6 +50,8 @@ public class Board extends Pane implements ViewAPI {
         MoveTo m = new MoveTo(t.getCenterX(), t.getCenterY());
         p.getElements().add(m);
         myTurtles.add(t);
+
+
     }
 
     private void createCanvas(int width, int height) {
@@ -131,6 +133,7 @@ public class Board extends Pane implements ViewAPI {
     }
 
     public void update() {
+        // needs to be in update bc might change
         List<ITurtle> myTurtleModels = myController.getTurtleList();
         for (int i = 0; i < myTurtles.size(); i++) {
             handleChange(myTurtles.get(i), myTurtleModels.get(i));
@@ -152,7 +155,7 @@ public class Board extends Pane implements ViewAPI {
 //        if (t2.getUpdatedX().size() != t2.getIsDisplayed().size()) {
 //            //throw new IllegalTurtleStateException();
 //        }
-
+        System.out.println(t2.getClearScreen());
         for (int i = 0; i < t2.getUpdatedX().size(); i++) {
 
             double x = t2.getUpdatedX().get(i);
@@ -167,7 +170,12 @@ public class Board extends Pane implements ViewAPI {
             double angle = 90-t2.getHeadingAngle().get(i);
             boolean penDown = !t2.getIsPenUp().get(i);
             boolean diplay = t2.getIsDisplayed().get(i);
-            
+            if(t2.getClearScreen().get(i)) {
+                System.out.println("gonna clear screen now");
+                clearScreen();
+                continue;
+            }
+
             t1.rotate(angle);
             if (!(xdisp==0&&ydisp==0)) {
                 System.out.println("entering");
@@ -177,5 +185,15 @@ public class Board extends Pane implements ViewAPI {
             }
         }
 
+    }
+
+    private void clearScreen() {
+        getChildren().clear();
+        //gc.clearRect(0, 0, myWidth, myHeight);
+        setBackground(Color.BEIGE);
+
+        // add stuff to update front end turtles
+        //List<ITurtle> myTurtleModels = myController.getTurtleList();
+        myTurtles.add(new TurtleView());
     }
 }

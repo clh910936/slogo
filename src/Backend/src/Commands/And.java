@@ -1,6 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class And extends TwoParamCommand {
 

@@ -1,7 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class HideTurtle extends ZeroParamCommand {

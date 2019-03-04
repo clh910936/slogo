@@ -1,6 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class Remainder extends TwoParamCommand {
     public Remainder(String language, ModelManager modelManager) {

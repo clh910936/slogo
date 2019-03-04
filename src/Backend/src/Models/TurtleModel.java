@@ -70,13 +70,12 @@ public class TurtleModel {
 
     }
 
+    public Map<Integer, ITurtle> getAllTurtles() {
+        return allTurtles;
+    }
 
     public ITurtle getCurrentTurtle() {
         return allTurtles.get(currentTurtleIndex);
-    }
-
-    public Map<Integer, ITurtle> getAllTurtles() {
-        return allTurtles;
     }
 
     public List<Integer> getCurrentActiveTurtles() {
@@ -86,4 +85,5 @@ public class TurtleModel {
     public void setCurrentTurtle(int index) {
         currentTurtleIndex = index;
     }
+
 }

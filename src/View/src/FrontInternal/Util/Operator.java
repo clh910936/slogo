@@ -1,6 +1,8 @@
 package FrontInternal.Util;
 
+import API.IModelManager;
 import BackExternal.*;
+import FrontExternal.GUI;
 import FrontInternal.Views.ErrorView;
 import FrontInternal.Views.ViewAPI;
 
@@ -28,10 +30,9 @@ public class Operator {
      *  Creates an instance of Operator and operator creates an isntance of Creator such that
      *  the backend is initialized
      */
-    public Operator(){
+    public Operator(GUI gui){
         myViews = new ArrayList<>();
-        Creator creator = new Creator();
-        myManager = creator.getModelManager();
+        myManager = new ModelManager(gui);
         myErrorView = new ErrorView(ERROR_HEIGHT);
         myErrorResources = ResourceBundle.getBundle("Errors");
     }
@@ -79,8 +80,8 @@ public class Operator {
     }
 
     /**
-     * Returns IModelManager
-     * @return instance of IModelManager associated with the current display
+     * Returns API.IModelManager
+     * @return instance of API.IModelManager associated with the current display
      */
     public IModelManager getManager(){
         return myManager;

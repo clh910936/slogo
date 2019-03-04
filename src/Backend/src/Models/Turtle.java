@@ -88,7 +88,9 @@ public class Turtle extends GeneralTurtle implements ITurtle {
     }
 
     public void setClearScreen() {
-        listOfStates.add(new TurtleState(this.myPointX, this.myPointY, this.myIsPenUp, this.myHeadingAngle, this.myIsDisplayed, this.myIsClearScreen));
+        this.myIsClearScreen = true;
+        listOfStates.add(new TurtleState(this.myPointX, this.myPointY, this.myIsPenUp, this.myHeadingAngle,
+                this.myIsDisplayed, true));
     }
 
     public List<Double> getUpdatedX() {

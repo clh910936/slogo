@@ -1,6 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class Power extends TwoParamCommand {
     public Power(String language, ModelManager modelManager) {

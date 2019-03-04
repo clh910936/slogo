@@ -1,6 +1,6 @@
 package Commands;
 
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public class Random extends OneParamCommand {
     public Random(String language, ModelManager modelManager) {

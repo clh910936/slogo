@@ -1,7 +1,7 @@
 package Commands;
 
 
-import Models.ModelManager;
+import BackExternal.ModelManager;
 
 public abstract class ThreeParamCommand extends CommandNode {
 

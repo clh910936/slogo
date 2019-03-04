@@ -3,7 +3,7 @@ package Parsing;
 import BackExternal.IllegalParametersException;
 import Commands.*;
 import BackExternal.IllegalCommandException;
-import Models.ModelManager;
+import BackExternal.ModelManager;
 import Models.TurtleModel;
 import Models.VariablesModel;
 import java.util.*;
