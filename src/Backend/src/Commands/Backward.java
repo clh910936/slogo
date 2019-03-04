@@ -10,7 +10,7 @@ public class Backward extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        this.myTurtle.moveForward(-(double) input);
-        return (double) input;
+        this.myTurtle.moveForward(-(double) myParams.get(0));
+        return (double) myParams.get(0);
     }
 }

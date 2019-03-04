@@ -10,8 +10,8 @@ public class SetHeading extends OneParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        double difference = this.myTurtle.getDegreesDifference((double) input);
-        this.myTurtle.setHeadingAngle((double) input);
+        double difference = this.myTurtle.getDegreesDifference((double) myParams.get(0));
+        this.myTurtle.setHeadingAngle((double) myParams.get(0));
         return difference;
     }
 }

@@ -9,6 +9,6 @@ public class ArcTangent extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return Math.atan(Math.toRadians((double) input));
+        return Math.atan(Math.toRadians((double) myParams.get(0)));
     }
 }
