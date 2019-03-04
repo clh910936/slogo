@@ -10,7 +10,7 @@ public interface IModelManager {
     List<String> getHistory();
     void parseCommand(String input, String language);
     boolean getWasSuccessfulHistory(int i);
-    List<ITurtle> getTurtleList();
+    Map<Integer,ITurtle> getTurtleList();
 
 
 }

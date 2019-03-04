@@ -9,14 +9,7 @@ public abstract class OneParamCommand extends CommandNode {
         super(language, modelManager);
     }
 
-    @Override
-    public boolean isCommandReadyToExecute() {
-        if(myParams.size() == MAX_PARAMS) {
-            input = myParams.get(0);
-            return true;
-        }
-        return false;
-    }
+
 
 
 }

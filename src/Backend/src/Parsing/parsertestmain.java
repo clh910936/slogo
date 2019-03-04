@@ -7,7 +7,18 @@ public class parsertestmain {
     public static void main (String[] args) {
         ModelManager mm = new ModelManager();
         CommandParser cp = new CommandParser(mm);
-
+        System.out.println(cp.parseCommand(
+                "to example [ :x ]\n" +
+                        "[\n" +
+                        "  if greater? :x 10\n" +
+                        "  [\n" +
+                        "    example difference :x 10\n" +
+                        "  ]\n" +
+                        "  fd 50\n" +
+                        "  right 10\n" +
+                        "]\n" +
+                        "\n" +
+                        "example 100", "English"));
 //        System.out.println(cp.parseCommand("IFELSE sum 0 1 \n" +
 //                "[ sum 2 3 ] \n" +
 //                "[ sum 20 30 ]", "English"));
