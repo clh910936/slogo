@@ -44,17 +44,23 @@ public class CommandParser {
         }
         myLanguage = language;
         commandInputList = commandInput.split(WHITESPACE);
+        myCommandSymbols.clear();
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
         currentReturnValue = -1;
         currentListIndex = 0;
         while(currentListIndex<commandInputList.length) {
             //TODO: check if the first one is a comment
-            CommandNode commandHead = getNewCommandObject(commandInputList[currentListIndex]);
+            String rawInput = commandInputList[currentListIndex];
+            String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
+            CommandNode commandHead = getNewCommandObject(rawInput);
             currentListIndex++;
             parseTree(commandHead);
         }
+        if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
         return currentReturnValue;
     }
+
+
 
 
     private void parseTree(CommandNode command) throws IllegalParametersException {
@@ -102,17 +108,7 @@ public class CommandParser {
     }
 
     private CommandNode getChildNode(String rawInput, String regexInput, CommandNode currCommand) throws IllegalParametersException {
-        if (regexInput.equals(COMMAND_SYMBOL)) {
-            if(CommandTypePredicate.checkNeedsWordParameter(currCommand)) {
-                return new StringInput(myLanguage, myModelManager, rawInput);
-            }
-            regexInput = Regex.getRegexSymbol(rawInput, myCommandSymbols);
-            return getNewCommandObject(regexInput);
-        }
-        else if (isUserCommand(rawInput)) {
-            return getNewCommandObject(regexInput);
-        }
-        else if(regexInput.equals(CONSTANT_SYMBOL)) {
+        if(regexInput.equals(CONSTANT_SYMBOL)) {
             return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
         }
         else if(regexInput.equals(LIST_START_SYMBOL)) {
@@ -128,7 +124,12 @@ public class CommandParser {
                 return new Variable(myLanguage, myModelManager, rawInput.substring(1));
             }
         }
-        throw new IllegalParametersException();
+        else {
+            if(CommandTypePredicate.checkNeedsWordParameter(currCommand)) {
+                return new StringInput(myLanguage, myModelManager, rawInput);
+            }
+            return getNewCommandObject(regexInput);
+        }
     }
 
 //    private double parseStack(Stack commandStack, VariablesModel vm) {
@@ -262,7 +263,8 @@ public class CommandParser {
 
     private CommandNode getNormalCommand(String commandName) throws IllegalCommandException {
         try{
-            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, commandName, myLanguage, myModelManager);
+            String command = Regex.getRegexSymbol(commandName, myCommandSymbols);
+            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, command, myLanguage, myModelManager);
         }
         catch (IllegalCommandException e) {
             throw e;

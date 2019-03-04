@@ -11,7 +11,7 @@ public abstract class OneParamCommand extends CommandNode {
 
     @Override
     public boolean isCommandReadyToExecute() {
-        if(myParams.size() == MAX_PARAMS) {
+        if(myChildren.size() == MAX_PARAMS) {
             input = myParams.get(0);
             return true;
         }
