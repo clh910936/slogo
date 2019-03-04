@@ -18,11 +18,11 @@ public class ErrorView extends HBox {
     private Background myErrorBackground;
     private Text myText;
 
-    private final int INSET_SIZE = 5;
-    private final int RADII_SIZE = 0;
-    private final Paint ERROR_COLOR = Color.RED;
-    private final Paint NO_ERROR_COLOR = Color.WHITE;
-    private final String EMPTY_TEXT = "";
+    private static final int INSET_SIZE = 5;
+    private static final int RADII_SIZE = 0;
+    private static final Paint ERROR_COLOR = Color.RED;
+    private static final Paint NO_ERROR_COLOR = Color.WHITE;
+    private static final String EMPTY_TEXT = "";
 
     /**
      * @param height int of the preferred errorBox height

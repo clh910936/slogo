@@ -41,15 +41,15 @@ public class Console extends Stage {
     private TextArea myUserInputField;
     private ErrorView myErrorView;
 
-    private final int CONSOLE_WIDTH = 500;
-    private final int CONSOLE_HEIGHT = 300;
+    private static final int CONSOLE_WIDTH = 500;
+    private static final int CONSOLE_HEIGHT = 300;
 
-    private final int BUTTON_WIDTH = 80;
-    private final int BUTTON_INSET = 5;
-    private final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
-    private final int BUTTON_VGAP = 10;
-    private final String RESOURCE_FILENAME = "Console";
-    private final String RUN_BUTTON = "RUN_BUTTON";
+    private static final int BUTTON_WIDTH = 80;
+    private static final int BUTTON_INSET = 5;
+    private static final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
+    private static final int BUTTON_VGAP = 10;
+    private static final String RESOURCE_FILENAME = "Console";
+    private static final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
     private boolean displaying = true;
 
