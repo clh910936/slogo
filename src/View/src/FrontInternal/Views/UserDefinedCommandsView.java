@@ -1,6 +1,10 @@
 package FrontInternal.Views;
 
 import FrontInternal.Util.Operator;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 import java.util.List;
 
@@ -12,6 +16,7 @@ import java.util.List;
  * that is created in View.
  */
 public class UserDefinedCommandsView extends View {
+    private static final Paint USER_COMMAND = Color.BLACK;
 
 
     /**
@@ -28,10 +33,25 @@ public class UserDefinedCommandsView extends View {
      */
     @Override
     public void update() {
-        myViewTemplate.clearLines();
+        this.clearLines();
         List<String> list = myManager.getUserDefinedCommands();
         for(String s : list){
-            myViewTemplate.addFinalLine(s);
+            this.addFinalLine(s);
         }
+    }
+
+    /**
+     * Adds a line of text to the bottom of the existing text
+     * This line cannot be edited by the user
+     * @param s String of text to be added
+     */
+    private void addFinalLine(String s){
+        Text text = createTextLine(s, USER_COMMAND);
+        text.setOnMouseClicked(e -> handleMouseClicked(text));
+    }
+
+    private void handleMouseClicked(Text text){
+        String command = text.getText();
+        myOperator.parse(command);
     }
 }

@@ -23,8 +23,8 @@ public class ReferencePage extends Stage{
     private static final String TXT = ".txt";
     private static final String FILE_SOURCE_PREFIX = "src/View/ReferencePageFiles/sprint1/";
     private static final String NLN = "\n";
-    private static final int WIDTH = 500;
-    private static final int HEIGHT = 400;
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 300;
 
     ReferencePage() {
         initializeVariables();
@@ -40,20 +40,21 @@ public class ReferencePage extends Stage{
     }
 
     private void createAllTabs() {
-        createAndAddTab("Turtle Commands", "Turtle_Files");
-        createAndAddTab("Turtle Queries", "TurtleQ_Files");
-        createAndAddTab("Math Operations", "Math_Files");
-        createAndAddTab("Boolean Operations", "Boolean_Files");
+        createAndAddTab("Turtle", "Turtle_Files");
+        createAndAddTab("TurtleQ", "TurtleQ_Files");
+        createAndAddTab("Pen", "Pen_Files");
+        createAndAddTab("Math_Ops", "Math_Files");
+        createAndAddTab("Boolean", "Boolean_Files");
         createAndAddTab("Other", "Other_Files");
     }
 
     /**
      *
-     * @param tabName desired name for the tab
-     * @param propertyKey name to list of file names in ReferencePage.properties
+     * @param tabNameKey desired name for the tab
+     * @param propertyFileKey name to list of file names in ReferencePage.properties
      * @return
      */
-    private void createAndAddTab(String tabName, String propertyKey) {
+    private void createAndAddTab(String tabNameKey, String propertyFileKey) {
         Tab tempTab = new Tab();
         Accordion tempAccordion = new Accordion();
         ScrollPane outerScrollPane = new ScrollPane();
@@ -63,9 +64,9 @@ public class ReferencePage extends Stage{
         tempAccordion.setPrefWidth(WIDTH);
         outerScrollPane.setContent(tempAccordion);
         tempTab.setContent(outerScrollPane);
-        tempTab.setText(tabName);
+        tempTab.setText(myResourceBundle.getString(tabNameKey));
 
-        String fileNamesString = myResourceBundle.getString(propertyKey);
+        String fileNamesString = myResourceBundle.getString(propertyFileKey);
         String[] fileNames = fileNamesString.split(" ");
         for (String s : fileNames){
             String stringContents = readFile(s);

@@ -34,7 +34,6 @@
 //}
 package Models;
 import BackExternal.ITurtle;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +66,7 @@ public class TurtleModel {
             allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,CLEAR_SCREEN));
         }
     }
+
 
     public ITurtle getCurrentTurtle() {
         return allTurtles.get(currentTurtleIndex);
