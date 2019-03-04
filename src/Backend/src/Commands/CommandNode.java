@@ -1,28 +1,42 @@
 package Commands;
 
-import Models.ModelManager;
+import Models.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CommandNode extends SyntaxNode {
+public abstract class CommandNode {
 
+    protected String myLanguage;
+    protected TurtleModel myTurtleModel;
+    protected VariablesModel myVariablesModel;
+    protected ModelManager myModelManager;
+    protected UserDefinedCommandsModel myUserDefinedCommandsModel;
     protected List<Object> myParams;
     protected List<CommandNode> myChildren;
-    protected int myMaxParams;
+    protected Turtle myTurtle;
 
     public CommandNode(String language, ModelManager modelManager) {
-        super(language, modelManager);
+        myModelManager = modelManager;
+        myVariablesModel = modelManager.getVariablesModel();
+        myTurtleModel = modelManager.getTurtleModel();
+        myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
+        myLanguage = language;
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
+        myTurtle = (Turtle) myTurtleModel.getCurrentTurtle();
     }
 
     public void addChild(CommandNode node) {
         myChildren.add(node);
     }
 
-    @Override
-    public boolean isReadyToExecute() {
-        return myChildren.size() == myMaxParams;
+    public String getCommandName() {
+        return this.getClass().getSimpleName();
     }
+
+    public abstract boolean isCommandReadyToExecute();
+
+    public abstract double executeCommand();
 }
 
