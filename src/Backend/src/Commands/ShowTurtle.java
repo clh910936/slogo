@@ -1,6 +1,7 @@
 package Commands;
 
 import Models.ModelManager;
+import Models.Turtle;
 
 public class ShowTurtle extends ZeroParamCommand {
 
@@ -8,7 +9,10 @@ public class ShowTurtle extends ZeroParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
+
         myTurtle.setShowTurtle();
         return 1;
     }

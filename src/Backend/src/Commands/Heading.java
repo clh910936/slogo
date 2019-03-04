@@ -2,13 +2,15 @@ package Commands;
 
 import Models.ModelManager;
 import Models.ModelManager;
+import Models.Turtle;
 
 public class Heading extends ZeroParamCommand {
     public Heading(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
         return myTurtle.getCurrentAngle();
     }
 }

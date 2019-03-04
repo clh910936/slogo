@@ -2,21 +2,14 @@ package Commands;
 
 import Models.ModelManager;
 
-public abstract class OneParamCommand extends CommandsGeneral {
-    private static final int MAX_PARAMS = 1;
-    protected Object input;
+public abstract class OneParamCommand extends CommandNode {
     public OneParamCommand(String language, ModelManager modelManager) {
         super(language, modelManager);
+        MAX_PARAMS = 1;
     }
 
-    @Override
-    public boolean isCommandReadyToExecute() {
-        if(myParams.size() == MAX_PARAMS) {
-            input = myParams.get(0);
-            return true;
-        }
-        return false;
-    }
+
+
 
 
 }

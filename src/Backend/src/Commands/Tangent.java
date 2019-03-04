@@ -8,7 +8,7 @@ public class Tangent extends OneParamCommand {
     }
 
     @Override
-    public double executeCommand() throws ClassCastException {
-        return Math.tan(Math.toRadians((double) input));
+    public Object executeCommand() throws ClassCastException {
+        return Math.tan(Math.toRadians((double) myParams.get(0)));
     }
 }

@@ -8,7 +8,7 @@ public class ArcTangent extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
-        return Math.atan(Math.toRadians((double) input));
+    public Object executeCommand() throws ClassCastException {
+        return Math.atan(Math.toRadians((double) myParams.get(0)));
     }
 }

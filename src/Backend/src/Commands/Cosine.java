@@ -8,7 +8,7 @@ public class Cosine extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
-        return Math.cos(Math.toRadians((double) input));
+    public Object executeCommand() throws ClassCastException {
+        return Math.cos(Math.toRadians((double) myParams.get(0)));
     }
 }

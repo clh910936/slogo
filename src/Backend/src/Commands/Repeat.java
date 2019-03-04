@@ -14,11 +14,11 @@ public class Repeat extends TwoParamCommand{
     }
 
     @Override
-    public double executeCommand() throws IllegalParametersException {
+    public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
-            double numOfTimes = (double) input1;
-            String[] commands = (String[]) input2;
+            double numOfTimes = (double) myParams.get(0);
+            String[] commands = (String[]) myParams.get(1);
 
             double lastValue = 0;
             for (int i = 1; i <= numOfTimes; i++) {

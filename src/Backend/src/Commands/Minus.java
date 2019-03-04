@@ -9,7 +9,7 @@ public class Minus extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws IllegalParametersException {
-        return -1 * (double) input;
+    public Object executeCommand() throws IllegalParametersException {
+        return -1 * (double) myParams.get(0);
     }
 }

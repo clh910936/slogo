@@ -8,7 +8,7 @@ public class Product extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
-        return (double) input1 * (double) input2;
+    public Object executeCommand() throws ClassCastException {
+        return (double) myParams.get(0) * (double) myParams.get(1);
     }
 }

@@ -1,12 +1,11 @@
 package Commands;
 
 import Models.ModelManager;
-import Models.ModelManager;
 import Parsing.CommandParser;
 
 import java.util.Arrays;
 
-public class UserDefinedCommand extends CommandsGeneral {
+public class UserDefinedCommand extends CommandNode {
     private String commandName;
     private String commandsToExecute;
     private String[] myVariables;
@@ -21,11 +20,8 @@ public class UserDefinedCommand extends CommandsGeneral {
         cp = new CommandParser(modelManager);
     }
 
-    public boolean isCommandReadyToExecute() {
-        return myParams.size()==myVariables.length;
-    }
 
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
@@ -37,7 +33,6 @@ public class UserDefinedCommand extends CommandsGeneral {
         return cp.parseCommand(commands, myLanguage);
     }
 
-    @Override
     public String getCommandName() {
         return commandName;
     }
@@ -53,4 +48,9 @@ public class UserDefinedCommand extends CommandsGeneral {
     public String toString() {
         return (getCommandName() + "\n\t" + Arrays.toString(getVariables())+ "\n\t[ " + getCommands() + " ]");
     }
+    @Override
+    public boolean isCommandReadyToExecute() {
+        return myChildren.size()==myVariables.length;
+    }
+
 }

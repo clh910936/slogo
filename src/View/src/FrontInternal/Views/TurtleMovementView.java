@@ -24,6 +24,9 @@ public class TurtleMovementView implements ViewAPI {
     private static final String ARROW_IMAGE = "/arrow.png";
     private static final String RIGHT_ROTATE = "/right_rotate.png";
     private static final String LEFT_ROTATE = "/left_rotate.png";
+    private static final int ROTATE_90 = 90;
+    private static final int ROTATE_180 = 180;
+    private static final int ROTATE_270 = 270;
 
 
 
@@ -37,9 +40,9 @@ public class TurtleMovementView implements ViewAPI {
 
     private void createAndAddControls() {
         myGridPane.add(createFormatArrow(0, ARROW_IMAGE, "forward"), 1, 0);
-        myGridPane.add(createFormatArrow(270, ARROW_IMAGE, "left"), 0, 1);
-        myGridPane.add(createFormatArrow(90, ARROW_IMAGE, "right"), 2, 1);
-        myGridPane.add(createFormatArrow(180, ARROW_IMAGE, "backward"), 1, 2);
+        myGridPane.add(createFormatArrow(ROTATE_270, ARROW_IMAGE, "left"), 0, 1);
+        myGridPane.add(createFormatArrow(ROTATE_90, ARROW_IMAGE, "right"), 2, 1);
+        myGridPane.add(createFormatArrow(ROTATE_180, ARROW_IMAGE, "backward"), 1, 2);
         myGridPane.add(createFormatArrow(0, RIGHT_ROTATE, "rotateRight"), 2, 0);
         myGridPane.add(createFormatArrow(0, LEFT_ROTATE, "rotateLeft"), 0, 0);
     }

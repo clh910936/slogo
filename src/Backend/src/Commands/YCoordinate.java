@@ -2,13 +2,16 @@ package Commands;
 
 import Models.ModelManager;
 import Models.ModelManager;
+import Models.Turtle;
 
 public class YCoordinate extends ZeroParamCommand {
     public YCoordinate (String language, ModelManager modelManager) {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
+    public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
         return myTurtle.getCurrentY();
     }
 }

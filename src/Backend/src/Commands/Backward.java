@@ -2,6 +2,7 @@ package Commands;
 
 import Models.ModelManager;
 import Models.ModelManager;
+import Models.Turtle;
 
 public class Backward extends OneParamCommand {
 
@@ -9,8 +10,10 @@ public class Backward extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
-        this.myTurtle.moveForward(-(double) input);
-        return (double) input;
+    public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
+        myTurtle.moveForward(-(double) myParams.get(0));
+        return (double) myParams.get(0);
     }
 }

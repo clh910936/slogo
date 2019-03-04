@@ -9,8 +9,8 @@ public class MakeVariable extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws IllegalParametersException {
-        myVariablesModel.addVariable(String.valueOf(input1), String.valueOf(input2));
-        return (double) input2;
+    public Object executeCommand() throws IllegalParametersException {
+        myVariablesModel.addVariable(String.valueOf(myParams.get(0)), String.valueOf(myParams.get(1)));
+        return (double) myParams.get(1);
     }
 }

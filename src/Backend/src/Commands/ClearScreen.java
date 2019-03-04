@@ -1,18 +1,24 @@
 package Commands;
 
 import Models.ModelManager;
+import Models.Turtle;
 
 public class ClearScreen extends ZeroParamCommand {
+    public static final double STARTX = 2000;
+    public static final double STARTY = 2000;
 
     public ClearScreen(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
 
     @Override
-    public double executeCommand() throws ClassCastException {
-        double dist = myTurtle.getDistToPoint(2000,2000);
-        myTurtle.setClearScreen();
-        myModelManager.createNewTurtleModel();
+    public Object executeCommand() throws ClassCastException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+
+        double dist = myTurtle.getDistToPoint(STARTX,STARTY);
+//        myTurtle.setClearScreen();
+//        myModelManager.createNewTurtleModel();
         return dist;
+
     }
 }

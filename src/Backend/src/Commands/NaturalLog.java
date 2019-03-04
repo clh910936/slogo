@@ -8,8 +8,8 @@ public class NaturalLog extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
-        return Math.log((double) input);
+    public Object executeCommand() throws ClassCastException {
+        return Math.log((double) myParams.get(0));
     }
 
 }

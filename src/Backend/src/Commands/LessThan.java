@@ -11,7 +11,7 @@ public class LessThan extends TwoParamCommand {
     }
 
     @Override
-    public double executeCommand() throws IllegalParametersException {
-        return ((double) input1 < (double) input2)? 1 : 0;
+    public Object executeCommand() throws IllegalParametersException {
+        return ((double) myParams.get(0) < (double) myParams.get(1))? 1 : 0;
     }
 }

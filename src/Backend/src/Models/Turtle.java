@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Turtle extends GeneralTurtle implements ITurtle {
 
+    public static final int FULL_CIRCLE_DEGREES = 360;
     private List<TurtleState> listOfStates;
 
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed, boolean isClearScreen) {
@@ -63,6 +64,7 @@ public class Turtle extends GeneralTurtle implements ITurtle {
         this.myPointX = x;
         this.myPointY = y;
         listOfStates.add(new TurtleState(this.myPointX, this.myPointY, this.myIsPenUp, this.myHeadingAngle, this.myIsDisplayed, this.myIsClearScreen));
+        printTurtleStatus();
     }
 
     public void setPenUp () {
@@ -141,20 +143,11 @@ public class Turtle extends GeneralTurtle implements ITurtle {
 
     private double keepAnglePositive(double angle) {
         while (angle < 0) {
-            angle += 360;
+            angle += FULL_CIRCLE_DEGREES;
         }
-        while (angle > 360) {
-            angle -= 360;
+        while (angle > FULL_CIRCLE_DEGREES) {
+            angle -= FULL_CIRCLE_DEGREES;
         }
         return angle;
     }
-
-//    private void resetModelAfterExecuting() {
-//        List<TurtleState> oldStates = new ArrayList<>();
-//        oldStates = listOfStates;
-//        listOfStates = new ArrayList<>();
-//        listOfStates.add(oldStates.get(oldStates.size()-1));
-//        System.out.println("STATES IN MODEL: " + listOfStates.size());
-//    }
-
 }

@@ -3,6 +3,7 @@ package Commands;
 import BackExternal.IllegalParametersException;
 import Models.ModelManager;
 import Models.ModelManager;
+import Models.Turtle;
 
 public class Forward extends OneParamCommand {
 
@@ -10,8 +11,9 @@ public class Forward extends OneParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws IllegalParametersException {
-        this.myTurtle.moveForward((double) input);
-        return (double) input;
+    public Object executeCommand() throws IllegalParametersException {
+        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        myTurtle.moveForward((double) myParams.get(0));
+        return (double) myParams.get(0);
     }
 }

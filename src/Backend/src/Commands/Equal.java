@@ -9,9 +9,9 @@ public class Equal extends TwoParamCommand {
         super(language, modelManager);
     }
     @Override
-    public double executeCommand() throws ClassCastException {
-        double one = Double.parseDouble(String.valueOf(input1));
-        double two = Double.parseDouble(String.valueOf(input2));
+    public Object executeCommand() throws ClassCastException {
+        double one = Double.parseDouble(String.valueOf(myParams.get(0)));
+        double two = Double.parseDouble(String.valueOf(myParams.get(1)));
         return (one == two) ? 1 : 0;
     }
 }
