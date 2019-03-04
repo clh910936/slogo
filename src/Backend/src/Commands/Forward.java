@@ -4,7 +4,7 @@ import BackExternal.IllegalParametersException;
 import Models.ModelManager;
 import Models.ModelManager;
 
-public class Forward extends TurtleCommand {
+public class Forward extends OneParamCommand {
 
     public Forward(String language, ModelManager modelManager) {
         super(language, modelManager);
