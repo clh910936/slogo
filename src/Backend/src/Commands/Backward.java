@@ -13,7 +13,7 @@ public class Backward extends OneParamCommand {
     public Object executeCommand() throws ClassCastException {
         Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
 
-        myTurtle.moveForward(-(double) myParams.get(0));
+        myTurtle.moveForward(-1 * Double.valueOf(String.valueOf(myParams.get(0))));
         return (double) myParams.get(0);
     }
 }

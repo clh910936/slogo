@@ -10,18 +10,25 @@ public abstract class GeneralTurtle {
     protected double myHeadingAngle;
     protected boolean myIsDisplayed;
     protected boolean myIsClearScreen;
+    protected int myId;
     protected int myPenColourIndex;
     protected double myPenSize;
     protected int myShapeIndex;
 
 
-    public GeneralTurtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle, boolean isDisplayed, boolean isClearScreen) {
+    public GeneralTurtle(double nextPointX, double nextPointY, boolean isPenUp,
+                         double headingAngle, boolean isDisplayed, boolean isClearScreen,
+                         int id, int pcIndex, double ps, int si) {
         this.myPointX = nextPointX;
         this.myPointY = nextPointY;
         this.myIsPenUp = isPenUp;
         this.myHeadingAngle = headingAngle;
         this.myIsDisplayed = isDisplayed;
         this.myIsClearScreen = isClearScreen;
+        this.myId = id;
+        this.myPenColourIndex = pcIndex;
+        this.myPenSize = ps;
+        this.myShapeIndex = si;
     }
 
     public double getCurrentX() {

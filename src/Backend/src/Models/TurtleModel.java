@@ -46,6 +46,9 @@ public class TurtleModel {
     public static final double HEADING_ANGLE = 0;
     public static final boolean IS_DISPLAYED = true;
     public static final boolean CLEAR_SCREEN = false;
+    public static final int PEN_COLOR_INDEX = 0;
+    public static final double PEN_SIZE = 5.0;
+    public static final int SHAPE_INDEX = 0;
 
 
     private List<Integer> currentActiveTurtles;
@@ -54,7 +57,8 @@ public class TurtleModel {
 
     public TurtleModel() {
         allTurtles = new HashMap<>();
-        allTurtles.put(1, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED, CLEAR_SCREEN));
+        allTurtles.put(1, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
+                                    CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX));
         currentActiveTurtles = new ArrayList<>();
         currentActiveTurtles.add(1);
         currentTurtleIndex = 1;
@@ -64,12 +68,11 @@ public class TurtleModel {
         currentActiveTurtles = turtleIds;
         for(int turtleId : turtleIds) {
             if (!allTurtles.containsKey(turtleId)) {
-                allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,CLEAR_SCREEN));
+                allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
+                        IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX));
             }
         }
-
     }
-
 
     public ITurtle getCurrentTurtle() {
         return allTurtles.get(currentTurtleIndex);
@@ -85,5 +88,9 @@ public class TurtleModel {
 
     public void setCurrentTurtle(int index) {
         currentTurtleIndex = index;
+    }
+
+    public int getCurrentTurtleIndex() {
+        return currentTurtleIndex;
     }
 }

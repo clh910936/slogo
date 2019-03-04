@@ -13,7 +13,7 @@ public class Left extends OneParamCommand {
     public Object executeCommand() throws IllegalParametersException {
         Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
 
-        myTurtle.turnCounterClockwise((double) myParams.get(0));
+        myTurtle.turnCounterClockwise(Double.valueOf(String.valueOf(myParams.get(0))));
         return (double) myParams.get(0);
     }
 }

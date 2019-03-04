@@ -20,14 +20,14 @@ public class parsertestmain {
 //                        "]\n" +
 //                        "\n" +
 //                        "example 100", "English"));
-        //TODO
-        System.out.println(cp.parseCommand("to square [ :distance ]\n" +
-                "[\n" +
-                "  repeat 4 [\n" +
-                "    fd :distance\n" +
-                "    rt 90\n" +
-                "  ]\n" +
-                "] square 3", "English"));
+//        //TODO
+//        System.out.println(cp.parseCommand("to square [ :distance ]\n" +
+//                "[\n" +
+//                "  repeat 4 [\n" +
+//                "    fd :distance\n" +
+//                "    rt 90\n" +
+//                "  ]\n" +
+//                "] square 3", "English"));
 
 //        System.out.println(cp.parseCommand("# same as fd 100\n" +
 //                "fd fd 50\n" +
@@ -65,7 +65,7 @@ public class parsertestmain {
 //                "    pu fd :size pd fd :size\n" +
 //                "  ]\n" +
 //                "]\ndash 20 8", "English"));
-//        System.out.println(cp.parseCommand("tell [ 1 2 3 ] setxy 3 4", "English"));
+        System.out.println(cp.parseCommand("tell [ 1 2 3 ] fd 10", "English"));
 //        System.out.println(cp.parseCommand("make :random 2", "English"));
 
 //        System.out.println(cp.parseCommand(

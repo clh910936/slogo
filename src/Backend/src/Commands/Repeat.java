@@ -17,7 +17,7 @@ public class Repeat extends TwoParamCommand{
     public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
-            double numOfTimes = (double) myParams.get(0);
+            double numOfTimes = Double.valueOf(String.valueOf(myParams.get(0)));
             String[] commands = (String[]) myParams.get(1);
 
             double lastValue = 0;
