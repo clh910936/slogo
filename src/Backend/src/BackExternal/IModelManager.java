@@ -11,6 +11,7 @@ public interface IModelManager {
     void parseCommand(String input, String language);
     boolean getWasSuccessfulHistory(int i);
     Map<Integer,ITurtle> getTurtleList();
-
-
+    void saveCurrentState(String fileName);
+    void setStateFromFile(String fileName, String language);
+    void changeVariable(String variableName, String value);
 }
