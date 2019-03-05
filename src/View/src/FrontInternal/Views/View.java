@@ -1,6 +1,6 @@
 package FrontInternal.Views;
 
-import BackExternal.IModelManager;
+import API.IModelManager;
 import FrontInternal.Util.Operator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;

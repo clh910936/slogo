@@ -36,8 +36,6 @@ public class CurrentStateFileModel {
     private final String VAR_NAME_TAG = "VARNAME";
     private final String VAR_VALUE_TAG = "VALUE";
 
-
-
     public CurrentStateFileModel(VariablesModel vm, UserDefinedCommandsModel userDefinedCommandsModel, ModelManager mm) {
         savedFilesList = new ArrayList<>();
         myVariablesModel = vm;
