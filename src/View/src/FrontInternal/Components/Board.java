@@ -4,7 +4,6 @@ import API.IModelManager;
 import BackExternal.ITurtle;
 
 import FrontInternal.Players.TurtleView;
-import FrontInternal.Util.Operator;
 import FrontInternal.Views.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;

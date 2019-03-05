@@ -1,7 +1,6 @@
 package FrontInternal.Views;
 
-import BackExternal.IModelManager;
-import FrontInternal.Util.Operator;
+import API.IModelManager;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
@@ -18,22 +17,21 @@ import javafx.scene.text.Text;
  * and UserDefinedCommandsView
  */
 public abstract class View implements ViewAPI {
-    protected Operator myOperator;
     protected IModelManager myManager;
 
     private BorderPane myBorderPane;
     private GridPane myGridPane;
     private ScrollPane myVariableScroll;
     protected int myGridIndex;
+    protected static final String DEFAULT_LANGUAGE = "English";
 
 
 
     /**
      * Used to create a template for the Variable,User Defined Commands, and History view
      */
-    public View(Operator operator){
-        myOperator = operator;
-        myManager = operator.getManager();
+    public View(IModelManager manager){
+        myManager = manager;
         myBorderPane = new BorderPane();
 
         myBorderPane.setPrefHeight(100);

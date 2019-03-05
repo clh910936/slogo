@@ -1,6 +1,6 @@
 package FrontInternal.Components;
 
-import FrontInternal.Util.Operator;
+import API.IModelManager;
 import FrontInternal.Views.ErrorView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,7 +27,7 @@ public class Console extends Stage {
     private HBox myTextHBox;
     private GridPane myButtonGridPane;
     private ComboBox myLanguageDropDown;
-    private Operator myOperator;
+    private IModelManager myManager;
     private ReferencePage myReferencePage;
 
     private ResourceBundle myResourcesBundle;
@@ -55,8 +54,8 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (Operator operator){
-        myOperator = operator;
+    public Console (IModelManager manager){
+        myManager = manager;
 
         initializeInstanceVariables();
         initializeLanguageList();
@@ -114,7 +113,7 @@ public class Console extends Stage {
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
         myLanguageDropDown = new ComboBox();
-        myErrorView = myOperator.getErrorPane();
+        myErrorView = myManager.getErrorPane();
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
@@ -157,7 +156,7 @@ public class Console extends Stage {
         myErrorView.clearError();
         String input = myUserInputField.getText();
         String language = String.valueOf(myLanguageDropDown.getValue());
-        myOperator.parse(input, language);
+        myManager.parseCommand(input, language);
     }
 
     /**

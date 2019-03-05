@@ -1,6 +1,6 @@
 package FrontInternal.Views;
 
-import FrontInternal.Util.Operator;
+import API.IModelManager;
 
 import java.util.Map;
 
@@ -15,10 +15,10 @@ public class VariableView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
-     * @param operator implementation of API.IModelManager
+     * @param manager implementation of API.IModelManager
      */
-    public VariableView(Operator operator){
-        super(operator);
+    public VariableView(IModelManager manager){
+        super(manager);
     }
 
     /**

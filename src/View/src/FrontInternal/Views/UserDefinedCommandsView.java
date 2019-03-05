@@ -1,7 +1,6 @@
 package FrontInternal.Views;
 
-import FrontInternal.Util.Operator;
-import javafx.scene.layout.HBox;
+import API.IModelManager;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -21,10 +20,10 @@ public class UserDefinedCommandsView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
-     * @param operator used for updating
+     * @param manager used for updating
      */
-    public UserDefinedCommandsView(Operator operator){
-        super(operator);
+    public UserDefinedCommandsView(IModelManager manager){
+        super(manager);
     }
 
     /**
