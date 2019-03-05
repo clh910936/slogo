@@ -45,12 +45,13 @@ public class Console extends Stage {
 
     private static final int BUTTON_WIDTH = 80;
     private static final int BUTTON_INSET = 5;
+    private static final int ERROR_HEIGHT = CONSOLE_HEIGHT/10;
     private static final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
     private static final int BUTTON_VGAP = 10;
     private static final String RESOURCE_FILENAME = "Console";
     private static final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
-    private boolean displaying = true;
+    private boolean isDisplaying = true;
 
 
     //public Console(Stage stage, CommandParser parser){
@@ -73,7 +74,7 @@ public class Console extends Stage {
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         this.setScene(consoleScene);
-        setOnCloseRequest(e -> displaying = false);
+        setOnCloseRequest(e -> isDisplaying = false);
         this.show();
     }
 
@@ -113,7 +114,7 @@ public class Console extends Stage {
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
         myLanguageDropDown = new ComboBox();
-        myErrorView = myManager.getErrorPane();
+        myErrorView = new ErrorView(ERROR_HEIGHT);
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
@@ -182,6 +183,6 @@ public class Console extends Stage {
     }
 
     public boolean getDisplaying(){
-        return displaying;
+        return isDisplaying;
     }
 }
