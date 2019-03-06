@@ -54,9 +54,15 @@ public abstract class View implements ViewAPI {
         text.setFill(color);
         text.setText(s);
         tempHBox.getChildren().add(text);
-        myGridPane.add(tempHBox, 0, myGridIndex);
-        myGridIndex++;
+        addToGridPane(tempHBox);
         return text;
+    }
+
+    //Called in Variable view because VariableView needed to create its own
+    //method to add new lines
+    protected void addToGridPane(Pane p){
+        myGridPane.add(p, 0, myGridIndex);
+        myGridIndex++;
     }
 
 

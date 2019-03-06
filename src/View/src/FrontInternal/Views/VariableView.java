@@ -1,7 +1,15 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 import java.util.Map;
 
 /**
@@ -31,8 +39,26 @@ public class VariableView extends View {
         this.clearLines();
         Map<String, String> map = myManager.getVariables();
         for(String s : map.keySet()){
-            String line = s + "\t" + map.get(s);
-            //this.addFinalLine(line);
+            Pane p = addEditableVariable(s, map.get(s));
+            addToGridPane(p);
         }
+    }
+
+    private Pane addEditableVariable(String varName, String variable){
+        Text name = new Text();
+        name.setText(varName);
+        TextField varValue = new TextField();
+        varValue.setText(variable);
+        varValue.textProperty().addListener(new ChangeListener<String>() {
+            //TODO: this seems unlikely to work-need to test it
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                myManager.changeVariable(varName, t1);
+            }
+        });
+        GridPane temp = new GridPane();
+        temp.add(name, 0, 0);
+        temp.add(varValue, 1, 0);
+        return temp;
     }
 }

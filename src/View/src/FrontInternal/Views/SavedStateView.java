@@ -18,6 +18,6 @@ public class SavedStateView extends View {
     @Override
     public void update() {
         this.clearLines();
-        
+
     }
 }
