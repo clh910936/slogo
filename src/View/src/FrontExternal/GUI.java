@@ -56,7 +56,7 @@ public class GUI implements FrontExternalAPI {
 
 
     private Node makeBoard() {
-        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myOperator);
+        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height), myOperator);
         return new HBox(myBoard);
     }
 
@@ -90,9 +90,6 @@ public class GUI implements FrontExternalAPI {
         return result;
     }
 
-    /**
-     * THE FOLLOWING ARE TURTLE/BOARD COMMANDS, FEROZE WILL TAKE CARE OF THEM
-     */
     @Override
     public void clearBoard() {
         myBoard.clear();
@@ -130,12 +127,12 @@ public class GUI implements FrontExternalAPI {
 
     @Override
     public void setShape(int index, int turtleId) {
-        myBoard.setShape(index, turtleId);
+        myBoard.setTurtleShape(index, turtleId);
     }
 
     @Override
     public void setPalette(int index, int r, int g, int b) {
-        myToolBar.setPalette(index, r, g, b);
+        // myToolBar.setPalette(index, r, g, b);
     }
 
     @Override
