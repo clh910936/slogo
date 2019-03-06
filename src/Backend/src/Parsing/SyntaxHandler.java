@@ -1,6 +1,7 @@
 package Parsing;
 
 import BackExternal.IllegalCommandException;
+import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Commands.*;
 
@@ -26,34 +27,34 @@ public class SyntaxHandler {
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
     private int index = 0;
+    private String[] commandInputList;
 
-    public SyntaxHandler(String language, ModelManager modelManager) {
+    public SyntaxHandler(String language, ModelManager modelManager, String[] commandInputList) {
         myLanguage = language;
         myModelManager = modelManager;
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
+        this.commandInputList = commandInputList;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
     }
 
-
-    protected CommandNode getCommandNode(String[] commandInputList, int currentListIndex, CommandNode parent) throws IllegalCommandException {
-        String rawInput = commandInputList[currentListIndex];
+    protected CommandNode getCommandNode(CommandNode parent) throws IllegalCommandException {
+        String rawInput = commandInputList[index];
         String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
-        index = currentListIndex;
         switch(regexInput) {
             case COMMENT_SYMBOL:
-                index = getIndexAfterComment(currentListIndex,commandInputList);
+                index = getIndexAfterComment(index,commandInputList);
             case LIST_END_SYMBOL :
                 throw new IllegalCommandException("List parameter is invalid");
             case GROUP_END_SYMBOL :
                 throw new IllegalCommandException("List parameter is invalid");
             case LIST_START_SYMBOL :
-                String[] listContents = getListContents(commandInputList, currentListIndex, LIST_START_SYMBOL, LIST_END_SYMBOL);
+                String[] listContents = getListContents(commandInputList, index, LIST_START_SYMBOL, LIST_END_SYMBOL);
                 index+=listContents.length + 2;
                 return new ListInput(myLanguage, myModelManager, listContents);
             case GROUP_START_SYMBOL :
-                listContents = getListContents(commandInputList, currentListIndex, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
+                listContents = getListContents(commandInputList, index, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
                 index+=listContents.length + 2;
                 return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
             case CONSTANT_SYMBOL :
@@ -77,9 +78,18 @@ public class SyntaxHandler {
         }
     }
 
-    public int getIndex() {
-        return index;
+    protected boolean isDoneParsing() {
+        return index==commandInputList.length;
     }
+
+    protected CommandNode parseForCommandNode(CommandNode parent) {
+        if(index>=commandInputList.length) {
+            throw new IllegalParametersException();
+        }
+        CommandNode commandNode = getCommandNode(parent);
+        return commandNode;
+    }
+
 
     private int getIndexAfterComment(int index, String[] commandInputArray) {
         String input = commandInputArray[index];
