@@ -136,6 +136,7 @@ public class TurtleView extends Sprite {
                     // get current location
                     double x = getCurrentX();
                     double y = getCurrentY();
+                    System.out.println("in loop");
                     //                System.out.println("current x: " + x);
                     //                System.out.println("current y: " + y);
                     //                System.out.println("angle: " + turtle.getRotate());
@@ -159,7 +160,9 @@ public class TurtleView extends Sprite {
                 }
             });
 
+            System.out.println("going to play");
             pt.play();
+            System.out.println("played");
             myPath.getElements().clear();
             myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
 
@@ -174,5 +177,10 @@ public class TurtleView extends Sprite {
 
     public void setPenColor(int index) {
         myPen.setColor(Color.RED);
+    }
+
+    @Override
+    public Node getPath() {
+        return myPath;
     }
 }

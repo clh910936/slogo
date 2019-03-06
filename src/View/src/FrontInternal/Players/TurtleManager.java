@@ -9,13 +9,13 @@ import FrontInternal.Components.Board;
  * @author Feroze
  */
 
-//TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO DO EVERYTHING
+//TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO HAVE EVERYTHING
 public class TurtleManager extends SpriteManager {
     private Board myBoard;
 
     public TurtleManager(Board b) {
         myBoard = b;
-        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), 0));
+        //addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), 0));
 
     }
 
@@ -26,6 +26,7 @@ public class TurtleManager extends SpriteManager {
     public void addSprites(Sprite... sprites) {
         myBoard.getChildren().addAll(sprites);
         for (Sprite s: sprites) {
+            myBoard.getChildren().add(s.getPath());
             GAME_ACTORS.put(s.getID(), s);
         }
     }
