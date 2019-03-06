@@ -26,7 +26,7 @@ public class SyntaxHandler {
     private List<Map.Entry<String, Pattern>> mySymbols;
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
-    private int index = 0;
+    private int index;
     private String[] commandInputList;
 
     public SyntaxHandler(String language, ModelManager modelManager, String[] commandInputList) {
@@ -35,6 +35,7 @@ public class SyntaxHandler {
         mySymbols = new ArrayList<>();
         myCommandSymbols = new ArrayList<>();
         this.commandInputList = commandInputList;
+        index = 0;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
     }
@@ -58,6 +59,7 @@ public class SyntaxHandler {
                 index+=listContents.length + 2;
                 return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
             case CONSTANT_SYMBOL :
+                index++;
                 return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
             case VARIABLE_SYMBOL :
                 index++;

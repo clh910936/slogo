@@ -38,13 +38,16 @@ public class ModelManager implements IModelManager {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             myCommandParser.parseCommand(inputString, language);
+            myHistoryModel.addHistoryEntry(inputString, true);
             myFrontEnd.updateViews();
         }
         catch (Exception e) {
             myHistoryModel.addHistoryEntry(inputString, false);
+            myFrontEnd.updateViews();
             throw e;
         }
-        myHistoryModel.addHistoryEntry(inputString, true);
+
+
     }
 
     public void setVariablesModel(VariablesModel vm) {
@@ -59,8 +62,12 @@ public class ModelManager implements IModelManager {
         return myHistoryModel.getHistory();
     }
 
-    public boolean getWasSuccessfulHistory(int i) {
-        return myHistoryModel.wasSuccessful.test(i);
+    public List<String> getSavedFilesList() {
+        return myCurrentStateFileModel.getSavedFilesList();
+    }
+
+    public boolean getSuccessOfHistoryEntry(int index) {
+        return myHistoryModel.getWasSuccessful(index);
     }
 
     public Map<String,String> getUserDefinedCommands() {
@@ -71,19 +78,15 @@ public class ModelManager implements IModelManager {
         return commandsList;
     }
 
-    public VariablesModel getVariablesModel() {
+    protected VariablesModel getVariablesModel() {
         return myVariablesModel;
     }
 
-    public UserDefinedCommandsModel getUserDefinedCommandsModel() {
+    protected UserDefinedCommandsModel getUserDefinedCommandsModel() {
         return myUserDefinedCommandsModel;
     }
 
-//    public HistoryModel getHistoryModel() {
-//        return myHistoryModel;
-//    }
-
-    public TurtleModel getTurtleModel() {
+    protected TurtleModel getTurtleModel() {
         return myTurtleModel;
     }
 
@@ -100,8 +103,5 @@ public class ModelManager implements IModelManager {
         myVariablesModel.addVariable(variableName, value);
     }
 
-    public List<String> getSavedFilesList() {
-        return myCurrentStateFileModel.getSavedFilesList();
-    }
 
 }
