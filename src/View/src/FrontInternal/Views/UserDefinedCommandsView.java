@@ -15,7 +15,6 @@ import java.util.Map;
  * that is created in View.
  */
 public class UserDefinedCommandsView extends View {
-    private static final Paint USER_COMMAND = Color.BLACK;
 
 
     /**
@@ -46,7 +45,7 @@ public class UserDefinedCommandsView extends View {
      * @param s String of text to be added
      */
     private void addFinalLine(String s){
-        Text text = createTextLine(s, USER_COMMAND);
+        Text text = createTextLine(s, DEFAULT_COLOR);
         text.setOnMouseClicked(e -> handleMouseClicked(text));
     }
 

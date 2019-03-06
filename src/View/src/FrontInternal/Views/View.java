@@ -3,6 +3,7 @@ package FrontInternal.Views;
 import API.IModelManager;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
@@ -18,6 +19,7 @@ import javafx.scene.text.Text;
  */
 public abstract class View implements ViewAPI {
     protected IModelManager myManager;
+    protected static final Paint DEFAULT_COLOR = Color.BLACK;
 
     private BorderPane myBorderPane;
     private GridPane myGridPane;

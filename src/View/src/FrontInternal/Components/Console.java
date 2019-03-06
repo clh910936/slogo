@@ -12,12 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,7 +33,8 @@ public class Console extends Stage {
     private ReferencePage myReferencePage;
     private TextField myStateNameField;
 
-    private ResourceBundle myResourcesBundle;
+    private ResourceBundle myGeneralResourceBundle;
+    private ResourceBundle myButtonsResourceBundle;
 
     private Button myRunButton;
     private Button myReferencePageButton;
@@ -52,7 +53,8 @@ public class Console extends Stage {
     private static final int ERROR_HEIGHT = CONSOLE_HEIGHT/10;
     private static final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
     private static final int BUTTON_VGAP = 10;
-    private static final String RESOURCE_FILENAME = "Console";
+    private static final String GENERAL_RESOURCE_FILENAME = "Console";
+    private static final String BUTTON_RESOURCE_FILENAME = "ConsoleButtons";
     private static final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
     private boolean isDisplaying = true;
@@ -84,8 +86,8 @@ public class Console extends Stage {
     }
 
     private void initializeSaveStatePane() {
-        myStateNameField.setPromptText(myResourcesBundle.getString("NAME_PROMPT"));
-        Button saveState = createAndFormatButton(myResourcesBundle.getString("STATE_BUTTON"));
+        myStateNameField.setPromptText(myGeneralResourceBundle.getString("NAME_PROMPT"));
+        Button saveState = createAndFormatButton(myGeneralResourceBundle.getString("STATE_BUTTON"));
         saveState.setOnMouseClicked(e -> saveState());
         mySaveStatePane.add(myStateNameField, 0, 0);
         mySaveStatePane.add(saveState, 0, 1);
@@ -96,12 +98,12 @@ public class Console extends Stage {
             myManager.saveCurrentState(myStateNameField.getText());
         }
         else{
-            showError(myResourcesBundle.getString("NO_FILENAME"));
+            showError(myGeneralResourceBundle.getString("NO_FILENAME"));
         }
     }
 
     private void createLoadFileButton() {
-        myLoadFileButton = createAndFormatButton(myResourcesBundle.getString("LOAD_BUTTON"));
+        myLoadFileButton = createAndFormatButton(myGeneralResourceBundle.getString("LOAD_BUTTON"));
         myLoadFileButton.setOnMouseClicked(e -> loadFile());
     }
 
@@ -111,11 +113,12 @@ public class Console extends Stage {
             Scanner scanner = new Scanner(file);
             String fileContents = new String();
             while(scanner.hasNext()){
-                fileContents += scanner.nextLine() + "\n";
+                //TODO: make sure the NLN character is working in the properties file
+                fileContents += scanner.nextLine() + myGeneralResourceBundle.getString("NLN");
             }
             myUserInputField.setText(fileContents);
         } catch (FileNotFoundException e) {
-            myErrorView.displayError(myResourcesBundle.getString("FILE_NOT_FOUND"));
+            myErrorView.displayError(myGeneralResourceBundle.getString("FILE_NOT_FOUND"));
         }
     }
 
@@ -131,7 +134,8 @@ public class Console extends Stage {
     private void initializeInstanceVariables() {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
-        myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
+        myGeneralResourceBundle = ResourceBundle.getBundle(GENERAL_RESOURCE_FILENAME);
+        myButtonsResourceBundle = ResourceBundle.getBundle(BUTTON_RESOURCE_FILENAME);
         mySaveStatePane = new GridPane();
         myStateNameField = new TextField();
 
@@ -146,7 +150,7 @@ public class Console extends Stage {
     }
 
     private void initializeLanguageList(){
-        String languages = myResourcesBundle.getString("POSSIBLE_LANGUAGES");
+        String languages = myGeneralResourceBundle.getString("POSSIBLE_LANGUAGES");
         String[] temp = languages.split(" ");
         for(String s : temp){
             myLanguages.add(s);
@@ -156,7 +160,7 @@ public class Console extends Stage {
     private void initializeDropDown(){
         myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
         myLanguageDropDown.getItems().addAll(myLanguages);
-        myLanguageDropDown.setValue(myResourcesBundle.getString("DEFAULT_LANGUAGE"));
+        myLanguageDropDown.setValue(myGeneralResourceBundle.getString("DEFAULT_LANGUAGE"));
         myButtonGridPane.add(myLanguageDropDown, 0, myButtonList.size());
     }
 
@@ -168,17 +172,30 @@ public class Console extends Stage {
     }
 
     private void createRunButton() {
-        myRunButton = createAndFormatButton(myResourcesBundle.getString(RUN_BUTTON));
+        myRunButton = createAndFormatButton(myGeneralResourceBundle.getString(RUN_BUTTON));
         myRunButton.setOnMouseClicked(e -> readText());
     }
 
     private void createReferencePageButton(){
-        myReferencePageButton = createAndFormatButton(myResourcesBundle.getString("REFERENCE_BUTTON"));
+        myReferencePageButton = createAndFormatButton(myGeneralResourceBundle.getString("REFERENCE_BUTTON"));
         myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
     }
 
-    private void makeButtons(){
-
+    //TODO: implement this and test it
+    private void makeButton(String s){
+        Button temp = new Button();
+        String info = myButtonsResourceBundle.getString(s);
+        String[] array = info.split(",");
+        String buttonName = array[0];
+        temp.setText(buttonName);
+        String methodName = array[1];
+        temp.setOnMouseClicked(e -> {
+        try {
+            Method method = this.getClass().getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException ex) {
+            //TODO: get rid of printing stack trace
+            ex.printStackTrace();
+        }});
     }
 
     private void showReferencePage(){
