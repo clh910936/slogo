@@ -1,6 +1,4 @@
 package FrontInternal.Players;
-
-import FrontInternal.Components.Board;
 import FrontInternal.Util.Location;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
@@ -8,13 +6,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.awt.*;
+import java.util.concurrent.locks.Lock;
 
 public class TurtleView extends Sprite {
     private double myX;
@@ -100,94 +97,75 @@ public class TurtleView extends Sprite {
 
     //TODO: REFACTOR THIS MASSIVE METHOD
     @Override
-    public void move(double x, double y) {
-        double xdisp = x-getLastX();
-        double ydisp = y-getLastY();
+    public synchronized void move(double x, double y) {
+            double xdisp = x - getLastX();
+            double ydisp = y - getLastY();
 
-        if (!(xdisp==0&&ydisp==0)) {
-            PathTransition pt = new PathTransition();
+            if (!(xdisp == 0 && ydisp == 0)) {
+                PathTransition pt = new PathTransition();
 
-            pt.setDuration(Duration.seconds(1));
-            pt.setNode(this);
+                pt.setDuration(Duration.seconds(1));
+                pt.setNode(this);
 
-            LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
+                LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
 
-            //have to update turtle location after this
-            myPath.getElements().addAll(l);
-            pt.setPath(myPath);
-            pt.setOrientation(PathTransition.OrientationType.NONE);
-            //pt.setCycleCount(Timeline.INDEFINITE);
-            //pt.setAutoReverse(true);
-            pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+                //have to update turtle location after this
+                myPath.getElements().addAll(l);
+                pt.setPath(myPath);
+                pt.setOrientation(PathTransition.OrientationType.NONE);
+                //pt.setCycleCount(Timeline.INDEFINITE);
+                //pt.setAutoReverse(true);
+                pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
 
-                Location oldLocation = null;
+                    Location oldLocation = null;
 
-                /**
-                 * Draw a line from the old location to the new location
-                 */
-                @Override
-                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                    /**
+                     * Draw a line from the old location to the new location
+                     */
+                    @Override
+                    public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
 
-                    // skip starting at 0/0
-                    if (oldValue == Duration.ZERO)
-                        return;
+                        // skip starting at 0/0
+                        if (oldValue == Duration.ZERO)
+                            return;
 
-                    // get current location
-                    double x = getCurrentX();
-                    double y = getCurrentY();
-                    System.out.println("in loop");
-                    //                System.out.println("current x: " + x);
-                    //                System.out.println("current y: " + y);
-                    //                System.out.println("angle: " + turtle.getRotate());
+                        // get current location
+                        double x = getCurrentX();
+                        double y = getCurrentY();
+                        System.out.println("in loop");
+                        //                System.out.println("current x: " + x);
+                        //                System.out.println("current y: " + y);
+                        //                System.out.println("angle: " + turtle.getRotate());
 
-                    // initialize the location
-                    if (oldLocation == null) {
-                        oldLocation = new Location(x, y);
-                        return;
+                        // initialize the location
+                        if (oldLocation == null) {
+                            oldLocation = new Location(x, y);
+                            return;
+                        }
+
+                        // draw line
+                        if (!myPen.getPenUp()) {
+                            gc.setStroke(myPen.getColor());
+                            gc.setFill(Color.YELLOW);
+                            gc.setLineWidth(myPen.getSize());
+                            gc.strokeLine(oldLocation.getX(), oldLocation.getY(), x, y);
+                        }
+
+                        oldLocation.setX(x);
+                        oldLocation.setY(y);
                     }
+                });
 
-                    // draw line
-                    if (!myPen.getPenUp()) {
-                        gc.setStroke(myPen.getColor());
-                        gc.setFill(Color.YELLOW);
-                        gc.setLineWidth(myPen.getSize());
-                        gc.strokeLine(oldLocation.getX(), oldLocation.getY(), x, y);
-                    }
+                System.out.println("going to play");
+                pt.play();
+                System.out.println("played");
+                myPath.getElements().clear();
+                myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
 
-                    oldLocation.setX(x);
-                    oldLocation.setY(y);
-                }
-            });
+                setLastX(x);
+                setLastY(y);
 
-            System.out.println("going to play");
-            pt.play();
-            System.out.println("played");
-            myPath.getElements().clear();
-            myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
-
-            setLastX(x);
-            setLastY(y);
         }
-//        javafx.scene.shape.Rectangle rect = new Rectangle(100, 40, 100, 100);
-//        rect.setArcHeight(50);
-//        rect.setArcWidth(50);
-//        rect.setFill(Color.VIOLET);
-//
-//        //myBoard.getChildren().addAll(rect);
-//
-//
-//        Path path = new Path();
-//        path.getElements().add (new MoveTo(0f, 50f));
-//        path.getElements().add (new CubicCurveTo(40f, 10f, 390f, 240f, 1904, 50f));
-//
-//        PathTransition pathTransition = new PathTransition();
-//        pathTransition.setDuration(Duration.millis(100000));
-//        pathTransition.setNode(this);
-//        pathTransition.setPath(path);
-//        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-//        pathTransition.setAutoReverse(true);
-//
-//        pathTransition.play();
     }
 
     public void setPen(boolean pen) {
