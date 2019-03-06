@@ -147,17 +147,5 @@ public class GUI implements FrontExternalAPI {
      * TODO: @Carrie pls add these methods to ur AllUserViews which updates each specific view accordingly.
      */
     @Override
-    public void updateHistory() {
-        myToolBar.updateHistory();
-    }
-
-    @Override
-    public void updateVariables() {
-        myToolBar.updateVariables();
-    }
-
-    @Override
-    public void updateUserDefinedCommands() {
-        myToolBar.updateUserDefinedCommands();
-    }
+    public void updateViews(){myToolBar.update();}
 }

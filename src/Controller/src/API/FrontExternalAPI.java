@@ -31,23 +31,8 @@ public interface FrontExternalAPI {
     public void setPalette(int index, int r, int g, int b);
     public void addTurtle(int turtleId);
     /**
-     * part of the HistoryView class.
-     * updates the history based on the changes made to the HistoryModel
-     * triggered by backend, using a listener event? (maybe need an external component)
+     * updates all of the Views
+     * ie History, User Defined Commands, etc.
      */
-    public void updateHistory();
-
-    /**
-     * part of the VariableView class.
-     * updates the variables based on the changes made to the VariablesModel
-     * triggered by backend, using a listener event? (maybe need an external component)
-     */
-    public void updateVariables();
-
-
-    /**
-     * Part of the UserDefinedCommandView class
-     * updates the user defined commands based on the changed made to the UserDefinedCommands model
-     */
-    public void updateUserDefinedCommands();
+    public void updateViews();
 }
