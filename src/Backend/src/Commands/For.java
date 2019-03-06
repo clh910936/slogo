@@ -5,6 +5,8 @@ import BackExternal.IllegalLoopParamsException;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +42,12 @@ public class For extends TwoParamCommand {
             if (commands.length == 0) {
                 return 0;
             }
-
+            CommandParser cp = new CommandParser(myModelManager);
             for (int i = 0; i < variableValues.size(); i++) {
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(variableValues.get(i));
                 commandString = commandString.replaceAll(variablesInfo[0], param);
-                CommandParser cp = new CommandParser(myModelManager);
-                out = cp.parseCommand(commandString, myLanguage);
+                out = cp.parseCommand(commandString,myLanguage);
             }
         }
         catch(IllegalCommandException e) {

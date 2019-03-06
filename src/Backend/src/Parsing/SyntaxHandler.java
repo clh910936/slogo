@@ -37,44 +37,44 @@ public class SyntaxHandler {
     }
 
 
-    public CommandNode getCommandNode(String[] commandInputList, int currentListIndex, CommandNode parent) throws IllegalCommandException {
+    protected CommandNode getCommandNode(String[] commandInputList, int currentListIndex, CommandNode parent) throws IllegalCommandException {
         String rawInput = commandInputList[currentListIndex];
         String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
         index = currentListIndex;
-        if(regexInput.equals(COMMENT_SYMBOL)) {
-            index = getIndexAfterComment(currentListIndex,commandInputList);
+        switch(regexInput) {
+            case COMMENT_SYMBOL:
+                index = getIndexAfterComment(currentListIndex,commandInputList);
+            case LIST_END_SYMBOL :
+                throw new IllegalCommandException("List parameter is invalid");
+            case GROUP_END_SYMBOL :
+                throw new IllegalCommandException("List parameter is invalid");
+            case LIST_START_SYMBOL :
+                String[] listContents = getListContents(commandInputList, currentListIndex, LIST_START_SYMBOL, LIST_END_SYMBOL);
+                index+=listContents.length + 2;
+                return new ListInput(myLanguage, myModelManager, listContents);
+            case GROUP_START_SYMBOL :
+                listContents = getListContents(commandInputList, currentListIndex, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
+                index+=listContents.length + 2;
+                return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
+            case CONSTANT_SYMBOL :
+                return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
+            case VARIABLE_SYMBOL :
+                index++;
+                if(parent!=null && CommandTypePredicate.checkNeedsVariableParameter(parent)) {
+                    return new StringInput(myLanguage, myModelManager, rawInput.substring(1));
+                }
+                else {
+                    return new Variable(myLanguage, myModelManager, rawInput.substring(1));
+                }
+            case COMMAND_SYMBOL :
+                index++;
+                if(parent!=null && CommandTypePredicate.checkNeedsWordParameter(parent)) {
+                    return new StringInput(myLanguage, myModelManager, rawInput);
+                }
+                return getNewCommandObject(rawInput);
+            default:
+                throw new IllegalCommandException("Syntax not valid!");
         }
-        else if(regexInput.equals(LIST_END_SYMBOL)||regexInput.equals(GROUP_END_SYMBOL)) {
-            throw new IllegalCommandException("List parameter is invalid");
-        }
-        else if(regexInput.equals(LIST_START_SYMBOL)) {
-            String[] listContents = getListContents(commandInputList, currentListIndex, LIST_START_SYMBOL, LIST_END_SYMBOL);
-            index+=listContents.length + 1;
-            return new ListInput(myLanguage, myModelManager, listContents);
-        }
-        else if(regexInput.equals(GROUP_START_SYMBOL)) {
-            String[] listContents = getListContents(commandInputList, currentListIndex, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
-            index+=listContents.length + 1;
-            return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
-        }
-        else if(regexInput.equals(CONSTANT_SYMBOL)) {
-            return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
-        }
-        else if(regexInput.equals(VARIABLE_SYMBOL)) {
-            if(parent!=null && CommandTypePredicate.checkNeedsVariableParameter(parent)) {
-                return new StringInput(myLanguage, myModelManager, rawInput.substring(1));
-            }
-            else {
-                return new Variable(myLanguage, myModelManager, rawInput.substring(1));
-            }
-        }
-        else if(regexInput.equals(COMMAND_SYMBOL)){
-            if(parent!=null && CommandTypePredicate.checkNeedsWordParameter(parent)) {
-                return new StringInput(myLanguage, myModelManager, rawInput);
-            }
-            return getNewCommandObject(rawInput);
-        }
-        throw new IllegalCommandException("Syntax not valid!");
     }
 
     public int getIndex() {
@@ -84,8 +84,8 @@ public class SyntaxHandler {
     private int getIndexAfterComment(int index, String[] commandInputArray) {
         String input = commandInputArray[index];
         while(!isCommand(input)||index<commandInputArray.length) {
-            index++;
             input = commandInputArray[index];
+            index++;
         }
         return index;
     }
@@ -146,7 +146,7 @@ public class SyntaxHandler {
     private String[] getListContents(String[] commandInputList, int currentIndex, String startSymbol, String endSymbol) throws IllegalCommandException{
         List<String> listContents = new ArrayList<>();
         int bracketCount = 1;
-        for(int i = currentIndex;i<commandInputList.length;i++) {
+        for(int i = currentIndex+1;i<commandInputList.length;i++) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput,mySymbols);
             if(input.equals(startSymbol)) {
@@ -156,6 +156,7 @@ public class SyntaxHandler {
                 bracketCount--;
             }
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
+
             listContents.add(rawInput);
         }
         throw new IllegalCommandException("Invalid ListInput Parameter");

@@ -3,6 +3,7 @@ package Commands;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
 
 public class Group extends ZeroParamCommand {
     private String[] myParamGroup;

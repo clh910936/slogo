@@ -29,7 +29,7 @@ public class DoTimes extends TwoParamCommand{
                 String param = String.valueOf(i);
                 commandString = commandString.replaceAll(variable, param);
                 myVariablesModel.addVariable(variable, param);
-                lastValue = cp.parseCommand(commandString, myLanguage);
+                lastValue = cp.parseCommand(commandString,myLanguage);
             }
             return lastValue;
         }

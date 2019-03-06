@@ -20,7 +20,7 @@ public class If extends TwoParamCommand {
             if (expr != 0) {
                 String commandString = String.join(" ", commands);
                 CommandParser cp = new CommandParser(myModelManager);
-                out = cp.parseCommand(commandString, myLanguage);
+                out = cp.parseCommand(commandString,myLanguage);
             }
         }
         catch (Exception e) {
