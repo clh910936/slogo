@@ -1,6 +1,9 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
+import javafx.scene.text.Text;
+
+import java.util.List;
 
 public class SavedStateView extends View {
 
@@ -14,10 +17,14 @@ public class SavedStateView extends View {
         super(manager);
     }
 
-    //TODO: write this method once getSavedStates is a thing
+    //TODO: check if this is working
     @Override
     public void update() {
         this.clearLines();
-
+        List<String> list = myManager.getSavedFilesList();
+        for(String s : list){
+            Text text = createTextLine(s, DEFAULT_COLOR);
+            text.setOnMouseClicked(e -> myManager.setStateFromFile(s, DEFAULT_LANGUAGE));
+        }
     }
 }

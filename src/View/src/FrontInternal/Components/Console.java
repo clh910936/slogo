@@ -135,7 +135,7 @@ public class Console extends Stage {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
         myGeneralResourceBundle = ResourceBundle.getBundle(GENERAL_RESOURCE_FILENAME);
-        myButtonsResourceBundle = ResourceBundle.getBundle(BUTTON_RESOURCE_FILENAME)
+        myButtonsResourceBundle = ResourceBundle.getBundle(BUTTON_RESOURCE_FILENAME);
         mySaveStatePane = new GridPane();
         myStateNameField = new TextField();
 
