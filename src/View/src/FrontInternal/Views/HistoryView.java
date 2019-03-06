@@ -36,7 +36,7 @@ public class HistoryView extends View {
         this.clearLines();
         List<String> history = myManager.getHistory();
         for(int k =0; k <history.size(); k++){
-            this.addFinalLine(history.get(k), myManager.getWasSuccessfulHistory(k));
+            this.addFinalLine(history.get(k), myManager.getSuccessOfHistoryEntry(k));
         }
     }
 

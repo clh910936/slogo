@@ -51,6 +51,8 @@ public class VariableView extends View {
             //TODO: this seems unlikely to work-need to test it
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                System.out.println("Changing var: " + varName);
+                System.out.println("\t from: " + s + "to: " + t1);
                 myManager.changeVariable(varName, t1);
             }
         });
