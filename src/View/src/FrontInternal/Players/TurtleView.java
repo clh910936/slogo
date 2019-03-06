@@ -135,7 +135,7 @@ public class TurtleView extends Sprite {
                     // get current location
                     double x = getCurrentX();
                     double y = getCurrentY();
-                    System.out.println("in loop");
+                    //System.out.println("in loop");
                     //                System.out.println("current x: " + x);
                     //                System.out.println("current y: " + y);
                     //                System.out.println("angle: " + turtle.getRotate());

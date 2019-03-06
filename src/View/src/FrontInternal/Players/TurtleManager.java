@@ -36,7 +36,6 @@ public class TurtleManager extends SpriteManager {
         for (Sprite s: sprites) {
             GAME_ACTORS.put(s.getID(), s);
         }
-
     }
 
 
@@ -49,7 +48,7 @@ public class TurtleManager extends SpriteManager {
     }
 
     public void rotateTurtle(double degrees, int turtleId) {
-        get(turtleId).rotate(degrees);
+        get(turtleId).rotate(-degrees);
     }
 
     public void setPenColor(int index, int turtleId) {
