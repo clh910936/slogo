@@ -4,10 +4,16 @@ import API.IModelManager;
 
 import FrontInternal.Players.TurtleManager;
 import FrontInternal.Views.ViewAPI;
+import javafx.animation.PathTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.awt.*;
 
@@ -27,6 +33,8 @@ public class Board extends Pane implements ViewAPI {
         getChildren().addAll(myCanvas);
 
         myTurtleManager = new TurtleManager(this);
+
+
     }
 
     public Dimension getDimensions() {

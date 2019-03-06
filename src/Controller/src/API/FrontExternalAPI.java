@@ -1,8 +1,6 @@
 package API;
 
 
-import javafx.scene.paint.Color;
-
 public interface FrontExternalAPI {
     /**
      * part of Board class

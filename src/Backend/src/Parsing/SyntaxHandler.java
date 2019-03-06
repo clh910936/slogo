@@ -58,6 +58,7 @@ public class SyntaxHandler {
                 index+=listContents.length + 2;
                 return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
             case CONSTANT_SYMBOL :
+                index++;
                 return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
             case VARIABLE_SYMBOL :
                 index++;

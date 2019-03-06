@@ -1,6 +1,12 @@
 package FrontInternal.Players;
 import FrontInternal.Components.Board;
-
+import javafx.animation.PathTransition;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 
 /**
@@ -9,13 +15,15 @@ import FrontInternal.Components.Board;
  * @author Feroze
  */
 
-//TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO DO EVERYTHING
+//TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO HAVE EVERYTHING
 public class TurtleManager extends SpriteManager {
     private Board myBoard;
 
     public TurtleManager(Board b) {
         myBoard = b;
-        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), 0));
+        //addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), 0));
+
+
 
     }
 
@@ -28,6 +36,7 @@ public class TurtleManager extends SpriteManager {
         for (Sprite s: sprites) {
             GAME_ACTORS.put(s.getID(), s);
         }
+
     }
 
 

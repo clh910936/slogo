@@ -10,9 +10,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -108,7 +107,7 @@ public class TurtleView extends Sprite {
         if (!(xdisp==0&&ydisp==0)) {
             PathTransition pt = new PathTransition();
 
-            pt.setDuration(Duration.seconds(0.1));
+            pt.setDuration(Duration.seconds(1));
             pt.setNode(this);
 
             LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
@@ -136,6 +135,7 @@ public class TurtleView extends Sprite {
                     // get current location
                     double x = getCurrentX();
                     double y = getCurrentY();
+                    System.out.println("in loop");
                     //                System.out.println("current x: " + x);
                     //                System.out.println("current y: " + y);
                     //                System.out.println("angle: " + turtle.getRotate());
@@ -147,7 +147,7 @@ public class TurtleView extends Sprite {
                     }
 
                     // draw line
-                    if (myPen.getPenUp()) {
+                    if (!myPen.getPenUp()) {
                         gc.setStroke(myPen.getColor());
                         gc.setFill(Color.YELLOW);
                         gc.setLineWidth(myPen.getSize());
@@ -159,13 +159,35 @@ public class TurtleView extends Sprite {
                 }
             });
 
+            System.out.println("going to play");
             pt.play();
+            System.out.println("played");
             myPath.getElements().clear();
             myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
 
             setLastX(x);
             setLastY(y);
         }
+//        javafx.scene.shape.Rectangle rect = new Rectangle(100, 40, 100, 100);
+//        rect.setArcHeight(50);
+//        rect.setArcWidth(50);
+//        rect.setFill(Color.VIOLET);
+//
+//        //myBoard.getChildren().addAll(rect);
+//
+//
+//        Path path = new Path();
+//        path.getElements().add (new MoveTo(0f, 50f));
+//        path.getElements().add (new CubicCurveTo(40f, 10f, 390f, 240f, 1904, 50f));
+//
+//        PathTransition pathTransition = new PathTransition();
+//        pathTransition.setDuration(Duration.millis(100000));
+//        pathTransition.setNode(this);
+//        pathTransition.setPath(path);
+//        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+//        pathTransition.setAutoReverse(true);
+//
+//        pathTransition.play();
     }
 
     public void setPen(boolean pen) {
@@ -174,5 +196,10 @@ public class TurtleView extends Sprite {
 
     public void setPenColor(int index) {
         myPen.setColor(Color.RED);
+    }
+
+    @Override
+    public Node getPath() {
+        return myPath;
     }
 }
