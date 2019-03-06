@@ -18,22 +18,21 @@ import javafx.scene.text.Text;
  * and UserDefinedCommandsView
  */
 public abstract class View implements ViewAPI {
-    protected Operator myOperator;
     protected IModelManager myManager;
 
     private BorderPane myBorderPane;
     private GridPane myGridPane;
     private ScrollPane myVariableScroll;
     protected int myGridIndex;
+    protected static final String DEFAULT_LANGUAGE = "English";
 
 
 
     /**
      * Used to create a template for the Variable,User Defined Commands, and History view
      */
-    public View(Operator operator){
-        myOperator = operator;
-        myManager = operator.getManager();
+    public View(IModelManager manager){
+        myManager = manager;
         myBorderPane = new BorderPane();
 
         myBorderPane.setPrefHeight(100);
@@ -56,9 +55,15 @@ public abstract class View implements ViewAPI {
         text.setFill(color);
         text.setText(s);
         tempHBox.getChildren().add(text);
-        myGridPane.add(tempHBox, 0, myGridIndex);
-        myGridIndex++;
+        addToGridPane(tempHBox);
         return text;
+    }
+
+    //Called in Variable view because VariableView needed to create its own
+    //method to add new lines
+    protected void addToGridPane(Pane p){
+        myGridPane.add(p, 0, myGridIndex);
+        myGridIndex++;
     }
 
 

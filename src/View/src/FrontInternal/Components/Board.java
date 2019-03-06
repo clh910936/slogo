@@ -3,13 +3,11 @@ package FrontInternal.Components;
 import API.IModelManager;
 
 import FrontInternal.Players.TurtleManager;
-import FrontInternal.Util.Operator;
 import FrontInternal.Views.ViewAPI;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Path;
 
 import java.awt.*;
 
@@ -21,15 +19,11 @@ public class Board extends Pane implements ViewAPI {
     private GraphicsContext gc;
     private Dimension myDimensions;
 
-    private Path p;
-    private Operator myOperator;
     private IModelManager myController;
-    
     private TurtleManager myTurtleManager;
 
-    public Board(Dimension d, Operator operator) {
-        myOperator = operator;
-        myController = operator.getManager();
+    public Board(Dimension d, IModelManager m) {
+        myController = m;
         myDimensions = d;
         createCanvas(myDimensions.width, myDimensions.height);
         getChildren().addAll(myCanvas);

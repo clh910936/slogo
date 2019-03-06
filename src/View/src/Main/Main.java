@@ -1,7 +1,6 @@
 package Main;
 
 import FrontInternal.Components.Console;
-import FrontInternal.Util.Operator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import FrontExternal.GUI;
@@ -20,7 +19,6 @@ public class Main extends Application {
         stage.setScene(display.getScene());
         stage.show();
 
-        new Console(display.getOperator());
 
 
     }

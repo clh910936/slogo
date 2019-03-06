@@ -1,14 +1,13 @@
 package FrontInternal.Views;
 
-import FrontInternal.Util.Operator;
-import javafx.scene.control.Alert;
+import API.IModelManager;
+import FrontInternal.Components.Console;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,15 +23,15 @@ import java.util.TreeSet;
 public class  AllUserViews extends VBox implements ViewAPI  {
     private ResourceBundle myViewClassResources;
     private ResourceBundle myErrorResources;
-    private Operator myOperator;
-    private Alert myAlertBox;
+    private IModelManager myManager;
+    private Console myConsole;
     private List<ViewAPI> myViews;
 
-    public AllUserViews(Operator operator){
+    public AllUserViews(IModelManager operator, Console console){
         myViewClassResources = ResourceBundle.getBundle("ViewDropDown");
         myErrorResources = ResourceBundle.getBundle("Errors");
-        myOperator = operator;
-        myAlertBox = new Alert(Alert.AlertType.ERROR);
+        myConsole = console;
+        myManager = operator;
         myViews = new ArrayList<>();
         initializeViews();
     }
@@ -44,10 +43,10 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             ViewAPI view = makeView(s);
             myViews.add(view);
             TitledPane pane = new TitledPane();
+            pane.setExpanded(false);
             pane.setText(s);
             pane.setContent(view.getPane());
             this.getChildren().add(pane);
-            myOperator.addViewToUpdate(view);
         }
     }
 
@@ -56,13 +55,19 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         System.out.println(s);
         try {
             Class c = Class.forName("FrontInternal.Views." + s);
-            System.out.println("\t found class");
-            var constructor = c.getConstructor(Operator.class);
-            System.out.println("\t constructor");
-
-            return (ViewAPI) constructor.newInstance(myOperator);
-        } catch (Exception e) {
-            return makeUnkownView();
+            //TODO: potential problem cuz IModelManger technically isn't a class?
+            var constructor = c.getConstructor(IModelManager.class);
+            return (ViewAPI) constructor.newInstance(myManager);
+        } catch (NoSuchMethodException e) {
+            try {
+                Class c = Class.forName("FrontInternal.Views." + s);
+                var constructor = c.getConstructor(IModelManager.class, Console.class);
+                return (ViewAPI) constructor.newInstance(myManager, myConsole);
+            } catch (Exception e1) {
+                return makeUnknownView();
+            }
+        } catch (Exception e){
+            return makeUnknownView();
         }
     }
 
@@ -85,15 +90,8 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         return this;
     }
 
-
-//    private void displayAlert(){
-//        this.myAlertBox = new Alert(Alert.AlertType.ERROR);
-//        this.myAlertBox.setTitle(title);
-//        this.myAlertBox.setHeaderText(header);
-//        this.myAlertBox.setContentText(content);
-//    }
-
-    private ViewAPI makeUnkownView(){
+    //View displayed in place of any of the views that failed to be added correctly
+    private ViewAPI makeUnknownView(){
         ViewAPI temp = new ViewAPI() {
             @Override
             public void update() {

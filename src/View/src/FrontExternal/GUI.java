@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import API.FrontExternalAPI;
+import BackExternal.ModelManager;
 import FrontInternal.Components.*;
-import FrontInternal.Util.Operator;
 import FrontInternal.Views.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,19 +28,19 @@ public class GUI implements FrontExternalAPI {
     private HBox myRoot;
 
     private ResourceBundle myResources;
-    private Operator myOperator;
+    private ModelManager myController;
     private AllUserViews myToolBar;
 
 
     // private
     public GUI() {
-        myOperator = new Operator(this);
+        myController = new ModelManager(this);
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
         //var right = makeRightView();
         //myRoot = new HBox(left, right);
-        myToolBar = new AllUserViews(myOperator);
-        myOperator.addViewToUpdate(myBoard);
+        myConsole = new Console(myController);
+        myToolBar = new AllUserViews(myController, myConsole);
         myRoot = new HBox(left, myToolBar);
         //myRoot.setHgrow(right, Priority.ALWAYS);
 
@@ -50,13 +50,10 @@ public class GUI implements FrontExternalAPI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
-    public Operator getOperator() {
-        return myOperator;
-    }
 
 
     private Node makeBoard() {
-        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height), myOperator);
+        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height), myController);
         return new HBox(myBoard);
     }
 
