@@ -104,70 +104,70 @@ public class TurtleView extends Sprite {
         double xdisp = x-getLastX();
         double ydisp = y-getLastY();
 
-//        if (!(xdisp==0&&ydisp==0)) {
-//            PathTransition pt = new PathTransition();
-//
-//            pt.setDuration(Duration.seconds(10));
-//            pt.setNode(this);
-//
-//            LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
-//
-//            //have to update turtle location after this
-//            myPath.getElements().addAll(l);
-//            pt.setPath(myPath);
-//            pt.setOrientation(PathTransition.OrientationType.NONE);
-//            //pt.setCycleCount(Timeline.INDEFINITE);
-//            //pt.setAutoReverse(true);
-//            pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
-//
-//                Location oldLocation = null;
-//
-//                /**
-//                 * Draw a line from the old location to the new location
-//                 */
-//                @Override
-//                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-//
-//                    // skip starting at 0/0
-//                    if (oldValue == Duration.ZERO)
-//                        return;
-//
-//                    // get current location
-//                    double x = getCurrentX();
-//                    double y = getCurrentY();
-//                    System.out.println("in loop");
-//                    //                System.out.println("current x: " + x);
-//                    //                System.out.println("current y: " + y);
-//                    //                System.out.println("angle: " + turtle.getRotate());
-//
-//                    // initialize the location
-//                    if (oldLocation == null) {
-//                        oldLocation = new Location(x, y);
-//                        return;
-//                    }
-//
-//                    // draw line
-//                    if (myPen.getPenUp()) {
-//                        gc.setStroke(myPen.getColor());
-//                        gc.setFill(Color.YELLOW);
-//                        gc.setLineWidth(myPen.getSize());
-//                        gc.strokeLine(oldLocation.getX(), oldLocation.getY(), x, y);
-//                    }
-//
-//                    oldLocation.setX(x);
-//                    oldLocation.setY(y);
-//                }
-//            });
-//
-//            System.out.println("going to play");
-//            pt.play();
-//            System.out.println("played");
-//            myPath.getElements().clear();
-//            myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
-//
-//            setLastX(x);
-//            setLastY(y);
-//        }
+        if (!(xdisp==0&&ydisp==0)) {
+            PathTransition pt = new PathTransition();
+
+            pt.setDuration(Duration.seconds(1));
+            pt.setNode(this);
+
+            LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
+
+            //have to update turtle location after this
+            myPath.getElements().addAll(l);
+            pt.setPath(myPath);
+            pt.setOrientation(PathTransition.OrientationType.NONE);
+            //pt.setCycleCount(Timeline.INDEFINITE);
+            //pt.setAutoReverse(true);
+            pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+
+                Location oldLocation = null;
+
+                /**
+                 * Draw a line from the old location to the new location
+                 */
+                @Override
+                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+
+                    // skip starting at 0/0
+                    if (oldValue == Duration.ZERO)
+                        return;
+
+                    // get current location
+                    double x = getCurrentX();
+                    double y = getCurrentY();
+                    System.out.println("in loop");
+                    //                System.out.println("current x: " + x);
+                    //                System.out.println("current y: " + y);
+                    //                System.out.println("angle: " + turtle.getRotate());
+
+                    // initialize the location
+                    if (oldLocation == null) {
+                        oldLocation = new Location(x, y);
+                        return;
+                    }
+
+                    // draw line
+                    if (!myPen.getPenUp()) {
+                        gc.setStroke(myPen.getColor());
+                        gc.setFill(Color.YELLOW);
+                        gc.setLineWidth(myPen.getSize());
+                        gc.strokeLine(oldLocation.getX(), oldLocation.getY(), x, y);
+                    }
+
+                    oldLocation.setX(x);
+                    oldLocation.setY(y);
+                }
+            });
+
+            System.out.println("going to play");
+            pt.play();
+            System.out.println("played");
+            myPath.getElements().clear();
+            myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
+
+            setLastX(x);
+            setLastY(y);
+        }
 //        javafx.scene.shape.Rectangle rect = new Rectangle(100, 40, 100, 100);
 //        rect.setArcHeight(50);
 //        rect.setArcWidth(50);
