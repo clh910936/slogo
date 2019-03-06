@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import API.FrontExternalAPI;
+import BackExternal.ModelManager;
 import FrontInternal.Components.*;
 import FrontInternal.Views.*;
 import javafx.event.ActionEvent;
@@ -27,19 +28,20 @@ public class GUI implements FrontExternalAPI {
     private HBox myRoot;
 
     private ResourceBundle myResources;
-    private Operator myOperator;
+    private ModelManager myController;
     private AllUserViews myToolBar;
 
 
     // private
     public GUI() {
-        myOperator = new Operator(this);
-        myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
         var left = makeBoard();
+        myController = new ModelManager(this);
+        myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
+
         //var right = makeRightView();
         //myRoot = new HBox(left, right);
-        myToolBar = new AllUserViews(myOperator);
-        myOperator.addViewToUpdate(myBoard);
+        myConsole = new Console(myController);
+        myToolBar = new AllUserViews(myController, myConsole);
         myRoot = new HBox(left, myToolBar);
         //myRoot.setHgrow(right, Priority.ALWAYS);
 
@@ -49,13 +51,10 @@ public class GUI implements FrontExternalAPI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
-    public Operator getOperator() {
-        return myOperator;
-    }
 
 
     private Node makeBoard() {
-        myBoard = new Board(DEFAULT_SIZE.width * 3/4,DEFAULT_SIZE.height, myOperator);
+        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height));
         return new HBox(myBoard);
     }
 
@@ -89,9 +88,6 @@ public class GUI implements FrontExternalAPI {
         return result;
     }
 
-    /**
-     * THE FOLLOWING ARE TURTLE/BOARD COMMANDS, FEROZE WILL TAKE CARE OF THEM
-     */
     @Override
     public void clearBoard() {
         myBoard.clear();
@@ -129,12 +125,12 @@ public class GUI implements FrontExternalAPI {
 
     @Override
     public void setShape(int index, int turtleId) {
-        myBoard.setShape(index, turtleId);
+        myBoard.setTurtleShape(index, turtleId);
     }
 
     @Override
     public void setPalette(int index, int r, int g, int b) {
-        myToolBar.setPalette(index, r, g, b);
+        // myToolBar.setPalette(index, r, g, b);
     }
 
     @Override

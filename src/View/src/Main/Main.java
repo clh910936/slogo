@@ -19,7 +19,6 @@ public class Main extends Application {
         stage.setScene(display.getScene());
         stage.show();
 
-        new Console(display.getOperator());
 
 
     }
