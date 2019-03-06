@@ -5,6 +5,8 @@ import API.FrontExternalAPI;
 public class Turtle extends GeneralTurtle {
 
     public static final int FULL_CIRCLE_DEGREES = 360;
+    public static final int STARTX = 2000;
+    public static final int STARTY = 2000;
 
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle,
                   boolean isDisplayed, boolean isClearScreen, int id, int pcIndex,
@@ -17,7 +19,7 @@ public class Turtle extends GeneralTurtle {
         myPointY += dist * Math.sin(Math.toRadians(myHeadingAngle));
         printTurtleStatus();
         // TODO: call feroze
-        myFrontExternalAPI.move(myPointX, myPointY, myId);
+        myFrontExternalAPI.move(myPointX - STARTX, myPointY - STARTY, myId);
         //notifyObservers();
     }
 
