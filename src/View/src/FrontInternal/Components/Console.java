@@ -8,9 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -29,6 +31,7 @@ public class Console extends Stage {
     private ComboBox myLanguageDropDown;
     private IModelManager myManager;
     private ReferencePage myReferencePage;
+    private TextField myStateNameField;
 
     private ResourceBundle myResourcesBundle;
 
@@ -39,6 +42,7 @@ public class Console extends Stage {
     private List<String> myLanguages;
     private TextArea myUserInputField;
     private ErrorView myErrorView;
+    private GridPane mySaveStatePane;
 
     private static final int CONSOLE_WIDTH = 500;
     private static final int CONSOLE_HEIGHT = 300;
@@ -60,6 +64,7 @@ public class Console extends Stage {
 
         initializeInstanceVariables();
         initializeLanguageList();
+        initializeSaveStatePane();
 
         createRunButton();
         createReferencePageButton();
@@ -76,6 +81,23 @@ public class Console extends Stage {
         this.setScene(consoleScene);
         setOnCloseRequest(e -> isDisplaying = false);
         this.show();
+    }
+
+    private void initializeSaveStatePane() {
+        myStateNameField.setPromptText(myResourcesBundle.getString("NAME_PROMPT"));
+        Button saveState = createAndFormatButton(myResourcesBundle.getString("STATE_BUTTON"));
+        saveState.setOnMouseClicked(e -> saveState());
+        mySaveStatePane.add(myStateNameField, 0, 0);
+        mySaveStatePane.add(saveState, 0, 1);
+    }
+
+    private void saveState() {
+        if(!myStateNameField.getText().equals("")){
+            myManager.saveCurrentState(myStateNameField.getText());
+        }
+        else{
+            showError(myResourcesBundle.getString("NO_FILENAME"));
+        }
     }
 
     private void createLoadFileButton() {
@@ -110,6 +132,8 @@ public class Console extends Stage {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
         myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
+        mySaveStatePane = new GridPane();
+        myStateNameField = new TextField();
 
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
@@ -172,6 +196,7 @@ public class Console extends Stage {
         for(int k = 0; k < myButtonList.size(); k++){
             myButtonGridPane.add(myButtonList.get(k), 0, k);
         }
+        myButtonGridPane.add(mySaveStatePane, 0, myButtonGridPane.getChildren().size());
     }
 
     private Button createAndFormatButton(String s){
