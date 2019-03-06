@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import API.FrontExternalAPI;
 import FrontInternal.Components.*;
-import FrontInternal.Util.Operator;
 import FrontInternal.Views.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

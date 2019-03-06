@@ -1,7 +1,7 @@
 package FrontInternal.Views;
 
 
-import FrontInternal.Util.Operator;
+import API.IModelManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  * turtle to be moved using UI controls
  */
 public class TurtleMovementView implements ViewAPI {
-    private Operator myOperator;
+    private IModelManager myManager;
     private GridPane myGridPane;
     private ResourceBundle myResources;
     private static final int BUTTON_WIDTH = 50;
@@ -27,11 +27,12 @@ public class TurtleMovementView implements ViewAPI {
     private static final int ROTATE_90 = 90;
     private static final int ROTATE_180 = 180;
     private static final int ROTATE_270 = 270;
+    private static final String DEFAULT_LANGAUGE = "English";
 
 
 
-    public TurtleMovementView(Operator operator){
-        myOperator = operator;
+    public TurtleMovementView(IModelManager manager){
+        myManager = manager;
         myGridPane = new GridPane();
         myResources = ResourceBundle.getBundle("TurtleControls");
 
@@ -49,7 +50,7 @@ public class TurtleMovementView implements ViewAPI {
 
     private void handleClick(String resourceKey) {
         String command = myResources.getString(resourceKey);
-        myOperator.parse(command);
+        myManager.parseCommand(command, DEFAULT_LANGAUGE);
     }
 
     private Pane createFormatArrow(int rotation, String imageName, String command){
