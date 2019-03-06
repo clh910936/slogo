@@ -11,7 +11,7 @@ public class DoTimes extends TwoParamCommand{
 
     public DoTimes(String language, ModelManager modelManager) {
         super(language, modelManager);
-        cp = new CommandParser(modelManager,language);
+        cp = new CommandParser(modelManager);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DoTimes extends TwoParamCommand{
                 String param = String.valueOf(i);
                 commandString = commandString.replaceAll(variable, param);
                 myVariablesModel.addVariable(variable, param);
-                lastValue = cp.parseCommand(commandString);
+                lastValue = cp.parseCommand(commandString,myLanguage);
             }
             return lastValue;
         }

@@ -29,8 +29,8 @@ public class Group extends ZeroParamCommand {
         else {
             commandToParse = handleOtherParams();
         }
-        CommandParser commandParser = new CommandParser(myModelManager, myLanguage);
-        return commandParser.parseCommand(commandToParse);
+        CommandParser commandParser = new CommandParser(myModelManager);
+        return commandParser.parseCommand(commandToParse,myLanguage);
     }
 
     private String handleTwoParams() {
