@@ -1,5 +1,6 @@
 package Models;
 
+import API.FrontExternalAPI;
 import Commands.UserDefinedCommand;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,7 +15,6 @@ public class UserDefinedCommandsModel {
     public UserDefinedCommandsModel() {
         myUserDefinedCommands = new HashMap<>();
     }
-
     public void addUserCreatedCommand(UserDefinedCommand command) {
         myUserDefinedCommands.put(command.getCommandName(),command);
     }

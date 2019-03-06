@@ -1,5 +1,6 @@
 package Models;
 
+import BackExternal.ModelManager;
 import Commands.UserDefinedCommand;
 import Parsing.CommandParser;
 import org.w3c.dom.Document;
@@ -9,7 +10,6 @@ import org.w3c.dom.NodeList;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
@@ -33,18 +33,26 @@ public class CurrentStateFileModel {
     private final String COMMAND_NAME_TAG = "COMNAME";
     private final String COMMAND_VAR_TAG = "COMVAR";
     private final String COMMAND_COMMANDS_TAG = "COMCOMMS";
-
     private final String VAR_NAME_TAG = "VARNAME";
     private final String VAR_VALUE_TAG = "VALUE";
-
-
 
     public CurrentStateFileModel(VariablesModel vm, UserDefinedCommandsModel userDefinedCommandsModel, ModelManager mm) {
         savedFilesList = new ArrayList<>();
         myVariablesModel = vm;
         myUserDefinedCommandsModel = userDefinedCommandsModel;
         myModelManager = mm;
+        savedFilesList = new ArrayList<>();
+        File folder = new File(DOCUMENT_PATH);
+        File[] listOfFiles = folder.listFiles();
+        for(File f : listOfFiles) {
+            savedFilesList.add(f.getName());
+        }
     }
+
+    public List<String> getSavedFilesList() {
+        return savedFilesList;
+    }
+
 
     public void setStateFromFile(String fileName, String language) {
         try {
@@ -75,9 +83,13 @@ public class CurrentStateFileModel {
                     myVariablesModel.addVariable(variableName,variableValue);
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
            //TODO: HANDLE
-        }    }
+        }
+    }
+
+
 
     public void save(String fileName) {
         try {
@@ -91,12 +103,8 @@ public class CurrentStateFileModel {
             Map<String,String> variables = myVariablesModel.getVariables();
             for(Map.Entry<String,String> variable : variables.entrySet()) {
                 Element savedVariable = doc.createElement(VARIABLE_TAG);
-                Element var = doc.createElement(VAR_NAME_TAG);
-                var.appendChild(doc.createTextNode(variable.getKey()));
-                Element value = doc.createElement(VAR_VALUE_TAG);
-                value.appendChild(doc.createTextNode(variable.getValue()));
-                savedVariable.appendChild(var);
-                savedVariable.appendChild(value);
+                addChildElement(doc, VAR_NAME_TAG, variable.getKey(), savedVariable);
+                addChildElement(doc, VAR_VALUE_TAG, variable.getValue(), savedVariable);
                 rootElement.appendChild(savedVariable);
             }
 
@@ -104,22 +112,12 @@ public class CurrentStateFileModel {
             Map<String, UserDefinedCommand> commands = myUserDefinedCommandsModel.getUserCreatedCommands();
             for(Map.Entry<String, UserDefinedCommand> command : commands.entrySet()) {
                 Element savedCommand = doc.createElement(USER_DEFINED_COMMAND_TAG);
-
-                Element name = doc.createElement(COMMAND_NAME_TAG);
                 String commandName = command.getKey();
-                name.appendChild(doc.createTextNode(commandName));
-
-                Element var = doc.createElement(COMMAND_VAR_TAG);
+                addChildElement(doc, COMMAND_NAME_TAG, commandName, savedCommand);
                 String commandVar = command.getValue().getVariablesToString();
-                var.appendChild(doc.createTextNode(commandVar));
-
-                Element definedCommands = doc.createElement(COMMAND_COMMANDS_TAG);
+                addChildElement(doc, COMMAND_VAR_TAG, commandVar,savedCommand);
                 String commandsDefined =command.getValue().getCommands();
-                definedCommands.appendChild(doc.createTextNode(commandsDefined));
-
-                savedCommand.appendChild(name);
-                savedCommand.appendChild(var);
-                savedCommand.appendChild(definedCommands);
+                addChildElement(doc, COMMAND_COMMANDS_TAG, commandsDefined,savedCommand);
                 rootElement.appendChild(savedCommand);
             }
 
@@ -137,6 +135,11 @@ public class CurrentStateFileModel {
         } catch (TransformerException tfe) {
             System.out.println(tfe);
             }
+    }
+    private void addChildElement(Document doc, String rootElement, String childElement, Element mainRoot) {
+        Element root = doc.createElement(rootElement);
+        root.appendChild(doc.createTextNode(childElement));
+        mainRoot.appendChild(root);
     }
 
 

@@ -1,12 +1,10 @@
 package FrontInternal.Views;
 
-import FrontInternal.Util.Operator;
-import javafx.scene.layout.HBox;
+import API.IModelManager;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,10 +20,10 @@ public class HistoryView extends View {
 
     /**
      * Creates a pane that can be updated based on the manager passed through
-     * @param operator Handles parsing and updating
+     * @param manager Handles parsing and updating
      */
-    public HistoryView(Operator operator){
-        super(operator);
+    public HistoryView(IModelManager manager){
+        super(manager);
     }
 
     /**
@@ -49,7 +47,7 @@ public class HistoryView extends View {
 
     private void handleClick(Text text) {
         String command = text.getText();
-        myOperator.parse(command);
+        myManager.parseCommand(command, DEFAULT_LANGUAGE);
     }
 
     private Paint determineColor(Boolean bool) {

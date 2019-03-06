@@ -27,6 +27,9 @@ public abstract class CommandNode {
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
     }
+    public int getNumParamsNeeded() {
+        return MAX_PARAMS;
+    }
 
     public void addChild(CommandNode node) {
         myChildren.add(node);

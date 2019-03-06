@@ -3,7 +3,6 @@ package FrontInternal.Components;
 import API.IModelManager;
 
 import FrontInternal.Players.TurtleView;
-import FrontInternal.Util.Operator;
 import FrontInternal.Views.ViewAPI;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;

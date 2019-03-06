@@ -1,6 +1,6 @@
 package FrontInternal.Components;
 
-import FrontInternal.Util.Operator;
+import API.IModelManager;
 import FrontInternal.Views.ErrorView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,15 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,8 +29,9 @@ public class Console extends Stage {
     private HBox myTextHBox;
     private GridPane myButtonGridPane;
     private ComboBox myLanguageDropDown;
-    private Operator myOperator;
+    private IModelManager myManager;
     private ReferencePage myReferencePage;
+    private TextField myStateNameField;
 
     private ResourceBundle myResourcesBundle;
 
@@ -40,26 +42,29 @@ public class Console extends Stage {
     private List<String> myLanguages;
     private TextArea myUserInputField;
     private ErrorView myErrorView;
+    private GridPane mySaveStatePane;
 
     private static final int CONSOLE_WIDTH = 500;
     private static final int CONSOLE_HEIGHT = 300;
 
     private static final int BUTTON_WIDTH = 80;
     private static final int BUTTON_INSET = 5;
+    private static final int ERROR_HEIGHT = CONSOLE_HEIGHT/10;
     private static final int BUTTON_PANE_WIDTH = BUTTON_WIDTH + 50;
     private static final int BUTTON_VGAP = 10;
     private static final String RESOURCE_FILENAME = "Console";
     private static final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
-    private boolean displaying = true;
+    private boolean isDisplaying = true;
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (Operator operator){
-        myOperator = operator;
+    public Console (IModelManager manager){
+        myManager = manager;
 
         initializeInstanceVariables();
         initializeLanguageList();
+        initializeSaveStatePane();
 
         createRunButton();
         createReferencePageButton();
@@ -74,8 +79,25 @@ public class Console extends Stage {
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         this.setScene(consoleScene);
-        setOnCloseRequest(e -> displaying = false);
+        setOnCloseRequest(e -> isDisplaying = false);
         this.show();
+    }
+
+    private void initializeSaveStatePane() {
+        myStateNameField.setPromptText(myResourcesBundle.getString("NAME_PROMPT"));
+        Button saveState = createAndFormatButton(myResourcesBundle.getString("STATE_BUTTON"));
+        saveState.setOnMouseClicked(e -> saveState());
+        mySaveStatePane.add(myStateNameField, 0, 0);
+        mySaveStatePane.add(saveState, 0, 1);
+    }
+
+    private void saveState() {
+        if(!myStateNameField.getText().equals("")){
+            myManager.saveCurrentState(myStateNameField.getText());
+        }
+        else{
+            showError(myResourcesBundle.getString("NO_FILENAME"));
+        }
     }
 
     private void createLoadFileButton() {
@@ -110,11 +132,13 @@ public class Console extends Stage {
         myButtonList = new ArrayList<>();
         myLanguages = new ArrayList<>();
         myResourcesBundle = ResourceBundle.getBundle(RESOURCE_FILENAME);
+        mySaveStatePane = new GridPane();
+        myStateNameField = new TextField();
 
         myButtonGridPane = new GridPane();
         myBorderPane = new BorderPane();
         myLanguageDropDown = new ComboBox();
-        myErrorView = myOperator.getErrorPane();
+        myErrorView = new ErrorView(ERROR_HEIGHT);
         myButtonInsets = new Insets(BUTTON_INSET, BUTTON_INSET, BUTTON_INSET, BUTTON_INSET);
         myUserInputField = new TextArea();
         myTextHBox = new HBox(myUserInputField);
@@ -153,11 +177,19 @@ public class Console extends Stage {
         myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
     }
 
+    private void makeButtons(){
+
+    }
+
+    private void showReferencePage(){
+        myReferencePage.show();
+    }
+
     private void readText() {
         myErrorView.clearError();
         String input = myUserInputField.getText();
         String language = String.valueOf(myLanguageDropDown.getValue());
-        myOperator.parse(input, language);
+        myManager.parseCommand(input, language);
     }
 
     /**
@@ -172,6 +204,7 @@ public class Console extends Stage {
         for(int k = 0; k < myButtonList.size(); k++){
             myButtonGridPane.add(myButtonList.get(k), 0, k);
         }
+        myButtonGridPane.add(mySaveStatePane, 0, myButtonGridPane.getChildren().size());
     }
 
     private Button createAndFormatButton(String s){
@@ -183,6 +216,6 @@ public class Console extends Stage {
     }
 
     public boolean getDisplaying(){
-        return displaying;
+        return isDisplaying;
     }
 }
