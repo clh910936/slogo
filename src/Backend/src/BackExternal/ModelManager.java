@@ -37,6 +37,7 @@ public class ModelManager implements IModelManager {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             myCommandParser.parseCommand(inputString, language);
+            myFrontEnd.updateViews();
         }
         catch (Exception e) {
             myHistoryModel.addHistoryEntry(inputString, false);
@@ -87,6 +88,7 @@ public class ModelManager implements IModelManager {
 
     public void saveCurrentState(String fileName) {
         myCurrentStateFileModel.save(fileName);
+        myFrontEnd.updateViews();
     }
 
     public void setStateFromFile(String fileName, String language) {
@@ -95,6 +97,10 @@ public class ModelManager implements IModelManager {
 
     public void changeVariable(String variableName, String value) {
         myVariablesModel.addVariable(variableName, value);
+    }
+
+    public List<String> getSavedFilesList() {
+        return myCurrentStateFileModel.getSavedFilesList();
     }
 
 }

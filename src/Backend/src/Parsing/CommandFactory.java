@@ -4,7 +4,7 @@ import BackExternal.IllegalCommandException;
 import Commands.CommandNode;
 import BackExternal.ModelManager;
 
-public class CommandClassFinder {
+public class CommandFactory {
 
     public static CommandNode getObject(String classPath, String className, String language, ModelManager modelManager) {
         Class clazz = findReflectionClass(classPath, className);
