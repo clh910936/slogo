@@ -236,4 +236,13 @@ public class Console extends Stage {
     public boolean getDisplaying(){
         return isDisplaying;
     }
+
+    /**
+     * Can be used to write to the Console
+     * Allows user-defined commands to be written to the console
+     * @param s String of the desired text to be displayed
+     */
+    public void display(String s){
+        myUserInputField.setText(s);
+    }
 }

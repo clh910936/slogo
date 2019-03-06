@@ -1,8 +1,11 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import FrontInternal.Components.Console;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.util.Map;
@@ -14,15 +17,24 @@ import java.util.Map;
  * the UserDefinedCommands. It then displays these on a pane
  * that is created in View.
  */
-public class UserDefinedCommandsView extends View {
-
+public class UserDefinedCommandsView implements ViewAPI {
+    private Console myConsole;
+    private Accordion myAccordion;
+    private IModelManager myManager;
+    private Pane myPane;
 
     /**
      * Creates a pane that can be updated based on the manager passed through
      * @param manager used for updating
      */
-    public UserDefinedCommandsView(IModelManager manager){
-        super(manager);
+    public UserDefinedCommandsView(IModelManager manager, Console console){
+        myManager = manager;
+        myConsole = console;
+        myPane = new Pane();
+        myAccordion = new Accordion();
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(myAccordion);
+        myPane.getChildren().add(scrollPane);
     }
 
     /**
@@ -32,25 +44,43 @@ public class UserDefinedCommandsView extends View {
     @Override
     public void update() {
         //TODO: fix this so it has the tabs you were thinking
-        this.clearLines();
+        myAccordion.getPanes().clear();
         Map<String, String> map = myManager.getUserDefinedCommands();
         for(String s : map.keySet()){
-            this.addFinalLine(s);
+            addCommand(s, map.get(s));
         }
     }
 
+    private void clear(){
+
+    }
+
+    @Override
+    public Pane getPane() {
+        return myPane;
+    }
+
+    //TODO: fix this javadoc comment
     /**
      * Adds a line of text to the bottom of the existing text
      * This line cannot be edited by the user
      * @param s String of text to be added
      */
-    private void addFinalLine(String s){
-        Text text = createTextLine(s, DEFAULT_COLOR);
+    private void addCommand(String name, String contents){
+        TitledPane dropDown = new TitledPane();
+        dropDown.setText(name);
+
+        Text text = new Text();
+        text.setText(contents);
+        Pane pane = new Pane();
+        pane.getChildren().add(text);
+
+        dropDown.setContent(pane);
         text.setOnMouseClicked(e -> handleMouseClicked(text));
+        myAccordion.getPanes().add(dropDown);
     }
 
     private void handleMouseClicked(Text text){
-        String command = text.getText();
-        myManager.parseCommand(command, DEFAULT_LANGUAGE);
+        myConsole.display(text.getText());
     }
 }

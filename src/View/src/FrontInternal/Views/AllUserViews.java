@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -65,15 +66,26 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             return (ViewAPI) constructor.newInstance(myManager);
         } catch (NoSuchMethodException e) {
             try {
-                Class c = Class.forName("FrontInternal.Views." + s);
-                var constructor = c.getConstructor(IModelManager.class, Console.class);
-                return (ViewAPI) constructor.newInstance(myManager, myConsole);
-            } catch (Exception e1) {
-                return makeUnknownView();
+                System.out.println("\tAttempted to check for Console");
+                Class c2 = Class.forName("FrontInternal.Views." + s);
+                var constructor2 = c2.getConstructor(IModelManager.class, Console.class);
+                System.out.println("\t made constructor");
+                return (ViewAPI) constructor2.newInstance(myManager, myConsole);
+            } catch (InstantiationException e1) {
+                e1.printStackTrace();
+            } catch (InvocationTargetException e1) {
+                e1.printStackTrace();
+            } catch (NoSuchMethodException e1) {
+                e1.printStackTrace();
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
             }
         } catch (Exception e){
             return makeUnknownView();
         }
+        return makeUnknownView();
     }
 
     /**
