@@ -2,6 +2,7 @@ package Commands;
 
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
 
 public class UserDefinedCommand extends CommandNode {
     private String commandName;
@@ -15,7 +16,7 @@ public class UserDefinedCommand extends CommandNode {
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;
-        cp = new CommandParser(modelManager);
+        cp = new CommandParser(modelManager, language);
     }
 
 
@@ -28,7 +29,7 @@ public class UserDefinedCommand extends CommandNode {
             commands = commands.replaceAll(variable, param);
         }
         myParams.clear();
-        return cp.parseCommand(commands, myLanguage);
+        return cp.parseCommand(commands);
     }
 
     public String getCommandName() {

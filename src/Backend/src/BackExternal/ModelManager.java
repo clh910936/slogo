@@ -5,6 +5,7 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ public class ModelManager implements IModelManager {
     private VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
     private final TurtleModel myTurtleModel;
-    private final CommandParser myCommandParser;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
     private final CurrentStateFileModel myCurrentStateFileModel;
 
@@ -30,13 +30,13 @@ public class ModelManager implements IModelManager {
         myHistoryModel = new HistoryModel();
         myTurtleModel = new TurtleModel(myFrontEnd);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
-        myCommandParser = new CommandParser(this);
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
-            myCommandParser.parseCommand(inputString, language);
+            CommandParser commandParser = new CommandParser(this, language);
+            commandParser.parseCommand(inputString);
             myFrontEnd.updateViews();
         }
         catch (Exception e) {
