@@ -9,6 +9,6 @@ public class Difference extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return (double) myParams.get(0) - (double) myParams.get(1);
+        return Double.valueOf(String.valueOf(myParams.get(0))) - Double.valueOf(String.valueOf(myParams.get(1)));
     }
 }

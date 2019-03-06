@@ -2,17 +2,10 @@ package BackExternal;
 
 import API.FrontExternalAPI;
 import API.IModelManager;
-import BackExternal.ITurtle;
-import BackExternal.IllegalCommandException;
-import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
-import Models.HistoryModel;
-import Models.TurtleModel;
-import Models.UserDefinedCommandsModel;
-import Models.VariablesModel;
+import Models.*;
 import Parsing.CommandParser;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +28,7 @@ public class ModelManager implements IModelManager {
         myFrontEnd = frontend;
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel();
+        myTurtleModel = new TurtleModel(myFrontEnd);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
@@ -44,6 +37,7 @@ public class ModelManager implements IModelManager {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             myCommandParser.parseCommand(inputString, language);
+            myFrontEnd.updateViews();
         }
         catch (Exception e) {
             myHistoryModel.addHistoryEntry(inputString, false);
@@ -66,11 +60,6 @@ public class ModelManager implements IModelManager {
 
     public boolean getWasSuccessfulHistory(int i) {
         return myHistoryModel.wasSuccessful.test(i);
-    }
-
-
-    public Map<Integer,ITurtle> getTurtleList() {
-        return myTurtleModel.getAllTurtles();
     }
 
     public Map<String,String> getUserDefinedCommands() {
@@ -99,6 +88,7 @@ public class ModelManager implements IModelManager {
 
     public void saveCurrentState(String fileName) {
         myCurrentStateFileModel.save(fileName);
+        myFrontEnd.updateViews();
     }
 
     public void setStateFromFile(String fileName, String language) {
@@ -107,6 +97,10 @@ public class ModelManager implements IModelManager {
 
     public void changeVariable(String variableName, String value) {
         myVariablesModel.addVariable(variableName, value);
+    }
+
+    public List<String> getSavedFilesList() {
+        return myCurrentStateFileModel.getSavedFilesList();
     }
 
 }
