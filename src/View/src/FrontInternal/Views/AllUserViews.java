@@ -2,6 +2,7 @@ package FrontInternal.Views;
 
 import API.IModelManager;
 import FrontInternal.Components.Console;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,28 +27,32 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     private IModelManager myManager;
     private Console myConsole;
     private List<ViewAPI> myViews;
+    private ScrollPane myScrollPane;
 
-    public AllUserViews(IModelManager operator, Console console){
+    public AllUserViews(IModelManager manager, Console console){
         myViewClassResources = ResourceBundle.getBundle("ViewDropDown");
         myErrorResources = ResourceBundle.getBundle("Errors");
         myConsole = console;
-        myManager = operator;
+        myManager = manager;
         myViews = new ArrayList<>();
+        myScrollPane = new ScrollPane();
         initializeViews();
     }
 
     //Initializes all views in the ViewDropDown.properties file
     private void initializeViews(){
         TreeSet<String> set =new TreeSet<>(myViewClassResources.keySet());
+        VBox allDropDowns = new VBox();
         for(String s : set){
             ViewAPI view = makeView(s);
             myViews.add(view);
             TitledPane pane = new TitledPane();
-            pane.setExpanded(false);
             pane.setText(s);
             pane.setContent(view.getPane());
-            this.getChildren().add(pane);
+            allDropDowns.getChildren().add(pane);
         }
+        myScrollPane.setContent(allDropDowns);
+        this.getChildren().add(myScrollPane);
     }
 
 
