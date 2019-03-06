@@ -78,15 +78,15 @@ public class ModelManager implements IModelManager {
         return commandsList;
     }
 
-    protected VariablesModel getVariablesModel() {
+    public VariablesModel getVariablesModel() {
         return myVariablesModel;
     }
 
-    protected UserDefinedCommandsModel getUserDefinedCommandsModel() {
+    public UserDefinedCommandsModel getUserDefinedCommandsModel() {
         return myUserDefinedCommandsModel;
     }
 
-    protected TurtleModel getTurtleModel() {
+    public TurtleModel getTurtleModel() {
         return myTurtleModel;
     }
 
