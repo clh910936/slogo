@@ -8,8 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
 import java.util.Map;
 
 /**

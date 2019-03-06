@@ -177,6 +177,14 @@ public class Console extends Stage {
         myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
     }
 
+    private void makeButtons(){
+
+    }
+
+    private void showReferencePage(){
+        myReferencePage.show();
+    }
+
     private void readText() {
         myErrorView.clearError();
         String input = myUserInputField.getText();

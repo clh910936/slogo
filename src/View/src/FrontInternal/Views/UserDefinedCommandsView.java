@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Carrie Hunner
@@ -32,9 +32,10 @@ public class UserDefinedCommandsView extends View {
      */
     @Override
     public void update() {
+        //TODO: fix this so it has the tabs you were thinking
         this.clearLines();
-        List<String> list = myManager.getUserDefinedCommands();
-        for(String s : list){
+        Map<String, String> map = myManager.getUserDefinedCommands();
+        for(String s : map.keySet()){
             this.addFinalLine(s);
         }
     }
@@ -51,6 +52,6 @@ public class UserDefinedCommandsView extends View {
 
     private void handleMouseClicked(Text text){
         String command = text.getText();
-        myOperator.parse(command);
+        myManager.parseCommand(command, DEFAULT_LANGUAGE);
     }
 }
