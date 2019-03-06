@@ -43,6 +43,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             ViewAPI view = makeView(s);
             myViews.add(view);
             TitledPane pane = new TitledPane();
+            pane.setExpanded(false);
             pane.setText(s);
             pane.setContent(view.getPane());
             this.getChildren().add(pane);
@@ -63,10 +64,10 @@ public class  AllUserViews extends VBox implements ViewAPI  {
                 var constructor = c.getConstructor(IModelManager.class, Console.class);
                 return (ViewAPI) constructor.newInstance(myManager, myConsole);
             } catch (Exception e1) {
-                return makeUnkownView();
+                return makeUnknownView();
             }
         } catch (Exception e){
-            return makeUnkownView();
+            return makeUnknownView();
         }
     }
 
@@ -90,7 +91,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     }
 
     //View displayed in place of any of the views that failed to be added correctly
-    private ViewAPI makeUnkownView(){
+    private ViewAPI makeUnknownView(){
         ViewAPI temp = new ViewAPI() {
             @Override
             public void update() {
