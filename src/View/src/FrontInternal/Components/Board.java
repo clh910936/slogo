@@ -19,11 +19,9 @@ public class Board extends Pane implements ViewAPI {
     private GraphicsContext gc;
     private Dimension myDimensions;
 
-    private IModelManager myController;
     private TurtleManager myTurtleManager;
 
-    public Board(Dimension d, IModelManager m) {
-        myController = m;
+    public Board(Dimension d) {
         myDimensions = d;
         createCanvas(myDimensions.width, myDimensions.height);
         getChildren().addAll(myCanvas);

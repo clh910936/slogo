@@ -34,9 +34,10 @@ public class GUI implements FrontExternalAPI {
 
     // private
     public GUI() {
+        var left = makeBoard();
         myController = new ModelManager(this);
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
-        var left = makeBoard();
+
         //var right = makeRightView();
         //myRoot = new HBox(left, right);
         myConsole = new Console(myController);
@@ -53,7 +54,7 @@ public class GUI implements FrontExternalAPI {
 
 
     private Node makeBoard() {
-        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height), myController);
+        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height));
         return new HBox(myBoard);
     }
 
