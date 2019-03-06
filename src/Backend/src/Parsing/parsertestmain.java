@@ -1,9 +1,5 @@
 package Parsing;
 
-import BackExternal.ModelManager;
-import Models.CurrentStateFileModel;
-
-
 public class parsertestmain {
     public static void main (String[] args) {
 //        ModelManager mm = new ModelManager()

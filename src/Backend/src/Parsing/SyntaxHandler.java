@@ -1,7 +1,6 @@
 package Parsing;
 
 import BackExternal.IllegalCommandException;
-import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Commands.*;
 
@@ -16,6 +15,8 @@ public class SyntaxHandler {
     public static final String CONSTANT_SYMBOL = "Constant";
     public static final String LIST_START_SYMBOL = "ListStart";
     public static final String LIST_END_SYMBOL = "ListEnd";
+    public static final String GROUP_START_SYMBOL = "GroupStart";
+    public static final String GROUP_END_SYMBOL = "GroupEnd";
     public static final String COMMAND_SYMBOL = "Command";
     private static final String COMMANDS_PACKAGE_PATH = "Commands.";
     private ModelManager myModelManager;
@@ -25,7 +26,6 @@ public class SyntaxHandler {
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
     private int index = 0;
-
 
     public SyntaxHandler(String language, ModelManager modelManager) {
         myLanguage = language;
@@ -37,23 +37,27 @@ public class SyntaxHandler {
     }
 
 
-
-    public CommandNode getCommandNode(String[] commandInputList, int currentListIndex, CommandNode parent) throws IllegalParametersException {
+    public CommandNode getCommandNode(String[] commandInputList, int currentListIndex, CommandNode parent) throws IllegalCommandException {
         String rawInput = commandInputList[currentListIndex];
         String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
         index = currentListIndex;
         if(regexInput.equals(COMMENT_SYMBOL)) {
             index = getIndexAfterComment(currentListIndex,commandInputList);
         }
-        else if(regexInput.equals(LIST_END_SYMBOL)) {
+        else if(regexInput.equals(LIST_END_SYMBOL)||regexInput.equals(GROUP_END_SYMBOL)) {
             throw new IllegalCommandException("List parameter is invalid");
         }
         else if(regexInput.equals(LIST_START_SYMBOL)) {
-            String[] listContents = getListContents(commandInputList, currentListIndex);
+            String[] listContents = getListContents(commandInputList, currentListIndex, LIST_START_SYMBOL, LIST_END_SYMBOL);
             index+=listContents.length + 1;
             return new ListInput(myLanguage, myModelManager, listContents);
         }
-        if(regexInput.equals(CONSTANT_SYMBOL)) {
+        else if(regexInput.equals(GROUP_START_SYMBOL)) {
+            String[] listContents = getListContents(commandInputList, currentListIndex, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
+            index+=listContents.length + 1;
+            return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
+        }
+        else if(regexInput.equals(CONSTANT_SYMBOL)) {
             return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
         }
         else if(regexInput.equals(VARIABLE_SYMBOL)) {
@@ -64,18 +68,18 @@ public class SyntaxHandler {
                 return new Variable(myLanguage, myModelManager, rawInput.substring(1));
             }
         }
-        else {
+        else if(regexInput.equals(COMMAND_SYMBOL)){
             if(parent!=null && CommandTypePredicate.checkNeedsWordParameter(parent)) {
                 return new StringInput(myLanguage, myModelManager, rawInput);
             }
             return getNewCommandObject(rawInput);
         }
+        throw new IllegalCommandException("Syntax not valid!");
     }
 
     public int getIndex() {
         return index;
     }
-
 
     private int getIndexAfterComment(int index, String[] commandInputArray) {
         String input = commandInputArray[index];
@@ -132,23 +136,23 @@ public class SyntaxHandler {
     private CommandNode getNormalCommand(String commandName) throws IllegalCommandException {
         try{
             String command = Regex.getRegexSymbol(commandName, myCommandSymbols);
-            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, command, myLanguage, myModelManager);
+            return CommandFactory.getObject(COMMANDS_PACKAGE_PATH, command, myLanguage, myModelManager);
         }
         catch (IllegalCommandException e) {
             throw e;
         }
     }
 
-    private String[] getListContents(String[] commandInputList, int currentIndex) throws IllegalCommandException{
+    private String[] getListContents(String[] commandInputList, int currentIndex, String startSymbol, String endSymbol) throws IllegalCommandException{
         List<String> listContents = new ArrayList<>();
         int bracketCount = 1;
         for(int i = currentIndex;i<commandInputList.length;i++) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput,mySymbols);
-            if(input.equals(LIST_START_SYMBOL)) {
+            if(input.equals(startSymbol)) {
                 bracketCount++;
             }
-            else if(input.equals(LIST_END_SYMBOL)) {
+            else if(input.equals(endSymbol)) {
                 bracketCount--;
             }
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);

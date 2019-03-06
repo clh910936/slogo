@@ -2,14 +2,10 @@ package BackExternal;
 
 import API.FrontExternalAPI;
 import API.IModelManager;
-import BackExternal.ITurtle;
-import BackExternal.IllegalCommandException;
-import BackExternal.IllegalParametersException;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +37,7 @@ public class ModelManager implements IModelManager {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             myCommandParser.parseCommand(inputString, language);
+            myFrontEnd.updateViews();
         }
         catch (Exception e) {
             myHistoryModel.addHistoryEntry(inputString, false);
@@ -96,6 +93,7 @@ public class ModelManager implements IModelManager {
 
     public void saveCurrentState(String fileName) {
         myCurrentStateFileModel.save(fileName);
+        myFrontEnd.updateViews();
     }
 
     public void setStateFromFile(String fileName, String language) {

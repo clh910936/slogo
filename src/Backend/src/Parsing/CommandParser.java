@@ -189,7 +189,7 @@ public class CommandParser {
 //    private CommandNode getNormalCommand(String commandName) throws IllegalCommandException {
 //        try{
 //            String command = Regex.getRegexSymbol(commandName, myCommandSymbols);
-//            return CommandClassFinder.getObject(COMMANDS_PACKAGE_PATH, command, myLanguage, myModelManager);
+//            return CommandFactory.getObject(COMMANDS_PACKAGE_PATH, command, myLanguage, myModelManager);
 //        }
 //        catch (IllegalCommandException e) {
 //            throw e;
