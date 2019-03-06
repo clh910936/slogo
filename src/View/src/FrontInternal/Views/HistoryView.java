@@ -32,6 +32,7 @@ public class HistoryView extends View {
      */
     @Override
     public void update() {
+        System.out.println("Updating History");
         this.clearLines();
         List<String> history = myManager.getHistory();
         for(int k =0; k <history.size(); k++){

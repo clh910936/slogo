@@ -66,13 +66,14 @@ public class Console extends Stage {
 
         initializeInstanceVariables();
         initializeLanguageList();
-        initializeSaveStatePane();
+
 
         createRunButton();
         createReferencePageButton();
         createLoadFileButton();
         addButtons();
         initializeDropDown();
+        initializeSaveStatePane();
         formatButtonGridPane();
 
         myBorderPane.setCenter(myTextHBox);
