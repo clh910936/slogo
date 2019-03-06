@@ -18,7 +18,6 @@ public class Turtle extends GeneralTurtle {
         myPointX += dist * Math.cos(Math.toRadians(myHeadingAngle));
         myPointY += dist * Math.sin(Math.toRadians(myHeadingAngle));
         printTurtleStatus();
-        // TODO: call feroze
         myFrontExternalAPI.move(myPointX - STARTX, myPointY - STARTY, myId);
         //notifyObservers();
     }
@@ -26,30 +25,30 @@ public class Turtle extends GeneralTurtle {
     public void turnCounterClockwise(double degrees) {
         myHeadingAngle += degrees;
         myHeadingAngle = keepAnglePositive(myHeadingAngle);
-        // TODO: call feroze
+        myFrontExternalAPI.rotate(myHeadingAngle, myId);
     }
 
     public void setHeadingAngle(double degrees) {
         myHeadingAngle = degrees;
         myHeadingAngle = keepAnglePositive(myHeadingAngle);
-        // TODO: call feroze
+        myFrontExternalAPI.rotate(myHeadingAngle, myId);
     }
 
     public void updatePoints(double x, double y) {
         this.myPointX = x;
         this.myPointY = y;
+        myFrontExternalAPI.move(myPointX, myPointY, myId);
         printTurtleStatus();
-        // TODO: call feroze
     }
 
     public void setPenUp () {
         this.myIsPenUp = true;
-        // TODO: call feroze
+        myFrontExternalAPI.penUp(true, myId);
     }
 
     public void setPenDown () {
         this.myIsPenUp = false;
-        // TODO: call feroze
+        myFrontExternalAPI.penUp(false, myId);
     }
 
     public void setShowTurtle() {
