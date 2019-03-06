@@ -44,7 +44,7 @@ public class TurtleModel {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
     public static final boolean IS_PEN_UP = false;
-    public static final double HEADING_ANGLE = 0;
+    public static final double HEADING_ANGLE = 90;
     public static final boolean IS_DISPLAYED = true;
     public static final boolean CLEAR_SCREEN = false;
     public static final int PEN_COLOR_INDEX = 0;
@@ -70,12 +70,10 @@ public class TurtleModel {
 
     public void setCurrentActiveTurtles(List<Integer> turtleIds) {
         currentActiveTurtles = turtleIds;
-        for(int turtleId : turtleIds) {
-            if (!allTurtles.containsKey(turtleId)) {
-                allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
-                        IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
-            }
-        }
+        turtleIds.stream().
+                filter(turtleId -> !allTurtles.containsKey(turtleId)).
+                forEach(turtleId -> allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
+                IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI)));
     }
 
     public Map<Integer, Turtle> getAllTurtles() {
