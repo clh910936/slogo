@@ -42,12 +42,12 @@ public class For extends TwoParamCommand {
             if (commands.length == 0) {
                 return 0;
             }
-            CommandParser cp = new CommandParser(myModelManager,myLanguage);
+            CommandParser cp = new CommandParser(myModelManager);
             for (int i = 0; i < variableValues.size(); i++) {
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(variableValues.get(i));
                 commandString = commandString.replaceAll(variablesInfo[0], param);
-                out = cp.parseCommand(commandString);
+                out = cp.parseCommand(commandString,myLanguage);
             }
         }
         catch(IllegalCommandException e) {

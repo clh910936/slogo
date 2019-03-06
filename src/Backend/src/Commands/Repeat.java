@@ -11,7 +11,7 @@ public class Repeat extends TwoParamCommand{
 
     public Repeat(String language, ModelManager modelManager) {
         super(language, modelManager);
-        cp = new CommandParser(modelManager, language);
+        cp = new CommandParser(modelManager);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Repeat extends TwoParamCommand{
             for (int i = 1; i <= numOfTimes; i++) {
                 String commandString = String.join(" ", commands);
                 myVariablesModel.addVariable(REPCOUNT, Double.toString(i));
-                lastValue = cp.parseCommand(commandString);
+                lastValue = cp.parseCommand(commandString,myLanguage);
             }
             return lastValue;
         }

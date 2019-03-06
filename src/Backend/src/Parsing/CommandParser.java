@@ -18,15 +18,15 @@ public class CommandParser {
     private boolean turtleEvaluated = false;
     private SyntaxHandler mySyntaxHandler;
 
-    public CommandParser(ModelManager modelManager, String language) {
+    public CommandParser(ModelManager modelManager) {
         myModelManager = modelManager;
-        mySyntaxHandler = new SyntaxHandler(language, modelManager);
     }
 
-    public double parseCommand(String commandInput) throws IllegalCommandException, IllegalParametersException {
+    public double parseCommand(String commandInput, String language) throws IllegalCommandException, IllegalParametersException {
         if(commandInput.length()==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
+        mySyntaxHandler = new SyntaxHandler(language, myModelManager);
         commandInputList = commandInput.split(WHITESPACE);
         currentReturnValue = -1;
         currentListIndex = 0;
@@ -40,10 +40,10 @@ public class CommandParser {
     }
 
     private CommandNode parseForCommandNode(CommandNode parent) {
+//        currentListIndex++;
         if(currentListIndex>=commandInputList.length) {
             throw new IllegalParametersException();
         }
-//        currentListIndex++;
         CommandNode commandNode = mySyntaxHandler.getCommandNode(commandInputList,currentListIndex,parent);
         currentListIndex = mySyntaxHandler.getIndex();
         return commandNode;
