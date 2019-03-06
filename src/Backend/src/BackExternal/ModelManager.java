@@ -28,7 +28,7 @@ public class ModelManager implements IModelManager {
         myFrontEnd = frontend;
         myVariablesModel = new VariablesModel();
         myHistoryModel = new HistoryModel();
-        myTurtleModel = new TurtleModel();
+        myTurtleModel = new TurtleModel(myFrontEnd);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCommandParser = new CommandParser(this);
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
@@ -60,11 +60,6 @@ public class ModelManager implements IModelManager {
 
     public boolean getWasSuccessfulHistory(int i) {
         return myHistoryModel.wasSuccessful.test(i);
-    }
-
-
-    public Map<Integer,ITurtle> getTurtleList() {
-        return myTurtleModel.getAllTurtles();
     }
 
     public Map<String,String> getUserDefinedCommands() {
