@@ -31,4 +31,6 @@ public abstract class Sprite extends ImageView {
     public abstract void rotate(double degrees);
 
     public abstract void setPenColor(int index);
+
+    public abstract Node getPath();
 }

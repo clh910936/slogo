@@ -5,6 +5,7 @@ import API.FrontExternalAPI;
 public class Turtle extends GeneralTurtle {
 
     public static final int FULL_CIRCLE_DEGREES = 360;
+    public static final int START_DEGREES = 180;
     public static final int STARTX = 2000;
     public static final int STARTY = 2000;
 
@@ -24,13 +25,13 @@ public class Turtle extends GeneralTurtle {
 
     public void turnCounterClockwise(double degrees) {
         myHeadingAngle += degrees;
-        myHeadingAngle = keepAnglePositive(myHeadingAngle);
+        myHeadingAngle = keepAnglePositive(myHeadingAngle + START_DEGREES);
         myFrontExternalAPI.rotate(myHeadingAngle, myId);
     }
 
     public void setHeadingAngle(double degrees) {
         myHeadingAngle = degrees;
-        myHeadingAngle = keepAnglePositive(myHeadingAngle);
+        myHeadingAngle = keepAnglePositive(myHeadingAngle + START_DEGREES);
         myFrontExternalAPI.rotate(myHeadingAngle, myId);
     }
 
