@@ -22,7 +22,7 @@ public class ModelManager implements IModelManager {
     private final TurtleModel myTurtleModel;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
     private final CurrentStateFileModel myCurrentStateFileModel;
-
+    private final CommandParser myCommandParser;
 
     public ModelManager(FrontExternalAPI frontend) {
         myFrontEnd = frontend;
@@ -31,12 +31,13 @@ public class ModelManager implements IModelManager {
         myTurtleModel = new TurtleModel(myFrontEnd);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
+        myCommandParser = new CommandParser(this);
+
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
-            CommandParser commandParser = new CommandParser(this, language);
-            commandParser.parseCommand(inputString);
+            myCommandParser.parseCommand(inputString, language);
             myFrontEnd.updateViews();
         }
         catch (Exception e) {

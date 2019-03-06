@@ -50,11 +50,11 @@ public class SyntaxHandler {
                 throw new IllegalCommandException("List parameter is invalid");
             case LIST_START_SYMBOL :
                 String[] listContents = getListContents(commandInputList, currentListIndex, LIST_START_SYMBOL, LIST_END_SYMBOL);
-                index+=listContents.length + 1;
+                index+=listContents.length + 2;
                 return new ListInput(myLanguage, myModelManager, listContents);
             case GROUP_START_SYMBOL :
                 listContents = getListContents(commandInputList, currentListIndex, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
-                index+=listContents.length + 1;
+                index+=listContents.length + 2;
                 return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
             case CONSTANT_SYMBOL :
                 return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
@@ -146,7 +146,7 @@ public class SyntaxHandler {
     private String[] getListContents(String[] commandInputList, int currentIndex, String startSymbol, String endSymbol) throws IllegalCommandException{
         List<String> listContents = new ArrayList<>();
         int bracketCount = 1;
-        for(int i = currentIndex;i<commandInputList.length;i++) {
+        for(int i = currentIndex+1;i<commandInputList.length;i++) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput,mySymbols);
             if(input.equals(startSymbol)) {
@@ -156,6 +156,7 @@ public class SyntaxHandler {
                 bracketCount--;
             }
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
+
             listContents.add(rawInput);
         }
         throw new IllegalCommandException("Invalid ListInput Parameter");

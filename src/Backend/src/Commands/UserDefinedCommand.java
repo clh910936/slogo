@@ -16,7 +16,7 @@ public class UserDefinedCommand extends CommandNode {
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;
-        cp = new CommandParser(modelManager, language);
+        cp = new CommandParser(modelManager);
     }
 
 
@@ -29,7 +29,7 @@ public class UserDefinedCommand extends CommandNode {
             commands = commands.replaceAll(variable, param);
         }
         myParams.clear();
-        return cp.parseCommand(commands);
+        return cp.parseCommand(commands,myLanguage);
     }
 
     public String getCommandName() {
