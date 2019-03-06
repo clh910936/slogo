@@ -16,6 +16,8 @@ public class ClearScreen extends ZeroParamCommand {
         Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
 
         double dist = myTurtle.getDistToPoint(STARTX,STARTY);
+
+        //TODO: call feroze
 //        myTurtle.setClearScreen();
 //        myModelManager.createNewTurtleModel();
         return dist;
