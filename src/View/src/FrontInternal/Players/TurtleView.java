@@ -26,6 +26,9 @@ public class TurtleView extends Sprite {
     private GraphicsContext gc;
 
     private Pen myPen;
+    private boolean isBusy;
+
+    private TurtleScheduler myScheduler;
 
     public TurtleView(Dimension d, GraphicsContext g, int id){
         super(id);
@@ -38,6 +41,9 @@ public class TurtleView extends Sprite {
         gc = g;
 
         myPen = new Pen();
+        isBusy = false;
+
+        myScheduler = new TurtleScheduler(this);
     }
 
     private void place(int i, int j) {
@@ -52,8 +58,11 @@ public class TurtleView extends Sprite {
         myLastY = 0;
     }
 
+    public TurtleScheduler getScheduler() {
+        return myScheduler;
+    }
     public void update() {
-
+        myScheduler.update();
     }
 
     public double getCenterX() {
@@ -67,105 +76,116 @@ public class TurtleView extends Sprite {
 
 
     public void rotate(double angle) {
+        setBusy(true);
         setRotate(angle);
+        System.out.println(isBusy);
+        setBusy(false);
     }
 
-    public double getCurrentX() {
+    private double getCurrentX() {
         return getTranslateX() + getCenterX();
     }
 
-    public double getCurrentY() {
+    private double getCurrentY() {
         return getTranslateY() + getCenterY();
     }
 
 
-    public double getLastX() {
+    private double getLastX() {
         return myLastX;
     }
 
-    public double getLastY() {
+    private double getLastY() {
         return myLastY;
     }
 
-    public void setLastX(double x) {
+    private void setLastX(double x) {
         myLastX = x;
     }
 
-    public void setLastY(double y) {
+    private void setLastY(double y) {
         myLastY = y;
+    }
+
+    private void setBusy(boolean b) {
+        isBusy = b;
+    }
+
+    public boolean getBusy() {
+        return isBusy;
     }
 
     //TODO: REFACTOR THIS MASSIVE METHOD
     @Override
-    public synchronized void move(double x, double y) {
-            double xdisp = x - getLastX();
-            double ydisp = y - getLastY();
+    public  void move(Double x, Double y) {
+        setBusy(true);
+        double xdisp = x - getLastX();
+        double ydisp = y - getLastY();
 
-            if (!(xdisp == 0 && ydisp == 0)) {
-                PathTransition pt = new PathTransition();
+        if (!(xdisp == 0 && ydisp == 0)) {
+            PathTransition pt = new PathTransition();
 
-                pt.setDuration(Duration.seconds(1));
-                pt.setNode(this);
+            pt.setDuration(Duration.seconds(1));
+            pt.setNode(this);
 
-                LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
+            LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
 
-                //have to update turtle location after this
-                myPath.getElements().addAll(l);
-                pt.setPath(myPath);
-                pt.setOrientation(PathTransition.OrientationType.NONE);
-                //pt.setCycleCount(Timeline.INDEFINITE);
-                //pt.setAutoReverse(true);
-                pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            //have to update turtle location after this
+            myPath.getElements().addAll(l);
+            pt.setPath(myPath);
+            pt.setOrientation(PathTransition.OrientationType.NONE);
+            //pt.setCycleCount(Timeline.INDEFINITE);
+            //pt.setAutoReverse(true);
+            pt.currentTimeProperty().addListener(new ChangeListener<Duration>() {
 
-                    Location oldLocation = null;
+                Location oldLocation = null;
 
-                    /**
-                     * Draw a line from the old location to the new location
-                     */
-                    @Override
-                    public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                /**
+                 * Draw a line from the old location to the new location
+                 */
+                @Override
+                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
 
-                        // skip starting at 0/0
-                        if (oldValue == Duration.ZERO)
-                            return;
+                    // skip starting at 0/0
+                    if (oldValue == Duration.ZERO)
+                        return;
 
-                        // get current location
-                        double x = getCurrentX();
-                        double y = getCurrentY();
-                        System.out.println("in loop");
-                        //                System.out.println("current x: " + x);
-                        //                System.out.println("current y: " + y);
-                        //                System.out.println("angle: " + turtle.getRotate());
+                    // get current location
+                    double x = getCurrentX();
+                    double y = getCurrentY();
+                    //                System.out.println("current x: " + x);
+                    //                System.out.println("current y: " + y);
+                    //                System.out.println("angle: " + turtle.getRotate());
 
-                        // initialize the location
-                        if (oldLocation == null) {
-                            oldLocation = new Location(x, y);
-                            return;
-                        }
-
-                        // draw line
-                        if (!myPen.getPenUp()) {
-                            gc.setStroke(myPen.getColor());
-                            gc.setFill(Color.YELLOW);
-                            gc.setLineWidth(myPen.getSize());
-                            gc.strokeLine(oldLocation.getX(), oldLocation.getY(), x, y);
-                        }
-
-                        oldLocation.setX(x);
-                        oldLocation.setY(y);
+                    // initialize the location
+                    if (oldLocation == null) {
+                        oldLocation = new Location(x, y);
+                        return;
                     }
-                });
 
-                System.out.println("going to play");
-                pt.play();
-                System.out.println("played");
-                myPath.getElements().clear();
-                myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
+                    // draw line
+                    if (!myPen.getPenUp()) {
+                        gc.setStroke(myPen.getColor());
+                        gc.setFill(Color.YELLOW);
+                        gc.setLineWidth(myPen.getSize());
+                        gc.strokeLine(oldLocation.getX(), oldLocation.getY(), x, y);
+                    }
 
-                setLastX(x);
-                setLastY(y);
+                    oldLocation.setX(x);
+                    oldLocation.setY(y);
 
+                }
+            });
+            pt.setOnFinished(e -> setBusy(false));
+            pt.play();
+            myPath.getElements().clear();
+            myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
+            setLastX(x);
+            setLastY(y);
         }
+        //setBusy(false);
+
+
     }
 
     public void setPen(boolean pen) {

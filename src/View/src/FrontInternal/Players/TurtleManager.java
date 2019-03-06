@@ -40,16 +40,18 @@ public class TurtleManager extends SpriteManager {
     }
 
 
-    public void moveTurtle(double x, double y, int turtleId) {
-        get(turtleId).move(x, y);
+    public void move(double x, double y, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, x, y);
     }
 
     public void setPen(boolean penUp, int turtleId) {
         get(turtleId).setPen(penUp);
     }
 
-    public void rotateTurtle(double degrees, int turtleId) {
-        get(turtleId).rotate(degrees);
+    public void rotate(double degrees, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, degrees);
     }
 
     public void setPenColor(int index, int turtleId) {
@@ -64,5 +66,9 @@ public class TurtleManager extends SpriteManager {
 
     public void addTurtle(int turtleId) {
         addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId));
+    }
+
+    public void update() {
+        GAME_ACTORS.values().forEach(Sprite::update);
     }
 }

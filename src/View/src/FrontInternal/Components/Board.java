@@ -1,18 +1,13 @@
 package FrontInternal.Components;
 
-import API.IModelManager;
-
 import FrontInternal.Players.TurtleManager;
 import FrontInternal.Views.ViewAPI;
-import javafx.animation.PathTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -26,6 +21,8 @@ public class Board extends Pane implements ViewAPI {
     private Dimension myDimensions;
 
     private TurtleManager myTurtleManager;
+    public static final int FRAMES_PER_SECOND = 60;
+    public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 
     public Board(Dimension d) {
         myDimensions = d;
@@ -33,6 +30,12 @@ public class Board extends Pane implements ViewAPI {
         getChildren().addAll(myCanvas);
 
         myTurtleManager = new TurtleManager(this);
+
+        var frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> update());
+        var animation = new Timeline();
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.getKeyFrames().add(frame);
+        animation.play();
 
 
     }
@@ -55,7 +58,7 @@ public class Board extends Pane implements ViewAPI {
     }
 
     public void move(double x, double y, int turtleId) {
-        myTurtleManager.moveTurtle(x, y, turtleId);
+        myTurtleManager.move(x, y, turtleId);
 
     }
 
@@ -65,7 +68,7 @@ public class Board extends Pane implements ViewAPI {
 
     @Override
     public void update() {
-        
+        myTurtleManager.update();
     }
 
     @Override
@@ -88,7 +91,7 @@ public class Board extends Pane implements ViewAPI {
     }
 
     public void rotate(double degrees, int turtleId) {
-        myTurtleManager.rotateTurtle(degrees, turtleId);
+        myTurtleManager.rotate(degrees, turtleId);
     }
 
     public void setPenColor(int index, int turtleId) {
