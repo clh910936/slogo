@@ -19,8 +19,8 @@ public class If extends TwoParamCommand {
             String[] commands = (String[]) myParams.get(1);
             if (expr != 0) {
                 String commandString = String.join(" ", commands);
-                CommandParser cp = new CommandParser(myModelManager);
-                out = cp.parseCommand(commandString, myLanguage);
+                CommandParser cp = new CommandParser(myModelManager,myLanguage);
+                out = cp.parseCommand(commandString);
             }
         }
         catch (Exception e) {

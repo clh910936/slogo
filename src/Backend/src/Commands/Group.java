@@ -3,6 +3,7 @@ package Commands;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
 
 public class Group extends ZeroParamCommand {
     private String[] myParamGroup;
@@ -28,8 +29,8 @@ public class Group extends ZeroParamCommand {
         else {
             commandToParse = handleOtherParams();
         }
-        CommandParser commandParser = new CommandParser(myModelManager);
-        return commandParser.parseCommand(commandToParse,myLanguage);
+        CommandParser commandParser = new CommandParser(myModelManager, myLanguage);
+        return commandParser.parseCommand(commandToParse);
     }
 
     private String handleTwoParams() {

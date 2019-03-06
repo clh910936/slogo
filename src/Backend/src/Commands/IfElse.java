@@ -27,8 +27,8 @@ public class IfElse extends ThreeParamCommand {
                 commandsToExecute = commandsFalse;
             }
             String commandString = String.join(" ", commandsToExecute);
-            CommandParser cp = new CommandParser(myModelManager);
-            out = cp.parseCommand(commandString, myLanguage);
+            CommandParser cp = new CommandParser(myModelManager,myLanguage);
+            out = cp.parseCommand(commandString);
         }
         catch (Exception e) {
             return 0;
