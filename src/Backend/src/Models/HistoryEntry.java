@@ -9,11 +9,11 @@ public class HistoryEntry {
         this.successful = successful;
     }
 
-    public boolean getSuccess() {
+    protected boolean getSuccess() {
         return successful;
     }
 
-    public String getCommandString() {
+    protected String getCommandString() {
         return myCommand;
     }
 }

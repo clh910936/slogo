@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 public class HistoryModel {
 
     private List<HistoryEntry> myHistory;
-    public final Predicate<Integer> wasSuccessful = index -> (myHistory.get(index).getSuccess());
+    private final Predicate<Integer> wasSuccessful = index -> (myHistory.get(index).getSuccess());
 
     public HistoryModel() {
         myHistory = new ArrayList<>();
@@ -20,13 +20,12 @@ public class HistoryModel {
 
     public List<String> getHistory() {
         List<String> history = new ArrayList<>();
-        for (HistoryEntry entry : myHistory) {
-            history.add(entry.getCommandString());
-        }
+        myHistory.forEach(entry -> history.add(entry.getCommandString()));
         return Collections.unmodifiableList(history);
     }
 
     public boolean getWasSuccessful(int i) throws IndexOutOfBoundsException {
         if(myHistory.size()<i) throw new IndexOutOfBoundsException();
-        return wasSuccessful.test(i);}
+        return wasSuccessful.test(i);
+    }
 }

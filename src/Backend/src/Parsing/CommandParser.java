@@ -7,7 +7,6 @@ import BackExternal.ModelManager;
 import Models.TurtleModel;
 import Models.VariablesModel;
 
-
 public class CommandParser {
     public static final String WHITESPACE = "\\s+";
 
@@ -28,7 +27,6 @@ public class CommandParser {
         commandInputList = commandInput.split(WHITESPACE);
         mySyntaxHandler = new SyntaxHandler(language, myModelManager,commandInputList);
         currentReturnValue = -1;
-
         while(!mySyntaxHandler.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
