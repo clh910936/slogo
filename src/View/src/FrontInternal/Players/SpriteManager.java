@@ -4,16 +4,16 @@ import java.util.*;
 
 public abstract class SpriteManager {
     /** All the sprite objects currently in play */
-    protected final static Map<Integer, Sprite> GAME_ACTORS = new HashMap<>();
+    //protected final static Map<Integer, Sprite> GAME_ACTORS = new HashMap<>();
 
     /** Used when turtles needs to disappear/get deleted
      */
     protected final static Set<Sprite> CLEAN_UP_SPRITES = new HashSet();
 
     /** */
-    public List<Sprite> getAllSprites() {
-        return (List<Sprite>) GAME_ACTORS.values();
-    }
+//    public List<Sprite> getAllSprites() {
+//        return (List<Sprite>) GAME_ACTORS.values();
+//    }
 
     public abstract void addSprites(Sprite... sprites);
 
@@ -36,9 +36,9 @@ public abstract class SpriteManager {
         }
     }
 
-    protected Sprite get(int turtleId) {
-        return GAME_ACTORS.get(turtleId);
-    }
+    //protected Sprite get(int turtleId) {
+        //return GAME_ACTORS.get(turtleId);
+    //}
 
     /**
      * VarArgs of sprite objects to be removed from the game.

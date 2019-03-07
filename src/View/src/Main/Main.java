@@ -23,7 +23,6 @@ public class Main extends Application {
 
         TitledPane tPane = new TitledPane();
 
-
         stage.setTitle(TITLE);
         stage.setScene(display.getScene());
         stage.show();

@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import java.util.*;
 
 
-public class PaletteView implements ViewAPI{
+public class PaletteView extends View{
     private ScrollPane myScrollPane;
     private IModelManager myManager;
     private Pane myPane;
@@ -26,12 +26,13 @@ public class PaletteView implements ViewAPI{
 
     //TODO: PALETTEVIEW HAS TO TELL THE BOARD ITS COLORS SOMEHOW
     public PaletteView(IModelManager manager) {
-        //super(manager);
+        super(manager);
         myManager = manager;
         myRoot = new HBox();
         makeScrollPane();
         addDefaultColors();
         addPlus();
+        setContents(myPane);
     }
 
     private void addPlus() {
@@ -104,7 +105,7 @@ public class PaletteView implements ViewAPI{
 
         var y = new HBox(myScrollPane);
         y.setMinHeight(210);
-        y.setMaxWidth(180);
+        //y.setMaxWidth(180);
 
         myPane = y;
     }

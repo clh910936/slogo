@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -58,6 +59,10 @@ public class GUI implements FrontExternalAPI {
         return new HBox(myBoard);
     }
 
+    public Pane getPane() {
+        return myRoot;
+    }
+
 //    private Node makeConsoleButton() {
 //        var b = makeButton("OpenConsole", e -> openConsole(null));
 //        b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
@@ -96,7 +101,7 @@ public class GUI implements FrontExternalAPI {
     //TODO: THIS IS MESSY AND I DONT LIKE IT BUT IT WORKS
     @Override
     public void setBackgroundColor(int index) {
-        for (ViewAPI v: myToolBar.getViews()) {
+        for (View v: myToolBar.getViews()) {
             if (v instanceof PaletteView) {
                 Color c = ((PaletteView) v).getColor(index);
                 myBoard.setBackgroundColor(c);
@@ -122,7 +127,7 @@ public class GUI implements FrontExternalAPI {
     //TODO EW
     @Override
     public void setPenColor(int index, int turtleId) {
-        for (ViewAPI v: myToolBar.getViews()) {
+        for (View v: myToolBar.getViews()) {
             if (v instanceof PaletteView) {
                 Color c = ((PaletteView) v).getColor(index);
                 myBoard.setPenColor(c, turtleId);
@@ -149,7 +154,7 @@ public class GUI implements FrontExternalAPI {
     //TODO THIS IS ALSO MESSY
     @Override
     public void setPalette(int index, int r, int g, int b) {
-        for (ViewAPI v: myToolBar.getViews()) {
+        for (View v: myToolBar.getViews()) {
             if (v instanceof PaletteView) {
                 ((PaletteView) v).addColor(index, r,g,b);
             }
