@@ -28,7 +28,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     private Console myConsole;
     private List<View> myViews;
     private ScrollPane myScrollPane;
-    private static final int WIDTH = 200;
+    private static final int WIDTH = 300;
 
     public AllUserViews(IModelManager manager, Console console){
         myViewClassResources = ResourceBundle.getBundle("ViewDropDown");
