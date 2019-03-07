@@ -48,7 +48,7 @@ public class TurtleModel {
     public static final boolean IS_DISPLAYED = true;
     public static final boolean CLEAR_SCREEN = false;
     public static final int PEN_COLOR_INDEX = 0;
-    public static final double PEN_SIZE = 5.0;
+    public static final double PEN_SIZE = 4.0;
     public static final int SHAPE_INDEX = 0;
 
 

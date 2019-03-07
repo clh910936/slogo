@@ -65,17 +65,17 @@ public class Turtle extends GeneralTurtle {
 
     public void setPensize(double pixels) {
         this.myPenSize = pixels;
-        // TODO: call feroze
+        myFrontExternalAPI.setPenSize(myPenSize, myId);
     }
 
     public void setPenColor(int index) {
         this.myPenColourIndex = index;
-        // TODO: call feroze
+        myFrontExternalAPI.setPenColor(myPenColourIndex, myId);
     }
 
     public void setShapeIndex(int index) {
         this.myShapeIndex = index;
-        // TODO: call feroze
+        myFrontExternalAPI.setShape(myShapeIndex, myId);
     }
 
     public void clearScreen() {
