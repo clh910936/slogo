@@ -120,9 +120,15 @@ public class GUI implements FrontExternalAPI {
         myBoard.move(x, y, turtleId);
     }
 
+    //TODO EW
     @Override
     public void setPenColor(int index, int turtleId) {
-        myBoard.setPenColor(index, turtleId);
+        for (ViewAPI v: myToolBar.getViews()) {
+            if (v instanceof PaletteView) {
+                Color c = ((PaletteView) v).getColor(index);
+                myBoard.setPenColor(c, turtleId);
+            }
+        }
     }
 
     @Override
@@ -138,6 +144,7 @@ public class GUI implements FrontExternalAPI {
     @Override
     public void setDisplayTurtle(boolean isDisplayed, int turtleId) {
         //TODO: implement
+        myBoard.setDisplayed(isDisplayed, turtleId);
     }
 
     //TODO THIS IS ALSO MESSY
