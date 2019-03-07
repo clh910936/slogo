@@ -22,7 +22,8 @@ import javafx.scene.paint.Paint;
 public abstract class View implements ViewAPI {
     protected IModelManager myManager;
     protected static final Paint DEFAULT_COLOR = Color.BLACK;
-    private Insets myInsets = new Insets(10, 10, 10, 10);
+    private static final int INSET = 10;
+    private static final Insets myInsets = new Insets(INSET, INSET, INSET, INSET);
 
     private VBox myVBox;
     private ScrollPane myVariableScroll;
