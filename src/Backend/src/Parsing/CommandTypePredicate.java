@@ -13,14 +13,13 @@ public class CommandTypePredicate {
     public static final List<String> TURTLE_COMMANDS = new ArrayList<>(
             Arrays.asList(
                     "Forward","Backward","Left","Right","SetHeading","SetTowards","SetPosition","PenDown","PenUp",
-                    "ShowTurtle","HideTurtle","Home","ClearScreen"
+                    "ShowTurtle","HideTurtle","Home","ClearScreen", "ID"
             )
     );
 
     public static final Predicate<CommandNode> needsWordParameter = command -> (command.getCommandName().equals(MAKE_COMMAND));
 
     public static final Predicate<CommandNode> needsVariableParameter = command -> (command.getCommandName().equals(MAKE_VARIABLE_COMMAND));
-
 
     public static final Predicate<CommandNode> isTurtleCommand = command -> (TURTLE_COMMANDS.contains(command.getCommandName()));
 

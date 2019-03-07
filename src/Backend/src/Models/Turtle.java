@@ -80,6 +80,8 @@ public class Turtle extends GeneralTurtle {
 
     public void clearScreen() {
         myFrontExternalAPI.clearBoard();
+
+
     }
 
     public int getPenColorIndex() {
