@@ -35,10 +35,7 @@
 package Models;
 import API.FrontExternalAPI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TurtleModel {
     public static final double STARTX = 2000;
@@ -86,7 +83,11 @@ public class TurtleModel {
     }
 
     public List<Integer> getCurrentActiveTurtles() {
-        return currentActiveTurtles;
+        return Collections.unmodifiableList(currentActiveTurtles);
+    }
+
+    public void clearCurrentActiveTurtles() {
+        currentActiveTurtles.clear();
     }
 
     public void setCurrentTurtle(int index) {
@@ -96,5 +97,7 @@ public class TurtleModel {
     public int getCurrentTurtleIndex() {
         return currentTurtleIndex;
     }
+
+
 
 }
