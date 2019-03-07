@@ -18,7 +18,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -65,7 +64,7 @@ public class CurrentStateFileModel {
 
     public void setStateFromFile(String fileName, String language) {
         try {
-            File file = new File(DOCUMENT_PATH + fileName + ".xml");
+            File file = new File(DOCUMENT_PATH + fileName);
             Document document = db.parse(file);
 
             readTag(document, USER_DEFINED_COMMAND_TAG, eElement -> {
@@ -95,31 +94,32 @@ public class CurrentStateFileModel {
 
     public void saveStateIntoFile(String fileName) {
         try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.newDocument();
             Element rootElement = doc.createElement("CONFIGURATION");
             doc.appendChild(rootElement);
 
             Element savedVariable = doc.createElement(VARIABLE_TAG);
             Map<String,String> variablesDataMap = myVariablesModel.getVariables();
-            final Function<String, Map<String,String>> variableTagObjects = variable -> {
+            Function<String, Map<String,String>> variableTagObjects = variable -> {
                 return Map.ofEntries(
                         entry(VAR_NAME_TAG, variable),
                         entry(VAR_VALUE_TAG, variablesDataMap.get(variable))
                 );
             };
-            saveElementType(variablesDataMap, variable -> addChildElements(doc,variableTagObjects.apply(variable),savedVariable));
+            saveElementType(variablesDataMap, variable -> addChildElements(doc,variableTagObjects.apply(variable),savedVariable,rootElement));
 
             Element savedCommand = doc.createElement(USER_DEFINED_COMMAND_TAG);
             Map<String, UserDefinedCommand> commandsDataMap = myUserDefinedCommandsModel.getUserCreatedCommands();
-            final Function<UserDefinedCommand, Map<String,String>> commandTagObjects = command -> {
+            Function<UserDefinedCommand, Map<String,String>> commandTagObjects = command -> {
                 return Map.ofEntries(
                         entry(COMMAND_NAME_TAG, command.getCommandName()),
                         entry(COMMAND_VAR_TAG, command.getVariablesToString()),
                         entry(COMMAND_COMMANDS_TAG, command.getCommands())
                 );
             };
-            saveElementType(commandsDataMap, command -> addChildElements(doc,commandTagObjects.apply(commandsDataMap.get(command)),savedCommand));
-
+            saveElementType(commandsDataMap, command -> addChildElements(doc,commandTagObjects.apply(commandsDataMap.get(command)),savedCommand,rootElement));
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
@@ -127,7 +127,7 @@ public class CurrentStateFileModel {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
             transformer.transform(source, result);
-        } catch (TransformerException tfe) {
+        } catch (Exception tfe) {
             // Should not ever happen - Exception required to be caught by Java
             System.out.println(tfe);
             }
@@ -139,14 +139,14 @@ public class CurrentStateFileModel {
         });
     }
 
-    private void addChildElements(Document doc, Map<String,String> tagToDataMap, Element mainRoot) {
+    private void addChildElements(Document doc, Map<String,String> tagToDataMap, Element mainRoot, Element fileRoot) {
+
         tagToDataMap.keySet().stream().forEach(tag-> {
             Element root = doc.createElement(tag);
             root.appendChild(doc.createTextNode(tagToDataMap.get(tag)));
             mainRoot.appendChild(root);
-                }
-
-        );
+        });
+        fileRoot.appendChild(mainRoot);
     }
 
 

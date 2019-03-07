@@ -5,6 +5,7 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
 
 import java.util.HashMap;
 import java.util.List;
