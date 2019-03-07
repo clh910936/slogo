@@ -5,7 +5,6 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
-import Parsing.SyntaxHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +22,8 @@ public class ModelManager implements IModelManager {
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
     private final CurrentStateFileModel myCurrentStateFileModel;
     private final CommandParser myCommandParser;
+    private final PaletteModel myPaletteModel;
+    private final BackgroundModel myBackgroundModel;
 
     public ModelManager(FrontExternalAPI frontend) {
         myFrontEnd = frontend;
@@ -32,7 +33,8 @@ public class ModelManager implements IModelManager {
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
         myCommandParser = new CommandParser(this);
-
+        myPaletteModel = new PaletteModel();
+        myBackgroundModel = new BackgroundModel();
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
@@ -88,6 +90,14 @@ public class ModelManager implements IModelManager {
 
     public TurtleModel getTurtleModel() {
         return myTurtleModel;
+    }
+
+    public PaletteModel getMyPaletteModel() {
+        return myPaletteModel;
+    }
+
+    public BackgroundModel getMyShapeModel() {
+        return myBackgroundModel;
     }
 
     public void saveCurrentState(String fileName) {
