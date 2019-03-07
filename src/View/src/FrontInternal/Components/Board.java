@@ -78,8 +78,9 @@ public class Board extends Pane implements ViewAPI {
 
 
     public void clear() {
-        getChildren().clear();
-        gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        //getChildren().clear();
+        setBackground(Color.BEIGE);
+        //gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
         System.out.println("cleared screen");
         //setBackground(Color.BEIGE);
     }
