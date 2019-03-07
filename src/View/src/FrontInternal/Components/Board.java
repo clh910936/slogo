@@ -115,8 +115,8 @@ public class Board extends Pane implements ViewAPI {
         myTurtleManager.rotate(degrees, turtleId);
     }
 
-    public void setPenColor(int index, int turtleId) {
-        myTurtleManager.setPenColor(index, turtleId);
+    public void setPenColor(Color c, int turtleId) {
+        myTurtleManager.setPenColor(c, turtleId);
     }
 
     public void setPenSize(double pixels, int turtleId) {
@@ -129,5 +129,9 @@ public class Board extends Pane implements ViewAPI {
 
     public void addTurtle(int turtleId) {
         myTurtleManager.addTurtle(turtleId);
+    }
+
+    public void setDisplayed(boolean isDisplayed, int turtleId) {
+        myTurtleManager.setDisplayed(isDisplayed, turtleId);
     }
 }

@@ -195,9 +195,9 @@ public class TurtleView extends Sprite {
         setBusy(false);
     }
 
-    public void setPenColor(int index) {
+    public void setPenColor(Color c) {
         setBusy(true);
-        myPen.setColor(Color.RED);
+        myPen.setColor(c);
         setBusy(false);
     }
 
@@ -210,5 +210,9 @@ public class TurtleView extends Sprite {
     @Override
     public Node getPath() {
         return myPath;
+    }
+
+    public void setDisplayed(boolean display) {
+        setVisible(display);
     }
 }
