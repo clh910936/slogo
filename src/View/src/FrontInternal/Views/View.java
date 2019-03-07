@@ -19,7 +19,7 @@ import javafx.scene.paint.Paint;
  * This is used to format the HistoryView, VariablesView,
  * and UserDefinedCommandsView
  */
-public abstract class View implements ViewAPI {
+public abstract class View {
     protected IModelManager myManager;
     protected static final Paint DEFAULT_COLOR = Color.BLACK;
     private static final int INSET = 10;
@@ -28,7 +28,7 @@ public abstract class View implements ViewAPI {
     private VBox myVBox;
     private ScrollPane myVariableScroll;
     protected static final String DEFAULT_LANGUAGE = "English";
-    private static final int HEIGHT = 100;
+    private static final int DEFAULT_HEIGHT = 100;
 
 
 
@@ -40,7 +40,7 @@ public abstract class View implements ViewAPI {
         myVBox = new VBox();
 
         myVBox.setFillWidth(true);
-        myVBox.setPrefHeight(HEIGHT);
+        myVBox.setPrefHeight(DEFAULT_HEIGHT);
 
         myVariableScroll = new ScrollPane();
         myVariableScroll.setFitToWidth(true);
@@ -50,12 +50,13 @@ public abstract class View implements ViewAPI {
         myVariableScroll.setBorder(Border.EMPTY);
     }
 
-
-
+    protected void setHeight(int height){
+        myVBox.setPrefHeight(height);
+    }
 
 
     protected void setContents(Pane p){
-        p.setPrefHeight(HEIGHT);
+        p.setPrefHeight(DEFAULT_HEIGHT);
         p.setPrefWidth(myVBox.getWidth());
         p.setPadding(myInsets);
         myVariableScroll.setContent(p);
@@ -63,10 +64,8 @@ public abstract class View implements ViewAPI {
 
 
 
-    @Override
     public abstract void update();
 
-    @Override
     public Pane getPane() {
         return myVBox;
     }
