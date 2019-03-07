@@ -112,7 +112,6 @@ public class Console extends Stage {
 
     private void saveState() {
         if(!myStateNameField.getText().equals("")){
-            System.out.println("Saved file named: " + myStateNameField.getText());
             myManager.saveCurrentState(myStateNameField.getText());
             myStateNameField.clear();
         }
@@ -125,11 +124,12 @@ public class Console extends Stage {
         File file = getFile();
         try {
             Scanner scanner = new Scanner(file);
-            String fileContents = new String();
+            StringBuilder fileContents = new StringBuilder();
             while(scanner.hasNext()){
-                fileContents += scanner.nextLine() + myGeneralResourceBundle.getString("NLN");
+                fileContents.append(scanner.nextLine());
+                fileContents.append(myGeneralResourceBundle.getString("NLN"));
             }
-            myUserInputField.setText(fileContents);
+            myUserInputField.setText(fileContents.toString());
         } catch (FileNotFoundException e) {
             myErrorView.displayError(myGeneralResourceBundle.getString("FILE_NOT_FOUND"));
         }
