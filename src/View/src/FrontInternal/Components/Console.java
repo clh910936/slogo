@@ -127,7 +127,6 @@ public class Console extends Stage {
             Scanner scanner = new Scanner(file);
             String fileContents = new String();
             while(scanner.hasNext()){
-                //TODO: make sure the NLN character is working in the properties file
                 fileContents += scanner.nextLine() + myGeneralResourceBundle.getString("NLN");
             }
             myUserInputField.setText(fileContents);
