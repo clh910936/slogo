@@ -6,6 +6,7 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.Map;
@@ -17,24 +18,22 @@ import java.util.Map;
  * the UserDefinedCommands. It then displays these on a pane
  * that is created in View.
  */
-public class UserDefinedCommandsView implements ViewAPI {
+public class UserDefinedCommandsView extends View {
     private Console myConsole;
     private Accordion myAccordion;
-    private IModelManager myManager;
-    private Pane myPane;
+    private VBox myVBox;
 
     /**
      * Creates a pane that can be updated based on the manager passed through
      * @param manager used for updating
      */
     public UserDefinedCommandsView(IModelManager manager, Console console){
-        myManager = manager;
+        super(manager);
         myConsole = console;
-        myPane = new Pane();
+        myVBox = new VBox();
         myAccordion = new Accordion();
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(myAccordion);
-        myPane.getChildren().add(scrollPane);
+        myVBox.getChildren().add(myAccordion);
+        setContents(myVBox);
     }
 
     /**
@@ -57,23 +56,18 @@ public class UserDefinedCommandsView implements ViewAPI {
 
     @Override
     public Pane getPane() {
-        return myPane;
+        return myVBox;
     }
 
     //TODO: fix this javadoc comment
-    /**
-     * Adds a line of text to the bottom of the existing text
-     * This line cannot be edited by the user
-     * @param s String of text to be added
-     */
     private void addCommand(String name, String contents){
         TitledPane dropDown = new TitledPane();
         dropDown.setText(name);
 
         Text text = new Text();
         text.setText(contents);
-        Pane pane = new Pane();
-        pane.getChildren().add(text);
+        ScrollPane pane = new ScrollPane();
+        pane.setContent(text);
 
         dropDown.setContent(pane);
         text.setOnMouseClicked(e -> handleMouseClicked(text));

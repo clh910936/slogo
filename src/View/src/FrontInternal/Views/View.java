@@ -52,6 +52,7 @@ public abstract class View implements ViewAPI {
 
     protected void setContents(Pane p){
         p.setPrefHeight(HEIGHT);
+        p.setPrefWidth(myVBox.getWidth());
         myVariableScroll.setContent(p);
     }
 
