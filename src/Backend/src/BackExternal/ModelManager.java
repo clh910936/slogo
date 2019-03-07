@@ -48,8 +48,6 @@ public class ModelManager implements IModelManager {
             myFrontEnd.updateViews();
             throw e;
         }
-
-
     }
 
     public void setVariablesModel(VariablesModel vm) {
@@ -101,7 +99,7 @@ public class ModelManager implements IModelManager {
     }
 
     public void saveCurrentState(String fileName) {
-        myCurrentStateFileModel.save(fileName);
+        myCurrentStateFileModel.saveStateIntoFile(fileName);
         myFrontEnd.updateViews();
     }
 
