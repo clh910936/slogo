@@ -65,7 +65,7 @@ public class UserDefinedCommand extends CommandNode {
     }
 
     public String toString() {
-        return (getCommandName() + " " + getVariablesListToString()+ " " + getCommandsToString());
+        return (getCommandName() + "\n" + getVariablesListToString()+ "\n" + getCommandsToString());
     }
     @Override
     public boolean isCommandReadyToExecute() {
