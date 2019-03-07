@@ -105,7 +105,7 @@ public class PaletteView extends View{
 
         var y = new HBox(myScrollPane);
         y.setMinHeight(210);
-        y.setMaxWidth(180);
+        //y.setMaxWidth(180);
 
         myPane = y;
     }
