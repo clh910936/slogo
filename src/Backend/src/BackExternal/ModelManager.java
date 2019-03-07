@@ -35,7 +35,7 @@ public class ModelManager implements IModelManager {
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
         myCommandParser = new CommandParser(this);
         myPaletteModel = new PaletteModel();
-        myBackgroundModel = new BackgroundModel();
+        myBackgroundModel = new BackgroundModel(myFrontEnd);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
@@ -110,6 +110,11 @@ public class ModelManager implements IModelManager {
 
     public void changeVariable(String variableName, String value) {
         myVariablesModel.addVariable(variableName, value);
+    }
+
+    @Override
+    public void addPalette(int index, int r, int g, int b) {
+        myPaletteModel.addPalette(index, r, g, b);
     }
 
     public void resetTurtle() {
