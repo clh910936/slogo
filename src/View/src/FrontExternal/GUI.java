@@ -52,8 +52,6 @@ public class GUI implements FrontExternalAPI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
-
-
     private Node makeBoard() {
         myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height));
         return new HBox(myBoard);
@@ -120,9 +118,15 @@ public class GUI implements FrontExternalAPI {
         myBoard.move(x, y, turtleId);
     }
 
+    //TODO EW
     @Override
     public void setPenColor(int index, int turtleId) {
-        myBoard.setPenColor(index, turtleId);
+        for (ViewAPI v: myToolBar.getViews()) {
+            if (v instanceof PaletteView) {
+                Color c = ((PaletteView) v).getColor(index);
+                myBoard.setPenColor(c, turtleId);
+            }
+        }
     }
 
     @Override
@@ -138,6 +142,7 @@ public class GUI implements FrontExternalAPI {
     @Override
     public void setDisplayTurtle(boolean isDisplayed, int turtleId) {
         //TODO: implement
+        myBoard.setDisplayed(isDisplayed, turtleId);
     }
 
     //TODO THIS IS ALSO MESSY

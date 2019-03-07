@@ -7,6 +7,7 @@ import Parsing.CommandParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.File;
 import java.util.*;
@@ -15,7 +16,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -27,7 +27,6 @@ public class CurrentStateFileModel {
     private VariablesModel myVariablesModel;
     private UserDefinedCommandsModel myUserDefinedCommandsModel;
     private ModelManager myModelManager;
-    private DocumentBuilder db;
     private final String DOCUMENT_PATH = "data/saved_states/";
     private final String USER_DEFINED_COMMAND_TAG = "COMMAND";
     private final String VARIABLE_TAG = "VARIABLE";
@@ -41,20 +40,9 @@ public class CurrentStateFileModel {
         myVariablesModel = vm;
         myUserDefinedCommandsModel = userDefinedCommandsModel;
         myModelManager = mm;
-        getDocumentBuilder();
     }
 
-    private void getDocumentBuilder() {
-        try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            db = dbf.newDocumentBuilder();
-        }
-        catch (ParserConfigurationException e) {
-            // Should not ever happen - Exception required to be caught by Java
-            System.out.println(e);
-        }
 
-    }
 
     public List<String> getSavedFilesList() {
         File folder = new File(DOCUMENT_PATH);
@@ -63,22 +51,26 @@ public class CurrentStateFileModel {
     }
 
     public void setStateFromFile(String fileName, String language) {
-        System.out.println(fileName);
         try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
             File file = new File(DOCUMENT_PATH + fileName);
             Document document = db.parse(file);
+
 
             readTag(document, USER_DEFINED_COMMAND_TAG, eElement -> {
                 String commandName = eElement.getElementsByTagName(COMMAND_NAME_TAG).item(0).getTextContent();
                 String[] commandVar = eElement.getElementsByTagName(COMMAND_VAR_TAG).item(0).getTextContent().split(CommandParser.WHITESPACE);
                 String commandDefined = eElement.getElementsByTagName(COMMAND_COMMANDS_TAG).item(0).getTextContent();
                 myUserDefinedCommandsModel.addUserCreatedCommand(new UserDefinedCommand(language, myModelManager,commandName, commandDefined, commandVar));
+                System.out.println("USER DEFINED COMMANDS: " + myUserDefinedCommandsModel.getUserCreatedCommands());
             });
 
             readTag(document, VARIABLE_TAG, eElement -> {
                 String variableName = eElement.getElementsByTagName(VAR_NAME_TAG).item(0).getTextContent();
                 String variableValue = eElement.getElementsByTagName(VAR_VALUE_TAG).item(0).getTextContent();
                 myVariablesModel.addVariable(variableName,variableValue);});
+//            System.out.println(myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands());
 
         }
         catch (Exception e) {
@@ -87,9 +79,15 @@ public class CurrentStateFileModel {
     }
 
     private void readTag(Document document, String tagName, Consumer<Element> action) {
-        List<Node> nodeList = (ArrayList) document.getElementsByTagName(tagName);
-        nodeList.stream().filter(node -> node.getNodeType()==Node.ELEMENT_NODE).map(node -> (Element) node).forEach(action);
+        NodeList nodeList = document.getElementsByTagName(tagName);
+        for(int i = 0 ;i<nodeList.getLength();i++) {
+            Node node = nodeList.item(i);
+            if(node.getNodeType()==Node.ELEMENT_NODE) {
+                System.out.println("TEXT: " + node.getTextContent());
+                action.accept((Element) node);
+            }
 
+        }
     }
 
 
@@ -146,8 +144,8 @@ public class CurrentStateFileModel {
             Element root = doc.createElement(tag);
             root.appendChild(doc.createTextNode(tagToDataMap.get(tag)));
             mainRoot.appendChild(root);
+            fileRoot.appendChild(mainRoot);
         });
-        fileRoot.appendChild(mainRoot);
     }
 
 
