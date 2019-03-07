@@ -12,12 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class Console extends Stage {
     //private CommandParser myParser;
     private BorderPane myBorderPane;
     private HBox myTextHBox;
-    private GridPane myButtonGridPane;
+    private VBox myVBox;
     private ComboBox myLanguageDropDown;
     private IModelManager myManager;
     private ReferencePage myReferencePage;
@@ -70,18 +70,16 @@ public class Console extends Stage {
         initializeInstanceVariables();
         initializeLanguageList();
 
-
-        //createRunButton();
-        //createReferencePageButton();
-        //createLoadFileButton();
         createAllButtons();
         addButtons();
         initializeDropDown();
         initializeSaveStatePane();
-        formatButtonGridPane();
+
+        myVBox.getChildren().add(mySaveStatePane);
+        formatSidePane();
 
         myBorderPane.setCenter(myTextHBox);
-        myBorderPane.setRight(myButtonGridPane);
+        myBorderPane.setRight(myVBox);
         myBorderPane.setBottom(myErrorView);
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
@@ -105,18 +103,22 @@ public class Console extends Stage {
 
     private void initializeSaveStatePane() {
         myStateNameField.setPromptText(myGeneralResourceBundle.getString("NAME_PROMPT"));
+        myStateNameField.setPrefWidth(BUTTON_WIDTH);
         Button saveState = createAndFormatButton(myGeneralResourceBundle.getString("STATE_BUTTON"));
         saveState.setOnMouseClicked(e -> saveState());
+        saveState.setPrefWidth(BUTTON_WIDTH);
         mySaveStatePane.add(myStateNameField, 0, 0);
         mySaveStatePane.add(saveState, 0, 1);
     }
 
     private void saveState() {
         if(!myStateNameField.getText().equals("")){
+            System.out.println("Saved file named: " + myStateNameField.getText());
             myManager.saveCurrentState(myStateNameField.getText());
+            myStateNameField.clear();
         }
         else{
-            showError(myGeneralResourceBundle.getString("NO_FILENAME"));
+            showError(myErrorResourceBundle.getString("NO_FILENAME"));
         }
     }
 
@@ -158,7 +160,7 @@ public class Console extends Stage {
         mySaveStatePane = new GridPane();
         myStateNameField = new TextField();
 
-        myButtonGridPane = new GridPane();
+        myVBox = new VBox();
         myBorderPane = new BorderPane();
         myLanguageDropDown = new ComboBox();
         myErrorView = new ErrorView(ERROR_HEIGHT);
@@ -180,14 +182,13 @@ public class Console extends Stage {
         myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
         myLanguageDropDown.getItems().addAll(myLanguages);
         myLanguageDropDown.setValue(myGeneralResourceBundle.getString("DEFAULT_LANGUAGE"));
-        myButtonGridPane.add(myLanguageDropDown, 0, myButtonList.size());
+        myVBox.getChildren().add(myLanguageDropDown);
     }
 
-    private void formatButtonGridPane() {
-        myButtonGridPane.setPrefWidth(BUTTON_PANE_WIDTH);
-
-        myButtonGridPane.setVgap(BUTTON_VGAP);
-        myButtonGridPane.setAlignment(Pos.TOP_CENTER);
+    private void formatSidePane() {
+        myVBox.setPrefWidth(BUTTON_PANE_WIDTH);
+        myVBox.setSpacing(BUTTON_VGAP);
+        myVBox.setAlignment(Pos.TOP_CENTER);
     }
 
     private void createRunButton() {
@@ -205,7 +206,7 @@ public class Console extends Stage {
         temp.setOnMouseClicked(e -> {
         try {
             Method method = this.getClass().getDeclaredMethod(s);
-            method.invoke(null);
+            method.invoke(this);
         } catch (Exception e1) {
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
@@ -233,9 +234,8 @@ public class Console extends Stage {
 
     private void addButtons(){
         for(int k = 0; k < myButtonList.size(); k++){
-            myButtonGridPane.add(myButtonList.get(k), 0, k);
+            myVBox.getChildren().add(myButtonList.get(k));
         }
-        myButtonGridPane.add(mySaveStatePane, 0, myButtonGridPane.getChildren().size());
     }
 
     private Button createAndFormatButton(String s){
