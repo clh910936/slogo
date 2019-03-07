@@ -17,12 +17,16 @@ public abstract class CommandNode {
     protected List<Object> myParams;
     protected List<CommandNode> myChildren;
     protected int MAX_PARAMS;
+    protected PaletteModel myPaletteModel;
+    protected BackgroundModel myBackgroundModel;
 
     public CommandNode(String language, ModelManager modelManager) {
         myModelManager = modelManager;
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
         myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
+        myPaletteModel = modelManager.getMyPaletteModel();
+        myBackgroundModel= modelManager.getMyShapeModel();
         myLanguage = language;
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
@@ -38,6 +42,10 @@ public abstract class CommandNode {
     public List<CommandNode> getChildren() {
         return Collections.unmodifiableList(myChildren);
     }
+    public void clearChildren() {
+        myChildren.clear();
+    }
+
 
     public List<Object> getMyParams() {
         return Collections.unmodifiableList(myParams);

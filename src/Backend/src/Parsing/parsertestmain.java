@@ -1,9 +1,11 @@
 package Parsing;
 
+import BackExternal.ModelManager;
+
 public class parsertestmain {
     public static void main (String[] args) {
-//        ModelManager mm = new ModelManager()
-//        CommandParser cp = new CommandParser(mm);
+        //ModelManager mm = new ModelManager();
+        //CommandParser cp = new CommandParser(mm);
 //        (cp).parseCommand("make :x 10", "English");
 //        cp.parseCommand("to square [ :distance ]\n" +
 //                "[\n" +
@@ -51,8 +53,8 @@ public class parsertestmain {
 //                        "]\n" +
 //                        "\n" +
 //                        "example 100", "English"));
-//        //TODO
-//        System.out.println(cp.parseCommand("to square [ :distance ]\n" +
+//
+// System.out.println(cp.parseCommand("to square [ :distance ]\n" +
 //        System.out.println(cp.parseCommand("tell [ 1 2 3 ] to square [ :distance ]\n" +
 //                "[\n" +
 //                "  repeat 4 [\n" +
