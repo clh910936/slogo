@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class Console extends Stage {
 
     private ResourceBundle myGeneralResourceBundle;
     private ResourceBundle myButtonsResourceBundle;
+    private ResourceBundle myErrorResourceBundle;
 
     private Button myRunButton;
     private Button myReferencePageButton;
@@ -55,6 +57,7 @@ public class Console extends Stage {
     private static final int BUTTON_VGAP = 10;
     private static final String GENERAL_RESOURCE_FILENAME = "Console";
     private static final String BUTTON_RESOURCE_FILENAME = "ConsoleButtons";
+    private static final String ERROR_RESOURCE_FILENAME = "Errors";
     private static final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
     private boolean isDisplaying = true;
@@ -68,9 +71,10 @@ public class Console extends Stage {
         initializeLanguageList();
 
 
-        createRunButton();
-        createReferencePageButton();
-        createLoadFileButton();
+        //createRunButton();
+        //createReferencePageButton();
+        //createLoadFileButton();
+        createAllButtons();
         addButtons();
         initializeDropDown();
         initializeSaveStatePane();
@@ -84,6 +88,19 @@ public class Console extends Stage {
         this.setScene(consoleScene);
         setOnCloseRequest(e -> isDisplaying = false);
         this.show();
+    }
+
+    private void createAllButtons() {
+        for(String s : myButtonsResourceBundle.keySet()){
+            String info[] = myButtonsResourceBundle.getString(s).split(",");
+            String name = info[0];
+            String methodName = info[1];
+            Button b = makeButton(methodName);
+            b.setText(name);
+            b.setPrefWidth(BUTTON_WIDTH);
+            b.setPadding(myButtonInsets);
+            myButtonList.add(b);
+        }
     }
 
     private void initializeSaveStatePane() {
@@ -137,6 +154,7 @@ public class Console extends Stage {
         myLanguages = new ArrayList<>();
         myGeneralResourceBundle = ResourceBundle.getBundle(GENERAL_RESOURCE_FILENAME);
         myButtonsResourceBundle = ResourceBundle.getBundle(BUTTON_RESOURCE_FILENAME);
+        myErrorResourceBundle = ResourceBundle.getBundle(ERROR_RESOURCE_FILENAME);
         mySaveStatePane = new GridPane();
         myStateNameField = new TextField();
 
@@ -182,21 +200,16 @@ public class Console extends Stage {
         myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
     }
 
-    //TODO: implement this and test it
-    private void makeButton(String s){
+    private Button makeButton(String s){
         Button temp = new Button();
-        String info = myButtonsResourceBundle.getString(s);
-        String[] array = info.split(",");
-        String buttonName = array[0];
-        temp.setText(buttonName);
-        String methodName = array[1];
         temp.setOnMouseClicked(e -> {
         try {
-            Method method = this.getClass().getDeclaredMethod(methodName);
-        } catch (NoSuchMethodException ex) {
-            //TODO: get rid of printing stack trace
-            ex.printStackTrace();
+            Method method = this.getClass().getDeclaredMethod(s);
+            method.invoke(null);
+        } catch (Exception e1) {
+            myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
+        return temp;
     }
 
     private void showReferencePage(){
