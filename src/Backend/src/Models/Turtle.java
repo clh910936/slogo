@@ -63,6 +63,21 @@ public class Turtle extends GeneralTurtle {
         // TODO: call feroze
     }
 
+    public void setPensize(double pixels) {
+        this.myPenSize = pixels;
+        // TODO: call feroze
+    }
+
+    public void setPenColor(int index) {
+        this.myPenColourIndex = index;
+        // TODO: call feroze
+    }
+
+    public void setShapeIndex(int index) {
+        this.myShapeIndex = index;
+        // TODO: call feroze
+    }
+
 
 
     //HELPERS
