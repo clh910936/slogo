@@ -52,8 +52,6 @@ public class GUI implements FrontExternalAPI {
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
-
-
     private Node makeBoard() {
         myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height));
         return new HBox(myBoard);

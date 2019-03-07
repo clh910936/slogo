@@ -106,6 +106,7 @@ public class ModelManager implements IModelManager {
 
     public void setStateFromFile(String fileName, String language) {
         myCurrentStateFileModel.setStateFromFile(fileName,language);
+        myFrontEnd.updateViews();
     }
 
     public void changeVariable(String variableName, String value) {
