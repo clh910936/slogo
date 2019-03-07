@@ -56,6 +56,8 @@ public class TurtleManager extends SpriteManager {
     }
 
     public void setPenSize(double pixels, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, pixels);
     }
 
     public void setTurtleShape(int index, int turtleId) {

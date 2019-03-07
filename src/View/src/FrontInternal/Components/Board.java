@@ -48,7 +48,7 @@ public class Board extends Pane implements ViewAPI {
 
     private void addSlider() {
         Slider slider = new Slider();
-        slider.setMin(0.001);
+        slider.setMin(0.1);
         slider.setMax(2);
         slider.setValue(1);
         slideSpeed.bind(slider.valueProperty());

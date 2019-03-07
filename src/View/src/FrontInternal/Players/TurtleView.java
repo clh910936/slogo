@@ -201,6 +201,12 @@ public class TurtleView extends Sprite {
         setBusy(false);
     }
 
+    public void setPenSize(double pixels) {
+        setBusy(true);
+        myPen.setSize(pixels);
+        setBusy(false);
+    }
+
     @Override
     public Node getPath() {
         return myPath;
