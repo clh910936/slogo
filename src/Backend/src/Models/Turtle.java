@@ -82,6 +82,14 @@ public class Turtle extends GeneralTurtle {
         myFrontExternalAPI.clearBoard();
     }
 
+    public int getPenColorIndex() {
+        return this.myPenColourIndex;
+    }
+
+    public int getShapeIndex() {
+        return this.myShapeIndex;
+    }
+
 
 
     //HELPERS
