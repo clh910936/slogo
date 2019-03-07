@@ -6,6 +6,7 @@ import BackExternal.ModelManager;
 import Commands.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -107,8 +108,7 @@ public class SyntaxHandler {
     }
 
     private boolean isNormalCommand(String input) {
-        String command = Regex.getRegexSymbol(input, myCommandSymbols);
-        return myCommandSymbols.stream().anyMatch(commandEntry -> commandEntry.getValue().equals(command));
+        return myCommandSymbols.stream().anyMatch(commandEntry -> Regex.match(input,commandEntry.getValue()));
     }
 
     private boolean isUserCommand(String input) {

@@ -38,6 +38,10 @@ public abstract class CommandNode {
     public List<CommandNode> getChildren() {
         return Collections.unmodifiableList(myChildren);
     }
+    public void clearChildren() {
+        myChildren.clear();
+    }
+
 
     public List<Object> getMyParams() {
         return Collections.unmodifiableList(myParams);

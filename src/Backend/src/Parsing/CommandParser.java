@@ -29,6 +29,8 @@ public class CommandParser {
         currentReturnValue = -1;
         while(!mySyntaxHandler.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
+            System.out.println("*****************************");
+            System.out.println(commandHead);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
@@ -61,6 +63,7 @@ public class CommandParser {
             }
             Object returnValue = command.executeCommand();
             command.clearMyParams();
+            command.clearChildren();
             return returnValue;
         }
     }
