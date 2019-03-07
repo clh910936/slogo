@@ -42,11 +42,10 @@ public class UserDefinedCommandsView extends View {
      */
     @Override
     public void update() {
-        //TODO: fix this so it has the tabs you were thinking
         myAccordion.getPanes().clear();
         Map<String, String> map = myManager.getUserDefinedCommands();
-        for(String s : map.keySet()){
-            addCommand(s, map.get(s));
+        for(Map.Entry<String, String> entry : map.entrySet()){
+            addCommand(entry.getKey(), entry.getValue());
         }
     }
 
