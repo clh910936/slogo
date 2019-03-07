@@ -1,6 +1,7 @@
 package FrontInternal.Players;
 import FrontInternal.Components.Board;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -50,9 +51,9 @@ public class TurtleManager extends SpriteManager {
         get(turtleId).getScheduler().addToSchedule(name, -degrees);
     }
 
-    public void setPenColor(int index, int turtleId) {
+    public void setPenColor(Color c, int turtleId) {
         String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        get(turtleId).getScheduler().addToSchedule(name, index);
+        get(turtleId).getScheduler().addToSchedule(name, c);
     }
 
     public void setPenSize(double pixels, int turtleId) {
@@ -69,5 +70,10 @@ public class TurtleManager extends SpriteManager {
 
     public void update() {
         GAME_ACTORS.values().forEach(Sprite::update);
+    }
+
+    public void setDisplayed(boolean isDisplayed, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, isDisplayed);
     }
 }
