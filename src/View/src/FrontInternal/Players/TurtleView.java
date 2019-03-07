@@ -1,6 +1,4 @@
 package FrontInternal.Players;
-
-import FrontInternal.Components.Board;
 import FrontInternal.Util.Location;
 import javafx.animation.PathTransition;
 import javafx.beans.value.ChangeListener;
@@ -8,13 +6,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.awt.*;
+import java.util.concurrent.locks.Lock;
 
 public class TurtleView extends Sprite {
     private double myX;
@@ -29,6 +26,9 @@ public class TurtleView extends Sprite {
     private GraphicsContext gc;
 
     private Pen myPen;
+    private boolean isBusy;
+
+    private TurtleScheduler myScheduler;
 
     public TurtleView(Dimension d, GraphicsContext g, int id){
         super(id);
@@ -41,6 +41,9 @@ public class TurtleView extends Sprite {
         gc = g;
 
         myPen = new Pen();
+        isBusy = false;
+
+        myScheduler = new TurtleScheduler(this);
     }
 
     private void place(int i, int j) {
@@ -55,8 +58,11 @@ public class TurtleView extends Sprite {
         myLastY = 0;
     }
 
+    public TurtleScheduler getScheduler() {
+        return myScheduler;
+    }
     public void update() {
-
+        myScheduler.update();
     }
 
     public double getCenterX() {
@@ -70,41 +76,52 @@ public class TurtleView extends Sprite {
 
 
     public void rotate(double angle) {
+        setBusy(true);
         setRotate(angle);
+        setBusy(false);
     }
 
-    public double getCurrentX() {
+    private double getCurrentX() {
         return getTranslateX() + getCenterX();
     }
 
-    public double getCurrentY() {
+    private double getCurrentY() {
         return getTranslateY() + getCenterY();
     }
 
 
-    public double getLastX() {
+    private double getLastX() {
         return myLastX;
     }
 
-    public double getLastY() {
+    private double getLastY() {
         return myLastY;
     }
 
-    public void setLastX(double x) {
+    private void setLastX(double x) {
         myLastX = x;
     }
 
-    public void setLastY(double y) {
+    private void setLastY(double y) {
         myLastY = y;
+    }
+
+    private void setBusy(boolean b) {
+        isBusy = b;
+    }
+
+    public boolean getBusy() {
+        return isBusy;
     }
 
     //TODO: REFACTOR THIS MASSIVE METHOD
     @Override
-    public void move(double x, double y) {
-        double xdisp = x-getLastX();
-        double ydisp = y-getLastY();
+    public  void move(Double x, Double y) {
+        setBusy(true);
+        double xdisp = x - getLastX();
+        double ydisp = y - getLastY();
 
-        if (!(xdisp==0&&ydisp==0)) {
+        if (!(xdisp == 0 && ydisp == 0)) {
             PathTransition pt = new PathTransition();
 
             pt.setDuration(Duration.seconds(1));
@@ -135,7 +152,6 @@ public class TurtleView extends Sprite {
                     // get current location
                     double x = getCurrentX();
                     double y = getCurrentY();
-                    //System.out.println("in loop");
                     //                System.out.println("current x: " + x);
                     //                System.out.println("current y: " + y);
                     //                System.out.println("angle: " + turtle.getRotate());
@@ -156,46 +172,31 @@ public class TurtleView extends Sprite {
 
                     oldLocation.setX(x);
                     oldLocation.setY(y);
+
                 }
             });
-
-            System.out.println("going to play");
+            pt.setOnFinished(e -> setBusy(false));
             pt.play();
-            System.out.println("played");
             myPath.getElements().clear();
             myPath.getElements().addAll(new MoveTo(l.getX(), l.getY()));
-
             setLastX(x);
             setLastY(y);
         }
-//        javafx.scene.shape.Rectangle rect = new Rectangle(100, 40, 100, 100);
-//        rect.setArcHeight(50);
-//        rect.setArcWidth(50);
-//        rect.setFill(Color.VIOLET);
-//
-//        //myBoard.getChildren().addAll(rect);
-//
-//
-//        Path path = new Path();
-//        path.getElements().add (new MoveTo(0f, 50f));
-//        path.getElements().add (new CubicCurveTo(40f, 10f, 390f, 240f, 1904, 50f));
-//
-//        PathTransition pathTransition = new PathTransition();
-//        pathTransition.setDuration(Duration.millis(100000));
-//        pathTransition.setNode(this);
-//        pathTransition.setPath(path);
-//        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-//        pathTransition.setAutoReverse(true);
-//
-//        pathTransition.play();
+        //setBusy(false);
+
+
     }
 
     public void setPen(boolean pen) {
+        setBusy(true);
         myPen.setPenUp(pen);
+        setBusy(false);
     }
 
     public void setPenColor(int index) {
+        setBusy(true);
         myPen.setColor(Color.RED);
+        setBusy(false);
     }
 
     @Override

@@ -1,12 +1,5 @@
 package FrontInternal.Players;
 import FrontInternal.Components.Board;
-import javafx.animation.PathTransition;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 
 /**
@@ -39,20 +32,24 @@ public class TurtleManager extends SpriteManager {
     }
 
 
-    public void moveTurtle(double x, double y, int turtleId) {
-        get(turtleId).move(x, y);
+    public void move(double x, double y, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, x, y);
     }
 
     public void setPen(boolean penUp, int turtleId) {
-        get(turtleId).setPen(penUp);
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, penUp);
     }
 
-    public void rotateTurtle(double degrees, int turtleId) {
-        get(turtleId).rotate(-degrees);
+    public void rotate(double degrees, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, -degrees);
     }
 
     public void setPenColor(int index, int turtleId) {
-        get(turtleId).setPenColor(index);
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, index);
     }
 
     public void setPenSize(double pixels, int turtleId) {
@@ -63,5 +60,9 @@ public class TurtleManager extends SpriteManager {
 
     public void addTurtle(int turtleId) {
         addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId));
+    }
+
+    public void update() {
+        GAME_ACTORS.values().forEach(Sprite::update);
     }
 }
