@@ -5,7 +5,6 @@ import BackExternal.IllegalLoopParamsException;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
-import Parsing.SyntaxHandler;
 
 import java.util.ArrayList;
 import java.util.List;

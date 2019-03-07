@@ -2,9 +2,6 @@ package Commands;
 
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
-import Parsing.SyntaxHandler;
-
-import java.util.Arrays;
 
 public class UserDefinedCommand extends CommandNode {
     private String commandName;
@@ -24,7 +21,6 @@ public class UserDefinedCommand extends CommandNode {
 
     public Object executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
-        System.out.println("-------" + commands + " " + myParams);
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
             String variable = myVariables[i];
@@ -34,6 +30,7 @@ public class UserDefinedCommand extends CommandNode {
         myParams.clear();
         return cp.parseCommand(commands,myLanguage);
     }
+
 
     public String getCommandName() {
         return commandName;
