@@ -42,8 +42,6 @@ public class CurrentStateFileModel {
         myModelManager = mm;
     }
 
-
-
     public List<String> getSavedFilesList() {
         File folder = new File(DOCUMENT_PATH);
         File[] listOfFiles = folder.listFiles();
@@ -60,21 +58,19 @@ public class CurrentStateFileModel {
 
             readTag(document, USER_DEFINED_COMMAND_TAG, eElement -> {
                 String commandName = eElement.getElementsByTagName(COMMAND_NAME_TAG).item(0).getTextContent();
-                String[] commandVar = eElement.getElementsByTagName(COMMAND_VAR_TAG).item(0).getTextContent().split(CommandParser.WHITESPACE);
+                String[] commandVar = eElement.getElementsByTagName(COMMAND_VAR_TAG).item(0).getTextContent().split(" ");
                 String commandDefined = eElement.getElementsByTagName(COMMAND_COMMANDS_TAG).item(0).getTextContent();
                 myUserDefinedCommandsModel.addUserCreatedCommand(new UserDefinedCommand(language, myModelManager,commandName, commandDefined, commandVar));
-                System.out.println("USER DEFINED COMMANDS: " + myUserDefinedCommandsModel.getUserCreatedCommands());
             });
 
             readTag(document, VARIABLE_TAG, eElement -> {
                 String variableName = eElement.getElementsByTagName(VAR_NAME_TAG).item(0).getTextContent();
                 String variableValue = eElement.getElementsByTagName(VAR_VALUE_TAG).item(0).getTextContent();
                 myVariablesModel.addVariable(variableName,variableValue);});
-//            System.out.println(myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands());
 
         }
         catch (Exception e) {
-           throw new IllegalSavedStateFileException();
+            throw new IllegalSavedStateFileException();
         }
     }
 
@@ -99,7 +95,6 @@ public class CurrentStateFileModel {
             Element rootElement = doc.createElement("CONFIGURATION");
             doc.appendChild(rootElement);
 
-            Element savedVariable = doc.createElement(VARIABLE_TAG);
             Map<String,String> variablesDataMap = myVariablesModel.getVariables();
             Function<String, Map<String,String>> variableTagObjects = variable -> {
                 return Map.ofEntries(
@@ -107,9 +102,8 @@ public class CurrentStateFileModel {
                         entry(VAR_VALUE_TAG, variablesDataMap.get(variable))
                 );
             };
-            saveElementType(variablesDataMap, variable -> addChildElements(doc,variableTagObjects.apply(variable),savedVariable,rootElement));
+            saveElementType(variablesDataMap, variable -> addChildElements(doc,variableTagObjects.apply(variable),VARIABLE_TAG,rootElement));
 
-            Element savedCommand = doc.createElement(USER_DEFINED_COMMAND_TAG);
             Map<String, UserDefinedCommand> commandsDataMap = myUserDefinedCommandsModel.getUserCreatedCommands();
             Function<UserDefinedCommand, Map<String,String>> commandTagObjects = command -> {
                 return Map.ofEntries(
@@ -118,7 +112,7 @@ public class CurrentStateFileModel {
                         entry(COMMAND_COMMANDS_TAG, command.getCommands())
                 );
             };
-            saveElementType(commandsDataMap, command -> addChildElements(doc,commandTagObjects.apply(commandsDataMap.get(command)),savedCommand,rootElement));
+            saveElementType(commandsDataMap, command -> addChildElements(doc,commandTagObjects.apply(commandsDataMap.get(command)),USER_DEFINED_COMMAND_TAG,rootElement));
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
@@ -129,7 +123,7 @@ public class CurrentStateFileModel {
         } catch (Exception tfe) {
             // Should not ever happen - Exception required to be caught by Java
             System.out.println(tfe);
-            }
+        }
     }
 
     private void saveElementType(Map<String,?> dataMap, Consumer<String> addChildren) {
@@ -138,14 +132,14 @@ public class CurrentStateFileModel {
         });
     }
 
-    private void addChildElements(Document doc, Map<String,String> tagToDataMap, Element mainRoot, Element fileRoot) {
-
+    private void addChildElements(Document doc, Map<String,String> tagToDataMap, String rootTag, Element fileRoot) {
+        Element root = doc.createElement(rootTag);
         tagToDataMap.keySet().stream().forEach(tag-> {
-            Element root = doc.createElement(tag);
-            root.appendChild(doc.createTextNode(tagToDataMap.get(tag)));
-            mainRoot.appendChild(root);
-            fileRoot.appendChild(mainRoot);
+            Element tagElement = doc.createElement(tag);
+            tagElement.appendChild(doc.createTextNode(tagToDataMap.get(tag)));
+            root.appendChild(tagElement);
         });
+        fileRoot.appendChild(root);
     }
 
 

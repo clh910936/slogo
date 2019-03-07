@@ -5,18 +5,16 @@ import BackExternal.IllegalCommandException;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Collections;
-import java.util.AbstractMap;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class Regex {
 
-    public static List<Map.Entry<String, Pattern>> addPatterns (String syntax, List<Map.Entry<String, Pattern>> mySymbols) {
+    public static Map<String,Pattern> addPatterns (String syntax, Map<String, Pattern> mySymbols) {
         var resources = ResourceBundle.getBundle(syntax);
         for (var key : Collections.list(resources.getKeys())) {
             var regex = resources.getString(key);
-            mySymbols.add(new AbstractMap.SimpleEntry<>(key,
-                    Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+            mySymbols.put(key,
+                    Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
         }
         return mySymbols;
     }
@@ -33,8 +31,8 @@ public class Regex {
     /**
      * Returns language's type associated with the given text if one exists
      */
-    public static String getRegexSymbol(String rawInput, List<Map.Entry<String, Pattern>> mySymbols) throws IllegalCommandException {
-        for (var e : mySymbols) {
+    public static String getRegexSymbol(String rawInput, Map<String, Pattern> mySymbols) throws IllegalCommandException {
+        for (Map.Entry<String,Pattern> e : mySymbols.entrySet()) {
             if (match(rawInput, e.getValue())) {
                 return e.getKey();
             }
