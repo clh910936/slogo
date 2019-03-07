@@ -1,5 +1,6 @@
 package FrontInternal.Players;
 import FrontInternal.Components.Board;
+import javafx.beans.property.SimpleDoubleProperty;
 
 
 /**
@@ -11,9 +12,11 @@ import FrontInternal.Components.Board;
 //TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO HAVE EVERYTHING
 public class TurtleManager extends SpriteManager {
     private Board myBoard;
+    private SimpleDoubleProperty slideSpeed;
 
-    public TurtleManager(Board b) {
+    public TurtleManager(Board b, SimpleDoubleProperty speed) {
         myBoard = b;
+        slideSpeed = speed;
         //addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), 0));
 
 
@@ -53,13 +56,15 @@ public class TurtleManager extends SpriteManager {
     }
 
     public void setPenSize(double pixels, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, pixels);
     }
 
     public void setTurtleShape(int index, int turtleId) {
     }
 
     public void addTurtle(int turtleId) {
-        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId));
+        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed));
     }
 
     public void update() {
