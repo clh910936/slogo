@@ -19,7 +19,7 @@ import javafx.scene.paint.Paint;
  * This is used to format the HistoryView, VariablesView,
  * and UserDefinedCommandsView
  */
-public abstract class View implements ViewAPI {
+public abstract class View {
     protected IModelManager myManager;
     protected static final Paint DEFAULT_COLOR = Color.BLACK;
     private static final int INSET = 10;
@@ -55,9 +55,6 @@ public abstract class View implements ViewAPI {
     }
 
 
-
-
-
     protected void setContents(Pane p){
         p.setPrefHeight(DEFAULT_HEIGHT);
         p.setPrefWidth(myVBox.getWidth());
@@ -67,10 +64,8 @@ public abstract class View implements ViewAPI {
 
 
 
-    @Override
     public abstract void update();
 
-    @Override
     public Pane getPane() {
         return myVBox;
     }
