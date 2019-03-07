@@ -21,6 +21,7 @@ public class CommandTypePredicate {
 
     public static final Predicate<CommandNode> needsVariableParameter = command -> (command.getCommandName().equals(MAKE_VARIABLE_COMMAND));
 
+
     public static final Predicate<CommandNode> isTurtleCommand = command -> (TURTLE_COMMANDS.contains(command.getCommandName()));
 
     public static boolean isTurtleCommand(CommandNode input) {
