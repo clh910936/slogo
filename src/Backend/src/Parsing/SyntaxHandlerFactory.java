@@ -5,81 +5,104 @@ import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Commands.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 import java.util.regex.Pattern;
 
-public class SyntaxHandler {
+public class SyntaxHandlerFactory {
     public static final String COMMENT_SYMBOL = "Comment";
-    public static final String VARIABLE_SYMBOL = "Variable";
-    public static final String CONSTANT_SYMBOL = "Constant";
     public static final String LIST_START_SYMBOL = "ListStart";
     public static final String LIST_END_SYMBOL = "ListEnd";
     public static final String GROUP_START_SYMBOL = "GroupStart";
     public static final String GROUP_END_SYMBOL = "GroupEnd";
-    public static final String COMMAND_SYMBOL = "Command";
+    public static final String WHITE_SPACE = "Whitespace";
     private static final String COMMANDS_PACKAGE_PATH = "Commands.";
     private ModelManager myModelManager;
     private String myLanguage;
-    private List<Map.Entry<String, Pattern>> myCommandSymbols;
-    private List<Map.Entry<String, Pattern>> mySymbols;
+    private Map<String, Pattern> myCommandSymbols;
+    private Map<String, Pattern> mySymbols;
     private static final String LANGUAGES_FILE = "resources/languages/";
     private static final String SYNTAX_FILE = LANGUAGES_FILE + "Syntax";
     private int index;
     private String[] commandInputList;
+    private String rawInput;
+    private String regexInput;
+    private CommandNode parent;
 
-    public SyntaxHandler(String language, ModelManager modelManager, String[] commandInputList) {
+    public SyntaxHandlerFactory(String language, ModelManager modelManager, String command) {
         myLanguage = language;
         myModelManager = modelManager;
-        mySymbols = new ArrayList<>();
-        myCommandSymbols = new ArrayList<>();
-        this.commandInputList = commandInputList;
+        mySymbols = new HashMap<>();
+        myCommandSymbols = new HashMap<>();
         index = 0;
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
+        commandInputList = command.split(mySymbols.get(WHITE_SPACE).toString());
+        for(int i = 0 ;i<commandInputList.length;i++) {
+            String line = commandInputList[i];
+            if(Regex.match(line, mySymbols.get(COMMENT_SYMBOL))) {
+                commandInputList[i] = "";
+            }
+        }
+        commandInputList = String.join(" ",commandInputList).split(mySymbols.get(WHITE_SPACE).toString());
     }
 
     protected CommandNode getCommandNode(CommandNode parent) throws IllegalCommandException {
-        String rawInput = commandInputList[index];
-        String regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
-        switch(regexInput) {
-            case COMMENT_SYMBOL:
-                index = getIndexAfterComment(index,commandInputList);
-            case LIST_END_SYMBOL :
-                throw new IllegalCommandException("List parameter is invalid");
-            case GROUP_END_SYMBOL :
-                throw new IllegalCommandException("List parameter is invalid");
-            case LIST_START_SYMBOL :
-                String[] listContents = getListContents(commandInputList, index, LIST_START_SYMBOL, LIST_END_SYMBOL);
-                index+=listContents.length + 2;
-                return new ListInput(myLanguage, myModelManager, listContents);
-            case GROUP_START_SYMBOL :
-                listContents = getListContents(commandInputList, index, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
-                index+=listContents.length + 2;
-                return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
-            case CONSTANT_SYMBOL :
-                index++;
-                return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
-            case VARIABLE_SYMBOL :
-                index++;
-                if(parent!=null && CommandTypePredicate.checkNeedsVariableParameter(parent)) {
-                    return new StringInput(myLanguage, myModelManager, rawInput.substring(1));
-                }
-                else {
-                    return new Variable(myLanguage, myModelManager, rawInput.substring(1));
-                }
-            case COMMAND_SYMBOL :
-                index++;
-                if(parent!=null && CommandTypePredicate.checkNeedsWordParameter(parent)) {
-                    return new StringInput(myLanguage, myModelManager, rawInput);
-                }
-                return getNewCommandObject(rawInput);
-            default:
-                throw new IllegalCommandException("Syntax not valid!");
+        rawInput = commandInputList[index];
+        regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
+        this.parent = parent;
+        try {
+            Method method = this.getClass().getDeclaredMethod("evaluate" + regexInput + "Symbol");
+            return (CommandNode) method.invoke(this);
+        }
+        catch (Exception e) {
+            throw new IllegalCommandException("Illegal syntax");
         }
     }
+
+    private void evaluateListEndSymbol() {
+        throw new IllegalCommandException("List parameter is invalid");
+    }
+
+    private void evaluateGroupEndSymbol() {
+        throw new IllegalCommandException("Grouping parameter is invalid");
+    }
+
+    private CommandNode evaluateListStartSymbol() {
+        String[] listContents = getListContents(commandInputList, index, LIST_START_SYMBOL, LIST_END_SYMBOL);
+        index+=listContents.length + 2;
+        return new ListInput(myLanguage, myModelManager, listContents);
+    }
+
+    private CommandNode evaluateGroupStartSymbol() {
+        String[] listContents = getListContents(commandInputList, index, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
+        index+=listContents.length + 2;
+        return new Group(myLanguage, myModelManager, listContents, getNewCommandObject(listContents[0]));
+    }
+
+    private CommandNode evaluateConstantSymbol() {
+        index++;
+        return new Constant(myLanguage, myModelManager, Double.parseDouble(rawInput));
+    }
+    private CommandNode evaluateVariableSymbol() {
+        index++;
+        if(parent!=null && CommandTypePredicate.checkNeedsVariableParameter(parent)) {
+            return new StringInput(myLanguage, myModelManager, rawInput.substring(1));
+        }
+        else {
+            return new Variable(myLanguage, myModelManager, rawInput.substring(1));
+        }
+    }
+
+    private CommandNode evaluateCommandSymbol() {
+        index++;
+        if(parent!=null && CommandTypePredicate.checkNeedsWordParameter(parent)) {
+            return new StringInput(myLanguage, myModelManager, rawInput);
+        }
+        return getNewCommandObject(rawInput);
+    }
+
+
 
     protected boolean isDoneParsing() {
         return index==commandInputList.length;
@@ -94,21 +117,12 @@ public class SyntaxHandler {
     }
 
 
-    private int getIndexAfterComment(int index, String[] commandInputArray) {
-        String input = commandInputArray[index];
-        while(!isCommand(input)||index<commandInputArray.length) {
-            input = commandInputArray[index];
-            index++;
-        }
-        return index;
-    }
-
     private boolean isCommand(String input) {
         return (isNormalCommand(input)|| isUserCommand(input));
     }
 
     private boolean isNormalCommand(String input) {
-        return myCommandSymbols.stream().anyMatch(commandEntry -> Regex.match(input,commandEntry.getValue()));
+        return myCommandSymbols.values().stream().anyMatch(command -> Regex.match(input,command));
     }
 
     private boolean isUserCommand(String input) {
