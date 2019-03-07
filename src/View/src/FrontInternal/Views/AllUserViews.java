@@ -26,7 +26,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     private ResourceBundle myErrorResources;
     private IModelManager myManager;
     private Console myConsole;
-    private List<ViewAPI> myViews;
+    private List<View> myViews;
     private ScrollPane myScrollPane;
     private static final int WIDTH = 200;
 
@@ -41,7 +41,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         initializeViews();
     }
 
-    public List<ViewAPI> getViews() {
+    public List<View> getViews() {
         return myViews;
     }
 
@@ -50,7 +50,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         TreeSet<String> set =new TreeSet<>(myViewClassResources.keySet());
         VBox allDropDowns = new VBox();
         for(String s : set){
-            ViewAPI view = makeView(s);
+            View view = makeView(s);
             myViews.add(view);
             TitledPane pane = new TitledPane();
             pane.setText(s);
@@ -62,20 +62,20 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     }
 
 
-    private ViewAPI makeView(String s) {
+    private View makeView(String s) {
         System.out.println(s);
         try {
             Class c = Class.forName("FrontInternal.Views." + s);
             //TODO: potential problem cuz IModelManger technically isn't a class?
             var constructor = c.getConstructor(IModelManager.class);
-            return (ViewAPI) constructor.newInstance(myManager);
+            return (View) constructor.newInstance(myManager);
         } catch (NoSuchMethodException e) {
             try {
                 System.out.println("\tAttempted to check for Console");
                 Class c2 = Class.forName("FrontInternal.Views." + s);
                 var constructor2 = c2.getConstructor(IModelManager.class, Console.class);
                 System.out.println("\t made constructor");
-                return (ViewAPI) constructor2.newInstance(myManager, myConsole);
+                return (View) constructor2.newInstance(myManager, myConsole);
             } catch (Exception e1) {
                 //e1.printStackTrace();
                return makeUnknownView();
@@ -106,8 +106,8 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     }
 
     //View displayed in place of any of the views that failed to be added correctly
-    private ViewAPI makeUnknownView(){
-        ViewAPI temp = new ViewAPI() {
+    private View makeUnknownView(){
+        View temp = new View(myManager) {
             @Override
             public void update() {
             }
