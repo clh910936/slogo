@@ -80,6 +80,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
                return makeUnknownView();
             }
         } catch (Exception e){
+            e.printStackTrace();
             return makeUnknownView();
         }
     }

@@ -98,8 +98,7 @@ public class Board extends Pane implements ViewAPI {
     public void clear() {
         //getChildren().clear();
         setBackground(Color.BEIGE);
-        //gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
-        System.out.println("cleared screen");
+        getChildren().removeAll(myTurtleManager.getAllSprites());
         //setBackground(Color.BEIGE);
     }
 
