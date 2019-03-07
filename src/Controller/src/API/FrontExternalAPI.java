@@ -28,6 +28,7 @@ public interface FrontExternalAPI {
     public void setShape(int index, int turtleId);
     public void setPalette(int index, int r, int g, int b);
     public void addTurtle(int turtleId);
+    public void setDisplayTurtle(boolean isDiplayed, int turtleId);
     /**
      * updates all of the Views
      * ie History, User Defined Commands, etc.
