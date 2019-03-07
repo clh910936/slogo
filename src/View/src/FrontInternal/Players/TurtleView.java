@@ -11,7 +11,6 @@ import javafx.scene.shape.*;
 import javafx.util.Duration;
 
 import java.awt.*;
-import java.util.concurrent.locks.Lock;
 
 public class TurtleView extends Sprite {
     private double myX;
