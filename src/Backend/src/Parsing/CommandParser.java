@@ -27,7 +27,6 @@ public class CommandParser {
         commandInputList = commandInput.split(WHITESPACE);
         mySyntaxHandler = new SyntaxHandler(language, myModelManager,commandInputList);
         currentReturnValue = -1;
-        System.out.println(myModelManager.getTurtleModel().getCurrentActiveTurtles());
         while(!mySyntaxHandler.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
@@ -35,7 +34,6 @@ public class CommandParser {
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
         return currentReturnValue;
     }
-
 
     private CommandNode buildCommandTree(CommandNode parent) {
         CommandNode currentNode = mySyntaxHandler.parseForCommandNode(parent);
@@ -51,7 +49,6 @@ public class CommandParser {
         }
         throw new IllegalParametersException();
     }
-
 
 
     private Object evaluate(CommandNode command) {

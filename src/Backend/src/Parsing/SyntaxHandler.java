@@ -107,13 +107,8 @@ public class SyntaxHandler {
     }
 
     private boolean isNormalCommand(String input) {
-        try {
-            Regex.getRegexSymbol(input,myCommandSymbols);
-            return true;
-        }
-        catch (IllegalCommandException e) {
-            return false;
-        }
+        String command = Regex.getRegexSymbol(input, myCommandSymbols);
+        return myCommandSymbols.stream().anyMatch(commandEntry -> commandEntry.getValue().equals(command));
     }
 
     private boolean isUserCommand(String input) {
