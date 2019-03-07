@@ -1,6 +1,7 @@
 package Commands;
 
 import BackExternal.ModelManager;
+import Models.Turtle;
 
 public class SetPalette extends FourParamCommand {
 
@@ -9,8 +10,16 @@ public class SetPalette extends FourParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        myPaletteModel.addPalette(Integer.valueOf(String.valueOf(myParams.get(0))), Integer.valueOf(String.valueOf(myParams.get(1))),
-                Integer.valueOf(String.valueOf(myParams.get(2))),Integer.valueOf(String.valueOf(myParams.get(3))));
-        return Integer.valueOf(String.valueOf(myParams.get(0)));
+
+        int index = (int) (double) Double.valueOf(String.valueOf(myParams.get(0)));
+        int r = (int) (double) Double.valueOf(String.valueOf(myParams.get(1)));
+        int g = (int) (double) Double.valueOf(String.valueOf(myParams.get(2)));
+        int b = (int) (double) Double.valueOf(String.valueOf(myParams.get(3)));
+
+        Turtle myTurtle = this.myTurtleModel.getCurrentTurtle();
+        myTurtle.setPalette(index, r, g, b);
+        myPaletteModel.addPalette(index, r, g, b);
+
+        return index;
     }
 }
