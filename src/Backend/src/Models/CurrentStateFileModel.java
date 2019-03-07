@@ -66,6 +66,7 @@ public class CurrentStateFileModel {
         try {
             File file = new File(DOCUMENT_PATH + fileName);
             Document document = db.parse(file);
+            System.out.println(document);
 
             readTag(document, USER_DEFINED_COMMAND_TAG, eElement -> {
                 String commandName = eElement.getElementsByTagName(COMMAND_NAME_TAG).item(0).getTextContent();
