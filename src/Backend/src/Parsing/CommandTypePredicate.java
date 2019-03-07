@@ -13,7 +13,7 @@ public class CommandTypePredicate {
     public static final List<String> TURTLE_COMMANDS = new ArrayList<>(
             Arrays.asList(
                     "Forward","Backward","Left","Right","SetHeading","SetTowards","SetPosition","PenDown","PenUp",
-                    "ShowTurtle","HideTurtle","Home","ClearScreen"
+                    "ShowTurtle","HideTurtle","Home","ClearScreen", "ID"
             )
     );
 

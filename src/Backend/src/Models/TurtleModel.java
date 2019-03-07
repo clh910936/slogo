@@ -35,10 +35,7 @@
 package Models;
 import API.FrontExternalAPI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TurtleModel {
     public static final double STARTX = 2000;
@@ -73,8 +70,9 @@ public class TurtleModel {
         currentActiveTurtles = turtleIds;
         turtleIds.stream().
                 filter(turtleId -> !allTurtles.containsKey(turtleId)).
-                forEach(turtleId -> allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
-                IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI)));
+                forEach(turtleId -> { allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
+                IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
+                myFrontExternalAPI.addTurtle(turtleId);});
     }
 
     public Map<Integer, Turtle> getAllTurtles() {
@@ -86,7 +84,11 @@ public class TurtleModel {
     }
 
     public List<Integer> getCurrentActiveTurtles() {
-        return currentActiveTurtles;
+        return Collections.unmodifiableList(currentActiveTurtles);
+    }
+
+    public void clearCurrentActiveTurtles() {
+        currentActiveTurtles.clear();
     }
 
     public void setCurrentTurtle(int index) {
@@ -96,5 +98,7 @@ public class TurtleModel {
     public int getCurrentTurtleIndex() {
         return currentTurtleIndex;
     }
+
+
 
 }
