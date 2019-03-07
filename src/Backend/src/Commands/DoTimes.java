@@ -19,6 +19,10 @@ public class DoTimes extends TwoParamCommand{
         if (! isCommandReadyToExecute()) return 0;
         try {
             String[] varAndLimit = (String[]) myParams.get(0);
+            System.out.println("VAR AND LIMIT");
+            for (String s : varAndLimit) {
+                System.out.println(s);
+            }
             String[] commands = (String[]) myParams.get(1);
             String variable = varAndLimit[VAR_LOC];
             double limit = Double.parseDouble(varAndLimit[LIMIT_LOC]);

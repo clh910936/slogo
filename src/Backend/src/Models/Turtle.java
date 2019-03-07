@@ -39,7 +39,7 @@ public class Turtle extends GeneralTurtle {
     public void updatePoints(double x, double y) {
         this.myPointX = x;
         this.myPointY = y;
-        myFrontExternalAPI.move(myPointX, myPointY, myId);
+        myFrontExternalAPI.move(myPointX - STARTX, myPointY - STARTY, myId);
         printTurtleStatus();
     }
 
