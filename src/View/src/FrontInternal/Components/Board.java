@@ -4,8 +4,10 @@ import FrontInternal.Players.TurtleManager;
 import FrontInternal.Views.ViewAPI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -24,12 +26,15 @@ public class Board extends Pane implements ViewAPI {
     public static final int FRAMES_PER_SECOND = 60;
     public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 
+    private SimpleDoubleProperty slideSpeed;
+
     public Board(Dimension d) {
         myDimensions = d;
         createCanvas(myDimensions.width, myDimensions.height);
         getChildren().addAll(myCanvas);
 
-        myTurtleManager = new TurtleManager(this);
+        slideSpeed = new SimpleDoubleProperty(1);
+        myTurtleManager = new TurtleManager(this, slideSpeed);
 
         var frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> update());
         var animation = new Timeline();
@@ -37,7 +42,19 @@ public class Board extends Pane implements ViewAPI {
         animation.getKeyFrames().add(frame);
         animation.play();
 
+        addSlider();
 
+    }
+
+    private void addSlider() {
+        Slider slider = new Slider();
+        slider.setMin(0.001);
+        slider.setMax(2);
+        slider.setValue(1);
+        slideSpeed.bind(slider.valueProperty());
+        slider.setTranslateX(myDimensions.width - 150);
+        slider.setTranslateY(myDimensions.height-50);
+        getChildren().add(slider);
     }
 
     public Dimension getDimensions() {
@@ -59,6 +76,7 @@ public class Board extends Pane implements ViewAPI {
 
     public void move(double x, double y, int turtleId) {
         myTurtleManager.move(x, y, turtleId);
+        System.out.println(slideSpeed);
 
     }
 
