@@ -78,6 +78,10 @@ public class Turtle extends GeneralTurtle {
         // TODO: call feroze
     }
 
+    public void clearScreen() {
+        myFrontExternalAPI.clearBoard();
+    }
+
 
 
     //HELPERS
