@@ -77,10 +77,11 @@ public class  AllUserViews extends VBox implements ViewAPI  {
                 System.out.println("\t made constructor");
                 return (ViewAPI) constructor2.newInstance(myManager, myConsole);
             } catch (Exception e1) {
+                //e1.printStackTrace();
                return makeUnknownView();
             }
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             return makeUnknownView();
         }
     }

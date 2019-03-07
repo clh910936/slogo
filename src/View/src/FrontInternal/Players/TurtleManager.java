@@ -3,6 +3,11 @@ import FrontInternal.Components.Board;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.paint.Color;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 
 /**
  * Sprite manager is responsible for holding all sprite objects (like turtles), and cleaning up
@@ -11,9 +16,10 @@ import javafx.scene.paint.Color;
  */
 
 //TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO HAVE EVERYTHING
-public class TurtleManager extends SpriteManager {
+public class TurtleManager {
     private Board myBoard;
     private SimpleDoubleProperty slideSpeed;
+    private Map<Integer, TurtleView> GAME_ACTORS = new HashMap<>();
 
     public TurtleManager(Board b, SimpleDoubleProperty speed) {
         myBoard = b;
@@ -28,13 +34,16 @@ public class TurtleManager extends SpriteManager {
      * VarArgs of sprite objects to be added to the game.
      * @param sprites
      */
-    public void addSprites(Sprite... sprites) {
+    public void addSprites(TurtleView... sprites) {
         myBoard.getChildren().addAll(sprites);
-        for (Sprite s: sprites) {
-            GAME_ACTORS.put(s.getID(), s);
+        for (TurtleView t: sprites) {
+            GAME_ACTORS.put(t.getID(), t);
         }
     }
 
+    protected Sprite get(int turtleId) {
+        return GAME_ACTORS.get(turtleId);
+    }
 
     public void move(double x, double y, int turtleId) {
         String name = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -66,6 +75,13 @@ public class TurtleManager extends SpriteManager {
 
     public void addTurtle(int turtleId) {
         addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed));
+    }
+
+    public Collection<TurtleView> getAllTurtles() {
+        return GAME_ACTORS.values();
+    }
+    public void clearTurtles() {
+        GAME_ACTORS = new HashMap<>();
     }
 
     public void update() {
