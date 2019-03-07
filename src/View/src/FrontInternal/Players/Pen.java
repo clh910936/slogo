@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 public class Pen {
     private Color myColor;
-    private int mySize;
+    private double mySize;
     private boolean up;
 
     private final static Color DEFAULT_COLOR = Color.BLUE;
@@ -19,7 +19,7 @@ public class Pen {
         return myColor;
     }
 
-    public int getSize() {
+    public double getSize() {
         return mySize;
     }
 
@@ -27,7 +27,7 @@ public class Pen {
         myColor = c;
     }
 
-    public void setSize(int size) {
+    public void setSize(double size) {
         mySize = size;
     }
 

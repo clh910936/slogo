@@ -34,7 +34,7 @@ public class TurtleMovementView implements ViewAPI {
     public TurtleMovementView(IModelManager manager){
         myManager = manager;
         myGridPane = new GridPane();
-        myResources = ResourceBundle.getBundle("TurtleControls");
+        myResources = ResourceBundle.getBundle("ViewBackgroundCommands");
 
         createAndAddControls();
     }

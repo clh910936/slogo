@@ -1,6 +1,7 @@
 package FrontInternal.Players;
 import FrontInternal.Util.Location;
 import javafx.animation.PathTransition;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -11,12 +12,10 @@ import javafx.scene.shape.*;
 import javafx.util.Duration;
 
 import java.awt.*;
-import java.util.concurrent.locks.Lock;
 
 public class TurtleView extends Sprite {
     private double myX;
     private double myY;
-    private double myAngle;
 
     private double myLastX;
     private double myLastY;
@@ -29,8 +28,9 @@ public class TurtleView extends Sprite {
     private boolean isBusy;
 
     private TurtleScheduler myScheduler;
+    private SimpleDoubleProperty slideSpeed;
 
-    public TurtleView(Dimension d, GraphicsContext g, int id){
+    public TurtleView(Dimension d, GraphicsContext g, int id, SimpleDoubleProperty speed){
         super(id);
         setImage(new Image(getClass().getClassLoader().getResourceAsStream("turtle_default.png")));
         place(d.width/ 2, d.height/2);
@@ -38,12 +38,15 @@ public class TurtleView extends Sprite {
         myPath = new Path();
         MoveTo m = new MoveTo(getCenterX(), getCenterY());
         myPath.getElements().add(m);
+
         gc = g;
 
         myPen = new Pen();
         isBusy = false;
 
         myScheduler = new TurtleScheduler(this);
+        slideSpeed = speed;
+        rotate(-90);
     }
 
     private void place(int i, int j) {
@@ -52,7 +55,6 @@ public class TurtleView extends Sprite {
 
         myX = getX() + getBoundsInLocal().getWidth()/2;
         myY = getY() + getBoundsInLocal().getHeight()/2;
-        myAngle = 90;
 
         myLastX = 0;
         myLastY = 0;
@@ -124,7 +126,7 @@ public class TurtleView extends Sprite {
         if (!(xdisp == 0 && ydisp == 0)) {
             PathTransition pt = new PathTransition();
 
-            pt.setDuration(Duration.seconds(1));
+            pt.setDuration(Duration.seconds(slideSpeed.get()));
             pt.setNode(this);
 
             LineTo l = new LineTo(getCenterX() + x, getCenterY() - y);
@@ -196,6 +198,12 @@ public class TurtleView extends Sprite {
     public void setPenColor(int index) {
         setBusy(true);
         myPen.setColor(Color.RED);
+        setBusy(false);
+    }
+
+    public void setPenSize(double pixels) {
+        setBusy(true);
+        myPen.setSize(pixels);
         setBusy(false);
     }
 
