@@ -1,4 +1,4 @@
 package Commands;
 
-public class SetBackground {
+public class SetBackground extends OneParamCommand {
 }

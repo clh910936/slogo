@@ -1,4 +1,5 @@
 package Commands;
 
-public class SetPalette {
+public class SetPalette extends OneParamCommand {
+
 }

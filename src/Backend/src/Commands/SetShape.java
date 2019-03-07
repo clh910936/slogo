@@ -1,4 +1,4 @@
 package Commands;
 
-public class SetShape {
+public class SetShape extends OneParamCommand {
 }

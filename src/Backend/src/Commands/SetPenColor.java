@@ -1,4 +1,4 @@
 package Commands;
 
-public class SetPenColor {
+public class SetPenColor extends OneParamCommand {
 }

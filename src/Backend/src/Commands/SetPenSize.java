@@ -1,4 +1,4 @@
 package Commands;
 
-public class SetPenSize {
+public class SetPenSize extends OneParamCommand {
 }
