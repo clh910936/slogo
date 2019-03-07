@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class UserDefinedCommandsModel {
 
-    Map<String,UserDefinedCommand> myUserDefinedCommands;
+    private Map<String,UserDefinedCommand> myUserDefinedCommands;
 
 
     public UserDefinedCommandsModel() {
