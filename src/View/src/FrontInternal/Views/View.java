@@ -1,11 +1,13 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
+import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 
 /**
  * @author Carrie Hunner
@@ -20,12 +22,12 @@ import javafx.scene.text.Text;
 public abstract class View implements ViewAPI {
     protected IModelManager myManager;
     protected static final Paint DEFAULT_COLOR = Color.BLACK;
+    private Insets myInsets = new Insets(10, 10, 10, 10);
 
-    private BorderPane myBorderPane;
-    private GridPane myGridPane;
+    private VBox myVBox;
     private ScrollPane myVariableScroll;
-    protected int myGridIndex;
     protected static final String DEFAULT_LANGUAGE = "English";
+    private static final int HEIGHT = 100;
 
 
 
@@ -34,48 +36,30 @@ public abstract class View implements ViewAPI {
      */
     public View(IModelManager manager){
         myManager = manager;
-        myBorderPane = new BorderPane();
+        myVBox = new VBox();
 
-        myBorderPane.setPrefHeight(100);
-        myBorderPane.setPrefWidth(100);
+        myVBox.setFillWidth(true);
+        myVBox.setPrefHeight(HEIGHT);
 
-        myGridPane = new GridPane();
         myVariableScroll = new ScrollPane();
-        myGridIndex = 0;
+        myVariableScroll.setFitToWidth(true);
+        myVariableScroll.setFitToHeight(true);
 
-        myVariableScroll.setContent(myGridPane);
-        myBorderPane.setCenter(myVariableScroll);
+        myVBox.getChildren().add(myVariableScroll);
         myVariableScroll.setBorder(Border.EMPTY);
     }
 
 
 
-    protected Text createTextLine(String s, Paint color) {
-        Text text = new Text();
-        HBox tempHBox = new HBox();
-        text.setFill(color);
-        text.setText(s);
-        tempHBox.getChildren().add(text);
-        addToGridPane(tempHBox);
-        return text;
+
+
+    protected void setContents(Pane p){
+        p.setPrefHeight(HEIGHT);
+        p.setPrefWidth(myVBox.getWidth());
+        p.setPadding(myInsets);
+        myVariableScroll.setContent(p);
     }
 
-    //Called in Variable view because VariableView needed to create its own
-    //method to add new lines
-    protected void addToGridPane(Pane p){
-        myGridPane.add(p, 0, myGridIndex);
-        myGridIndex++;
-    }
-
-
-
-    /**
-     * Removes all lines of text from the pane
-     */
-    protected void clearLines(){
-        myGridPane.getChildren().clear();
-        myGridIndex = 0;
-    }
 
 
     @Override
@@ -83,6 +67,6 @@ public abstract class View implements ViewAPI {
 
     @Override
     public Pane getPane() {
-        return myBorderPane;
+        return myVBox;
     }
 }

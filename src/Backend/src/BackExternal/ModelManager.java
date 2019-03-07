@@ -5,6 +5,7 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,8 +49,6 @@ public class ModelManager implements IModelManager {
             myFrontEnd.updateViews();
             throw e;
         }
-
-
     }
 
     public void setVariablesModel(VariablesModel vm) {
@@ -101,7 +100,7 @@ public class ModelManager implements IModelManager {
     }
 
     public void saveCurrentState(String fileName) {
-        myCurrentStateFileModel.save(fileName);
+        myCurrentStateFileModel.saveStateIntoFile(fileName);
         myFrontEnd.updateViews();
     }
 
