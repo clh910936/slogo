@@ -1,11 +1,13 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
+import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 
 /**
  * @author Carrie Hunner
@@ -20,6 +22,7 @@ import javafx.scene.text.Text;
 public abstract class View implements ViewAPI {
     protected IModelManager myManager;
     protected static final Paint DEFAULT_COLOR = Color.BLACK;
+    private Insets myInsets = new Insets(10, 10, 10, 10);
 
     private VBox myVBox;
     private ScrollPane myVariableScroll;
@@ -53,6 +56,7 @@ public abstract class View implements ViewAPI {
     protected void setContents(Pane p){
         p.setPrefHeight(HEIGHT);
         p.setPrefWidth(myVBox.getWidth());
+        p.setPadding(myInsets);
         myVariableScroll.setContent(p);
     }
 
