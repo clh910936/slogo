@@ -20,11 +20,11 @@ public class SavedStateView extends View {
     //TODO: check if this is working
     @Override
     public void update() {
-        this.clearLines();
+        //this.clearLines();
         List<String> list = myManager.getSavedFilesList();
         for(String s : list){
-            Text text = createTextLine(s, DEFAULT_COLOR);
-            text.setOnMouseClicked(e -> myManager.setStateFromFile(s, DEFAULT_LANGUAGE));
+            //Text text = createTextLine(s, DEFAULT_COLOR);
+            //text.setOnMouseClicked(e -> myManager.setStateFromFile(s, DEFAULT_LANGUAGE));
         }
     }
 }

@@ -34,11 +34,11 @@ public class VariableView extends View {
     //TODO: fixme
     @Override
     public void update() {
-        this.clearLines();
+        //this.clearLines();
         Map<String, String> map = myManager.getVariables();
         for(String s : map.keySet()){
             Pane p = addEditableVariable(s, map.get(s));
-            addToGridPane(p);
+            //addToGridPane(p);
         }
     }
 
