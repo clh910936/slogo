@@ -55,12 +55,12 @@ public class Turtle extends GeneralTurtle {
 
     public void setShowTurtle() {
         this.myIsDisplayed = true;
-        // TODO: call feroze
+        myFrontExternalAPI.setDisplayTurtle(true, myId);
     }
 
     public void setHideTurtle() {
         this.myIsDisplayed = false;
-        // TODO: call feroze
+        myFrontExternalAPI.setDisplayTurtle(false, myId);
     }
 
     public void setPensize(double pixels) {
@@ -88,6 +88,10 @@ public class Turtle extends GeneralTurtle {
 
     public int getShapeIndex() {
         return this.myShapeIndex;
+    }
+
+    public void setPalette(int index, int r, int g, int b) {
+        myFrontExternalAPI.setPalette(index, r, g, b);
     }
 
 
