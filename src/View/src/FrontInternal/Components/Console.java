@@ -185,6 +185,7 @@ public class Console extends Stage {
     }
 
     private Button makeButton(String s){
+        System.out.println("Making button");
         Button temp = new Button();
         temp.setOnMouseClicked(e -> {
         try {
