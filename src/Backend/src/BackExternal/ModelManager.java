@@ -18,7 +18,7 @@ public class ModelManager implements IModelManager {
 
     private VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
-    private final TurtleModel myTurtleModel;
+    private TurtleModel myTurtleModel;
     private final UserDefinedCommandsModel myUserDefinedCommandsModel;
     private final CurrentStateFileModel myCurrentStateFileModel;
     private final CommandParser myCommandParser;
@@ -113,5 +113,8 @@ public class ModelManager implements IModelManager {
         myVariablesModel.addVariable(variableName, value);
     }
 
+    public void resetTurtle() {
+        myTurtleModel = new TurtleModel(myFrontEnd);
+    }
 
 }
