@@ -5,7 +5,6 @@ import API.FrontExternalAPI;
 public class Turtle extends GeneralTurtle {
 
     public static final int FULL_CIRCLE_DEGREES = 360;
-    public static final int START_DEGREES = 180;
     public static final int STARTX = 2000;
     public static final int STARTY = 2000;
 
@@ -25,13 +24,15 @@ public class Turtle extends GeneralTurtle {
 
     public void turnCounterClockwise(double degrees) {
         myHeadingAngle += degrees;
-        myHeadingAngle = keepAnglePositive(myHeadingAngle + START_DEGREES);
+        myHeadingAngle = keepAnglePositive(myHeadingAngle);
+        printTurtleStatus();
         myFrontExternalAPI.rotate(myHeadingAngle, myId);
     }
 
     public void setHeadingAngle(double degrees) {
         myHeadingAngle = degrees;
-        myHeadingAngle = keepAnglePositive(myHeadingAngle + START_DEGREES);
+        myHeadingAngle = keepAnglePositive(myHeadingAngle);
+        printTurtleStatus();
         myFrontExternalAPI.rotate(myHeadingAngle, myId);
     }
 
@@ -62,53 +63,6 @@ public class Turtle extends GeneralTurtle {
         // TODO: call feroze
     }
 
-//    public List<Double> getUpdatedX() {
-//        List<Double> listOfX = new ArrayList<>();
-//        for (int i = 0; i < listOfStates.size(); i++) {
-//            listOfX.add(listOfStates.get(i).getCurrentX() - STARTX);
-//        }
-//        return listOfX;
-//    }
-//
-//    public List<Double> getUpdatedY() {
-//        List<Double> listOfY = new ArrayList<>();
-//        for (int i = 0; i < listOfStates.size(); i++) {
-//            listOfY.add(listOfStates.get(i).getCurrentY() - STARTY);
-//        }
-//        return listOfY;
-//    }
-//
-//    public List<Double> getHeadingAngle() {
-//        List<Double> listOfAngles = new ArrayList<>();
-//        for (int i = 0; i < listOfStates.size(); i++) {
-//            listOfAngles.add(listOfStates.get(i).getCurrentAngle());
-//        }
-//        return listOfAngles;
-//    }
-//
-//    public List<Boolean> getIsPenUp() {
-//        List<Boolean> listOfPenUp = new ArrayList<>();
-//        for (int i = 0; i < listOfStates.size(); i++) {
-//            listOfPenUp.add(listOfStates.get(i).getCurrentIsPenUp());
-//        }
-//        return listOfPenUp;
-//    }
-//
-//    public List<Boolean> getIsDisplayed() {
-//        List<Boolean> listOfIsDisplayed = new ArrayList<>();
-//        for (int i = 0; i < listOfStates.size(); i++) {
-//            listOfIsDisplayed.add(listOfStates.get(i).getCurrentIsDisplayed());
-//        }
-//        return listOfIsDisplayed;
-//    }
-//
-//    public List<Boolean> getClearScreen() {
-//        List<Boolean> listOfCS = new ArrayList<>();
-//        for (int i = 0; i < listOfStates.size(); i++) {
-//            listOfCS.add(listOfStates.get(i).getCurrentIsCS());
-//        }
-//        return listOfCS;
-//    }
 
 
     //HELPERS

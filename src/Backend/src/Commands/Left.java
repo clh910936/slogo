@@ -13,6 +13,6 @@ public class Left extends OneParamCommand {
         Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
 
         myTurtle.turnCounterClockwise(Double.valueOf(String.valueOf(myParams.get(0))));
-        return (double) myParams.get(0);
+        return myParams.get(0);
     }
 }

@@ -44,7 +44,7 @@ public class TurtleModel {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
     public static final boolean IS_PEN_UP = false;
-    public static final double HEADING_ANGLE = 90;
+    public static final double HEADING_ANGLE = 0;
     public static final boolean IS_DISPLAYED = true;
     public static final boolean CLEAR_SCREEN = false;
     public static final int PEN_COLOR_INDEX = 0;

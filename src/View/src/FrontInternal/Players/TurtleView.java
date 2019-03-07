@@ -78,7 +78,6 @@ public class TurtleView extends Sprite {
     public void rotate(double angle) {
         setBusy(true);
         setRotate(angle);
-        System.out.println(isBusy);
         setBusy(false);
     }
 
@@ -189,11 +188,15 @@ public class TurtleView extends Sprite {
     }
 
     public void setPen(boolean pen) {
+        setBusy(true);
         myPen.setPenUp(pen);
+        setBusy(false);
     }
 
     public void setPenColor(int index) {
+        setBusy(true);
         myPen.setColor(Color.RED);
+        setBusy(false);
     }
 
     @Override
