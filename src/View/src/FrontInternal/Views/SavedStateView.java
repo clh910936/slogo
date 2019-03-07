@@ -26,6 +26,7 @@ public class SavedStateView extends View {
         myConsole = console;
         myErrorResources = ResourceBundle.getBundle("Errors");
         setContents(myVBox);
+        update();
     }
 
     //TODO: check if this is working
