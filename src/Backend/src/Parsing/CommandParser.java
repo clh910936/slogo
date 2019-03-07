@@ -27,6 +27,7 @@ public class CommandParser {
         commandInputList = commandInput.split(WHITESPACE);
         mySyntaxHandler = new SyntaxHandler(language, myModelManager,commandInputList);
         currentReturnValue = -1;
+        System.out.println(myModelManager.getTurtleModel().getCurrentActiveTurtles());
         while(!mySyntaxHandler.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
@@ -55,7 +56,7 @@ public class CommandParser {
 
     private Object evaluate(CommandNode command) {
         if(CommandTypePredicate.isTurtleCommand(command)&&!turtleEvaluated) {
-            return turtleEvaluate(command);
+            return evaluateForAllTurtles(command);
         }
         else {
             for(CommandNode child : command.getChildren()) {
@@ -67,7 +68,7 @@ public class CommandParser {
         }
     }
 
-    private Object turtleEvaluate(CommandNode command) {
+    private Object evaluateForAllTurtles(CommandNode command) {
         Object currentValue = null;
         turtleEvaluated = true;
         TurtleModel turtleModel = myModelManager.getTurtleModel();
