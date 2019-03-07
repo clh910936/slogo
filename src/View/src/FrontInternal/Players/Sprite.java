@@ -2,6 +2,7 @@ package FrontInternal.Players;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 public abstract class Sprite extends ImageView {
     /**
@@ -30,7 +31,7 @@ public abstract class Sprite extends ImageView {
 
     public abstract void rotate(double degrees);
 
-    public abstract void setPenColor(int index);
+    public abstract void setPenColor(Color c);
 
     public abstract Node getPath();
 
