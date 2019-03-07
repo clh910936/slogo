@@ -5,7 +5,10 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
@@ -86,12 +89,13 @@ public class ReferencePage extends Stage{
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(fileName));
-            String text = "";
+            StringBuilder text = new StringBuilder("");
             while(in.ready()) {
                 String line = in.readLine();
-                text = text + NLN + line;
+                text.append(NLN);
+                text.append(line);
             }
-            return text;
+            return text.toString();
         } catch (FileNotFoundException e) {
             return myResourceBundle.getString("REFERENCE_FILE_NOT_FOUND");
         } catch (IOException e) {

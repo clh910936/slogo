@@ -1,6 +1,8 @@
 package FrontInternal.Components;
 
 import API.IModelManager;
+import BackExternal.IllegalCommandException;
+import BackExternal.IllegalParametersException;
 import FrontInternal.Views.ErrorView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,9 +40,6 @@ public class Console extends Stage {
     private ResourceBundle myButtonsResourceBundle;
     private ResourceBundle myErrorResourceBundle;
 
-    private Button myRunButton;
-    private Button myReferencePageButton;
-    private Button myLoadFileButton;
     private List<Button> myButtonList;
     private List<String> myLanguages;
     private TextArea myUserInputField;
@@ -113,7 +112,6 @@ public class Console extends Stage {
 
     private void saveState() {
         if(!myStateNameField.getText().equals("")){
-            System.out.println("Saved file named: " + myStateNameField.getText());
             myManager.saveCurrentState(myStateNameField.getText());
             myStateNameField.clear();
         }
@@ -122,21 +120,16 @@ public class Console extends Stage {
         }
     }
 
-    private void createLoadFileButton() {
-        myLoadFileButton = createAndFormatButton(myGeneralResourceBundle.getString("LOAD_BUTTON"));
-        myLoadFileButton.setOnMouseClicked(e -> loadFile());
-    }
-
     private void loadFile() {
         File file = getFile();
         try {
             Scanner scanner = new Scanner(file);
-            String fileContents = new String();
+            StringBuilder fileContents = new StringBuilder();
             while(scanner.hasNext()){
-                //TODO: make sure the NLN character is working in the properties file
-                fileContents += scanner.nextLine() + myGeneralResourceBundle.getString("NLN");
+                fileContents.append(scanner.nextLine());
+                fileContents.append(myGeneralResourceBundle.getString("NLN"));
             }
-            myUserInputField.setText(fileContents);
+            myUserInputField.setText(fileContents.toString());
         } catch (FileNotFoundException e) {
             myErrorView.displayError(myGeneralResourceBundle.getString("FILE_NOT_FOUND"));
         }
@@ -191,16 +184,6 @@ public class Console extends Stage {
         myVBox.setAlignment(Pos.TOP_CENTER);
     }
 
-    private void createRunButton() {
-        myRunButton = createAndFormatButton(myGeneralResourceBundle.getString(RUN_BUTTON));
-        myRunButton.setOnMouseClicked(e -> readText());
-    }
-
-    private void createReferencePageButton(){
-        myReferencePageButton = createAndFormatButton(myGeneralResourceBundle.getString("REFERENCE_BUTTON"));
-        myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
-    }
-
     private Button makeButton(String s){
         Button temp = new Button();
         temp.setOnMouseClicked(e -> {
@@ -221,7 +204,15 @@ public class Console extends Stage {
         myErrorView.clearError();
         String input = myUserInputField.getText();
         String language = String.valueOf(myLanguageDropDown.getValue());
-        myManager.parseCommand(input, language);
+        try {
+            myManager.parseCommand(input, language);
+        }
+        catch (IllegalCommandException e){
+            showError(myErrorResourceBundle.getString("COMMAND"));
+        }
+        catch (IllegalParametersException e){
+            showError(myErrorResourceBundle.getString("PARAMS"));
+        }
     }
 
     /**

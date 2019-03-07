@@ -1,13 +1,13 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.util.List;
 
 /**
@@ -21,7 +21,6 @@ public class HistoryView extends View {
     private static final Paint PARSED = Color.GREEN;
     private static final Paint NOT_PARSED = Color.RED;
     private VBox myVBox;
-    private ScrollPane myScrollpane;
 
     /**
      * Creates a pane that can be updated based on the manager passed through

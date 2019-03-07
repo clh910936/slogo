@@ -26,6 +26,7 @@ public class SavedStateView extends View {
         myConsole = console;
         myErrorResources = ResourceBundle.getBundle("Errors");
         setContents(myVBox);
+        update();
     }
 
     //TODO: check if this is working
@@ -41,7 +42,6 @@ public class SavedStateView extends View {
 
     private void handleMouseClicked(String name){
         myManager.setStateFromFile(name, DEFAULT_LANGUAGE);
-        myConsole.showError(name + " Clicked");
     }
     private Text createTextLine(String s, Paint color){
         Text text = new Text();

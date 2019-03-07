@@ -42,8 +42,8 @@ public class VariableView extends View {
         //this.clearLines();
         myVBox.getChildren().clear();
         Map<String, String> map = myManager.getVariables();
-        for(String s : map.keySet()){
-            Pane p = addEditableVariable(s, map.get(s));
+        for(Map.Entry<String, String> entry : map.entrySet()){
+            Pane p = addEditableVariable(entry.getKey(), entry.getValue());
             myVBox.getChildren().add(p);
             //addToGridPane(p);
         }

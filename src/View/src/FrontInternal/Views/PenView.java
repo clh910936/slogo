@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 public class PenView extends View{
     private VBox myVBox;
     private final static int MAX_PEN_SIZE = 20;
+    private final static int INIT_PEN_SIZE = 4;
     private final static int SLIDER_WIDTH = 150;
     private ResourceBundle myResources;
     private static final int BUTTON_WIDTH = 100;
@@ -79,6 +80,7 @@ public class PenView extends View{
         slider.setPrefWidth(SLIDER_WIDTH);
         slider.setMaxWidth(SLIDER_WIDTH);
         slider.setShowTickLabels(true);
+        slider.setValue(INIT_PEN_SIZE);
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
