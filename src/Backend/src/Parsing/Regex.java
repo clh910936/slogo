@@ -26,7 +26,7 @@ public class Regex {
     /**
      * Returns true if the given text matches the given regular expression pattern
      */
-    private static boolean match (String text, Pattern regex) {
+    public static boolean match (String text, Pattern regex) {
         return regex.matcher(text).matches();
     }
 

@@ -60,8 +60,9 @@ public class TurtleModel {
     public TurtleModel(FrontExternalAPI frontExternalAPI) {
         myFrontExternalAPI = frontExternalAPI;
         allTurtles = new HashMap<>();
-        allTurtles.put(1, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
-                                    CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
+        Turtle t = new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
+                CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI);
+        allTurtles.put(1, t);
         myFrontExternalAPI.addTurtle(1);
         currentActiveTurtles = new ArrayList<>();
         currentActiveTurtles.add(1);
