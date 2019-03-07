@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -27,7 +28,7 @@ public class Console extends Stage {
     //private CommandParser myParser;
     private BorderPane myBorderPane;
     private HBox myTextHBox;
-    private GridPane myButtonGridPane;
+    private VBox myVBox;
     private ComboBox myLanguageDropDown;
     private IModelManager myManager;
     private ReferencePage myReferencePage;
@@ -35,6 +36,7 @@ public class Console extends Stage {
 
     private ResourceBundle myGeneralResourceBundle;
     private ResourceBundle myButtonsResourceBundle;
+    private ResourceBundle myErrorResourceBundle;
 
     private Button myRunButton;
     private Button myReferencePageButton;
@@ -55,6 +57,7 @@ public class Console extends Stage {
     private static final int BUTTON_VGAP = 10;
     private static final String GENERAL_RESOURCE_FILENAME = "Console";
     private static final String BUTTON_RESOURCE_FILENAME = "ConsoleButtons";
+    private static final String ERROR_RESOURCE_FILENAME = "Errors";
     private static final String RUN_BUTTON = "RUN_BUTTON";
     private Insets myButtonInsets;
     private boolean isDisplaying = true;
@@ -66,17 +69,17 @@ public class Console extends Stage {
 
         initializeInstanceVariables();
         initializeLanguageList();
-        initializeSaveStatePane();
 
-        createRunButton();
-        createReferencePageButton();
-        createLoadFileButton();
+        createAllButtons();
         addButtons();
         initializeDropDown();
-        formatButtonGridPane();
+        initializeSaveStatePane();
+
+        myVBox.getChildren().add(mySaveStatePane);
+        formatSidePane();
 
         myBorderPane.setCenter(myTextHBox);
-        myBorderPane.setRight(myButtonGridPane);
+        myBorderPane.setRight(myVBox);
         myBorderPane.setBottom(myErrorView);
 
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
@@ -85,20 +88,37 @@ public class Console extends Stage {
         this.show();
     }
 
+    private void createAllButtons() {
+        for(String s : myButtonsResourceBundle.keySet()){
+            String info[] = myButtonsResourceBundle.getString(s).split(",");
+            String name = info[0];
+            String methodName = info[1];
+            Button b = makeButton(methodName);
+            b.setText(name);
+            b.setPrefWidth(BUTTON_WIDTH);
+            b.setPadding(myButtonInsets);
+            myButtonList.add(b);
+        }
+    }
+
     private void initializeSaveStatePane() {
         myStateNameField.setPromptText(myGeneralResourceBundle.getString("NAME_PROMPT"));
+        myStateNameField.setPrefWidth(BUTTON_WIDTH);
         Button saveState = createAndFormatButton(myGeneralResourceBundle.getString("STATE_BUTTON"));
         saveState.setOnMouseClicked(e -> saveState());
+        saveState.setPrefWidth(BUTTON_WIDTH);
         mySaveStatePane.add(myStateNameField, 0, 0);
         mySaveStatePane.add(saveState, 0, 1);
     }
 
     private void saveState() {
         if(!myStateNameField.getText().equals("")){
+            System.out.println("Saved file named: " + myStateNameField.getText());
             myManager.saveCurrentState(myStateNameField.getText());
+            myStateNameField.clear();
         }
         else{
-            showError(myGeneralResourceBundle.getString("NO_FILENAME"));
+            showError(myErrorResourceBundle.getString("NO_FILENAME"));
         }
     }
 
@@ -136,10 +156,11 @@ public class Console extends Stage {
         myLanguages = new ArrayList<>();
         myGeneralResourceBundle = ResourceBundle.getBundle(GENERAL_RESOURCE_FILENAME);
         myButtonsResourceBundle = ResourceBundle.getBundle(BUTTON_RESOURCE_FILENAME);
+        myErrorResourceBundle = ResourceBundle.getBundle(ERROR_RESOURCE_FILENAME);
         mySaveStatePane = new GridPane();
         myStateNameField = new TextField();
 
-        myButtonGridPane = new GridPane();
+        myVBox = new VBox();
         myBorderPane = new BorderPane();
         myLanguageDropDown = new ComboBox();
         myErrorView = new ErrorView(ERROR_HEIGHT);
@@ -161,14 +182,13 @@ public class Console extends Stage {
         myLanguageDropDown.setPrefWidth(BUTTON_WIDTH);
         myLanguageDropDown.getItems().addAll(myLanguages);
         myLanguageDropDown.setValue(myGeneralResourceBundle.getString("DEFAULT_LANGUAGE"));
-        myButtonGridPane.add(myLanguageDropDown, 0, myButtonList.size());
+        myVBox.getChildren().add(myLanguageDropDown);
     }
 
-    private void formatButtonGridPane() {
-        myButtonGridPane.setPrefWidth(BUTTON_PANE_WIDTH);
-
-        myButtonGridPane.setVgap(BUTTON_VGAP);
-        myButtonGridPane.setAlignment(Pos.TOP_CENTER);
+    private void formatSidePane() {
+        myVBox.setPrefWidth(BUTTON_PANE_WIDTH);
+        myVBox.setSpacing(BUTTON_VGAP);
+        myVBox.setAlignment(Pos.TOP_CENTER);
     }
 
     private void createRunButton() {
@@ -181,21 +201,16 @@ public class Console extends Stage {
         myReferencePageButton.setOnMouseClicked(e -> myReferencePage.show());
     }
 
-    //TODO: implement this and test it
-    private void makeButton(String s){
+    private Button makeButton(String s){
         Button temp = new Button();
-        String info = myButtonsResourceBundle.getString(s);
-        String[] array = info.split(",");
-        String buttonName = array[0];
-        temp.setText(buttonName);
-        String methodName = array[1];
         temp.setOnMouseClicked(e -> {
         try {
-            Method method = this.getClass().getDeclaredMethod(methodName);
-        } catch (NoSuchMethodException ex) {
-            //TODO: get rid of printing stack trace
-            ex.printStackTrace();
+            Method method = this.getClass().getDeclaredMethod(s);
+            method.invoke(this);
+        } catch (Exception e1) {
+            myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
+        return temp;
     }
 
     private void showReferencePage(){
@@ -219,9 +234,8 @@ public class Console extends Stage {
 
     private void addButtons(){
         for(int k = 0; k < myButtonList.size(); k++){
-            myButtonGridPane.add(myButtonList.get(k), 0, k);
+            myVBox.getChildren().add(myButtonList.get(k));
         }
-        myButtonGridPane.add(mySaveStatePane, 0, myButtonGridPane.getChildren().size());
     }
 
     private Button createAndFormatButton(String s){
@@ -234,5 +248,14 @@ public class Console extends Stage {
 
     public boolean getDisplaying(){
         return isDisplaying;
+    }
+
+    /**
+     * Can be used to write to the Console
+     * Allows user-defined commands to be written to the console
+     * @param s String of the desired text to be displayed
+     */
+    public void display(String s){
+        myUserInputField.setText(s);
     }
 }
