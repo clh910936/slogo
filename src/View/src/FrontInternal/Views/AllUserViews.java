@@ -91,7 +91,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
      */
     @Override
     public void update() {
-        for(ViewAPI v : myViews){
+        for(View v : myViews){
             v.update();
         }
     }
