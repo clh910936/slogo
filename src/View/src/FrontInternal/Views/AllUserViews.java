@@ -41,6 +41,10 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         initializeViews();
     }
 
+    public List<ViewAPI> getViews() {
+        return myViews;
+    }
+
     //Initializes all views in the ViewDropDown.properties file
     private void initializeViews(){
         TreeSet<String> set =new TreeSet<>(myViewClassResources.keySet());

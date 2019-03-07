@@ -103,7 +103,8 @@ public class Board extends Pane implements ViewAPI {
         //setBackground(Color.BEIGE);
     }
 
-    public void setBackgroundColor(int index) {
+    public void setBackgroundColor(Color c) {
+        setBackground(c);
     }
 
     public void penUp(boolean true_is_penup, int turtleId) {
