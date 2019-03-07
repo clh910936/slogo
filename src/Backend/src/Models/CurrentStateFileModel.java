@@ -63,6 +63,7 @@ public class CurrentStateFileModel {
     }
 
     public void setStateFromFile(String fileName, String language) {
+        System.out.println(fileName);
         try {
             File file = new File(DOCUMENT_PATH + fileName);
             Document document = db.parse(file);

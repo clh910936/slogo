@@ -139,6 +139,11 @@ public class GUI implements FrontExternalAPI {
         myBoard.setTurtleShape(index, turtleId);
     }
 
+    @Override
+    public void setDisplayTurtle(boolean isDisplayed, int turtleId) {
+        //TODO: implement
+    }
+
     //TODO THIS IS ALSO MESSY
     @Override
     public void setPalette(int index, int r, int g, int b) {
