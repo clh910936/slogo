@@ -25,6 +25,8 @@ public class Ask extends TwoParamCommand {
         for(String i : activeTurtles) {
             activeTurtleIds.add(Integer.parseInt(i));
         }
+
+        this.myTurtleModel.clearCurrentActiveTurtles();
         this.myTurtleModel.setCurrentActiveTurtles(activeTurtleIds);
 
         CommandParser cp = new CommandParser(myModelManager);
@@ -32,6 +34,7 @@ public class Ask extends TwoParamCommand {
         String commandString = String.join(" ", commands);
         double out = cp.parseCommand(commandString, myLanguage);
 
+        this.myTurtleModel.clearCurrentActiveTurtles();
         this.myTurtleModel.setCurrentActiveTurtles(savedActiveTurtles);
 
         return out;
