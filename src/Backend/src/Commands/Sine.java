@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Sine extends OneParamCommand {
 
-    public Sine(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Sine(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

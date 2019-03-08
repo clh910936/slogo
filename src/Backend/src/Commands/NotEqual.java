@@ -6,8 +6,10 @@ import Parsing.SyntaxHandlerFactory;
 
 public class NotEqual extends TwoParamCommand {
 
-    public NotEqual(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public NotEqual(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

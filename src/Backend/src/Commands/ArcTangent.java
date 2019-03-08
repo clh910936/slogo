@@ -4,8 +4,10 @@ import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class ArcTangent extends OneParamCommand {
-    public ArcTangent(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public ArcTangent(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

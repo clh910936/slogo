@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class IsShowing extends ZeroParamCommand {
-    public IsShowing(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public IsShowing(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

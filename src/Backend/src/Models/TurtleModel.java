@@ -51,7 +51,7 @@ public class TurtleModel {
 
     private List<Integer> currentActiveTurtles;
     private Map<Integer, Turtle> allTurtles;
-    private int currentTurtleIndex;
+    private double currentTurtleIndex;
     private FrontExternalAPI myFrontExternalAPI;
 
     public TurtleModel(FrontExternalAPI frontExternalAPI) {
@@ -99,7 +99,7 @@ public class TurtleModel {
         currentTurtleIndex = index;
     }
 
-    public int getCurrentTurtleIndex() {
+    public double getCurrentTurtleIndex() {
         return currentTurtleIndex;
     }
 

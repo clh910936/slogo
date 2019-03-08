@@ -30,6 +30,7 @@ public class SyntaxHandlerFactory {
     public SyntaxHandlerFactory(ModelManager modelManager) {
         myModelManager = modelManager;
         myCommandSymbols = new HashMap<>();
+        mySymbols = new HashMap<>();
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
@@ -39,12 +40,11 @@ public class SyntaxHandlerFactory {
     }
 
     public CommandNode getCommandNode(CommandNode parent, ParserTracker parserTracker) throws IllegalCommandException {
-
         this.parent = parent;
+        rawInput = parserTracker.getRawInput();
         regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
         this.index = parserTracker.getIndex();
-        this.rawInput = parserTracker.getRawInput();
-        this.commandInputList = commandInputList;
+        this.commandInputList = parserTracker.getCommandInputList();
         try {
             Method method = this.getClass().getDeclaredMethod("evaluate" + regexInput + "Symbol");
             CommandNode returnNode = (CommandNode) method.invoke(this);
@@ -67,33 +67,33 @@ public class SyntaxHandlerFactory {
     private CommandNode evaluateListStartSymbol() {
         String[] listContents = getListContents(commandInputList, index, LIST_START_SYMBOL, LIST_END_SYMBOL);
         index+=listContents.length + 2;
-        return new ListInput(this, myModelManager, listContents);
+        return new ListInput(myModelManager, listContents);
     }
 
     private CommandNode evaluateGroupStartSymbol() {
         String[] listContents = getListContents(commandInputList, index, GROUP_START_SYMBOL, GROUP_END_SYMBOL);
         index+=listContents.length + 2;
-        return new Group(this, myModelManager, listContents, getNewCommandObject(listContents[0]));
+        return new Group(myModelManager, listContents, getNewCommandObject(listContents[0]));
     }
 
     private CommandNode evaluateConstantSymbol() {
         index++;
-        return new Constant(this, myModelManager, Double.parseDouble(rawInput));
+        return new Constant(myModelManager, Double.parseDouble(rawInput));
     }
     private CommandNode evaluateVariableSymbol() {
         index++;
         if(parent!=null && CommandTypePredicate.checkNeedsVariableParameter(parent)) {
-            return new StringInput(this, myModelManager, rawInput.substring(1));
+            return new StringInput(myModelManager, rawInput.substring(1));
         }
         else {
-            return new Variable(this, myModelManager, rawInput.substring(1));
+            return new Variable(myModelManager, rawInput.substring(1));
         }
     }
 
     private CommandNode evaluateCommandSymbol() {
         index++;
         if(parent!=null && CommandTypePredicate.checkNeedsWordParameter(parent)) {
-            return new StringInput(this, myModelManager, rawInput);
+            return new StringInput(myModelManager, rawInput);
         }
         return getNewCommandObject(rawInput);
     }
@@ -137,7 +137,7 @@ public class SyntaxHandlerFactory {
     private CommandNode getNormalCommand(String commandName) throws IllegalCommandException {
         try{
             String command = Regex.getRegexSymbol(commandName, myCommandSymbols);
-            return CommandFactory.getObject(COMMANDS_PACKAGE_PATH, command, this, myModelManager);
+            return CommandFactory.getObject(COMMANDS_PACKAGE_PATH, command, myModelManager);
         }
         catch (IllegalCommandException e) {
             throw e;

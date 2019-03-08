@@ -7,8 +7,10 @@ import Models.Turtle;
 public class Home extends ZeroParamCommand {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
-    public Home(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Home(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

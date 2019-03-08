@@ -6,8 +6,10 @@ import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Left extends OneParamCommand {
-    public Left(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Left(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

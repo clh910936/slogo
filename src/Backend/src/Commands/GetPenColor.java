@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class GetPenColor extends ZeroParamCommand {
 
-    public GetPenColor(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public GetPenColor(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

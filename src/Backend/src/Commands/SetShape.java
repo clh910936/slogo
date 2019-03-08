@@ -7,8 +7,10 @@ import Models.Turtle;
 
 public class SetShape extends OneParamCommand {
 
-    public SetShape(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetShape(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

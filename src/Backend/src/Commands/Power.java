@@ -4,8 +4,10 @@ import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Power extends TwoParamCommand {
-    public Power(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Power(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

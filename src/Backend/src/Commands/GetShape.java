@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class GetShape extends ZeroParamCommand {
 
-    public GetShape(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public GetShape(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

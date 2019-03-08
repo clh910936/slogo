@@ -7,8 +7,10 @@ import Parsing.SyntaxHandlerFactory;
 
 public abstract class TwoParamCommand extends CommandNode {
 
-    public TwoParamCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public TwoParamCommand(ModelManager modelManager
+) {
+        super(modelManager
+);
         setMaxParams(2);
     }
 

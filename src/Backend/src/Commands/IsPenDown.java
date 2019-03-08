@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class IsPenDown extends ZeroParamCommand {
-    public IsPenDown(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public IsPenDown(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

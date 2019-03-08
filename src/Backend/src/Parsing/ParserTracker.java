@@ -26,11 +26,15 @@ public class ParserTracker {
         commandInputList = command.split(resources.getObject(WHITE_SPACE).toString());
         for(int i = 0 ;i<commandInputList.length;i++) {
             String line = commandInputList[i];
-            if(Regex.match(line, (Pattern) resources.getObject(COMMENT_SYMBOL))) {
+            if(Regex.match(line, Pattern.compile((String) resources.getObject(COMMENT_SYMBOL), Pattern.CASE_INSENSITIVE))) {
                 commandInputList[i] = "";
             }
         }
         commandInputList = String.join(" ",commandInputList).split(resources.getObject(WHITE_SPACE).toString());
+    }
+
+    public String[] getCommandInputList() {
+        return commandInputList;
     }
     public int getIndex() {return index;}
 

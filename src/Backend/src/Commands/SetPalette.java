@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class SetPalette extends FourParamCommand {
 
-    public SetPalette(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetPalette(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

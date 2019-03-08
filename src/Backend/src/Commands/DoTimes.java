@@ -10,8 +10,10 @@ public class DoTimes extends TwoParamCommand{
     public static final int VAR_LOC = 0;
     public static final int LIMIT_LOC = 1;
 
-    public DoTimes(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public DoTimes(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

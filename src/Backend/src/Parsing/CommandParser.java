@@ -54,6 +54,7 @@ public class CommandParser {
                 }
             }
         }
+
         throw new IllegalParametersException();
     }
 

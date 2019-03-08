@@ -8,8 +8,10 @@ public class ClearScreen extends ZeroParamCommand {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
 
-    public ClearScreen(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public ClearScreen(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override
