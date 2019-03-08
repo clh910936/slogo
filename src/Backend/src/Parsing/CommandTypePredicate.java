@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class CommandTypePredicate {
+
     public static final String NEEDS_VARIABLE_FILE = "resources/Commands/needs-variable-parameter";
     public static final String NEEDS_WORD_FILE = "resources/Commands/needs-word-parameter";
     public static final String TURTLE_COMMANDS_FILE = "resources/Commands/turtle-commands";

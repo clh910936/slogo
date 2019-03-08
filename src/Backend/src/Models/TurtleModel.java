@@ -83,6 +83,10 @@ public class TurtleModel {
         return allTurtles.get(currentTurtleIndex);
     }
 
+    public Turtle getTurtle(int turtleId) {
+        return allTurtles.get(turtleId);
+    }
+
     public List<Integer> getCurrentActiveTurtles() {
         return Collections.unmodifiableList(currentActiveTurtles);
     }
