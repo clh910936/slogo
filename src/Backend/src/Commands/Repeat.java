@@ -7,7 +7,7 @@ import Parsing.CommandParser;
 
 
 public class Repeat extends TwoParamCommand{
-    public static final String REPCOUNT = ":repcount";
+    public static final String REPCOUNT = "repcount";
 
     public Repeat(ModelManager modelManager
 ) {

@@ -197,7 +197,6 @@ public class Console extends Stage {
         } catch (IllegalAccessException e1) {
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         } catch (InvocationTargetException e1) {
-
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
             return temp;
@@ -215,6 +214,7 @@ public class Console extends Stage {
             myManager.parseCommand(input, language);
         }
         catch (IllegalCommandException e){
+            e.printStackTrace();
             showError(myErrorResourceBundle.getString("COMMAND"));
         }
         catch (IllegalParametersException e){

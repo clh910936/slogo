@@ -60,6 +60,7 @@ public class CurrentStateFileModel {
                 String commandName = eElement.getElementsByTagName(COMMAND_NAME_TAG).item(0).getTextContent();
                 String[] commandVar = eElement.getElementsByTagName(COMMAND_VAR_TAG).item(0).getTextContent().split(" ");
                 String commandDefined = eElement.getElementsByTagName(COMMAND_COMMANDS_TAG).item(0).getTextContent();
+                System.out.println("^^^^"+commandName + " " + commandVar + " " + commandDefined);
                 myUserDefinedCommandsModel.addUserCreatedCommand(new UserDefinedCommand(myModelManager,commandName, commandDefined, commandVar));
             });
 
@@ -67,7 +68,6 @@ public class CurrentStateFileModel {
                 String variableName = eElement.getElementsByTagName(VAR_NAME_TAG).item(0).getTextContent();
                 String variableValue = eElement.getElementsByTagName(VAR_VALUE_TAG).item(0).getTextContent();
                 myVariablesModel.addVariable(variableName,variableValue);});
-
         }
         catch (Exception e) {
             throw new IllegalSavedStateFileException();
@@ -105,6 +105,8 @@ public class CurrentStateFileModel {
             saveElementType(variablesDataMap, variable -> addChildElements(doc,variableTagObjects.apply(variable),VARIABLE_TAG,rootElement));
 
             Map<String, UserDefinedCommand> commandsDataMap = myUserDefinedCommandsModel.getUserCreatedCommands();
+
+
             Function<UserDefinedCommand, Map<String,String>> commandTagObjects = command -> {
                 return Map.ofEntries(
                         entry(COMMAND_NAME_TAG, command.getCommandName()),
