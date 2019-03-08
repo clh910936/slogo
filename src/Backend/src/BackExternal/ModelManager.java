@@ -6,6 +6,9 @@ import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
 import Parsing.SyntaxHandlerFactory;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -152,10 +155,88 @@ public class ModelManager implements IModelManager {
         return new ArrayList<>(myTurtleModel.getAllTurtles().keySet());
     }
 
+    @Override
+    public void setXPos(int turtleId, SimpleDoubleProperty xpos) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setxPos(xpos);
+    }
+
+    @Override
+    public void setYPos(int turtleId, SimpleDoubleProperty ypos) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setyPos(ypos);
+    }
+
+    @Override
+    public void setPenUp(int turtleId, SimpleBooleanProperty penUp) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setPenUp(penUp);
+    }
+
+    @Override
+    public void setPenThickness(int turtleId, SimpleDoubleProperty thickness) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setPenThickness(thickness);
+    }
+
+    @Override
+    public void setR(int turtleId, SimpleIntegerProperty r) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setR(r);
+    }
+
+    @Override
+    public void setG(int turtleId, SimpleIntegerProperty g) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setG(g);
+    }
+
+    @Override
+    public void setB(int turtleId, SimpleIntegerProperty b) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setB(b);
+    }
+
+    @Override
+    public SimpleDoubleProperty getXPos(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getxPos();
+    }
+
+    @Override
+    public SimpleDoubleProperty getYPos(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getyPos();
+    }
+
+    @Override
+    public SimpleBooleanProperty getPenUp(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getPenUp();
+    }
+
+    @Override
+    public SimpleDoubleProperty getPenThickness(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getPenThickness();
+    }
+
+    @Override
+    public SimpleIntegerProperty getR(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getR();
+    }
+
+    @Override
+    public SimpleIntegerProperty getG(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getG();
+    }
+
+    @Override
+    public SimpleIntegerProperty GetB(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getB();
+    }
+
+
     public void resetTurtle() {
         myTurtleModel = new TurtleModel(myFrontEnd);
     }
 
 
 
-    }
+}

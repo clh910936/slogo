@@ -1,6 +1,7 @@
 package Models;
 
 import API.FrontExternalAPI;
+import Commands.PenDown;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -129,4 +130,62 @@ public abstract class GeneralTurtle {
     public FrontExternalAPI getMyFrontExternalAPI() {
         return myFrontExternalAPI;
     }
+
+
+    public SimpleDoubleProperty getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(SimpleDoubleProperty x) {
+        xPos = x;
+    }
+
+    public SimpleDoubleProperty getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(SimpleDoubleProperty y) {
+        yPos = y;
+    }
+
+    public SimpleBooleanProperty getPenUp() {
+        return PenUp;
+    }
+
+    public void setPenUp(SimpleBooleanProperty PenUp) {
+        this.PenUp = PenUp;
+    }
+
+    public SimpleDoubleProperty getPenThickness() {
+        return PenThickness;
+    }
+
+    public void setPenThickness(SimpleDoubleProperty thickness) {
+        PenThickness = thickness;
+    }
+
+    public SimpleIntegerProperty getR() {
+        return R;
+    }
+
+    public void setR(SimpleIntegerProperty r) {
+        R = r;
+    }
+
+    public SimpleIntegerProperty getG() {
+        return G;
+    }
+
+    public void setG(SimpleIntegerProperty g) {
+        G = g;
+    }
+
+    public SimpleIntegerProperty getB() {
+        return B;
+    }
+
+    public void setB(SimpleIntegerProperty b) {
+        B = b;
+    }
+
 }
