@@ -9,14 +9,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 
 import java.util.*;
 
 
-public class PaletteView extends View{
-    private ScrollPane myScrollPane;
-    private IModelManager myManager;
+public class PaletteView extends HorizontalView{
+//    private ScrollPane myScrollPane;
+//    private IModelManager myManager;
     private Pane myPane;
     private HBox myRoot;
     private Map<Integer, Color> ACTIVE_COLORS = new LinkedHashMap<>();
@@ -27,18 +28,23 @@ public class PaletteView extends View{
     //TODO: PALETTEVIEW HAS TO TELL THE BOARD ITS COLORS SOMEHOW
     public PaletteView(IModelManager manager) {
         super(manager);
-        myManager = manager;
         myRoot = new HBox();
-        makeScrollPane();
+        myPane = makeScrollPane(myRoot);
+        //myPane.setMinHeight(210);
+        //makeScrollPane();
         addDefaultColors();
-        addPlus();
+        addNewColor = addPlus(myRoot, e->openInput());
+        //addPlus();
+
         setContents(myPane);
+        setHeight(250);
+
     }
 
-    private void addPlus() {
-        addNewColor = new AddElement(e -> openInput());
-        myRoot.getChildren().add(addNewColor);
-    }
+//    private void addPlus() {
+//        addNewColor = new AddElement(e -> openInput());
+//        myRoot.getChildren().add(addNewColor);
+//    }
 
     private void openInput() {
         TextInputDialog dialog = new TextInputDialog("22, 100, 245, 216");
@@ -97,27 +103,23 @@ public class PaletteView extends View{
         }
     }
 
-    private void makeScrollPane() {
-        myScrollPane = new ScrollPane();
-        myScrollPane.setFitToHeight(true);
-
-        myScrollPane.setContent(myRoot);
-
-        var y = new HBox(myScrollPane);
-        y.setMinHeight(210);
-        //y.setMaxWidth(180);
-
-        myPane = y;
-    }
+//    private void makeScrollPane() {
+//        myScrollPane = new ScrollPane();
+//        myScrollPane.setFitToHeight(true);
+//
+//        myScrollPane.setContent(myRoot);
+//        //myScrollPane.setMinViewportHeight(200);
+//        var y = new HBox(myScrollPane);
+//        y.setMinHeight(300);
+//        //y.setMaxWidth(180);
+//
+//        myPane = y;
+//    }
 
     @Override
     public void update() {
         return;
     }
 
-    @Override
-    public Pane getPane() {
-        return myPane;
-    }
 
 }

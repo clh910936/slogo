@@ -5,8 +5,10 @@ import API.IModelManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
@@ -15,8 +17,7 @@ import java.util.ResourceBundle;
  * User Views. Creates buttons that allow the
  * turtle to be moved using UI controls
  */
-public class TurtleMovementView implements ViewAPI {
-    private IModelManager myManager;
+public class TurtleMovementView extends View {
     private GridPane myGridPane;
     private ResourceBundle myResources;
     private static final int BUTTON_WIDTH = 50;
@@ -28,15 +29,17 @@ public class TurtleMovementView implements ViewAPI {
     private static final int ROTATE_180 = 180;
     private static final int ROTATE_270 = 270;
     private static final String DEFAULT_LANGAUGE = "English";
+    private static final int HEIGHT = 175;
 
 
 
     public TurtleMovementView(IModelManager manager){
-        myManager = manager;
+        super(manager);
         myGridPane = new GridPane();
         myResources = ResourceBundle.getBundle("ViewBackgroundCommands");
-
+        setContents(myGridPane);
         createAndAddControls();
+        myGridPane.setMinHeight(HEIGHT);
     }
 
     private void createAndAddControls() {

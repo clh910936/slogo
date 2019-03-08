@@ -1,20 +1,21 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class SetPosition extends TwoParamCommand {
 
-    public SetPosition(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public SetPosition(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        double dist = myTurtle.getDistToPoint((double) myParams.get(0), (double) myParams.get(1));
-        myTurtle.updatePoints((double) myParams.get(0), (double) myParams.get(1));
+        double dist = myTurtle.getDistToPoint((double) getMyParams().get(0), (double) getMyParams().get(1));
+        myTurtle.updatePoints((double) getMyParams().get(0), (double) getMyParams().get(1));
 
         return dist;
     }

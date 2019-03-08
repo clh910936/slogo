@@ -1,5 +1,6 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
@@ -9,8 +10,8 @@ public class Group extends ZeroParamCommand {
     private CommandNode myCommand;
     private int paramsNeeded;
 
-    public Group(String language, ModelManager modelManager, String[] myList, CommandNode command) {
-        super(language, modelManager);
+    public Group(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String[] myList, CommandNode command) {
+        super(syntaxHandlerFactory, modelManager);
         this.myParamGroup = myList;
         this.myCommand = command;
         paramsNeeded = myCommand.getNumParamsNeeded();
@@ -28,8 +29,7 @@ public class Group extends ZeroParamCommand {
         else {
             commandToParse = handleOtherParams();
         }
-        CommandParser commandParser = new CommandParser(myModelManager);
-        return commandParser.parseCommand(commandToParse,myLanguage);
+        return getCp().parseCommand(commandToParse);
     }
 
     private String handleTwoParams() {

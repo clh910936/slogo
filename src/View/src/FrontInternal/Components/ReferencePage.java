@@ -1,7 +1,11 @@
 package FrontInternal.Components;
 
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 

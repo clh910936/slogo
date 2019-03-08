@@ -1,27 +1,29 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 
 public class MakeUserInstruction extends ThreeParamCommand {
-
-    public MakeUserInstruction(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    private SyntaxHandlerFactory syntaxHandlerFactory;
+    public MakeUserInstruction(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
+        this.syntaxHandlerFactory = syntaxHandlerFactory;
     }
 
-    //myParams.get(0) : name
-    //myParams.get(1) : variables
+    //getMyParams().get(0) : name
+    //getMyParams().get(1) : variables
     //input3 : commands
 
     @Override
     public Object executeCommand() throws ClassCastException {
         try {
-            String name = String.valueOf(myParams.get(0));
-            String[] variables = (String[]) myParams.get(1);
-            String[] commands = (String[]) myParams.get(2);
+            String name = String.valueOf(getMyParams().get(0));
+            String[] variables = (String[]) getMyParams().get(1);
+            String[] commands = (String[]) getMyParams().get(2);
             String commandString = String.join(" ", commands);
-            UserDefinedCommand userCommand = new UserDefinedCommand(myLanguage, myModelManager, name, commandString, variables);
-            myUserDefinedCommandsModel.addUserCreatedCommand(userCommand);
+            UserDefinedCommand userCommand = new UserDefinedCommand(syntaxHandlerFactory, getMyModelManager(), name, commandString, variables);
+            getMyUserDefinedCommandsModel().addUserCreatedCommand(userCommand);
         }
         catch (Exception e) {
             return 0;

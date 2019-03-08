@@ -16,19 +16,19 @@ public class CommandParser {
     private boolean turtleEvaluated = false;
     private SyntaxHandlerFactory mySyntaxHandlerFactory;
     private List<Double> returnValues;
+    private ParserTracker parserTracker;
 
-    public CommandParser(ModelManager modelManager) {
+    public CommandParser(ModelManager modelManager, SyntaxHandlerFactory syntaxHandlerFactory) {
+        mySyntaxHandlerFactory = syntaxHandlerFactory;
         myModelManager = modelManager;
         returnValues = new ArrayList<>();
     }
 
-    public double parseCommand(String commandInput, String language) throws IllegalCommandException, IllegalParametersException {
-        if(commandInput.length()==0) {
-            throw new IllegalCommandException("No Command Inputted");
-        }
-        mySyntaxHandlerFactory = new SyntaxHandlerFactory(language, myModelManager,commandInput);
+
+    public double parseCommand(String command) throws IllegalCommandException, IllegalParametersException {
+        parserTracker = new ParserTracker(command);
         currentReturnValue = -1;
-        while(!mySyntaxHandlerFactory.isDoneParsing()) {
+        while(!parserTracker.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
             returnValues.add(currentReturnValue);
@@ -42,7 +42,8 @@ public class CommandParser {
     }
 
     private CommandNode buildCommandTree(CommandNode parent) {
-        CommandNode currentNode = mySyntaxHandlerFactory.parseForCommandNode(parent);
+        parserTracker.setNextInputString();
+        CommandNode currentNode = mySyntaxHandlerFactory.getCommandNode(parent, parserTracker);
         while(currentNode!=null) {
             if(currentNode.isCommandReadyToExecute()) {
                 return currentNode;

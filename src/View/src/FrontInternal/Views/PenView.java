@@ -20,15 +20,20 @@ public class PenView extends View{
     private final static int SLIDER_WIDTH = 150;
     private ResourceBundle myResources;
     private static final int BUTTON_WIDTH = 100;
+    private static final int MAJOR_TICK = 5;
+    private static final int MINOR_TICK = 4;
     private Console myConsole;
     private ResourceBundle myErrorResources;
     private ResourceBundle myGeneralResources;
+    private static final int HEIGHT = 150;
 
     public PenView(IModelManager manager, Console console){
         super(manager);
+
         myErrorResources = ResourceBundle.getBundle("Errors");
         myGeneralResources = ResourceBundle.getBundle("ViewBackgroundCommands");
         myVBox = new VBox();
+        setHeight(HEIGHT);
         myConsole = console;
         setContents(myVBox);
         myResources = ResourceBundle.getBundle("ViewBackgroundCommands");
@@ -73,8 +78,8 @@ public class PenView extends View{
         Slider slider = new Slider();
         myVBox.getChildren().add(slider);
         slider.setMax(MAX_PEN_SIZE);
-        slider.setMajorTickUnit(5);
-        slider.setMinorTickCount(4);
+        slider.setMajorTickUnit(MAJOR_TICK);
+        slider.setMinorTickCount(MINOR_TICK);
         slider.setShowTickMarks(true);
         slider.setSnapToTicks(true);
         slider.setPrefWidth(SLIDER_WIDTH);
