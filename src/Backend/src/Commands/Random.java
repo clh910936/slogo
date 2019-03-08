@@ -9,6 +9,7 @@ public class Random extends OneParamCommand {
         super(modelManager
 );
     }
+
     @Override
     public Object executeCommand() throws ClassCastException {
         return (int)(Math.random() * Double.valueOf(String.valueOf(getMyParams().get(0))));

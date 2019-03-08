@@ -126,7 +126,24 @@ public class ModelManager implements IModelManager {
 
     @Override
     public int getCurrentActiveTurtle() {
-        return 0;
+        return myTurtleModel.getCurrentTurtleIndex();
+    }
+
+    @Override
+    public void makeCurrentActiveTurtle(int index) {
+        myTurtleModel.setCurrentTurtle(index);
+    }
+
+    @Override
+    public void setTurtleImage(int turtleid, int shapeIndex) {
+        Turtle t = myTurtleModel.getTurtle(turtleid);
+        t.setShapeIndex(shapeIndex);
+    }
+
+    @Override
+    public int getTurtleImage(int turtleid) {
+        Turtle t = myTurtleModel.getTurtle(turtleid);
+        return t.getShapeIndex();
     }
 
     public void resetTurtle() {

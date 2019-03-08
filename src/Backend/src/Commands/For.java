@@ -58,22 +58,6 @@ public class For extends TwoParamCommand {
     }
 
 
-//    double out = 0.0;
-//        for (int i = 0; i < variableValues.size(); i++) {
-//        String[] newCommandArray = Arrays.copyOf(((String[])getMyParams().get(1)), ((String[])getMyParams().get(1)).length);
-//        for (int j = 0; j < ((String[])getMyParams().get(1)).length; j++) {
-//            if (((String[])getMyParams().get(1))[j].equals(tmpVar)) {
-//                newCommandArray[j] = variableValues.get(i).toString();
-//            }
-//        }
-//        if(newCommandArray.length == 0) {
-//            return 0;
-//        }
-//        String newCommand = String.join(" ", newCommandArray);
-//        CommandParser getCp() = new CommandParser(myModelManager);
-//        out = getCp().parseCommand(newCommand, myLanguage);
-//    }
-
     private List<Double> getListOfVariables(String[] variablesFor) {
         List<Double> variableValues = new ArrayList<>();
         double start = Double.parseDouble((variablesFor)[START_LOC]);
