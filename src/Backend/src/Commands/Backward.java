@@ -1,18 +1,19 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Backward extends OneParamCommand {
 
-    public Backward(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Backward(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        myTurtle.moveForward(-1 * Double.valueOf(String.valueOf(myParams.get(0))));
-        return (double) myParams.get(0);
+        myTurtle.moveForward(-1 * Double.valueOf(String.valueOf(getMyParams().get(0))));
+        return (double) getMyParams().get(0);
     }
 }

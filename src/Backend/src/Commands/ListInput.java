@@ -1,13 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class ListInput extends ZeroParamCommand {
 
     private String[] myList;
 
-    public ListInput(String language, ModelManager modelManager, String[] myList) {
-        super(language, modelManager);
+    public ListInput(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String[] myList) {
+        super(syntaxHandlerFactory, modelManager);
         this.myList = myList;
     }
     @Override

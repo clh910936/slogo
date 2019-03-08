@@ -1,18 +1,19 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Forward extends OneParamCommand {
 
-    public Forward(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Forward(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        Turtle myTurtle = this.myTurtleModel.getCurrentTurtle();
-        myTurtle.moveForward(Double.valueOf(String.valueOf(myParams.get(0))));
-        return myParams.get(0);
+        Turtle myTurtle = this.getMyTurtleModel().getCurrentTurtle();
+        myTurtle.moveForward(Double.valueOf(String.valueOf(getMyParams().get(0))));
+        return getMyParams().get(0);
     }
 }

@@ -1,38 +1,33 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
-
-
-
 
 public class UserDefinedCommand extends CommandNode {
     private String commandName;
     private String commandsToExecute;
     private String[] myVariables;
-    private CommandParser cp;
 
-    public UserDefinedCommand(String language, ModelManager modelManager,
+    public UserDefinedCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager,
                               String name, String commands, String[] var) {
-        super(language, modelManager);
+        super(syntaxHandlerFactory, modelManager);
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;
-        cp = new CommandParser(modelManager);
     }
 
 
     public Object executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
-        System.out.println("-------" + commands + " " + myParams);
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
             String variable = myVariables[i];
-            String param = String.valueOf(myParams.get(i));
+            String param = String.valueOf(getMyParams().get(i));
             commands = commands.replaceAll(variable, param);
         }
-        myParams.clear();
-        return cp.parseCommand(commands,myLanguage);
+        clearMyParams();
+        return getCp().parseCommand(commands);
     }
 
     public String getCommandName() {
@@ -69,7 +64,7 @@ public class UserDefinedCommand extends CommandNode {
     }
     @Override
     public boolean isCommandReadyToExecute() {
-        return myChildren.size()==myVariables.length;
+        return getChildren().size()==myVariables.length;
     }
 
 }
