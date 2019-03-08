@@ -7,8 +7,10 @@ import Parsing.CommandParser;
 
 public class If extends TwoParamCommand {
 
-    public If(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public If(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

@@ -9,9 +9,11 @@ public class UserDefinedCommand extends CommandNode {
     private String commandsToExecute;
     private String[] myVariables;
 
-    public UserDefinedCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager,
+    public UserDefinedCommand(ModelManager modelManager
+,
                               String name, String commands, String[] var) {
-        super(syntaxHandlerFactory, modelManager);
+        super(modelManager
+);
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;

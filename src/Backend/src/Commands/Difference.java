@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Difference extends TwoParamCommand {
 
-    public Difference(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Difference(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

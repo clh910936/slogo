@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Turtles extends ZeroParamCommand {
 
-    public Turtles(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Turtles(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

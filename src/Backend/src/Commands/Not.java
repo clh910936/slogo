@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Not extends OneParamCommand {
 
-    public Not(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Not(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException  {

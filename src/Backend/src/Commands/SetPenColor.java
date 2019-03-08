@@ -7,8 +7,10 @@ import Models.Turtle;
 
 public class SetPenColor extends OneParamCommand {
 
-    public SetPenColor(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetPenColor(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

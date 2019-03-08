@@ -6,9 +6,9 @@ import BackExternal.ModelManager;
 
 public class CommandFactory {
 
-    public static CommandNode getObject(String classPath, String className, SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+    public static CommandNode getObject(String classPath, String className, ModelManager modelManager) {
         Class clazz = findReflectionClass(classPath, className);
-        CommandNode o = instantiateReflectionClass(clazz,syntaxHandlerFactory, modelManager);
+        CommandNode o = instantiateReflectionClass(clazz, modelManager);
         return o;
     }
 
@@ -23,10 +23,10 @@ public class CommandFactory {
         return clazz;
     }
 
-    private static CommandNode instantiateReflectionClass(Class clazz, SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+    private static CommandNode instantiateReflectionClass(Class clazz, ModelManager modelManager) {
         CommandNode instantiatedObject = null;
         try{
-            instantiatedObject = (CommandNode) clazz.getDeclaredConstructor(SyntaxHandlerFactory.class, ModelManager.class).newInstance(syntaxHandlerFactory, modelManager);
+            instantiatedObject = (CommandNode) clazz.getDeclaredConstructor(ModelManager.class).newInstance(modelManager);
         }
         catch (Exception e) {
             System.out.println("Could not instantiate " + clazz);

@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Or extends TwoParamCommand {
 
-    public Or(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Or(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException  {

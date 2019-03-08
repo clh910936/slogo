@@ -9,8 +9,10 @@ import Parsing.CommandParser;
 public class Repeat extends TwoParamCommand{
     public static final String REPCOUNT = ":repcount";
 
-    public Repeat(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Repeat(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

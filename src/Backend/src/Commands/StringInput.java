@@ -8,8 +8,10 @@ public class StringInput extends ZeroParamCommand {
 
     private String myString;
 
-    public StringInput(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String myString) {
-        super(syntaxHandlerFactory, modelManager);
+    public StringInput(ModelManager modelManager
+, String myString) {
+        super(modelManager
+);
         this.myString = myString;
     }
     @Override

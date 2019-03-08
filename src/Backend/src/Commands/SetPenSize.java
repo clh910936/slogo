@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class SetPenSize extends OneParamCommand {
 
-    public SetPenSize(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetPenSize(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

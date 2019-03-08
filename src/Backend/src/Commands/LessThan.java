@@ -6,8 +6,10 @@ import BackExternal.ModelManager;
 
 public class LessThan extends TwoParamCommand {
 
-    public LessThan(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public LessThan(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

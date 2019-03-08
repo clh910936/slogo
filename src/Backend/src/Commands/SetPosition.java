@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class SetPosition extends TwoParamCommand {
 
-    public SetPosition(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetPosition(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

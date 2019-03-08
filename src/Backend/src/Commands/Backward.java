@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class Backward extends OneParamCommand {
 
-    public Backward(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Backward(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

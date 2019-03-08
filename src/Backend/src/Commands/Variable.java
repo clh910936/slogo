@@ -7,8 +7,10 @@ public class Variable extends ZeroParamCommand {
 
     private String myVarName;
 
-    public Variable(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String varName) {
-        super(syntaxHandlerFactory, modelManager);
+    public Variable(ModelManager modelManager
+, String varName) {
+        super(modelManager
+);
         this.myVarName = varName;
     }
     @Override

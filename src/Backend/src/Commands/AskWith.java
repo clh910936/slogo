@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AskWith extends TwoParamCommand {
-    public AskWith(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public AskWith(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

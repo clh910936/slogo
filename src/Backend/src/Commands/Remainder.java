@@ -4,8 +4,10 @@ import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Remainder extends TwoParamCommand {
-    public Remainder(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Remainder(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

@@ -9,8 +9,10 @@ import java.util.List;
 
 public class Ask extends TwoParamCommand {
 
-    public Ask(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Ask(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

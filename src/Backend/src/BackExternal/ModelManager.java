@@ -82,6 +82,9 @@ public class ModelManager implements IModelManager {
         }
         return commandsList;
     }
+    public SyntaxHandlerFactory getMySyntaxHandlerFactory() {
+        return mySyntaxHandlerFactory;
+    }
 
     public VariablesModel getVariablesModel() {
         return myVariablesModel;
@@ -153,4 +156,6 @@ public class ModelManager implements IModelManager {
         myTurtleModel = new TurtleModel(myFrontEnd);
     }
 
-}
+
+
+    }

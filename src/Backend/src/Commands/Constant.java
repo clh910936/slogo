@@ -7,8 +7,10 @@ public class Constant extends ZeroParamCommand {
 
     private double num;
 
-    public Constant(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, double num) {
-        super(syntaxHandlerFactory, modelManager);
+    public Constant(ModelManager modelManager
+, double num) {
+        super(modelManager
+);
         this.num = num;
     }
     @Override
