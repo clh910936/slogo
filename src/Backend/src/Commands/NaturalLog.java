@@ -1,10 +1,11 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class NaturalLog extends OneParamCommand {
-    public NaturalLog(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public NaturalLog(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

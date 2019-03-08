@@ -1,13 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
 public class If extends TwoParamCommand {
 
-    public If(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public If(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
@@ -19,8 +20,7 @@ public class If extends TwoParamCommand {
             String[] commands = (String[]) getMyParams().get(1);
             if (expr != 0) {
                 String commandString = String.join(" ", commands);
-                CommandParser cp = new CommandParser(myModelManager);
-                out = cp.parseCommand(commandString,myLanguage);
+                out = getCp().parseCommand(commandString);
             }
         }
         catch (Exception e) {

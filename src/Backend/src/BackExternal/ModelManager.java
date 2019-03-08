@@ -5,6 +5,7 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandlerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +40,8 @@ public class ModelManager implements IModelManager {
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
-            myCommandParser.parseCommand(inputString, language);
+            SyntaxHandlerFactory syntaxHandlerFactory = new SyntaxHandlerFactory(language, this,inputString);
+            myCommandParser.parseCommand(syntaxHandlerFactory);
             myHistoryModel.addHistoryEntry(inputString, true);
             myFrontEnd.updateViews();
         }

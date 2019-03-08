@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class GreaterThan extends TwoParamCommand {
 
-    public GreaterThan(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public GreaterThan(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

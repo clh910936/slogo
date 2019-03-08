@@ -1,11 +1,12 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class Minus extends OneParamCommand {
-    public Minus(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Minus(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

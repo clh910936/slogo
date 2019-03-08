@@ -1,13 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Forward extends OneParamCommand {
 
-    public Forward(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Forward(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

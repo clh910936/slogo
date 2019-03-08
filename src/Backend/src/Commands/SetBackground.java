@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class SetBackground extends OneParamCommand {
 
-    public SetBackground(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public SetBackground(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

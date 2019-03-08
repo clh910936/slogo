@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
 public class IfElse extends ThreeParamCommand {
 
-    public IfElse(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public IfElse(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     //getMyParams().get(0) : expr
@@ -27,8 +28,7 @@ public class IfElse extends ThreeParamCommand {
                 commandsToExecute = commandsFalse;
             }
             String commandString = String.join(" ", commandsToExecute);
-            CommandParser cp = new CommandParser(myModelManager);
-            out = cp.parseCommand(commandString,myLanguage);
+            out = getCp().parseCommand(commandString);
         }
         catch (Exception e) {
             return 0;

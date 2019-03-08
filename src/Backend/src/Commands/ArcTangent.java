@@ -1,10 +1,11 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class ArcTangent extends OneParamCommand {
-    public ArcTangent(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public ArcTangent(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

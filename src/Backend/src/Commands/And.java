@@ -1,11 +1,12 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class And extends TwoParamCommand {
 
-    public And(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public And(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

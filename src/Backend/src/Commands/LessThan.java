@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class LessThan extends TwoParamCommand {
 
-    public LessThan(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public LessThan(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override

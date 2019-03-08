@@ -1,11 +1,12 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class IsPenDown extends ZeroParamCommand {
-    public IsPenDown(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public IsPenDown(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

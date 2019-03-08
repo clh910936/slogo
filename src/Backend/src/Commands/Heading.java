@@ -1,11 +1,12 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Heading extends ZeroParamCommand {
-    public Heading(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Heading(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

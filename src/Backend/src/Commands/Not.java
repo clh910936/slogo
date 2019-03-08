@@ -1,12 +1,12 @@
 package Commands;
 
-
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Not extends OneParamCommand {
 
-    public Not(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Not(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException  {

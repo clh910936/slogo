@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Backward extends OneParamCommand {
 
-    public Backward(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Backward(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

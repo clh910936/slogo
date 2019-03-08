@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class SetHeading extends OneParamCommand {
 
-    public SetHeading(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public SetHeading(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override

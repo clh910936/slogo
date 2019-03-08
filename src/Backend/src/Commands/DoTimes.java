@@ -1,17 +1,17 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandlerFactory;
 
 public class DoTimes extends TwoParamCommand{
-    private CommandParser cp;
     public static final int VAR_LOC = 0;
     public static final int LIMIT_LOC = 1;
 
-    public DoTimes(String language, ModelManager modelManager) {
-        super(language, modelManager);
-        cp = new CommandParser(modelManager);
+    public DoTimes(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DoTimes extends TwoParamCommand{
                 String param = String.valueOf(i);
                 commandString = commandString.replaceAll(variable, param);
                 getMyVariablesModel().addVariable(variable, param);
-                lastValue = cp.parseCommand(commandString,getMyLanguage());
+                lastValue = getCp().parseCommand(commandString);
             }
             return lastValue;
         }

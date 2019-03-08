@@ -1,12 +1,13 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class SetPosition extends TwoParamCommand {
 
-    public SetPosition(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public SetPosition(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override

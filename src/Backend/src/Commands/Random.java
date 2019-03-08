@@ -1,10 +1,11 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Random extends OneParamCommand {
-    public Random(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Random(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

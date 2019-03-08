@@ -1,10 +1,11 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Remainder extends TwoParamCommand {
-    public Remainder(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Remainder(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

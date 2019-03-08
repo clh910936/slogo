@@ -1,5 +1,6 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
@@ -7,15 +8,13 @@ public class UserDefinedCommand extends CommandNode {
     private String commandName;
     private String commandsToExecute;
     private String[] myVariables;
-    private CommandParser cp;
 
-    public UserDefinedCommand(String language, ModelManager modelManager,
+    public UserDefinedCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager,
                               String name, String commands, String[] var) {
-        super(language, modelManager);
+        super(syntaxHandlerFactory, modelManager);
         commandName = name;
         commandsToExecute = commands;
         myVariables = var;
-        cp = new CommandParser(modelManager);
     }
 
 
@@ -28,7 +27,7 @@ public class UserDefinedCommand extends CommandNode {
             commands = commands.replaceAll(variable, param);
         }
         clearMyParams();
-        return cp.parseCommand(commands,getMyLanguage());
+        return getCp().parseCommand(commands);
     }
 
     public String getCommandName() {

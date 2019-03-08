@@ -1,5 +1,6 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalCommandException;
 import BackExternal.IllegalLoopParamsException;
 import BackExternal.IllegalParametersException;
@@ -17,8 +18,8 @@ public class For extends TwoParamCommand {
     public static final int END_LOC = 2;
     public static final int INCR_LOC = 3;
 
-    public For(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public For(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
@@ -41,12 +42,11 @@ public class For extends TwoParamCommand {
             if (commands.length == 0) {
                 return 0;
             }
-            CommandParser cp = new CommandParser(getMyModelManager());
             for (int i = 0; i < variableValues.size(); i++) {
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(variableValues.get(i));
                 commandString = commandString.replaceAll(variablesInfo[0], param);
-                out = cp.parseCommand(commandString,getMyLanguage());
+                out = getCp().parseCommand(commandString);
             }
         }
         catch(IllegalCommandException e) {
@@ -68,8 +68,8 @@ public class For extends TwoParamCommand {
 //            return 0;
 //        }
 //        String newCommand = String.join(" ", newCommandArray);
-//        CommandParser cp = new CommandParser(myModelManager);
-//        out = cp.parseCommand(newCommand, myLanguage);
+//        CommandParser getCp() = new CommandParser(myModelManager);
+//        out = getCp().parseCommand(newCommand, myLanguage);
 //    }
 
     private List<Double> getListOfVariables(String[] variablesFor) {

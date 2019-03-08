@@ -1,10 +1,11 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Tangent extends OneParamCommand {
-    public Tangent(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Tangent(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override

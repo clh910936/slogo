@@ -1,7 +1,9 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.*;
+import Parsing.CommandParser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +11,6 @@ import java.util.List;
 
 public abstract class CommandNode {
 
-    private String myLanguage;
     private TurtleModel myTurtleModel;
     private VariablesModel myVariablesModel;
     private ModelManager myModelManager;
@@ -18,18 +19,30 @@ public abstract class CommandNode {
     private int MAX_PARAMS;
     private PaletteModel myPaletteModel;
     private BackgroundModel myBackgroundModel;
+    private CommandParser cp;
+    private UserDefinedCommandsModel myUserDefinedCommandsModel;
 
-    public CommandNode(String language, ModelManager modelManager) {
+    public CommandNode(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
         myModelManager = modelManager;
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
         myPaletteModel = modelManager.getMyPaletteModel();
         myBackgroundModel= modelManager.getMyShapeModel();
-        myLanguage = language;
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
+        myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
+        cp = new CommandParser(modelManager,syntaxHandlerFactory);
     }
-    public String getMyLanguage() {return myLanguage;}
+
+    protected CommandParser getCp() {
+        return cp;
+    }
+
+    protected UserDefinedCommandsModel getMyUserDefinedCommandsModel() {
+        return myUserDefinedCommandsModel;
+    }
+
+
 
     protected TurtleModel getMyTurtleModel() {
         return myTurtleModel;

@@ -1,5 +1,6 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
@@ -8,8 +9,8 @@ import java.util.List;
 
 public class Ask extends TwoParamCommand {
 
-    public Ask(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Ask(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
@@ -29,10 +30,9 @@ public class Ask extends TwoParamCommand {
         this.getMyTurtleModel().clearCurrentActiveTurtles();
         this.getMyTurtleModel().setCurrentActiveTurtles(activeTurtleIds);
 
-        CommandParser cp = new CommandParser(myModelManager);
         String[] commands = (String[]) getMyParams().get(1);
         String commandString = String.join(" ", commands);
-        double out = cp.parseCommand(commandString, myLanguage);
+        double out = getCp().parseCommand(commandString);
 
         this.getMyTurtleModel().clearCurrentActiveTurtles();
         this.getMyTurtleModel().setCurrentActiveTurtles(savedActiveTurtles);

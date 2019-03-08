@@ -1,15 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
-import Parsing.CommandParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AskWith extends TwoParamCommand {
-    private CommandParser cp;
-    public AskWith(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public AskWith(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
@@ -17,7 +16,6 @@ public class AskWith extends TwoParamCommand {
 
         List<Integer> savedActiveTurtles = this.getMyTurtleModel().getCurrentActiveTurtles();
         List<Integer> newActiveTurtles = new ArrayList<>();
-        cp = new CommandParser(getMyModelManager());
         getTurtlesOfCondition(newActiveTurtles);
         setActiveTurtles(newActiveTurtles);
         double returnValue = parseCommand();
@@ -28,7 +26,7 @@ public class AskWith extends TwoParamCommand {
     private double parseCommand() {
         String[] commands = (String[]) getMyParams().get(1);
         String commandString = String.join(" ", commands);
-        return cp.parseCommand(commandString, getMyLanguage());
+        return getCp().parseCommand(commandString);
     }
 
     private void setActiveTurtles(List<Integer> activeTurtles) {
@@ -41,7 +39,7 @@ public class AskWith extends TwoParamCommand {
             makeTurtleIndexActiveTurtle(currentTurtle);
             String[] condition = (String[]) getMyParams().get(0);
             String conditionString = String.join(" ", condition);
-            double out = cp.parseCommand(conditionString, getMyLanguage());
+            double out = getCp().parseCommand(conditionString);
             if (out != 0) {
                 newActiveTurtles.add(currentTurtle);
             }

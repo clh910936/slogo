@@ -1,5 +1,6 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
@@ -7,11 +8,9 @@ import Parsing.CommandParser;
 
 public class Repeat extends TwoParamCommand{
     public static final String REPCOUNT = ":repcount";
-    private CommandParser cp;
 
-    public Repeat(String language, ModelManager modelManager) {
-        super(language, modelManager);
-        cp = new CommandParser(modelManager);
+    public Repeat(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
@@ -25,7 +24,7 @@ public class Repeat extends TwoParamCommand{
             for (int i = 1; i <= numOfTimes; i++) {
                 String commandString = String.join(" ", commands);
                 getMyVariablesModel().addVariable(REPCOUNT, Double.toString(i));
-                lastValue = cp.parseCommand(commandString,getMyLanguage());
+                lastValue = getCp().parseCommand(commandString);
             }
             return lastValue;
         }

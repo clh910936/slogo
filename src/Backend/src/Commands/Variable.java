@@ -1,13 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Variable extends ZeroParamCommand {
 
     private String myVarName;
 
-    public Variable(String language, ModelManager modelManager, String varName) {
-        super(language, modelManager);
+    public Variable(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String varName) {
+        super(syntaxHandlerFactory, modelManager);
         this.myVarName = varName;
     }
     @Override

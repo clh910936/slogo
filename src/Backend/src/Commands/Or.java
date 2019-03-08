@@ -1,11 +1,12 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Or extends TwoParamCommand {
 
-    public Or(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Or(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
     @Override
     public Object executeCommand() throws ClassCastException  {

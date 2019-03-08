@@ -1,13 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class SetShape extends OneParamCommand {
 
-    public SetShape(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public SetShape(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+        super(syntaxHandlerFactory, modelManager);
     }
 
     @Override
