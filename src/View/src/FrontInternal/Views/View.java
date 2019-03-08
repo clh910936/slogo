@@ -66,4 +66,9 @@ public abstract class View {
     public Pane getPane() {
         return myVBox;
     }
+
+    public void setHeight(int height){
+        myVBox.setPrefHeight(height);
+        myVariableScroll.setPrefHeight(height);
+    }
 }
