@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import API.FrontExternalAPI;
+import API.IModelManager;
 import BackExternal.ModelManager;
 import FrontInternal.Components.*;
 import FrontInternal.Views.*;
@@ -36,14 +37,14 @@ public class GUI implements FrontExternalAPI {
 
 
     // private
-    public GUI() {
+    public GUI(Console console) {
         var left = makeBoard();
         myController = new ModelManager(this);
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
 
         //var right = makeRightView();
         //myRoot = new HBox(left, right);
-        myConsole = new Console(myController);
+        myConsole = console;
         myToolBar = new AllUserViews(myController, myConsole);
         myRoot = new HBox(left, myToolBar);
         //myRoot.setHgrow(right, Priority.ALWAYS);
@@ -52,6 +53,10 @@ public class GUI implements FrontExternalAPI {
 
 
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+    }
+
+    public IModelManager getModelManager(){
+        return myController;
     }
 
     private Node makeBoard() {
