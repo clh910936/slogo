@@ -1,18 +1,14 @@
 package FrontInternal.Views;
 
 import API.IModelManager;
-import FrontInternal.Components.Console;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class SavedStateView extends View {
     private VBox myVBox;
-    private Console myConsole;
-    private ResourceBundle myErrorResources;
 
 
     /**
@@ -20,11 +16,9 @@ public class SavedStateView extends View {
      *
      * @param manager
      */
-    public SavedStateView(IModelManager manager, Console console) {
+    public SavedStateView(IModelManager manager) {
         super(manager);
         myVBox = new VBox();
-        myConsole = console;
-        myErrorResources = ResourceBundle.getBundle("Errors");
         setContents(myVBox);
         update();
     }
