@@ -4,8 +4,10 @@ import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Cosine extends OneParamCommand {
-    public Cosine(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Cosine(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

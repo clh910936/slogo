@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Equal extends TwoParamCommand {
 
-    public Equal(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Equal(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

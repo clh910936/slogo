@@ -60,7 +60,7 @@ public class CurrentStateFileModel {
                 String commandName = eElement.getElementsByTagName(COMMAND_NAME_TAG).item(0).getTextContent();
                 String[] commandVar = eElement.getElementsByTagName(COMMAND_VAR_TAG).item(0).getTextContent().split(" ");
                 String commandDefined = eElement.getElementsByTagName(COMMAND_COMMANDS_TAG).item(0).getTextContent();
-                myUserDefinedCommandsModel.addUserCreatedCommand(new UserDefinedCommand(language, myModelManager,commandName, commandDefined, commandVar));
+                myUserDefinedCommandsModel.addUserCreatedCommand(new UserDefinedCommand(myModelManager,commandName, commandDefined, commandVar));
             });
 
             readTag(document, VARIABLE_TAG, eElement -> {

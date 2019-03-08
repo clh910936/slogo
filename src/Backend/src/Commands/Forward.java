@@ -7,8 +7,10 @@ import Models.Turtle;
 
 public class Forward extends OneParamCommand {
 
-    public Forward(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Forward(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Product extends TwoParamCommand {
 
-    public Product(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Product(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

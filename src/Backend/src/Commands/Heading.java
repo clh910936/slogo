@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Heading extends ZeroParamCommand {
-    public Heading(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Heading(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

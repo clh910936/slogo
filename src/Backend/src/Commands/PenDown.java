@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class PenDown extends ZeroParamCommand {
 
-    public PenDown(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public PenDown(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

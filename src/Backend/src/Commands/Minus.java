@@ -5,8 +5,10 @@ import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class Minus extends OneParamCommand {
-    public Minus(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Minus(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

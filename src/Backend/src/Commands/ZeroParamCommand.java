@@ -6,8 +6,10 @@ import Parsing.SyntaxHandlerFactory;
 
 public abstract class ZeroParamCommand extends CommandNode {
 
-    public ZeroParamCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public ZeroParamCommand(ModelManager modelManager
+) {
+        super(modelManager
+);
         setMaxParams(0);
     }
 

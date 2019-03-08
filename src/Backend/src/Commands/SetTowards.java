@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class SetTowards extends TwoParamCommand {
 
-    public SetTowards(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetTowards(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

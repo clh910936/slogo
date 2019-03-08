@@ -7,8 +7,10 @@ public class ListInput extends ZeroParamCommand {
 
     private String[] myList;
 
-    public ListInput(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String[] myList) {
-        super(syntaxHandlerFactory, modelManager);
+    public ListInput(ModelManager modelManager
+, String[] myList) {
+        super(modelManager
+);
         this.myList = myList;
     }
     @Override

@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class ID extends ZeroParamCommand {
 
-    public ID(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public ID(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

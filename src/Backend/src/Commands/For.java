@@ -18,8 +18,10 @@ public class For extends TwoParamCommand {
     public static final int END_LOC = 2;
     public static final int INCR_LOC = 3;
 
-    public For(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public For(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

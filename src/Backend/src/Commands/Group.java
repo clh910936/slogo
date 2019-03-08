@@ -10,8 +10,10 @@ public class Group extends ZeroParamCommand {
     private CommandNode myCommand;
     private int paramsNeeded;
 
-    public Group(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager, String[] myList, CommandNode command) {
-        super(syntaxHandlerFactory, modelManager);
+    public Group(ModelManager modelManager
+, String[] myList, CommandNode command) {
+        super(modelManager
+);
         this.myParamGroup = myList;
         this.myCommand = command;
         paramsNeeded = myCommand.getNumParamsNeeded();
