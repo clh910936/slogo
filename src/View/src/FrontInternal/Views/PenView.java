@@ -25,12 +25,15 @@ public class PenView extends View{
     private Console myConsole;
     private ResourceBundle myErrorResources;
     private ResourceBundle myGeneralResources;
+    private static final int HEIGHT = 150;
 
     public PenView(IModelManager manager, Console console){
         super(manager);
+
         myErrorResources = ResourceBundle.getBundle("Errors");
         myGeneralResources = ResourceBundle.getBundle("ViewBackgroundCommands");
         myVBox = new VBox();
+        setHeight(HEIGHT);
         myConsole = console;
         setContents(myVBox);
         myResources = ResourceBundle.getBundle("ViewBackgroundCommands");
