@@ -9,7 +9,7 @@ public class IsShowing extends ZeroParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
         return myTurtle.getCurrentIsDisplayed() ? 1 : 0;
     }

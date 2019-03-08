@@ -9,7 +9,7 @@ public class And extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return (Double.valueOf(String.valueOf(myParams.get(0))) != 0 && Double.valueOf(String.valueOf(myParams.get(1))) != 0)? 1 : 0;
+        return (Double.valueOf(String.valueOf(getMyParams().get(0))) != 0 && Double.valueOf(String.valueOf(getMyParams().get(1))) != 0)? 1 : 0;
     }
 
 }

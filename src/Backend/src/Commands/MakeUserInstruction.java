@@ -9,16 +9,16 @@ public class MakeUserInstruction extends ThreeParamCommand {
         super(language, modelManager);
     }
 
-    //myParams.get(0) : name
-    //myParams.get(1) : variables
+    //getMyParams().get(0) : name
+    //getMyParams().get(1) : variables
     //input3 : commands
 
     @Override
     public Object executeCommand() throws ClassCastException {
         try {
-            String name = String.valueOf(myParams.get(0));
-            String[] variables = (String[]) myParams.get(1);
-            String[] commands = (String[]) myParams.get(2);
+            String name = String.valueOf(getMyParams().get(0));
+            String[] variables = (String[]) getMyParams().get(1);
+            String[] commands = (String[]) getMyParams().get(2);
             String commandString = String.join(" ", commands);
             UserDefinedCommand userCommand = new UserDefinedCommand(myLanguage, myModelManager, name, commandString, variables);
             myUserDefinedCommandsModel.addUserCreatedCommand(userCommand);

@@ -18,8 +18,8 @@ public class DoTimes extends TwoParamCommand{
     public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
-            String[] varAndLimit = (String[]) myParams.get(0);
-            String[] commands = (String[]) myParams.get(1);
+            String[] varAndLimit = (String[]) getMyParams().get(0);
+            String[] commands = (String[]) getMyParams().get(1);
             String variable = varAndLimit[VAR_LOC];
             double limit = Double.parseDouble(varAndLimit[LIMIT_LOC]);
 
@@ -28,8 +28,8 @@ public class DoTimes extends TwoParamCommand{
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(i);
                 commandString = commandString.replaceAll(variable, param);
-                myVariablesModel.addVariable(variable, param);
-                lastValue = cp.parseCommand(commandString,myLanguage);
+                getMyVariablesModel().addVariable(variable, param);
+                lastValue = cp.parseCommand(commandString,getMyLanguage());
             }
             return lastValue;
         }

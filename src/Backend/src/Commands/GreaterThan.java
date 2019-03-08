@@ -10,6 +10,6 @@ public class GreaterThan extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        return (Double.valueOf(String.valueOf(myParams.get(0))) > Double.valueOf(String.valueOf(myParams.get(1))))? 1 : 0;
+        return (Double.valueOf(String.valueOf(getMyParams().get(0))) > Double.valueOf(String.valueOf(getMyParams().get(1))))? 1 : 0;
     }
 }

@@ -10,9 +10,9 @@ public class Right extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        myTurtle.turnCounterClockwise(-1 * Double.valueOf(String.valueOf(myParams.get(0))));
-        return myParams.get(0);
+        myTurtle.turnCounterClockwise(-1 * Double.valueOf(String.valueOf(getMyParams().get(0))));
+        return getMyParams().get(0);
     }
 }

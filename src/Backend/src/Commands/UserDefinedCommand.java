@@ -24,13 +24,12 @@ public class UserDefinedCommand extends CommandNode {
         if(commands.length()==0) return 0;
         for (int i = 0; i < myVariables.length; i++) {
             String variable = myVariables[i];
-            String param = String.valueOf(myParams.get(i));
+            String param = String.valueOf(getMyParams().get(i));
             commands = commands.replaceAll(variable, param);
         }
-        myParams.clear();
-        return cp.parseCommand(commands,myLanguage);
+        clearMyParams();
+        return cp.parseCommand(commands,getMyLanguage());
     }
-
 
     public String getCommandName() {
         return commandName;
@@ -66,7 +65,7 @@ public class UserDefinedCommand extends CommandNode {
     }
     @Override
     public boolean isCommandReadyToExecute() {
-        return myChildren.size()==myVariables.length;
+        return getChildren().size()==myVariables.length;
     }
 
 }

@@ -6,6 +6,6 @@ public abstract class FourParamCommand extends CommandNode{
 
     public FourParamCommand(String language, ModelManager modelManager) {
         super(language, modelManager);
-        MAX_PARAMS = 4;
+        setMaxParams(4);
     }
 }

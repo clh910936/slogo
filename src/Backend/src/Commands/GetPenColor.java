@@ -11,7 +11,7 @@ public class GetPenColor extends ZeroParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
         return myTurtle.getPenColorIndex();
     }
 }

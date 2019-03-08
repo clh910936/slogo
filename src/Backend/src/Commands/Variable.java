@@ -12,6 +12,6 @@ public class Variable extends ZeroParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return myVariablesModel.getVariable(myVarName);
+        return getMyVariablesModel().getVariable(myVarName);
     }
 }

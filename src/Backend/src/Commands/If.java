@@ -15,8 +15,8 @@ public class If extends TwoParamCommand {
         double out = 0.0;
 
         try {
-            double expr =  Double.parseDouble(String.valueOf(myParams.get(0)));
-            String[] commands = (String[]) myParams.get(1);
+            double expr =  Double.parseDouble(String.valueOf(getMyParams().get(0)));
+            String[] commands = (String[]) getMyParams().get(1);
             if (expr != 0) {
                 String commandString = String.join(" ", commands);
                 CommandParser cp = new CommandParser(myModelManager);

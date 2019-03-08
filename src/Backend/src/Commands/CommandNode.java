@@ -9,28 +9,48 @@ import java.util.List;
 
 public abstract class CommandNode {
 
-    protected String myLanguage;
-    protected TurtleModel myTurtleModel;
-    protected VariablesModel myVariablesModel;
-    protected ModelManager myModelManager;
-    protected UserDefinedCommandsModel myUserDefinedCommandsModel;
-    protected List<Object> myParams;
-    protected List<CommandNode> myChildren;
-    protected int MAX_PARAMS;
-    protected PaletteModel myPaletteModel;
-    protected BackgroundModel myBackgroundModel;
+    private String myLanguage;
+    private TurtleModel myTurtleModel;
+    private VariablesModel myVariablesModel;
+    private ModelManager myModelManager;
+    private List<Object> myParams;
+    private List<CommandNode> myChildren;
+    private int MAX_PARAMS;
+    private PaletteModel myPaletteModel;
+    private BackgroundModel myBackgroundModel;
 
     public CommandNode(String language, ModelManager modelManager) {
         myModelManager = modelManager;
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
-        myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
         myPaletteModel = modelManager.getMyPaletteModel();
         myBackgroundModel= modelManager.getMyShapeModel();
         myLanguage = language;
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
     }
+    public String getMyLanguage() {return myLanguage;}
+
+    protected TurtleModel getMyTurtleModel() {
+        return myTurtleModel;
+    }
+
+    protected BackgroundModel getMyBackgroundModel() {
+        return myBackgroundModel;
+    }
+
+    protected VariablesModel getMyVariablesModel() {
+        return myVariablesModel;
+    }
+
+    protected ModelManager getMyModelManager() {
+        return myModelManager;
+    }
+
+    protected PaletteModel getMyPaletteModel() {
+        return myPaletteModel;
+    }
+
     public int getNumParamsNeeded() {
         return MAX_PARAMS;
     }
@@ -68,5 +88,9 @@ public abstract class CommandNode {
     }
 
     public abstract Object executeCommand();
+
+    protected void setMaxParams(int max) {
+        MAX_PARAMS = max;
+    }
 }
 

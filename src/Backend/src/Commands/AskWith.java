@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AskWith extends TwoParamCommand {
-
+    private CommandParser cp;
     public AskWith(String language, ModelManager modelManager) {
         super(language, modelManager);
     }
@@ -15,42 +15,43 @@ public class AskWith extends TwoParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
 
-//        TODO: christina please check this
-
-        List<Integer> savedActiveTurtles = new ArrayList<>();
-        savedActiveTurtles = this.myTurtleModel.getCurrentActiveTurtles();
-
+        List<Integer> savedActiveTurtles = this.getMyTurtleModel().getCurrentActiveTurtles();
         List<Integer> newActiveTurtles = new ArrayList<>();
+        cp = new CommandParser(getMyModelManager());
+        getTurtlesOfCondition(newActiveTurtles);
+        setActiveTurtles(newActiveTurtles);
+        double returnValue = parseCommand();
+        setActiveTurtles(savedActiveTurtles);
+        return returnValue;
+    }
 
-        for (Integer currentTurtle : newActiveTurtles) {
+    private double parseCommand() {
+        String[] commands = (String[]) getMyParams().get(1);
+        String commandString = String.join(" ", commands);
+        return cp.parseCommand(commandString, getMyLanguage());
+    }
+
+    private void setActiveTurtles(List<Integer> activeTurtles) {
+        this.getMyTurtleModel().clearCurrentActiveTurtles();
+        this.getMyTurtleModel().setCurrentActiveTurtles(activeTurtles);
+    }
+
+    private void getTurtlesOfCondition(List<Integer> newActiveTurtles) {
+        for (Integer currentTurtle : getMyTurtleModel().getAllTurtles().keySet()) {
             makeTurtleIndexActiveTurtle(currentTurtle);
-            String[] condition = (String[]) myParams.get(0);
+            String[] condition = (String[]) getMyParams().get(0);
             String conditionString = String.join(" ", condition);
-            CommandParser cp = new CommandParser(myModelManager);
-            double out = cp.parseCommand(conditionString, myLanguage);
+            double out = cp.parseCommand(conditionString, getMyLanguage());
             if (out != 0) {
                 newActiveTurtles.add(currentTurtle);
             }
         }
-
-        this.myTurtleModel.clearCurrentActiveTurtles();
-        this.myTurtleModel.setCurrentActiveTurtles(newActiveTurtles);
-
-        CommandParser cp = new CommandParser(myModelManager);
-        String[] commands = (String[]) myParams.get(1);
-        String commandString = String.join(" ", commands);
-        double out = cp.parseCommand(commandString, myLanguage);
-
-        this.myTurtleModel.clearCurrentActiveTurtles();
-        this.myTurtleModel.setCurrentActiveTurtles(savedActiveTurtles);
-
-        return out;
     }
 
+
     private void makeTurtleIndexActiveTurtle(Integer currentTurtle) {
-        this.myTurtleModel.clearCurrentActiveTurtles();
         List<Integer> thisTurtleAsActive = new ArrayList<>();
         thisTurtleAsActive.add(currentTurtle);
-        this.myTurtleModel.setCurrentActiveTurtles(thisTurtleAsActive);
+        setActiveTurtles(thisTurtleAsActive);
     }
 }

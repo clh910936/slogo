@@ -17,14 +17,14 @@ public class Repeat extends TwoParamCommand{
     public Object executeCommand() throws IllegalParametersException {
         if (! isCommandReadyToExecute()) return 0;
         try {
-            double numOfTimes = Double.valueOf(String.valueOf(myParams.get(0)));
-            String[] commands = (String[]) myParams.get(1);
+            double numOfTimes = Double.valueOf(String.valueOf(getMyParams().get(0)));
+            String[] commands = (String[]) getMyParams().get(1);
 
             double lastValue = 0;
             for (int i = 1; i <= numOfTimes; i++) {
                 String commandString = String.join(" ", commands);
-                myVariablesModel.addVariable(REPCOUNT, Double.toString(i));
-                lastValue = cp.parseCommand(commandString,myLanguage);
+                getMyVariablesModel().addVariable(REPCOUNT, Double.toString(i));
+                lastValue = cp.parseCommand(commandString,getMyLanguage());
             }
             return lastValue;
         }

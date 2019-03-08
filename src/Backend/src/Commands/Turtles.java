@@ -10,6 +10,6 @@ public class Turtles extends ZeroParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        return myTurtleModel.getAllTurtles().size();
+        return getMyTurtleModel().getAllTurtles().size();
     }
 }

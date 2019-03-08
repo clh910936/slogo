@@ -25,8 +25,8 @@ public class For extends TwoParamCommand {
     public Object executeCommand() throws IllegalParametersException {
         double out = 0.0;
         try {
-            String[] variablesInfo = (String[]) myParams.get(0);
-            String[] commands = (String[]) myParams.get(1);
+            String[] variablesInfo = (String[]) getMyParams().get(0);
+            String[] commands = (String[]) getMyParams().get(1);
 
             if (variablesInfo.length != NUM_PARAMS) {
                 throw new IllegalLoopParamsException();
@@ -41,12 +41,12 @@ public class For extends TwoParamCommand {
             if (commands.length == 0) {
                 return 0;
             }
-            CommandParser cp = new CommandParser(myModelManager);
+            CommandParser cp = new CommandParser(getMyModelManager());
             for (int i = 0; i < variableValues.size(); i++) {
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(variableValues.get(i));
                 commandString = commandString.replaceAll(variablesInfo[0], param);
-                out = cp.parseCommand(commandString,myLanguage);
+                out = cp.parseCommand(commandString,getMyLanguage());
             }
         }
         catch(IllegalCommandException e) {
@@ -58,9 +58,9 @@ public class For extends TwoParamCommand {
 
 //    double out = 0.0;
 //        for (int i = 0; i < variableValues.size(); i++) {
-//        String[] newCommandArray = Arrays.copyOf(((String[])myParams.get(1)), ((String[])myParams.get(1)).length);
-//        for (int j = 0; j < ((String[])myParams.get(1)).length; j++) {
-//            if (((String[])myParams.get(1))[j].equals(tmpVar)) {
+//        String[] newCommandArray = Arrays.copyOf(((String[])getMyParams().get(1)), ((String[])getMyParams().get(1)).length);
+//        for (int j = 0; j < ((String[])getMyParams().get(1)).length; j++) {
+//            if (((String[])getMyParams().get(1))[j].equals(tmpVar)) {
 //                newCommandArray[j] = variableValues.get(i).toString();
 //            }
 //        }

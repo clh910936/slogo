@@ -10,9 +10,9 @@ public class SetBackground extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        double d = Double.valueOf(String.valueOf(myParams.get(0)));
+        double d = Double.valueOf(String.valueOf(getMyParams().get(0)));
         int n = (int) d;
-        myBackgroundModel.setCurrentBackgroundIndex(n);
+        getMyBackgroundModel().setCurrentBackgroundIndex(n);
         return n;
     }
 }

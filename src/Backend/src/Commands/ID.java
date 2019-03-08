@@ -9,6 +9,6 @@ public class ID extends ZeroParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return this.myTurtleModel.getCurrentTurtleIndex();
+        return this.getMyTurtleModel().getCurrentTurtleIndex();
     }
 }
