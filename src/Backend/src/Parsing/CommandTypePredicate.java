@@ -2,27 +2,20 @@ package Parsing;
 
 import Commands.CommandNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class CommandTypePredicate {
-    public static final String MAKE_VARIABLE_COMMAND = "MakeVariable";
-    public static final String MAKE_COMMAND = "MakeUserInstruction";
-    public static final List<String> TURTLE_COMMANDS = new ArrayList<>(
-            Arrays.asList(
-                    "Forward","Backward","Left","Right","SetHeading","SetTowards","SetPosition","PenDown","PenUp",
-                    "ShowTurtle","HideTurtle","Home","ClearScreen", "ID"
-            )
-    );
 
-    public static final Predicate<CommandNode> needsWordParameter = command -> (command.getCommandName().equals(MAKE_COMMAND));
+    public static final String NEEDS_VARIABLE_FILE = "resources/Commands/needs-variable-parameter";
+    public static final String NEEDS_WORD_FILE = "resources/Commands/needs-word-parameter";
+    public static final String TURTLE_COMMANDS_FILE = "resources/Commands/turtle-commands";
 
-    public static final Predicate<CommandNode> needsVariableParameter = command -> (command.getCommandName().equals(MAKE_VARIABLE_COMMAND));
+    private static final Predicate<CommandNode> needsWordParameter = command -> (ResourceBundle.getBundle(NEEDS_WORD_FILE).containsKey(command.getCommandName()));
 
+    private static final Predicate<CommandNode> needsVariableParameter = command -> (ResourceBundle.getBundle(NEEDS_VARIABLE_FILE).containsKey(command.getCommandName()));
 
-    public static final Predicate<CommandNode> isTurtleCommand = command -> (TURTLE_COMMANDS.contains(command.getCommandName()));
+    private static final Predicate<CommandNode> isTurtleCommand = command -> (ResourceBundle.getBundle(TURTLE_COMMANDS_FILE).containsKey(command.getCommandName()));
 
     public static boolean isTurtleCommand(CommandNode input) {
         return isTurtleCommand.test(input);

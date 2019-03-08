@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class Quotient extends TwoParamCommand {
 
-    public Quotient(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Quotient(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

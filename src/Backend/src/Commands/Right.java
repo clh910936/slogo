@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class Right extends OneParamCommand {
 
-    public Right(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Right(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

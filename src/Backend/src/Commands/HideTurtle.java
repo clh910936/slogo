@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class HideTurtle extends ZeroParamCommand {
 
-    public HideTurtle(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public HideTurtle(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

@@ -22,7 +22,7 @@ public abstract class CommandNode {
     private CommandParser cp;
     private UserDefinedCommandsModel myUserDefinedCommandsModel;
 
-    public CommandNode(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
+    public CommandNode(ModelManager modelManager) {
         myModelManager = modelManager;
         myVariablesModel = modelManager.getVariablesModel();
         myTurtleModel = modelManager.getTurtleModel();
@@ -31,7 +31,7 @@ public abstract class CommandNode {
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
         myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
-        cp = new CommandParser(modelManager,syntaxHandlerFactory);
+        cp = new CommandParser(modelManager,myModelManager.getMySyntaxHandlerFactory());
     }
 
     protected CommandParser getCp() {

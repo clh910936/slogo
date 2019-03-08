@@ -6,8 +6,10 @@ import Models.Turtle;
 
 public class SetHeading extends OneParamCommand {
 
-    public SetHeading(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetHeading(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

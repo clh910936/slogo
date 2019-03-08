@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public class And extends TwoParamCommand {
 
-    public And(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public And(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {

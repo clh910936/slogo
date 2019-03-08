@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public abstract class FourParamCommand extends CommandNode{
 
-    public FourParamCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public FourParamCommand(ModelManager modelManager
+) {
+        super(modelManager
+);
         setMaxParams(4);
     }
 }

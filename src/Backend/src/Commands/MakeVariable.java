@@ -6,8 +6,10 @@ import BackExternal.ModelManager;
 
 public class MakeVariable extends TwoParamCommand {
 
-    public MakeVariable(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public MakeVariable(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

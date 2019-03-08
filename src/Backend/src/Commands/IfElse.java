@@ -6,8 +6,10 @@ import Parsing.CommandParser;
 
 public class IfElse extends ThreeParamCommand {
 
-    public IfElse(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public IfElse(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     //getMyParams().get(0) : expr

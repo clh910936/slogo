@@ -6,8 +6,10 @@ import BackExternal.ModelManager;
 
 public class SetBackground extends OneParamCommand {
 
-    public SetBackground(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public SetBackground(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {

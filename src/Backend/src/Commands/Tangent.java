@@ -4,8 +4,10 @@ import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Tangent extends OneParamCommand {
-    public Tangent(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Tangent(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

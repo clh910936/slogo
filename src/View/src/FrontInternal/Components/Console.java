@@ -197,6 +197,7 @@ public class Console extends Stage {
         } catch (IllegalAccessException e1) {
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         } catch (InvocationTargetException e1) {
+
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
             return temp;

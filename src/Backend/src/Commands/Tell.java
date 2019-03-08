@@ -8,8 +8,10 @@ import java.util.List;
 
 public class Tell extends OneParamCommand {
 
-    public Tell(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public Tell(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
 
     @Override

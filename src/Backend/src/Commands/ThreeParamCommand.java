@@ -5,8 +5,10 @@ import BackExternal.ModelManager;
 
 public abstract class ThreeParamCommand extends CommandNode {
 
-    public ThreeParamCommand(SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public ThreeParamCommand(ModelManager modelManager
+) {
+        super(modelManager
+);
         setMaxParams(3);
     }
 

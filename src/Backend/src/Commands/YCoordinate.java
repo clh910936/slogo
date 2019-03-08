@@ -7,12 +7,14 @@ import Parsing.SyntaxHandlerFactory;
 
 public class YCoordinate extends ZeroParamCommand {
     public static final int STARTY = 2000;
-    public YCoordinate (SyntaxHandlerFactory syntaxHandlerFactory, ModelManager modelManager) {
-        super(syntaxHandlerFactory, modelManager);
+    public YCoordinate (ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {
         Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
-        return myTurtle.getCurrentY() - STARTY;
+        return myTurtle.getMyPointX() - STARTY;
     }
 }
