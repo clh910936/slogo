@@ -36,7 +36,7 @@ public interface IModelManager {
     int getTurtleImage(int turtleid);
 
     // I need to know all the turtle IDs to query
-    //List<Integer> getTurtles();
+    List<Integer> getTurtles();
 
     //TODO: ALSO, in order to track the turtles in real time, I need
     // u to add these private variables to each Turtle (no need to initialize them)

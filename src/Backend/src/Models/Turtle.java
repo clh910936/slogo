@@ -8,11 +8,6 @@ public class Turtle extends GeneralTurtle {
     public static final int STARTX = 2000;
     public static final int STARTY = 2000;
 
-    //private SimpleDoubleProperty xPos;
-    //private SimpleDoubleProperty yPos;
-    // private SimpleBooleanProperty PenUp;
-    // private SimpleDoubleProperty PenThickness;
-
     public Turtle(double nextPointX, double nextPointY, boolean isPenUp, double headingAngle,
                   boolean isDisplayed, boolean isClearScreen, int id, int pcIndex,
                   double ps, int si, FrontExternalAPI myFrontExternal) {
