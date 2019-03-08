@@ -69,11 +69,6 @@ public class UserDefinedCommandsView extends View {
         pane.setContent(text);
 
         dropDown.setContent(pane);
-        text.setOnMouseClicked(e -> handleMouseClicked(text));
         myAccordion.getPanes().add(dropDown);
-    }
-
-    private void handleMouseClicked(Text text){
-        myConsole.display(text.getText());
     }
 }
