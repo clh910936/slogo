@@ -42,9 +42,12 @@ public class SyntaxHandlerFactory {
     public CommandNode getCommandNode(CommandNode parent, ParserTracker parserTracker) throws IllegalCommandException {
         this.parent = parent;
         rawInput = parserTracker.getRawInput();
+        System.out.println(rawInput);
+
         regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
         this.index = parserTracker.getIndex();
         this.commandInputList = parserTracker.getCommandInputList();
+        System.out.println(rawInput);
         try {
             Method method = this.getClass().getDeclaredMethod("evaluate" + regexInput + "Symbol");
             CommandNode returnNode = (CommandNode) method.invoke(this);
@@ -65,6 +68,7 @@ public class SyntaxHandlerFactory {
     }
 
     private CommandNode evaluateListStartSymbol() {
+        System.out.println("*****EVALUATE LIST START HERE");
         String[] listContents = getListContents(commandInputList, index, LIST_START_SYMBOL, LIST_END_SYMBOL);
         index+=listContents.length + 2;
         return new ListInput(myModelManager, listContents);
@@ -147,18 +151,22 @@ public class SyntaxHandlerFactory {
     private String[] getListContents(String[] commandInputList, int currentIndex, String startSymbol, String endSymbol) throws IllegalCommandException{
         List<String> listContents = new ArrayList<>();
         int bracketCount = 1;
+        System.out.println("COMMND LIST" + Arrays.toString(commandInputList));
         for(int i = currentIndex+1;i<commandInputList.length;i++) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput,mySymbols);
+            System.out.println("RAW LIST INPUT" + rawInput);
             if(input.equals(startSymbol)) {
+                System.out.println("EQUALS START SYMBOL");
                 bracketCount++;
             }
             else if(input.equals(endSymbol)) {
+                System.out.println("EQUALS END SYMBOL");
                 bracketCount--;
             }
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
-
             listContents.add(rawInput);
+            System.out.println(listContents);
         }
         throw new IllegalCommandException("Invalid ListInput Parameter");
     }

@@ -6,6 +6,7 @@ import Models.*;
 import Parsing.CommandParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,8 +42,6 @@ public abstract class CommandNode {
     protected UserDefinedCommandsModel getMyUserDefinedCommandsModel() {
         return myUserDefinedCommandsModel;
     }
-
-
 
     protected TurtleModel getMyTurtleModel() {
         return myTurtleModel;

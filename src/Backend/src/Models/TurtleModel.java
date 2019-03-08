@@ -74,7 +74,7 @@ public class TurtleModel {
     }
 
     public Turtle getCurrentTurtle() {
-        return allTurtles.get(currentTurtleIndex);
+        return allTurtles.get((int) currentTurtleIndex);
     }
 
     public Turtle getTurtle(int turtleId) {
