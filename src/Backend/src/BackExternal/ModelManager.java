@@ -127,7 +127,7 @@ public class ModelManager implements IModelManager {
 
     @Override
     public int getCurrentActiveTurtle() {
-        return myTurtleModel.getCurrentTurtleIndex();
+        return (int) myTurtleModel.getCurrentTurtleIndex();
     }
 
     @Override

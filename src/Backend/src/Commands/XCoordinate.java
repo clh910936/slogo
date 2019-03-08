@@ -14,6 +14,6 @@ public class XCoordinate extends ZeroParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
         Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
-        return myTurtle.getCurrentX() - STARTX;
+        return myTurtle.getMyPointX() - STARTX;
     }
 }
