@@ -2,6 +2,7 @@ package FrontInternal.Views;
 
 import API.IModelManager;
 import FrontInternal.Players.AddElement;
+import FrontInternal.Players.TurtleInfoElement;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -14,8 +15,9 @@ public class TurtleInfoView extends HorizontalView {
         myRoot = new HBox();
         myPane = makeScrollPane(myRoot);
         addTurtles(manager);
-        addNewTurtleButton = addPlus(myRoot, e->addNewTurtle());
         setContents(myPane);
+        setHeight(210);
+        update();
     }
 
     private void addNewTurtle() {
@@ -26,7 +28,10 @@ public class TurtleInfoView extends HorizontalView {
 
     @Override
     public void update() {
-        return;
+        for(int id: myManager.getTurtles()) {
+            myRoot.getChildren().add(new TurtleInfoElement(id));
+        }
+        addNewTurtleButton = addPlus(myRoot, e->addNewTurtle());
     }
 
     /* add a SimpleDoubleProperty to every turtle
