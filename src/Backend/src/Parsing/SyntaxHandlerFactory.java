@@ -27,11 +27,10 @@ public class SyntaxHandlerFactory {
 
     private CommandNode parent;
 
-    public SyntaxHandlerFactory(String language, ModelManager modelManager) {
+    public SyntaxHandlerFactory(ModelManager modelManager) {
         myModelManager = modelManager;
         myCommandSymbols = new HashMap<>();
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
-        Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
     }
 
     public void changeLanguage(String language) {
