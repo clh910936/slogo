@@ -50,9 +50,6 @@ public abstract class View {
         myVariableScroll.setBorder(Border.EMPTY);
     }
 
-    protected void setHeight(int height){
-        myVBox.setPrefHeight(height);
-    }
 
 
     protected void setContents(Pane p){
