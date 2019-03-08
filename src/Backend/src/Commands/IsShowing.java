@@ -14,6 +14,6 @@ public class IsShowing extends ZeroParamCommand {
     public Object executeCommand() throws ClassCastException {
         Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        return myTurtle.getCurrentIsDisplayed() ? 1 : 0;
+        return myTurtle.getMyIsDisplayed() ? 1 : 0;
     }
 }

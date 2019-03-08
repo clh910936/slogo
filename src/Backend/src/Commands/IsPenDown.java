@@ -13,6 +13,6 @@ public class IsPenDown extends ZeroParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
         Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
-        return ! myTurtle.getCurrentIsPenUp() ? 1 : 0;
+        return ! myTurtle.getMyIsPenUp() ? 1 : 0;
     }
 }

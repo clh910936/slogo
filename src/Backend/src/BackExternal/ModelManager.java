@@ -7,6 +7,7 @@ import Models.*;
 import Parsing.CommandParser;
 import Parsing.SyntaxHandlerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,7 +127,7 @@ public class ModelManager implements IModelManager {
 
     @Override
     public int getCurrentActiveTurtle() {
-        return myTurtleModel.getCurrentTurtleIndex();
+        return (int) myTurtleModel.getCurrentTurtleIndex();
     }
 
     @Override
@@ -144,6 +145,11 @@ public class ModelManager implements IModelManager {
     public int getTurtleImage(int turtleid) {
         Turtle t = myTurtleModel.getTurtle(turtleid);
         return t.getShapeIndex();
+    }
+
+    @Override
+    public List<Integer> getTurtles() {
+        return new ArrayList<>(myTurtleModel.getAllTurtles().keySet());
     }
 
     public void resetTurtle() {
