@@ -11,8 +11,8 @@ public class PaletteElement extends ViewElement {
         rect.setArcWidth(10);
         getChildren().add(rect);
 
-        String indexLabel = "Index: " + index;
-        String colorLabel = "Color: " + ColorUtils.getColorNameFromRgb(r, g, b);
+        String indexLabel = getResourceBundle().getString("INDEX") + index;
+        String colorLabel = getResourceBundle().getString("COLOR") + ColorUtils.getColorNameFromRgb(r, g, b);
         makeLabels(indexLabel, colorLabel);
     }
 }

@@ -70,7 +70,7 @@ public class GUI implements FrontExternalAPI {
     }
 
     private Node makeBoard() {
-        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height));
+        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height), myController);
         return new HBox(myBoard);
     }
 
@@ -162,7 +162,6 @@ public class GUI implements FrontExternalAPI {
 
     @Override
     public void setDisplayTurtle(boolean isDisplayed, int turtleId) {
-        //TODO: implement
         myBoard.setDisplayed(isDisplayed, turtleId);
     }
 

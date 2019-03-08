@@ -23,7 +23,7 @@ public abstract class Sprite extends ImageView {
 
     public abstract void move(Double x, Double y);
 
-    public int getID() {
+    protected int getID() {
         return myId;
     }
 
@@ -36,5 +36,6 @@ public abstract class Sprite extends ImageView {
     public abstract Node getPath();
 
     public abstract TurtleScheduler getScheduler();
+
 
 }

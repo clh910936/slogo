@@ -1,7 +1,10 @@
 package FrontInternal.Players;
+import API.IModelManager;
 import FrontInternal.Util.Location;
 import javafx.animation.PathTransition;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -29,10 +32,14 @@ public class TurtleView extends Sprite {
 
     private TurtleScheduler myScheduler;
     private SimpleDoubleProperty slideSpeed;
+    private IModelManager myController;
 
-    public TurtleView(Dimension d, GraphicsContext g, int id, SimpleDoubleProperty speed){
+    private final String DEFAULT_IMAGE = "turtle_default.png";
+
+    public TurtleView(Dimension d, GraphicsContext g, int id, SimpleDoubleProperty speed, IModelManager controller){
         super(id);
-        setImage(new Image(getClass().getClassLoader().getResourceAsStream("turtle_default.png")));
+        myController = controller;
+        setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
         place(d.width/ 2, d.height/2);
 
         myPath = new Path();
@@ -47,6 +54,18 @@ public class TurtleView extends Sprite {
         myScheduler = new TurtleScheduler(this);
         slideSpeed = speed;
         rotate(-90);
+        setProperties();
+    }
+
+    private void setProperties() {
+        myController.setXPos(getID(), new SimpleDoubleProperty(0));
+        myController.setYPos(getID(), new SimpleDoubleProperty(0));
+        myController.setTurtleImage(getID(), 0);
+        myController.setPenUp(getID(), new SimpleBooleanProperty(false));
+        myController.setPenThickness(getID(), new SimpleDoubleProperty(Pen.DEFAULT_SIZE));
+        myController.setR(getID(), new SimpleIntegerProperty(Pen.DEFAULT_R));
+        myController.setG(getID(), new SimpleIntegerProperty(Pen.DEFAULT_G));
+        myController.setB(getID(), new SimpleIntegerProperty(Pen.DEFAULT_B));
     }
 
     private void place(int i, int j) {
@@ -154,9 +173,8 @@ public class TurtleView extends Sprite {
                     // get current location
                     double x = getCurrentX();
                     double y = getCurrentY();
-                    //                System.out.println("current x: " + x);
-                    //                System.out.println("current y: " + y);
-                    //                System.out.println("angle: " + turtle.getRotate());
+                    myController.getXPos(getID()).set(x);
+                    myController.getYPos(getID()).set(y);
 
                     // initialize the location
                     if (oldLocation == null) {
@@ -192,18 +210,23 @@ public class TurtleView extends Sprite {
     public void setPen(boolean pen) {
         setBusy(true);
         myPen.setPenUp(pen);
+        myController.getPenUp(getID()).set(pen);
         setBusy(false);
     }
 
     public void setPenColor(Color c) {
         setBusy(true);
         myPen.setColor(c);
+        myController.getR(getID()).set((int) c.getRed() * 255);
+        myController.getG(getID()).set((int) c.getGreen() * 255);
+        myController.GetB(getID()).set((int) c.getBlue() * 255);
         setBusy(false);
     }
 
     public void setPenSize(double pixels) {
         setBusy(true);
         myPen.setSize(pixels);
+        myController.getPenThickness(getID()).set(pixels);
         setBusy(false);
     }
 
