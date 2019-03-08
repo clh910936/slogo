@@ -237,6 +237,4 @@ public class ModelManager implements IModelManager {
         myTurtleModel = new TurtleModel(myFrontEnd);
     }
 
-
-
 }
