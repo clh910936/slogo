@@ -42,8 +42,6 @@ public abstract class CommandNode {
         return myUserDefinedCommandsModel;
     }
 
-
-
     protected TurtleModel getMyTurtleModel() {
         return myTurtleModel;
     }

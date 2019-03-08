@@ -3,6 +3,7 @@ package Parsing;
 import BackExternal.IllegalParametersException;
 import Commands.CommandNode;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;

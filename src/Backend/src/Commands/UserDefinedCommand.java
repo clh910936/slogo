@@ -1,17 +1,13 @@
 package Commands;
 
-import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
-import Parsing.CommandParser;
 
 public class UserDefinedCommand extends CommandNode {
     private String commandName;
     private String commandsToExecute;
     private String[] myVariables;
 
-    public UserDefinedCommand(ModelManager modelManager
-,
-                              String name, String commands, String[] var) {
+    public UserDefinedCommand(ModelManager modelManager, String name, String commands, String[] var) {
         super(modelManager
 );
         commandName = name;
@@ -28,8 +24,10 @@ public class UserDefinedCommand extends CommandNode {
             String param = String.valueOf(getMyParams().get(i));
             commands = commands.replaceAll(variable, param);
         }
+        Object ret = getCp().parseCommand(commands);
         clearMyParams();
-        return getCp().parseCommand(commands);
+        clearChildren();
+        return ret;
     }
 
     public String getCommandName() {
@@ -45,6 +43,7 @@ public class UserDefinedCommand extends CommandNode {
     }
 
     public String getVariablesToString() {
+        System.out.println("**#**$*#" + String.join(" ",myVariables));
         return String.join(" ",myVariables);
     }
 
