@@ -16,8 +16,8 @@ import java.util.*;
 
 
 public class PaletteView extends HorizontalView{
-    private ScrollPane myScrollPane;
-    private IModelManager myManager;
+//    private ScrollPane myScrollPane;
+//    private IModelManager myManager;
     private Pane myPane;
     private HBox myRoot;
     private Map<Integer, Color> ACTIVE_COLORS = new LinkedHashMap<>();
@@ -28,7 +28,6 @@ public class PaletteView extends HorizontalView{
     //TODO: PALETTEVIEW HAS TO TELL THE BOARD ITS COLORS SOMEHOW
     public PaletteView(IModelManager manager) {
         super(manager);
-        myManager = manager;
         myRoot = new HBox();
         myPane = makeScrollPane(myRoot);
         //myPane.setMinHeight(210);
@@ -36,6 +35,7 @@ public class PaletteView extends HorizontalView{
         addDefaultColors();
         addNewColor = addPlus(myRoot, e->openInput());
         //addPlus();
+        //setHeight(200);
         setContents(myPane);
 
     }
