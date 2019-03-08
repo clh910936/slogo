@@ -117,6 +117,11 @@ public class ModelManager implements IModelManager {
         myPaletteModel.addPalette(index, r, g, b);
     }
 
+    @Override
+    public int getCurrentActiveTurtle() {
+        return 0;
+    }
+
     public void resetTurtle() {
         myTurtleModel = new TurtleModel(myFrontEnd);
     }
