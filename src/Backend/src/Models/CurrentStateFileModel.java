@@ -70,7 +70,7 @@ public class CurrentStateFileModel {
 
         }
         catch (Exception e) {
-           throw new IllegalSavedStateFileException();
+            throw new IllegalSavedStateFileException();
         }
     }
 
@@ -123,7 +123,7 @@ public class CurrentStateFileModel {
         } catch (Exception tfe) {
             // Should not ever happen - Exception required to be caught by Java
             System.out.println(tfe);
-            }
+        }
     }
 
     private void saveElementType(Map<String,?> dataMap, Consumer<String> addChildren) {
