@@ -25,13 +25,13 @@ public interface IModelManager {
 
 
     // implement this, just so i can read the index from the model later
-    void setTurtleImage(int turtleid, int index);
+    //void setTurtleImage(int turtleid, int index);
 
     // tells me which turtle image to render
-    int getTurtleImage(int turtleid);
+    //int getTurtleImage(int turtleid);
 
     // I need to know all the turtle IDs to query
-    List<Integer> getTurtles();
+    //List<Integer> getTurtles();
 
     //TODO: ALSO, in order to track the turtles in real time, I need
     // u to add these private variables to each Turtle (no need to initialize them)
@@ -47,12 +47,12 @@ public interface IModelManager {
     // private SimpleIntegerProperty B;
 
     // AND i need getters and setters for all these things given id, eg
-    SimpleDoubleProperty getXPos(int turtleId);
-    void setXPos(int turtleId, SimpleDoubleProperty xpos);
+    //SimpleDoubleProperty getXPos(int turtleId);
+    //void setXPos(int turtleId, SimpleDoubleProperty xpos);
     // sorry its so much!!! but should be easy
 
     //ok also im ditching setshape, now, setshape will just change
-    //the IMAGE index of the turtle
+    //the IMAGE index of the turtle, theyre pretty much the same thing
     //so u can change shape index to IMAGE index
 
 

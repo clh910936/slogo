@@ -35,8 +35,9 @@ public class PaletteView extends HorizontalView{
         addDefaultColors();
         addNewColor = addPlus(myRoot, e->openInput());
         //addPlus();
-        //setHeight(200);
+
         setContents(myPane);
+        setHeight(250);
 
     }
 
