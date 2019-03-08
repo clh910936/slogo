@@ -232,6 +232,11 @@ public class ModelManager implements IModelManager {
         return myTurtleModel.getTurtle(turtleId).getB();
     }
 
+    @Override
+    public void populateBoard() {
+        myTurtleModel.populateBoard();
+    }
+
 
     public void resetTurtle() {
         myTurtleModel = new TurtleModel(myFrontEnd);

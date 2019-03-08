@@ -42,6 +42,7 @@ public class GUI implements FrontExternalAPI {
     public GUI(Console console) {
         var left = makeBoard();
         myController = new ModelManager(this);
+        myController.populateBoard();
         myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
 
         //var right = makeRightView();
@@ -177,7 +178,8 @@ public class GUI implements FrontExternalAPI {
 
     @Override
     public void addTurtle(int turtleId) {
-        myBoard.addTurtle(turtleId);
+        System.out.println(myController == null);
+        myBoard.addTurtle(turtleId, myController);
     }
 
     /**

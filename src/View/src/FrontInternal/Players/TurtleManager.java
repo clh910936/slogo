@@ -75,8 +75,8 @@ public class TurtleManager {
     public void setTurtleShape(int index, int turtleId) {
     }
 
-    public void addTurtle(int turtleId) {
-        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed, myController));
+    public void addTurtle(int turtleId, IModelManager controller) {
+        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed, controller));
     }
 
     public Collection<TurtleView> getAllTurtles() {

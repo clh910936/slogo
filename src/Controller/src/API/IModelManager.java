@@ -69,6 +69,8 @@ public interface IModelManager {
     SimpleIntegerProperty getG(int turtleId);
     SimpleIntegerProperty GetB(int turtleId);
 
+    void populateBoard();
+
 
     // AND i need getters and setters for all these things given id, eg
     //SimpleDoubleProperty getXPos(int turtleId);

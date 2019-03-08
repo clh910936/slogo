@@ -129,8 +129,8 @@ public class Board extends Pane implements ViewAPI {
         myTurtleManager.setTurtleShape(index, turtleId);
     }
 
-    public void addTurtle(int turtleId) {
-        myTurtleManager.addTurtle(turtleId);
+    public void addTurtle(int turtleId, IModelManager controller) {
+        myTurtleManager.addTurtle(turtleId, controller);
     }
 
     public void setDisplayed(boolean isDisplayed, int turtleId) {
