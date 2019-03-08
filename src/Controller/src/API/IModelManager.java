@@ -15,5 +15,6 @@ public interface IModelManager {
     List<String> getSavedFilesList();
     void changeVariable(String variableName, String value);
     void addPalette(int index, int r, int g, int b);
+    int getCurrentActiveTurtle();
 
 }

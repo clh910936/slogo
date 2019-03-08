@@ -5,7 +5,6 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
-import Parsing.SyntaxHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -116,6 +115,11 @@ public class ModelManager implements IModelManager {
     @Override
     public void addPalette(int index, int r, int g, int b) {
         myPaletteModel.addPalette(index, r, g, b);
+    }
+
+    @Override
+    public int getCurrentActiveTurtle() {
+        return 0;
     }
 
     public void resetTurtle() {

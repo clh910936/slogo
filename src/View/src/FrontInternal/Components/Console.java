@@ -82,7 +82,6 @@ public class Console extends Stage {
         Scene consoleScene = new Scene(myBorderPane, CONSOLE_WIDTH, CONSOLE_HEIGHT);
         this.setScene(consoleScene);
         setOnCloseRequest(e -> isDisplaying = false);
-        this.show();
     }
 
     public void setModelManager(IModelManager manager){

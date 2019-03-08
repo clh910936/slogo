@@ -7,38 +7,42 @@ import BackExternal.ModelManager;
 import Models.TurtleModel;
 import Models.VariablesModel;
 
-public class CommandParser {
-    public static final String WHITESPACE = "\\s+";
+import java.util.ArrayList;
+import java.util.List;
 
+public class CommandParser {
     private ModelManager myModelManager;
-    private String[] commandInputList;
     private double currentReturnValue;
     private boolean turtleEvaluated = false;
-    private SyntaxHandler mySyntaxHandler;
+    private SyntaxHandlerFactory mySyntaxHandlerFactory;
+    private List<Double> returnValues;
 
     public CommandParser(ModelManager modelManager) {
         myModelManager = modelManager;
+        returnValues = new ArrayList<>();
     }
 
     public double parseCommand(String commandInput, String language) throws IllegalCommandException, IllegalParametersException {
         if(commandInput.length()==0) {
             throw new IllegalCommandException("No Command Inputted");
         }
-        commandInputList = commandInput.split(WHITESPACE);
-        mySyntaxHandler = new SyntaxHandler(language, myModelManager,commandInputList);
+        mySyntaxHandlerFactory = new SyntaxHandlerFactory(language, myModelManager,commandInput);
         currentReturnValue = -1;
-        while(!mySyntaxHandler.isDoneParsing()) {
+        while(!mySyntaxHandlerFactory.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
-            System.out.println("*****************************");
-            System.out.println(commandHead);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
+            returnValues.add(currentReturnValue);
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
         return currentReturnValue;
     }
 
+    public List<Double> getReturnValues() {
+        return returnValues;
+    }
+
     private CommandNode buildCommandTree(CommandNode parent) {
-        CommandNode currentNode = mySyntaxHandler.parseForCommandNode(parent);
+        CommandNode currentNode = mySyntaxHandlerFactory.parseForCommandNode(parent);
         while(currentNode!=null) {
             if(currentNode.isCommandReadyToExecute()) {
                 return currentNode;
