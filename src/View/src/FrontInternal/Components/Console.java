@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,10 +192,14 @@ public class Console extends Stage {
         try {
             Method method = this.getClass().getDeclaredMethod(s);
             method.invoke(this);
-        } catch (Exception e1) {
+        } catch (NoSuchMethodException e1) {
+            myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
+        } catch (IllegalAccessException e1) {
+            myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
+        } catch (InvocationTargetException e1) {
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
-        return temp;
+            return temp;
     }
 
     private void showReferencePage(){
