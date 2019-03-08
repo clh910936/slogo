@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +48,8 @@ public class ModelManager implements IModelManager {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             mySyntaxHandlerFactory.changeLanguage(language);
+            System.out.println("*******"+ inputString);
+
             myCommandParser.parseCommand(inputString);
             myHistoryModel.addHistoryEntry(inputString, true);
             myFrontEnd.updateViews();

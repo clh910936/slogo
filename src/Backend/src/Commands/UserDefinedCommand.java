@@ -34,19 +34,13 @@ public class UserDefinedCommand extends CommandNode {
         return commandName;
     }
 
-    public String[] getVariables() {
-        return myVariables;
-    }
-
     public String getCommands() {
         return commandsToExecute;
     }
 
     public String getVariablesToString() {
-        System.out.println("**#**$*#" + String.join(" ",myVariables));
         return String.join(" ",myVariables);
     }
-
 
     public String getVariablesListToString() {
         StringBuilder sb = new StringBuilder();

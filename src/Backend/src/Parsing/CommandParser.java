@@ -26,7 +26,6 @@ public class CommandParser {
 
 
     public double parseCommand(String command) throws IllegalCommandException, IllegalParametersException {
-        System.out.println("here" + command);
         parserTracker = new ParserTracker(command);
         currentReturnValue = -1;
         while(!parserTracker.isDoneParsing()) {

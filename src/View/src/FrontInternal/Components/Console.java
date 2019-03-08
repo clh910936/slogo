@@ -192,16 +192,11 @@ public class Console extends Stage {
         try {
             Method method = this.getClass().getDeclaredMethod(s);
             method.invoke(this);
-<<<<<<< HEAD
-        } catch (Exception e1) {
-=======
         } catch (NoSuchMethodException e1) {
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         } catch (IllegalAccessException e1) {
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         } catch (InvocationTargetException e1) {
-
->>>>>>> 58709c629ee6bca1ce3c94154eb1312d7d9972bb
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
             return temp;
