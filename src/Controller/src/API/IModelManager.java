@@ -1,6 +1,8 @@
 package API;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.List;
 import java.util.Map;
@@ -50,6 +52,23 @@ public interface IModelManager {
     // private SimpleIntegerProperty R;
     // private SimpleIntegerProperty G;
     // private SimpleIntegerProperty B;
+
+    void setXPos(int turtleId, SimpleDoubleProperty xpos);
+    void setYPos(int turtleId, SimpleDoubleProperty ypos);
+    void setPenUp(int turtleId, SimpleBooleanProperty penUp);
+    void setPenThickness(int turtleId, SimpleDoubleProperty thickness);
+    void setR(int turtleId, SimpleIntegerProperty r);
+    void setG(int turtleId, SimpleIntegerProperty g);
+    void setB(int turtleId, SimpleIntegerProperty b);
+
+    SimpleDoubleProperty getXPos(int turtleId);
+    SimpleDoubleProperty getYPos(int turtleId);
+    SimpleBooleanProperty getPenUp(int turtleId);
+    SimpleDoubleProperty getPenThickness(int turtleId);
+    SimpleIntegerProperty getR(int turtleId);
+    SimpleIntegerProperty getG(int turtleId);
+    SimpleIntegerProperty GetB(int turtleId);
+
 
     // AND i need getters and setters for all these things given id, eg
     //SimpleDoubleProperty getXPos(int turtleId);

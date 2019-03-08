@@ -15,7 +15,6 @@ public class Forward extends OneParamCommand {
     @Override
     public Object executeCommand() throws IllegalParametersException {
         Turtle myTurtle = this.getMyTurtleModel().getCurrentTurtle();
-        System.out.println("HERE" + getMyTurtleModel().getCurrentTurtleIndex());
         myTurtle.moveForward(Double.valueOf(String.valueOf(getMyParams().get(0))));
         return getMyParams().get(0);
     }
