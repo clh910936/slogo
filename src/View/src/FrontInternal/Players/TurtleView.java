@@ -175,6 +175,7 @@ public class TurtleView extends Sprite {
                     double y = getCurrentY();
                     myController.getXPos(getID()).set(x);
                     myController.getYPos(getID()).set(y);
+                    System.out.println(myController.getYPos(getID()).get());
 
                     // initialize the location
                     if (oldLocation == null) {

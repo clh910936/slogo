@@ -28,8 +28,9 @@ public class TurtleInfoView extends HorizontalView {
 
     @Override
     public void update() {
+        myRoot.getChildren().clear();
         for(int id: myManager.getTurtles()) {
-            myRoot.getChildren().add(new TurtleInfoElement(id));
+            myRoot.getChildren().add(new TurtleInfoElement(id, myManager.getXPos(id), myManager.getYPos(id)));
         }
         addNewTurtleButton = addPlus(myRoot, e->addNewTurtle());
     }
