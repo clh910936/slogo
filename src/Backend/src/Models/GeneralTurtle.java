@@ -1,6 +1,9 @@
 package Models;
 
 import API.FrontExternalAPI;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class GeneralTurtle {
     public static final double STARTX = 2000;
@@ -17,6 +20,15 @@ public abstract class GeneralTurtle {
     private double myPenSize;
     private int myShapeIndex;
     private FrontExternalAPI myFrontExternalAPI;
+
+    private SimpleDoubleProperty xPos;
+    private SimpleDoubleProperty yPos;
+    private SimpleBooleanProperty PenUp;
+    private SimpleDoubleProperty PenThickness;
+    private SimpleIntegerProperty R;
+    private SimpleIntegerProperty G;
+    private SimpleIntegerProperty B;
+
 
     public GeneralTurtle(double nextPointX, double nextPointY, boolean isPenUp,
                          double headingAngle, boolean isDisplayed, boolean isClearScreen,
