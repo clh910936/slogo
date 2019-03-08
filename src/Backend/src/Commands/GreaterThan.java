@@ -1,15 +1,18 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class GreaterThan extends TwoParamCommand {
 
-    public GreaterThan(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public GreaterThan(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        return (Double.valueOf(String.valueOf(myParams.get(0))) > Double.valueOf(String.valueOf(myParams.get(1))))? 1 : 0;
+        return (Double.valueOf(String.valueOf(getMyParams().get(0))) > Double.valueOf(String.valueOf(getMyParams().get(1))))? 1 : 0;
     }
 }

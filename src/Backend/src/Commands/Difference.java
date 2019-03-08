@@ -1,14 +1,17 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Difference extends TwoParamCommand {
 
-    public Difference(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Difference(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return Double.valueOf(String.valueOf(myParams.get(0))) - Double.valueOf(String.valueOf(myParams.get(1)));
+        return Double.valueOf(String.valueOf(getMyParams().get(0))) - Double.valueOf(String.valueOf(getMyParams().get(1)));
     }
 }

@@ -1,18 +1,21 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 
 public class SetBackground extends OneParamCommand {
 
-    public SetBackground(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public SetBackground(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        double d = Double.valueOf(String.valueOf(myParams.get(0)));
+        double d = Double.valueOf(String.valueOf(getMyParams().get(0)));
         int n = (int) d;
-        myBackgroundModel.setCurrentBackgroundIndex(n);
+        getMyBackgroundModel().setCurrentBackgroundIndex(n);
         return n;
     }
 }

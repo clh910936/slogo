@@ -1,18 +1,21 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Right extends OneParamCommand {
 
-    public Right(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Right(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        myTurtle.turnCounterClockwise(-1 * Double.valueOf(String.valueOf(myParams.get(0))));
-        return myParams.get(0);
+        myTurtle.turnCounterClockwise(-1 * Double.valueOf(String.valueOf(getMyParams().get(0))));
+        return getMyParams().get(0);
     }
 }

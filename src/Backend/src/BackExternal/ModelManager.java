@@ -5,7 +5,12 @@ import API.IModelManager;
 import Commands.UserDefinedCommand;
 import Models.*;
 import Parsing.CommandParser;
+import Parsing.SyntaxHandlerFactory;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +29,7 @@ public class ModelManager implements IModelManager {
     private final CommandParser myCommandParser;
     private final PaletteModel myPaletteModel;
     private final BackgroundModel myBackgroundModel;
+    private final SyntaxHandlerFactory mySyntaxHandlerFactory;
 
     public ModelManager(FrontExternalAPI frontend) {
         myFrontEnd = frontend;
@@ -32,14 +38,16 @@ public class ModelManager implements IModelManager {
         myTurtleModel = new TurtleModel(myFrontEnd);
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
-        myCommandParser = new CommandParser(this);
+        mySyntaxHandlerFactory = new SyntaxHandlerFactory(this);
+        myCommandParser = new CommandParser(this,mySyntaxHandlerFactory);
         myPaletteModel = new PaletteModel();
         myBackgroundModel = new BackgroundModel(myFrontEnd);
     }
 
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
-            myCommandParser.parseCommand(inputString, language);
+            mySyntaxHandlerFactory.changeLanguage(language);
+            myCommandParser.parseCommand(inputString);
             myHistoryModel.addHistoryEntry(inputString, true);
             myFrontEnd.updateViews();
         }
@@ -76,6 +84,9 @@ public class ModelManager implements IModelManager {
             commandsList.put(command.getKey(),command.getValue().toString());
         }
         return commandsList;
+    }
+    public SyntaxHandlerFactory getMySyntaxHandlerFactory() {
+        return mySyntaxHandlerFactory;
     }
 
     public VariablesModel getVariablesModel() {
@@ -119,11 +130,113 @@ public class ModelManager implements IModelManager {
 
     @Override
     public int getCurrentActiveTurtle() {
-        return 0;
+        return (int) myTurtleModel.getCurrentTurtleIndex();
     }
+
+    @Override
+    public void makeCurrentActiveTurtle(int index) {
+        myTurtleModel.setCurrentTurtle(index);
+    }
+
+    @Override
+    public void setTurtleImage(int turtleid, int shapeIndex) {
+        Turtle t = myTurtleModel.getTurtle(turtleid);
+        t.setShapeIndex(shapeIndex);
+    }
+
+    @Override
+    public int getTurtleImage(int turtleid) {
+        Turtle t = myTurtleModel.getTurtle(turtleid);
+        return t.getShapeIndex();
+    }
+
+    @Override
+    public List<Integer> getTurtles() {
+        return new ArrayList<>(myTurtleModel.getAllTurtles().keySet());
+    }
+
+    @Override
+    public void setXPos(int turtleId, SimpleDoubleProperty xpos) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setxPos(xpos);
+    }
+
+    @Override
+    public void setYPos(int turtleId, SimpleDoubleProperty ypos) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setyPos(ypos);
+    }
+
+    @Override
+    public void setPenUp(int turtleId, SimpleBooleanProperty penUp) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setPenUp(penUp);
+    }
+
+    @Override
+    public void setPenThickness(int turtleId, SimpleDoubleProperty thickness) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setPenThickness(thickness);
+    }
+
+    @Override
+    public void setR(int turtleId, SimpleIntegerProperty r) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setR(r);
+    }
+
+    @Override
+    public void setG(int turtleId, SimpleIntegerProperty g) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setG(g);
+    }
+
+    @Override
+    public void setB(int turtleId, SimpleIntegerProperty b) {
+        Turtle t = myTurtleModel.getTurtle(turtleId);
+        t.setB(b);
+    }
+
+    @Override
+    public SimpleDoubleProperty getXPos(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getxPos();
+    }
+
+    @Override
+    public SimpleDoubleProperty getYPos(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getyPos();
+    }
+
+    @Override
+    public SimpleBooleanProperty getPenUp(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getPenUp();
+    }
+
+    @Override
+    public SimpleDoubleProperty getPenThickness(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getPenThickness();
+    }
+
+    @Override
+    public SimpleIntegerProperty getR(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getR();
+    }
+
+    @Override
+    public SimpleIntegerProperty getG(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getG();
+    }
+
+    @Override
+    public SimpleIntegerProperty GetB(int turtleId) {
+        return myTurtleModel.getTurtle(turtleId).getB();
+    }
+
 
     public void resetTurtle() {
         myTurtleModel = new TurtleModel(myFrontEnd);
     }
+
+
 
 }

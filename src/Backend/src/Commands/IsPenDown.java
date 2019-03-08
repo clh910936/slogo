@@ -1,15 +1,18 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class IsPenDown extends ZeroParamCommand {
-    public IsPenDown(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public IsPenDown(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
-        return ! myTurtle.getCurrentIsPenUp() ? 1 : 0;
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
+        return ! myTurtle.getMyIsPenUp() ? 1 : 0;
     }
 }

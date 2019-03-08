@@ -1,13 +1,17 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
+import Parsing.SyntaxHandlerFactory;
 
 public class StringInput extends ZeroParamCommand {
 
     private String myString;
 
-    public StringInput(String language, ModelManager modelManager, String myString) {
-        super(language, modelManager);
+    public StringInput(ModelManager modelManager
+, String myString) {
+        super(modelManager
+);
         this.myString = myString;
     }
     @Override

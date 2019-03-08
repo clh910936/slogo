@@ -1,11 +1,14 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public abstract class OneParamCommand extends CommandNode {
-    public OneParamCommand(String language, ModelManager modelManager) {
-        super(language, modelManager);
-        MAX_PARAMS = 1;
+    public OneParamCommand(ModelManager modelManager
+) {
+        super(modelManager
+);
+        setMaxParams(1);
     }
 
 

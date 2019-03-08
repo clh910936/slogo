@@ -1,13 +1,17 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Random extends OneParamCommand {
-    public Random(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Random(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
+
     @Override
     public Object executeCommand() throws ClassCastException {
-        return (int)(Math.random() * Double.valueOf(String.valueOf(myParams.get(0))));
+        return (int)(Math.random() * Double.valueOf(String.valueOf(getMyParams().get(0))));
     }
 }

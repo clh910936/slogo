@@ -1,14 +1,17 @@
 package Commands;
 
-
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 
 public class Sum extends TwoParamCommand {
-    public Sum(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Sum(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException  {
-        return (double) myParams.get(0) + (double) myParams.get(1);
+        System.out.println((double) getMyParams().get(0) + (double) getMyParams().get(1));
+        return (double) getMyParams().get(0) + (double) getMyParams().get(1);
     }
 }

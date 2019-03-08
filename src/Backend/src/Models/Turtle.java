@@ -15,85 +15,83 @@ public class Turtle extends GeneralTurtle {
     }
 
     public void moveForward(double dist) {
-        myPointX += dist * Math.cos(Math.toRadians(myHeadingAngle));
-        myPointY += dist * Math.sin(Math.toRadians(myHeadingAngle));
+        setMyPointX(getMyPointX() + dist * Math.cos(Math.toRadians(getMyHeadingAngle())));
+        setMyPointY(getMyPointY() + dist * Math.sin(Math.toRadians(getMyHeadingAngle())));
         printTurtleStatus();
-        myFrontExternalAPI.move(myPointX - STARTX, myPointY - STARTY, myId);
+        getMyFrontExternalAPI().move(getMyPointX() - STARTX, getMyPointY() - STARTY, getMyId());
         //notifyObservers();
     }
 
     public void turnCounterClockwise(double degrees) {
-        myHeadingAngle += degrees;
-        myHeadingAngle = keepAnglePositive(myHeadingAngle);
+        setMyHeadingAngle(getMyHeadingAngle() + degrees);
+        setMyHeadingAngle(keepAnglePositive(getMyHeadingAngle()));
         printTurtleStatus();
-        myFrontExternalAPI.rotate(myHeadingAngle, myId);
+        getMyFrontExternalAPI().rotate(getMyHeadingAngle(), getMyId());
     }
 
     public void setHeadingAngle(double degrees) {
-        myHeadingAngle = degrees;
-        myHeadingAngle = keepAnglePositive(myHeadingAngle);
+        setMyHeadingAngle(degrees);
+        setMyHeadingAngle(keepAnglePositive(getMyHeadingAngle()));
         printTurtleStatus();
-        myFrontExternalAPI.rotate(myHeadingAngle, myId);
+        getMyFrontExternalAPI().rotate(getMyHeadingAngle(), getMyId());
     }
 
     public void updatePoints(double x, double y) {
-        this.myPointX = x;
-        this.myPointY = y;
-        myFrontExternalAPI.move(myPointX, myPointY, myId);
+        setMyPointX(x);
+        setMyPointY(y);
+        getMyFrontExternalAPI().move(getMyPointX() - STARTX, getMyPointY() - STARTY, getMyId());
         printTurtleStatus();
     }
 
     public void setPenUp () {
-        this.myIsPenUp = true;
-        myFrontExternalAPI.penUp(true, myId);
+        setMyIsPenUp(true);
+        getMyFrontExternalAPI().penUp(true, getMyId());
     }
 
     public void setPenDown () {
-        this.myIsPenUp = false;
-        myFrontExternalAPI.penUp(false, myId);
+        setMyIsPenUp(false);
+        getMyFrontExternalAPI().penUp(false, getMyId());
     }
 
     public void setShowTurtle() {
-        this.myIsDisplayed = true;
-        myFrontExternalAPI.setDisplayTurtle(true, myId);
+        setMyIsDisplayed(true);
+        getMyFrontExternalAPI().setDisplayTurtle(true, getMyId());
     }
 
     public void setHideTurtle() {
-        this.myIsDisplayed = false;
-        myFrontExternalAPI.setDisplayTurtle(false, myId);
+        setMyIsDisplayed(false);
+        getMyFrontExternalAPI().setDisplayTurtle(false, getMyId());
     }
 
     public void setPensize(double pixels) {
-        this.myPenSize = pixels;
-        myFrontExternalAPI.setPenSize(myPenSize, myId);
+        setMyPenSize(pixels);
+        getMyFrontExternalAPI().setPenSize(getMyPenSize(), getMyId());
     }
 
     public void setPenColor(int index) {
-        this.myPenColourIndex = index;
-        myFrontExternalAPI.setPenColor(myPenColourIndex, myId);
+        setMyPenColourIndex(index);
+        getMyFrontExternalAPI().setPenColor(getMyPenColourIndex(), getMyId());
     }
 
     public void setShapeIndex(int index) {
-        this.myShapeIndex = index;
-        myFrontExternalAPI.setShape(myShapeIndex, myId);
+        setMyShapeIndex(index);
+        getMyFrontExternalAPI().setShape(getMyShapeIndex(), getMyId());
     }
 
     public void clearScreen() {
-        myFrontExternalAPI.clearBoard();
-
-
+        getMyFrontExternalAPI().clearBoard();
     }
 
     public int getPenColorIndex() {
-        return this.myPenColourIndex;
+        return getMyPenColourIndex();
     }
 
     public int getShapeIndex() {
-        return this.myShapeIndex;
+        return getMyShapeIndex();
     }
 
     public void setPalette(int index, int r, int g, int b) {
-        myFrontExternalAPI.setPalette(index, r, g, b);
+        getMyFrontExternalAPI().setPalette(index, r, g, b);
     }
 
 
@@ -102,19 +100,19 @@ public class Turtle extends GeneralTurtle {
 
     public double getDegreesDifference(double newAngle) {
         newAngle = keepAnglePositive(newAngle);
-        double output = keepAnglePositive(newAngle - myHeadingAngle);
+        double output = keepAnglePositive(newAngle - getMyHeadingAngle());
         return output;
     }
 
     public double getAngleToPoint(double x, double y) {
-        double rise = x - myPointX;
-        double run = y - myPointY;
+        double rise = x - getMyPointX();
+        double run = y - getMyPointY();
         return keepAnglePositive(Math.toDegrees(Math.atan(rise / run)));
     }
 
     public double getDistToPoint(double x, double y) {
-        double rise = x - myPointX;
-        double run = y - myPointY;
+        double rise = x - getMyPointX();
+        double run = y - getMyPointY();
         return Math.sqrt(rise * rise + run * run);
     }
 
@@ -129,9 +127,9 @@ public class Turtle extends GeneralTurtle {
     }
 
     private void printTurtleStatus() {
-        System.out.println("Located at: (" + getCurrentX() + ", " + getCurrentY() + ")");
-        System.out.println("pen?: " + myIsPenUp);
-        System.out.println("angle: " + myHeadingAngle);
-        System.out.println("displayed?: +" + myIsDisplayed);
+        System.out.println("Located at: (" + getMyPointX() + ", " + getMyPointY() + ")");
+        System.out.println("pen?: " + getMyIsPenUp());
+        System.out.println("angle: " + getMyHeadingAngle());
+        System.out.println("displayed?: +" + getMyIsDisplayed());
     }
 }

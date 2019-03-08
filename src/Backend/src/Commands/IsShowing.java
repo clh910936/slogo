@@ -1,16 +1,19 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class IsShowing extends ZeroParamCommand {
-    public IsShowing(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public IsShowing(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        return myTurtle.getCurrentIsDisplayed() ? 1 : 0;
+        return myTurtle.getMyIsDisplayed() ? 1 : 0;
     }
 }

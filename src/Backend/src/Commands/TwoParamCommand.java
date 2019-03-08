@@ -1,13 +1,17 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
+import Parsing.SyntaxHandlerFactory;
 
 
 public abstract class TwoParamCommand extends CommandNode {
 
-    public TwoParamCommand(String language, ModelManager modelManager) {
-        super(language, modelManager);
-        MAX_PARAMS = 2;
+    public TwoParamCommand(ModelManager modelManager
+) {
+        super(modelManager
+);
+        setMaxParams(2);
     }
 
 

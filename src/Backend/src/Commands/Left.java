@@ -1,18 +1,21 @@
 package Commands;
 
+import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Models.Turtle;
 
 public class Left extends OneParamCommand {
-    public Left(String language, ModelManager modelManager) {
-        super(language, modelManager);
+    public Left(ModelManager modelManager
+) {
+        super(modelManager
+);
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        Turtle myTurtle =(Turtle) this.myTurtleModel.getCurrentTurtle();
+        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
 
-        myTurtle.turnCounterClockwise(Double.valueOf(String.valueOf(myParams.get(0))));
-        return myParams.get(0);
+        myTurtle.turnCounterClockwise(Double.valueOf(String.valueOf(getMyParams().get(0))));
+        return getMyParams().get(0);
     }
 }
