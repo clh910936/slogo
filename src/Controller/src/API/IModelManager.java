@@ -19,6 +19,7 @@ public interface IModelManager {
     void addPalette(int index, int r, int g, int b);
     int getCurrentActiveTurtle();
 
+    // also this method: void makeCurrentActiveTurtle(int index);
     //TODO: add an image index to each turtle, 0-5, initially starts at 0
     // this way we don't have to have users upload their own images, ill just look
     // at the index to determine which image to use
