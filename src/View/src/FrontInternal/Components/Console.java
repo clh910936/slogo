@@ -63,9 +63,7 @@ public class Console extends Stage {
 
 
     //public Console(Stage stage, CommandParser parser){
-    public Console (IModelManager manager){
-        myManager = manager;
-
+    public Console (){
         initializeInstanceVariables();
         initializeLanguageList();
 
@@ -86,6 +84,9 @@ public class Console extends Stage {
         setOnCloseRequest(e -> isDisplaying = false);
     }
 
+    public void setModelManager(IModelManager manager){
+        myManager = manager;
+    }
     private void createAllButtons() {
         for(String s : myButtonsResourceBundle.keySet()){
             String info[] = myButtonsResourceBundle.getString(s).split(",");
@@ -184,6 +185,7 @@ public class Console extends Stage {
     }
 
     private Button makeButton(String s){
+        System.out.println("Making button");
         Button temp = new Button();
         temp.setOnMouseClicked(e -> {
         try {

@@ -2,7 +2,11 @@ package FrontInternal.Views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -54,8 +58,7 @@ public class ErrorView extends HBox {
         CornerRadii radii = new CornerRadii(RADII_SIZE);
 
         BackgroundFill fill = new BackgroundFill(color, radii, insets);
-        Background background = new Background(fill);
-        return background;
+        return new Background(fill);
     }
 
     private void setErrorlessBackground(){
