@@ -12,6 +12,6 @@ public class Minus extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        return -1 * (double) getMyParams().get(0);
+        return -1 * Double.parseDouble(getMyParams().get(0).toString());
     }
 }

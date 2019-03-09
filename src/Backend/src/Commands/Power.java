@@ -11,6 +11,6 @@ public class Power extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return Math.pow((double) getMyParams().get(0), (double) getMyParams().get(1));
+        return Math.pow(Double.parseDouble(getMyParams().get(0).toString()), Double.parseDouble(getMyParams().get(1).toString()));
     }
 }
