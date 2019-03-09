@@ -103,14 +103,8 @@ public class SyntaxHandlerFactory {
     }
 
 
-
-
     private boolean isNormalCommand(String input) {
         return myCommandSymbols.values().stream().anyMatch(command -> Regex.match(input,command));
-    }
-
-    private boolean isUserCommand(String input) {
-        return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().containsKey(input);
     }
 
 
@@ -130,7 +124,9 @@ public class SyntaxHandlerFactory {
 
     private CommandNode getUserCreatedCommand(String commandName) throws IllegalCommandException {
         if(myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().containsKey(commandName)) {
-            return myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().get(commandName);
+            UserDefinedCommand commandToCopy = myModelManager.getUserDefinedCommandsModel().getUserCreatedCommands().get(commandName);
+            UserDefinedCommand userDefinedCommand = new UserDefinedCommand(myModelManager, commandToCopy.getCommandName(), commandToCopy.getCommands(),commandToCopy.getMyVariables());
+            return userDefinedCommand;
         }
         else {
             throw new IllegalCommandException("Command not defined");

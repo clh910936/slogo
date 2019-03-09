@@ -31,7 +31,10 @@ public class CommandParser {
         while(!parserTracker.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
+            commandHead.clearChildren();
+            commandHead.clearMyParams();
             returnValues.add(currentReturnValue);
+            System.out.println("YUUHHHHHH" + returnValues);
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
         return currentReturnValue;
