@@ -37,11 +37,12 @@ public class AskWith extends TwoParamCommand {
     }
 
     private void getTurtlesOfCondition(List<Integer> newActiveTurtles) {
+        String[] condition = (String[]) getMyParams().get(0);
+        String conditionString = String.join(" ", condition);
         for (Integer currentTurtle : getMyTurtleModel().getAllTurtles().keySet()) {
             makeTurtleIndexActiveTurtle(currentTurtle);
-            String[] condition = (String[]) getMyParams().get(0);
-            String conditionString = String.join(" ", condition);
             double out = getCp().parseCommand(conditionString);
+            System.out.println("OUT VALUE" + out);
             if (out != 0) {
                 newActiveTurtles.add(currentTurtle);
             }

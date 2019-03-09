@@ -16,7 +16,7 @@ public class SetShape extends OneParamCommand {
     @Override
     public Object executeCommand() throws IllegalParametersException {
         Turtle myTurtle = this.getMyTurtleModel().getCurrentTurtle();
-        int n = Integer.parseInt(getMyParams().get(0).toString());
+        int n = (int) Double.parseDouble(getMyParams().get(0).toString());
         myTurtle.setShapeIndex(n);
         return n;
     }

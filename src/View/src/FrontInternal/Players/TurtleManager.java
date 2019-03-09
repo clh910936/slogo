@@ -1,4 +1,5 @@
 package FrontInternal.Players;
+import API.IModelManager;
 import FrontInternal.Components.Board;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.paint.Color;
@@ -20,11 +21,12 @@ public class TurtleManager {
     private Board myBoard;
     private SimpleDoubleProperty slideSpeed;
     private Map<Integer, TurtleView> GAME_ACTORS = new HashMap<>();
+    private IModelManager myController;
 
-    public TurtleManager(Board b, SimpleDoubleProperty speed) {
+    public TurtleManager(Board b, SimpleDoubleProperty speed, IModelManager controller) {
         myBoard = b;
         slideSpeed = speed;
-        //addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), 0));
+        myController = controller;
 
 
 
@@ -71,10 +73,14 @@ public class TurtleManager {
     }
 
     public void setTurtleShape(int index, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, index);
     }
 
-    public void addTurtle(int turtleId) {
-        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed));
+    public void addTurtle(int turtleId, IModelManager controller) {
+        var t = new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed, controller);
+        addSprites(t);
+        t.setImageProp();
     }
 
     public Collection<TurtleView> getAllTurtles() {

@@ -24,21 +24,20 @@ public class CommandParser {
         returnValues = new ArrayList<>();
     }
 
-
     public double parseCommand(String command) throws IllegalCommandException, IllegalParametersException {
         parserTracker = new ParserTracker(command);
         currentReturnValue = -1;
         while(!parserTracker.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
-            System.out.println(commandHead);
-            currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
+            double returnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
+            if(returnValue!=-1) currentReturnValue = returnValue;
+            else currentReturnValue = 0;
             commandHead.clearChildren();
             commandHead.clearMyParams();
             returnValues.add(currentReturnValue);
-            System.out.println("YUUHHHHHH" + returnValues);
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
-        return currentReturnValue;
+        return currentReturnValue; 
     }
 
     public List<Double> getReturnValues() {
@@ -75,19 +74,18 @@ public class CommandParser {
         for(CommandNode child : command.getChildren()) {
             command.addParam(evaluate(child));
         }
-        System.out.println("!!!!!!!!!!" + command);
         Object returnValue = command.executeCommand();
-        System.out.println("RETURN VALUE " + returnValue);
         command.clearMyParams();
         return returnValue;
     }
 
     private Object evaluateForAllTurtles(CommandNode command) {
-        Object currentValue = null;
+        Object currentValue = -1;
         TurtleModel turtleModel = myModelManager.getTurtleModel();
         turtleEvaluated = true;
         VariablesModel currVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
         VariablesModel newVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
+        System.out.println("YUHHH" + myModelManager.getTurtleModel().getCurrentActiveTurtles());
         for (int id : turtleModel.getCurrentActiveTurtles()) {
             System.out.println("********" + command + " " + id);
             double currTurtleId = turtleModel.getCurrentTurtleIndex();
