@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CONFIGURATION>
+    <VARIABLE>
+        <VALUE>3.0</VALUE>
+        <VARNAME>repcount</VARNAME>
+    </VARIABLE>
+    <COMMAND>
+        <COMCOMMS>poly 4 :side</COMCOMMS>
+        <COMNAME>square</COMNAME>
+        <COMVAR>:side</COMVAR>
+    </COMMAND>
+    <COMMAND>
+        <COMCOMMS>repeat :numsides [ fd :length rt quotient 360 :numsides ]</COMCOMMS>
+        <COMNAME>poly</COMNAME>
+        <COMVAR>:numsides :length</COMVAR>
+    </COMMAND>
+    <COMMAND>
+        <COMCOMMS>square :size fd :size rt 30 triangle :size</COMCOMMS>
+        <COMNAME>house</COMNAME>
+        <COMVAR>:size</COMVAR>
+    </COMMAND>
+    <COMMAND>
+        <COMCOMMS>poly 3 :side</COMCOMMS>
+        <COMNAME>triangle</COMNAME>
+        <COMVAR>:side</COMVAR>
+    </COMMAND>
+</CONFIGURATION>
