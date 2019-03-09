@@ -1,5 +1,6 @@
 package FrontInternal.Components;
 
+import API.IModelManager;
 import FrontInternal.Players.TurtleManager;
 import FrontInternal.Views.ViewAPI;
 import javafx.animation.KeyFrame;
@@ -21,6 +22,7 @@ public class Board extends Pane implements ViewAPI {
     private Canvas myCanvas;
     private GraphicsContext gc;
     private Dimension myDimensions;
+    private IModelManager myController;
 
     private TurtleManager myTurtleManager;
     public static final int FRAMES_PER_SECOND = 60;
@@ -28,13 +30,15 @@ public class Board extends Pane implements ViewAPI {
 
     private SimpleDoubleProperty slideSpeed;
 
-    public Board(Dimension d) {
+    public Board(Dimension d, IModelManager controller) {
         myDimensions = d;
+        myController = controller;
+
         createCanvas(myDimensions.width, myDimensions.height);
         getChildren().addAll(myCanvas);
 
         slideSpeed = new SimpleDoubleProperty(1);
-        myTurtleManager = new TurtleManager(this, slideSpeed);
+        myTurtleManager = new TurtleManager(this, slideSpeed, myController);
 
         var frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> update());
         var animation = new Timeline();
@@ -125,8 +129,8 @@ public class Board extends Pane implements ViewAPI {
         myTurtleManager.setTurtleShape(index, turtleId);
     }
 
-    public void addTurtle(int turtleId) {
-        myTurtleManager.addTurtle(turtleId);
+    public void addTurtle(int turtleId, IModelManager controller) {
+        myTurtleManager.addTurtle(turtleId, controller);
     }
 
     public void setDisplayed(boolean isDisplayed, int turtleId) {

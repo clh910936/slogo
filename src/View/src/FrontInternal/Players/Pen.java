@@ -7,8 +7,13 @@ public class Pen {
     private double mySize;
     private boolean up;
 
-    private final static Color DEFAULT_COLOR = Color.BLUE;
-    private final static int DEFAULT_SIZE = 4;
+    public final static Color DEFAULT_COLOR = Color.BLUE;
+    public final static int DEFAULT_R = (int) DEFAULT_COLOR.getRed() * 255;
+    public final static int DEFAULT_G = (int) DEFAULT_COLOR.getGreen() * 255;
+    public final static int DEFAULT_B = (int) DEFAULT_COLOR.getBlue() * 255;
+
+    public final static int DEFAULT_SIZE = 4;
+
     public Pen() {
         myColor = DEFAULT_COLOR;
         mySize = DEFAULT_SIZE;

@@ -6,9 +6,11 @@ import FrontInternal.Components.Console;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -50,6 +52,9 @@ public class Main extends Application {
         stage.setTitle(myResources.getString("title"));
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 7);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
     }
 
     private void initializeVariables() {

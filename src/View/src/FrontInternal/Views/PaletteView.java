@@ -3,13 +3,13 @@ package FrontInternal.Views;
 import API.IModelManager;
 import FrontInternal.Players.AddElement;
 import FrontInternal.Players.PaletteElement;
-import javafx.scene.control.ScrollPane;
+
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+
 
 
 import java.util.*;

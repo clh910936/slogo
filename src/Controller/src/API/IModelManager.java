@@ -67,7 +67,9 @@ public interface IModelManager {
     SimpleDoubleProperty getPenThickness(int turtleId);
     SimpleIntegerProperty getR(int turtleId);
     SimpleIntegerProperty getG(int turtleId);
-    SimpleIntegerProperty GetB(int turtleId);
+    SimpleIntegerProperty getB(int turtleId);
+
+    void populateBoard();
 
 
     // AND i need getters and setters for all these things given id, eg

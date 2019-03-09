@@ -231,13 +231,19 @@ public class ModelManager implements IModelManager {
     }
 
     @Override
-    public SimpleIntegerProperty GetB(int turtleId) {
+    public SimpleIntegerProperty getB(int turtleId) {
         return myTurtleModel.getTurtle(turtleId).getB();
+    }
+
+    @Override
+    public void populateBoard() {
+        myTurtleModel.populateBoard();
     }
 
 
     public void resetTurtle() {
         myTurtleModel = new TurtleModel(myFrontEnd);
+        myTurtleModel.populateBoard();
     }
 
 
