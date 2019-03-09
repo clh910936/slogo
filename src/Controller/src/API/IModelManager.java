@@ -67,7 +67,7 @@ public interface IModelManager {
     SimpleDoubleProperty getPenThickness(int turtleId);
     SimpleIntegerProperty getR(int turtleId);
     SimpleIntegerProperty getG(int turtleId);
-    SimpleIntegerProperty GetB(int turtleId);
+    SimpleIntegerProperty getB(int turtleId);
 
     void populateBoard();
 

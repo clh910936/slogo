@@ -18,6 +18,10 @@ public abstract class ViewElement extends VBox{
         setPadding(new Insets(10, 10, 0, 0));
     }
 
+    protected void expand(int h) {
+        setMinHeight(h);
+    }
+
     protected ResourceBundle getResourceBundle(String s) {
         return ResourceBundle.getBundle(s);
     }

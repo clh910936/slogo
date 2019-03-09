@@ -73,10 +73,14 @@ public class TurtleManager {
     }
 
     public void setTurtleShape(int index, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, index);
     }
 
     public void addTurtle(int turtleId, IModelManager controller) {
-        addSprites(new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed, controller));
+        var t = new TurtleView(myBoard.getDimensions(), myBoard.getGC(), turtleId, slideSpeed, controller);
+        addSprites(t);
+        t.setImageProp();
     }
 
     public Collection<TurtleView> getAllTurtles() {

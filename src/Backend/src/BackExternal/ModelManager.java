@@ -231,7 +231,7 @@ public class ModelManager implements IModelManager {
     }
 
     @Override
-    public SimpleIntegerProperty GetB(int turtleId) {
+    public SimpleIntegerProperty getB(int turtleId) {
         return myTurtleModel.getTurtle(turtleId).getB();
     }
 
@@ -243,6 +243,7 @@ public class ModelManager implements IModelManager {
 
     public void resetTurtle() {
         myTurtleModel = new TurtleModel(myFrontEnd);
+        myTurtleModel.populateBoard();
     }
 
 
