@@ -24,7 +24,6 @@ public class CommandParser {
         returnValues = new ArrayList<>();
     }
 
-
     public double parseCommand(String command) throws IllegalCommandException, IllegalParametersException {
         parserTracker = new ParserTracker(command);
         currentReturnValue = -1;
