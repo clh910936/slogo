@@ -20,9 +20,7 @@ public class Ask extends TwoParamCommand {
 
         //TODO: christina please check this
 
-        List<Integer> savedActiveTurtles = new ArrayList<>();
-        savedActiveTurtles = this.getMyTurtleModel().getCurrentActiveTurtles();
-
+        List<Integer> savedActiveTurtles = new ArrayList<>(this.getMyTurtleModel().getCurrentActiveTurtles());
         String[] activeTurtles = (String[]) getMyParams().get(0);
         List<Integer> activeTurtleIds = new ArrayList<>();
         for(String i : activeTurtles) {
@@ -35,7 +33,6 @@ public class Ask extends TwoParamCommand {
         String[] commands = (String[]) getMyParams().get(1);
         String commandString = String.join(" ", commands);
         double out = getCp().parseCommand(commandString);
-
         this.getMyTurtleModel().clearCurrentActiveTurtles();
         this.getMyTurtleModel().setCurrentActiveTurtles(savedActiveTurtles);
 

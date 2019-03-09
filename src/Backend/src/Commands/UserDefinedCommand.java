@@ -14,11 +14,10 @@ public class UserDefinedCommand extends CommandNode {
         commandsToExecute = commands;
         myVariables = var;
     }
-
-
     public Object executeCommand() throws ClassCastException {
         String commands = commandsToExecute;
         if(commands.length()==0) return 0;
+        System.out.println("^^^^^^^^^" + getMyParams());
         for (int i = 0; i < myVariables.length; i++) {
             String variable = myVariables[i];
             String param = String.valueOf(getMyParams().get(i));
@@ -37,6 +36,8 @@ public class UserDefinedCommand extends CommandNode {
     public String getCommands() {
         return commandsToExecute;
     }
+
+    public String[] getMyVariables() { return myVariables;}
 
     public String getVariablesToString() {
         return String.join(" ",myVariables);

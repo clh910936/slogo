@@ -16,7 +16,7 @@ public class AskWith extends TwoParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
 
-        List<Integer> savedActiveTurtles = this.getMyTurtleModel().getCurrentActiveTurtles();
+        List<Integer> savedActiveTurtles = new ArrayList<>(this.getMyTurtleModel().getCurrentActiveTurtles());
         List<Integer> newActiveTurtles = new ArrayList<>();
         getTurtlesOfCondition(newActiveTurtles);
         setActiveTurtles(newActiveTurtles);
