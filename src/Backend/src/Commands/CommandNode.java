@@ -104,5 +104,15 @@ public abstract class CommandNode {
     protected void setMaxParams(int max) {
         MAX_PARAMS = max;
     }
+
+    protected List<Double> getVariableValues(String[] variablesInfo) {
+        List<String> varParams = new ArrayList<>();
+        for(int i = 1;i<variablesInfo.length;i++) {
+            varParams.add(variablesInfo[i]);
+        }
+        getCp().parseCommand(String.join(" ",varParams));
+        return getCp().getReturnValues();
+    }
+
 }
 

@@ -103,15 +103,17 @@ any decisions, assumptions, or simplifications you made to handle vague, ambiguo
 # Known Bugs
 any known bugs, crashes, or problems with the project's functionality
 
-- AskWith is throwing a null pointer error
+- In loops, conditions that require expressions to be evaluated do not work.
 
 # Extra Features
 any extra features included in the project
 * Uploading a .txt or .logo file: Users can navigate to any folder on their computer and upload a file to the console where it can then be run.
+* Can handle recursive functions
+* Can group variable number of parameters
 
 # Impressions
 your impressions of the assignment to help improve it in the future
 * **Michael:** I found this assignment rewarding. But I wish we had more help with setting up modules and working with interfaces. We felt like we were getting conflicting information about how we should approach design using interfaces and module exports.
-* **Christina:** 
+* **Christina:** I thought it was a helpful project to understand relationships between packages and modules and for understanding the purpose of APIs. However, I feel that we didn’t receive enough guidance in the beginning to implement the different modules and that took the majority of our time when we were planning. It would have been helpful to have known more about modules and for the TAs to know more as well.
 * **Feroze:** Although we all agree it was rocky in the beginning, I thought that I gained more insight into object-oriented programming through this one assignment than with any other CS assignment I've had here at Duke. I never even really knew what an interface was before starting this project but now I feel like I have a solid understanding of abstracting as well as other advanced Java tools like Reflection, Functional Interfaces, and Generics. Overall, I wish there was a little more guidance in this assignment  - especially during sprint 2 - but I very happy with how hard my team worked and what we were eventually able to accomplish.
 * **Carrie:** The initial start was extremely rough. We had a lot of struggles getting modules up, running, and communicating and I felt unprepared to be working with them. TA office hours were not particularly helpful either, as the TAs had not heard of modules until we arrived. In the future, perhaps a more in depth explanation and demo, as well as more resources or examples, would be helpful if modules are to remain a part of this project.
