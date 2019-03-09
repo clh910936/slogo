@@ -72,7 +72,9 @@ public class CommandParser {
         for(CommandNode child : command.getChildren()) {
             command.addParam(evaluate(child));
         }
+        System.out.println("!!!!!!!!!!" + command);
         Object returnValue = command.executeCommand();
+        System.out.println("RETURN VALUE " + returnValue);
         command.clearMyParams();
         return returnValue;
     }
