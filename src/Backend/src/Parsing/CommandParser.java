@@ -30,7 +30,7 @@ public class CommandParser {
         currentReturnValue = -1;
         while(!parserTracker.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
-            System.out.println(commandHead);
+            System.out.println("michael is kwl" + commandHead);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
             commandHead.clearChildren();
             commandHead.clearMyParams();

@@ -1,6 +1,5 @@
 package Commands;
 
-import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.Turtle;
 

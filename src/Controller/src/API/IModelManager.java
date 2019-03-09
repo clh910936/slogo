@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface IModelManager {
 
@@ -39,6 +40,7 @@ public interface IModelManager {
 
     // I need to know all the turtle IDs to query
     List<Integer> getTurtles();
+    Set<Integer> getColors();
 
     //TODO: ALSO, in order to track the turtles in real time, I need
     // u to add these private variables to each Turtle (no need to initialize them)
@@ -67,17 +69,12 @@ public interface IModelManager {
     SimpleDoubleProperty getPenThickness(int turtleId);
     SimpleIntegerProperty getR(int turtleId);
     SimpleIntegerProperty getG(int turtleId);
-    SimpleIntegerProperty GetB(int turtleId);
+    SimpleIntegerProperty getB(int turtleId);
+
+    void populateBoard();
 
 
-    // AND i need getters and setters for all these things given id, eg
-    //SimpleDoubleProperty getXPos(int turtleId);
-    //void setXPos(int turtleId, SimpleDoubleProperty xpos);
-    // sorry its so much!!! but should be easy
 
-    //ok also im ditching setshape, now, setshape will just change
-    //the IMAGE index of the turtle, theyre pretty much the same thing
-    //so u can change shape index to IMAGE index
 
 
 
