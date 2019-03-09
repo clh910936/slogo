@@ -24,7 +24,7 @@ public abstract class HorizontalView extends View {
         return y;
     }
 
-    protected AddElement addPlus(Pane root, EventHandler<ActionEvent> e) {
+    protected AddElement addPlus(Pane root, EventHandler e) {
         var button = new AddElement(e);
         root.getChildren().add(button);
         return button;

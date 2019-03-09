@@ -15,7 +15,7 @@ public class SetPenColor extends OneParamCommand {
     @Override
     public Object executeCommand() throws IllegalParametersException {
         Turtle myTurtle = this.getMyTurtleModel().getCurrentTurtle();
-        int n = (int) (double) Double.valueOf(String.valueOf(getMyParams().get(0)));
+        int n = (int) Double.parseDouble(getMyParams().get(0).toString());
         myTurtle.setPenColor(n);
         return n;
     }

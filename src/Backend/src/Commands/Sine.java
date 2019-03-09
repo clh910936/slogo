@@ -13,6 +13,6 @@ public class Sine extends OneParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException {
-        return Math.sin(Math.toRadians((double) getMyParams().get(0)));
+        return Math.sin(Math.toRadians(Double.parseDouble(getMyParams().get(0).toString())));
     }
 }

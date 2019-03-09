@@ -6,8 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import java.util.ResourceBundle;
 
 
 public abstract class ViewElement extends VBox{
@@ -16,6 +16,14 @@ public abstract class ViewElement extends VBox{
         setMinWidth(100);
         setAlignment(Pos.TOP_CENTER);
         setPadding(new Insets(10, 10, 0, 0));
+    }
+
+    protected void expand(int h) {
+        setMinHeight(h);
+    }
+
+    protected ResourceBundle getResourceBundle(String s) {
+        return ResourceBundle.getBundle(s);
     }
 
     protected void makeLabels(String... labels) {

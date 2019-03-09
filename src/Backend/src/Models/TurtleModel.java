@@ -57,22 +57,18 @@ public class TurtleModel {
     public TurtleModel(FrontExternalAPI frontExternalAPI) {
         myFrontExternalAPI = frontExternalAPI;
         allTurtles = new HashMap<>();
-        Turtle t = new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
-                CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI);
-        allTurtles.put(1, t);
-        myFrontExternalAPI.addTurtle(1);
-        currentActiveTurtles = new ArrayList<>();
-        currentActiveTurtles.add(1);
-        currentTurtleIndex = 1;
+
     }
 
     public void setCurrentActiveTurtles(List<Integer> turtleIds) {
         currentActiveTurtles = turtleIds;
         turtleIds.stream().
                 filter(turtleId -> !allTurtles.containsKey(turtleId)).
-                forEach(turtleId -> { allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
+                forEach(turtleId -> {
+                    allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
                 IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
-                myFrontExternalAPI.addTurtle(turtleId);});
+                    myFrontExternalAPI.addTurtle(turtleId);
+                });
     }
 
     public Map<Integer, Turtle> getAllTurtles() {
@@ -80,7 +76,7 @@ public class TurtleModel {
     }
 
     public Turtle getCurrentTurtle() {
-        return allTurtles.get(currentTurtleIndex);
+        return allTurtles.get((int) currentTurtleIndex);
     }
 
     public Turtle getTurtle(int turtleId) {
@@ -104,5 +100,13 @@ public class TurtleModel {
     }
 
 
-
+    public void populateBoard() {
+        Turtle t = new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
+                CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI);
+        allTurtles.put(1, t);
+        myFrontExternalAPI.addTurtle(1);
+        currentActiveTurtles = new ArrayList<>();
+        currentActiveTurtles.add(1);
+        currentTurtleIndex = 1;
+    }
 }

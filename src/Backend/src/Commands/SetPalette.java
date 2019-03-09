@@ -14,10 +14,10 @@ public class SetPalette extends FourParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
 
-        int index = (int) (double) Double.valueOf(String.valueOf(getMyParams().get(0)));
-        int r = (int) (double) Double.valueOf(String.valueOf(getMyParams().get(1)));
-        int g = (int) (double) Double.valueOf(String.valueOf(getMyParams().get(2)));
-        int b = (int) (double) Double.valueOf(String.valueOf(getMyParams().get(3)));
+        int index = Integer.parseInt(getMyParams().get(0).toString());
+        int r = Integer.parseInt(getMyParams().get(1).toString());
+        int g = Integer.parseInt(getMyParams().get(2).toString());
+        int b = Integer.parseInt(getMyParams().get(3).toString());
 
         Turtle myTurtle = this.getMyTurtleModel().getCurrentTurtle();
         myTurtle.setPalette(index, r, g, b);
