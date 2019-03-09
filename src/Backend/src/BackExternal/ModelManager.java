@@ -248,6 +248,4 @@ public class ModelManager implements IModelManager {
         myTurtleModel.populateBoard();
     }
 
-
-
 }
