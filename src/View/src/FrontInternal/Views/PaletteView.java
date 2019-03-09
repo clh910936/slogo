@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 
 
 import java.util.*;
+import java.util.function.Predicate;
 
 
 public class PaletteView extends HorizontalView{
@@ -55,11 +56,17 @@ public class PaletteView extends HorizontalView{
 
         Optional<String> result = dialog.showAndWait();
 
-        //TODO ACCOUNT FOR POORLY FORMATTED INPUT
         result.ifPresent(name -> {
             List<String> args = Arrays.asList(name.split(", "));
-            addColor(Integer.parseInt(args.get(0)), Integer.parseInt(args.get(1)),
-                    Integer.parseInt(args.get(2)), Integer.parseInt(args.get(3)));
+            Predicate<Integer> validcolor = e -> (e >= 0 && e <= 255);
+            Predicate<Integer> validid = e -> !myManager.getColors().contains(e);
+            int arg1 = validid.test(Integer.parseInt(args.get(0))) ? Integer.parseInt(args.get(0)) :
+                    Collections.max(myManager.getColors()) + 1;
+            int arg2 = validcolor.test(Integer.parseInt(args.get(1))) ? Integer.parseInt(args.get(1)) : 0;
+            int arg3 = validcolor.test(Integer.parseInt(args.get(2))) ? Integer.parseInt(args.get(2)) : 0;
+            int arg4 = validcolor.test(Integer.parseInt(args.get(3))) ? Integer.parseInt(args.get(3)) : 0;
+            addColor(arg1, arg2,
+                    arg3, arg4);
         });
     }
 
