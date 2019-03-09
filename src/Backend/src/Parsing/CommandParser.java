@@ -24,7 +24,6 @@ public class CommandParser {
         returnValues = new ArrayList<>();
     }
 
-
     public double parseCommand(String command) throws IllegalCommandException, IllegalParametersException {
         parserTracker = new ParserTracker(command);
         currentReturnValue = -1;
@@ -38,7 +37,7 @@ public class CommandParser {
             System.out.println("YUUHHHHHH" + returnValues);
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
-        return currentReturnValue;
+        return currentReturnValue; 
     }
 
     public List<Double> getReturnValues() {
