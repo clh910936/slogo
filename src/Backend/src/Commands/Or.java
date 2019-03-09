@@ -12,6 +12,6 @@ public class Or extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException  {
-        return ((double) getMyParams().get(0) != 0 || (double) getMyParams().get(1) != 0)? 1 : 0;
+        return (Double.parseDouble(getMyParams().get(0).toString()) != 0 || Double.parseDouble(getMyParams().get(1).toString()) != 0)? 1 : 0;
     }
 }

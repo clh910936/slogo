@@ -27,6 +27,7 @@ public class ParserTracker {
     private void makeInputArray(String command) {
         var resources = ResourceBundle.getBundle(SyntaxHandlerFactory.SYNTAX_FILE);
         System.out.println("COMMAND STRING" + command);
+        command = command.strip();
         commandInputList = command.split(String.valueOf(resources.getObject(NEW_LINE_SYMBOL)));
         System.out.println("AFTER FIRST SPLIT" + Arrays.toString(commandInputList));
         for(int i = 0 ;i<commandInputList.length;i++) {

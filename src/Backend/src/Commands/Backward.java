@@ -13,9 +13,9 @@ public class Backward extends OneParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
+        Turtle myTurtle = this.getMyTurtleModel().getCurrentTurtle();
 
         myTurtle.moveForward(-1 * Double.valueOf(String.valueOf(getMyParams().get(0))));
-        return (double) getMyParams().get(0);
+        return Double.parseDouble(getMyParams().get(0).toString());
     }
 }
