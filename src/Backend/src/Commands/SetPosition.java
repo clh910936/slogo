@@ -15,10 +15,10 @@ public class SetPosition extends TwoParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
         Turtle myTurtle =(Turtle) this.getMyTurtleModel().getCurrentTurtle();
-
+        myTurtle.setPenUp();
         double dist = myTurtle.getDistToPoint(Double.parseDouble(getMyParams().get(0).toString()), Double.parseDouble(getMyParams().get(1).toString()));
-        myTurtle.updatePoints(Double.parseDouble(getMyParams().get(0).toString()), Double.parseDouble(getMyParams().get(1).toString()));
-
+        myTurtle.updatePoints(Double.parseDouble(getMyParams().get(0).toString()) + Turtle.STARTX, Double.parseDouble(getMyParams().get(1).toString()) + Turtle.STARTY);
+        myTurtle.setPenDown();
         return dist;
     }
 }

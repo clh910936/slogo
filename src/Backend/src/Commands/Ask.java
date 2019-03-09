@@ -18,11 +18,10 @@ public class Ask extends TwoParamCommand {
     @Override
     public Object executeCommand() throws ClassCastException {
 
-        //TODO: christina please check this
-
         List<Integer> savedActiveTurtles = new ArrayList<>(this.getMyTurtleModel().getCurrentActiveTurtles());
-        String[] activeTurtles = (String[]) getMyParams().get(0);
+
         List<Integer> activeTurtleIds = new ArrayList<>();
+        String[] activeTurtles = (String[]) getMyParams().get(0);
         for(String i : activeTurtles) {
             activeTurtleIds.add(Integer.parseInt(i));
         }
