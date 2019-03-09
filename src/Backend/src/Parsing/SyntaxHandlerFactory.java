@@ -49,6 +49,7 @@ public class SyntaxHandlerFactory {
         this.commandInputList = parserTracker.getCommandInputList();
         System.out.println(rawInput);
         try {
+            System.out.println("&(*&(*&(&"+regexInput);
             Method method = this.getClass().getDeclaredMethod("evaluate" + regexInput + "Symbol");
             CommandNode returnNode = (CommandNode) method.invoke(this);
             parserTracker.setIndex(index);
