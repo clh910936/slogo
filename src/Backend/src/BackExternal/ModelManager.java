@@ -11,10 +11,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModelManager implements IModelManager {
     /*
@@ -156,6 +153,11 @@ public class ModelManager implements IModelManager {
     @Override
     public List<Integer> getTurtles() {
         return new ArrayList<>(myTurtleModel.getAllTurtles().keySet());
+    }
+
+    @Override
+    public Set<Integer> getColors() {
+        return myPaletteModel.getColors();
     }
 
     @Override

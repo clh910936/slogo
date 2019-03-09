@@ -29,6 +29,7 @@ public abstract class View {
     private ScrollPane myVariableScroll;
     protected static final String DEFAULT_LANGUAGE = "English";
     private static final int DEFAULT_HEIGHT = 100;
+    private static final int DEFAULT_WIDTH = 250;
 
 
 
@@ -41,6 +42,7 @@ public abstract class View {
 
         myVBox.setFillWidth(true);
         myVBox.setPrefHeight(DEFAULT_HEIGHT);
+        myVBox.setMinWidth(DEFAULT_WIDTH);
 
         myVariableScroll = new ScrollPane();
         myVariableScroll.setFitToWidth(true);

@@ -37,7 +37,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         myManager = manager;
         myViews = new ArrayList<>();
         myScrollPane = new ScrollPane();
-        myScrollPane.setPrefWidth(WIDTH);
+        myScrollPane.setMinWidth(WIDTH);
         initializeViews();
     }
 
@@ -53,7 +53,7 @@ public class  AllUserViews extends VBox implements ViewAPI  {
             View view = makeView(s);
             myViews.add(view);
             TitledPane pane = new TitledPane();
-            pane.setText(s);
+            pane.setText(myViewClassResources.getString(s));
             pane.setContent(view.getPane());
             allDropDowns.getChildren().add(pane);
         }
