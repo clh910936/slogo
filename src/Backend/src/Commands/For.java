@@ -28,9 +28,15 @@ public class For extends TwoParamCommand {
     public Object executeCommand() throws IllegalParametersException {
         double out = 0.0;
         try {
-            String[] variablesInfo = (String[]) getMyParams().get(0);
-            String[] commands = (String[]) getMyParams().get(1);
+            //(String[]) getMyParams().get(0)
+            List<Double> tempVar = getCp().getReturnValues();
+            String[] variablesInfo = new String[tempVar.size()];
+            for (int i = 0; i < tempVar.size(); i++) {
+                variablesInfo[i] = String.valueOf(tempVar.get(i));
+            }
 
+            String[] commands = (String[]) getMyParams().get(1);
+            System.out.println("LENGTH" + variablesInfo.length);
             if (variablesInfo.length != NUM_PARAMS) {
                 throw new IllegalLoopParamsException();
             }

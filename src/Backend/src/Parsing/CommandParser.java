@@ -38,7 +38,7 @@ public class CommandParser {
             System.out.println("YUUHHHHHH" + returnValues);
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
-        return currentReturnValue;
+        return currentReturnValue; 
     }
 
     public List<Double> getReturnValues() {
