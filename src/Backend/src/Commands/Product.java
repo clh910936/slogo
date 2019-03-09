@@ -12,6 +12,6 @@ public class Product extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException {
-        return (double) getMyParams().get(0) * (double) getMyParams().get(1);
+        return Double.parseDouble(getMyParams().get(0).toString()) * Double.parseDouble(getMyParams().get(1).toString());
     }
 }

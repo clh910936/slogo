@@ -64,9 +64,11 @@ public class TurtleModel {
         currentActiveTurtles = turtleIds;
         turtleIds.stream().
                 filter(turtleId -> !allTurtles.containsKey(turtleId)).
-                forEach(turtleId -> { allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
+                forEach(turtleId -> {
+                    allTurtles.put(turtleId, new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE,
                 IS_DISPLAYED,CLEAR_SCREEN, turtleId, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI));
-                myFrontExternalAPI.addTurtle(turtleId);});
+                    myFrontExternalAPI.addTurtle(turtleId);
+                });
     }
 
     public Map<Integer, Turtle> getAllTurtles() {

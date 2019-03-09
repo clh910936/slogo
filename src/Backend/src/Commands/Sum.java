@@ -11,7 +11,6 @@ public class Sum extends TwoParamCommand {
     }
     @Override
     public Object executeCommand() throws ClassCastException  {
-        System.out.println((double) getMyParams().get(0) + (double) getMyParams().get(1));
-        return (double) getMyParams().get(0) + (double) getMyParams().get(1);
+        return Double.parseDouble(getMyParams().get(0).toString()) + Double.parseDouble(getMyParams().get(1).toString());
     }
 }

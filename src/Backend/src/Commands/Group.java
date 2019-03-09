@@ -5,10 +5,15 @@ import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 public class Group extends ZeroParamCommand {
     private String[] myParamGroup;
     private CommandNode myCommand;
     private int paramsNeeded;
+    private static final String GROUPING_ALLOWED_FILE = "resources/Commands/allow-grouping";
 
     public Group(ModelManager modelManager
 , String[] myList, CommandNode command) {
@@ -21,40 +26,38 @@ public class Group extends ZeroParamCommand {
 
     @Override
     public Object executeCommand() throws ClassCastException,IllegalParametersException {
-        if (paramsNeeded == 0 && myParamGroup.length > 1||myParamGroup.length==1) {
-            throw new IllegalParametersException();
-        }
+        var resources = ResourceBundle.getBundle(GROUPING_ALLOWED_FILE);
         String commandToParse;
-        if (paramsNeeded == 2) {
-            commandToParse = handleTwoParams();
+        if(resources.containsKey(myCommand.getCommandName())) {
+            System.out.println("GROUPING ALLOWED");
+            commandToParse = handleGrouping();
         }
         else {
-            commandToParse = handleOtherParams();
+            commandToParse = handleOther();
         }
         return getCp().parseCommand(commandToParse);
     }
 
-    private String handleTwoParams() {
-        StringBuilder sb = new StringBuilder();
+    private String handleGrouping() {
+        List<String> groupingList = new ArrayList<>();
         int numCommandsNeeded = myParamGroup.length-2;
         String commandString = myParamGroup[0];
         for(int i = 0;i<numCommandsNeeded;i++) {
-            sb.append(commandString);
+            groupingList.add(commandString);
         }
         for(int i = 1 ;i<myParamGroup.length;i++) {
-            sb.append(myParamGroup[i]);
+            groupingList.add(myParamGroup[i]);
         }
-        return sb.toString();
+        return String.join(" ",groupingList);
     }
 
-    private String handleOtherParams() {
-        StringBuilder sb = new StringBuilder();
+    private String handleOther() {
+        List<String> groupingList = new ArrayList<>();
         String commandString = myParamGroup[0];
         for(int i = 1;i<myParamGroup.length;i++) {
-            if((i-1)%paramsNeeded==0) sb.append(commandString);
-            sb.append(myParamGroup[i]);
+            if((i-1)%paramsNeeded==0) groupingList.add(commandString);
+            groupingList.add(myParamGroup[i]);
         }
-        return sb.toString();
-
+        return String.join(" ",groupingList);
     }
 }
