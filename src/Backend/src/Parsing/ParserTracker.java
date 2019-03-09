@@ -52,7 +52,7 @@ public class ParserTracker {
         if(index>=commandInputList.length) {
             throw new IllegalParametersException();
         }
-        rawInput = commandInputList[index];
+        rawInput = commandInputList[index].strip();
     }
 
     public void setIndex(int val) {

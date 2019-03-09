@@ -8,6 +8,7 @@ import BackExternal.ModelManager;
 import Parsing.CommandParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class For extends TwoParamCommand {
@@ -29,23 +30,15 @@ public class For extends TwoParamCommand {
         double out = 0.0;
         try {
             String[] variablesInfo = (String[]) getMyParams().get(0);
-//            List<Double> tempVar = getCp().getReturnValues();
-//            String[] variablesInfo = new String[tempVar.size()];
-//            for (int i = 0; i < tempVar.size(); i++) {
-//                variablesInfo[i] = String.valueOf(tempVar.get(i));
-//            }
-
+            String varName = variablesInfo[0];
+            List<Double> variableValues = getVariableValues(variablesInfo);
             String[] commands = (String[]) getMyParams().get(1);
-            System.out.println("LENGTH" + variablesInfo.length);
             if (variablesInfo.length != NUM_PARAMS) {
                 throw new IllegalLoopParamsException();
             }
-
             if (! isCommandReadyToExecute()) {
                 return 0;
             }
-
-            List<Double> variableValues = getListOfVariables(variablesInfo);
 
             if (commands.length == 0) {
                 return 0;
@@ -53,7 +46,7 @@ public class For extends TwoParamCommand {
             for (int i = 0; i < variableValues.size(); i++) {
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(variableValues.get(i));
-                commandString = commandString.replaceAll(variablesInfo[0], param);
+                commandString = commandString.replaceAll(varName, param);
                 out = getCp().parseCommand(commandString);
             }
         }
@@ -63,17 +56,13 @@ public class For extends TwoParamCommand {
         return out;
     }
 
-
-    private List<Double> getListOfVariables(String[] variablesFor) {
-        List<Double> variableValues = new ArrayList<>();
-        double start = Double.parseDouble((variablesFor)[START_LOC]);
-        double end = Double.parseDouble(((variablesFor)[END_LOC]));
-        double incr = Double.parseDouble((variablesFor)[INCR_LOC]);
-        while (start <= end) {
-            variableValues.add(start);
-            start += incr;
+    private List<Double> getVariableValues(String[] variablesInfo) {
+        List<String> varParams = new ArrayList<>();
+        for(int i = 1;i<variablesInfo.length;i++) {
+            varParams.add(variablesInfo[i]);
         }
-        return variableValues;
+        getCp().parseCommand(String.join(" ",varParams));
+        return getCp().getReturnValues();
     }
 
 
