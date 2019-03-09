@@ -30,6 +30,7 @@ public class CommandParser {
         currentReturnValue = -1;
         while(!parserTracker.isDoneParsing()) {
             CommandNode commandHead = buildCommandTree(null);
+            System.out.println(commandHead);
             currentReturnValue = Double.valueOf(String.valueOf(evaluate(commandHead)));
             commandHead.clearChildren();
             commandHead.clearMyParams();
@@ -57,7 +58,6 @@ public class CommandParser {
                 }
             }
         }
-
         throw new IllegalParametersException();
     }
 
