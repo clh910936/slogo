@@ -30,8 +30,6 @@ public class For extends TwoParamCommand {
         double out = 0.0;
         try {
             String[] variablesInfo = (String[]) getMyParams().get(0);
-            List<Double> variableValues = getVariableValues(variablesInfo);
-            String varName = variablesInfo[0];
             String[] commands = (String[]) getMyParams().get(1);
 //            if (variablesInfo.length != NUM_PARAMS) {
 //                throw new IllegalLoopParamsException();
@@ -39,6 +37,7 @@ public class For extends TwoParamCommand {
             if (! isCommandReadyToExecute()) {
                 return 0;
             }
+            List<Double> variableValues = getListOfVariables(variablesInfo);
 
             if (commands.length == 0) {
                 return 0;
@@ -46,15 +45,28 @@ public class For extends TwoParamCommand {
             for (int i = 0; i < variableValues.size(); i++) {
                 String commandString = String.join(" ", commands);
                 String param = String.valueOf(variableValues.get(i));
-                commandString = commandString.replaceAll(varName, param);
+                commandString = commandString.replaceAll(variablesInfo[0], param);
                 out = getCp().parseCommand(commandString);
             }
+
         }
         catch(IllegalCommandException e) {
             throw new IllegalCommandException("For loop broke");
         }
         return out;
     }
+    private List<Double> getListOfVariables(String[] variablesFor) {
+        List<Double> variableValues = new ArrayList<>();
+        double start = Double.parseDouble((variablesFor)[START_LOC]);
+        double end = Double.parseDouble(((variablesFor)[END_LOC]));
+        double incr = Double.parseDouble((variablesFor)[INCR_LOC]);
+        while (start <= end) {
+            variableValues.add(start);
+            start += incr;
+        }
+        return variableValues;
+    }
+
 
 
 
