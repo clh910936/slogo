@@ -19,7 +19,6 @@ public class TurtleInfoView extends HorizontalView {
         super(manager);
         myRoot = new HBox();
         myPane = makeScrollPane(myRoot);
-        addTurtles(manager);
         setContents(myPane);
         setHeight(270);
         update();
@@ -28,9 +27,6 @@ public class TurtleInfoView extends HorizontalView {
     private void addNewTurtle() {
         int newid = Collections.max(myManager.getTurtles()) + 1;
         myManager.parseCommand(String.format(TELL, newid), DEFAULT_LANGUAGE);
-    }
-
-    private void addTurtles(IModelManager manager) {
     }
 
     @Override
