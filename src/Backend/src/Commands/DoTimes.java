@@ -21,15 +21,19 @@ public class DoTimes extends TwoParamCommand{
 
     @Override
     public Object executeCommand() throws IllegalParametersException {
-        if (! isCommandReadyToExecute()) return 0;
         try {
             String[] varAndLimit = (String[]) getMyParams().get(0);
             String varName = varAndLimit[0];
-            List<Double> variableValues = getVariableValues(varAndLimit);
+            List<Double> variableValues = new ArrayList<>(getVariableValues(varAndLimit));
             String[] commands = (String[]) getMyParams().get(1);
             String variable = varAndLimit[VAR_LOC];
-            double limit = Double.parseDouble(varAndLimit[LIMIT_LOC]);
-
+            double limit = variableValues.get(0);
+            if (! isCommandReadyToExecute()) {
+                return 0;
+            }
+            if (commands.length == 0) {
+                return 0;
+            }
             double lastValue = 0;
             for (int i = 1; i <= limit; i++) {
                 String commandString = String.join(" ", commands);

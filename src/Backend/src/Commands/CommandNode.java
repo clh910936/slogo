@@ -111,8 +111,10 @@ public abstract class CommandNode {
             varParams.add(variablesInfo[i]);
         }
         getCp().parseCommand(String.join(" ",varParams));
+        System.out.println("returns" + getCp().getReturnValues());
         return getCp().getReturnValues();
     }
 
 }
+
 

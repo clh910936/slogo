@@ -31,21 +31,18 @@ public class For extends TwoParamCommand {
         try {
             String[] variablesInfo = (String[]) getMyParams().get(0);
             String[] commands = (String[]) getMyParams().get(1);
-//            if (variablesInfo.length != NUM_PARAMS) {
-//                throw new IllegalLoopParamsException();
-//            }
+            String varName = variablesInfo[0];
+            List<Double> variableValues = new ArrayList<>(getVariableValues(variablesInfo));
             if (! isCommandReadyToExecute()) {
                 return 0;
             }
-            List<Double> variableValues = getListOfVariables(variablesInfo);
-
             if (commands.length == 0) {
                 return 0;
             }
-            for (int i = 0; i < variableValues.size(); i++) {
+            for (double i = variableValues.get(0); i < variableValues.get(1); i+=variableValues.get(2)) {
                 String commandString = String.join(" ", commands);
-                String param = String.valueOf(variableValues.get(i));
-                commandString = commandString.replaceAll(variablesInfo[0], param);
+                String param = String.valueOf((int) i);
+                commandString = commandString.replaceAll(varName, param);
                 out = getCp().parseCommand(commandString);
             }
 
@@ -55,17 +52,7 @@ public class For extends TwoParamCommand {
         }
         return out;
     }
-    private List<Double> getListOfVariables(String[] variablesFor) {
-        List<Double> variableValues = new ArrayList<>();
-        double start = Double.parseDouble((variablesFor)[START_LOC]);
-        double end = Double.parseDouble(((variablesFor)[END_LOC]));
-        double incr = Double.parseDouble((variablesFor)[INCR_LOC]);
-        while (start <= end) {
-            variableValues.add(start);
-            start += incr;
-        }
-        return variableValues;
-    }
+
 
 
 
