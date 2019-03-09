@@ -30,12 +30,12 @@ public class For extends TwoParamCommand {
         double out = 0.0;
         try {
             String[] variablesInfo = (String[]) getMyParams().get(0);
-            String varName = variablesInfo[0];
             List<Double> variableValues = getVariableValues(variablesInfo);
+            String varName = variablesInfo[0];
             String[] commands = (String[]) getMyParams().get(1);
-            if (variablesInfo.length != NUM_PARAMS) {
-                throw new IllegalLoopParamsException();
-            }
+//            if (variablesInfo.length != NUM_PARAMS) {
+//                throw new IllegalLoopParamsException();
+//            }
             if (! isCommandReadyToExecute()) {
                 return 0;
             }
@@ -56,14 +56,7 @@ public class For extends TwoParamCommand {
         return out;
     }
 
-    private List<Double> getVariableValues(String[] variablesInfo) {
-        List<String> varParams = new ArrayList<>();
-        for(int i = 1;i<variablesInfo.length;i++) {
-            varParams.add(variablesInfo[i]);
-        }
-        getCp().parseCommand(String.join(" ",varParams));
-        return getCp().getReturnValues();
-    }
+
 
 
 }
