@@ -193,13 +193,10 @@ public class Console extends Stage {
             Method method = this.getClass().getDeclaredMethod(s);
             method.invoke(this);
         } catch (NoSuchMethodException e1) {
-            e1.printStackTrace();
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         } catch (IllegalAccessException e1) {
-            e1.printStackTrace();
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         } catch (InvocationTargetException e1) {
-            e1.printStackTrace();
             myErrorView.displayError(myErrorResourceBundle.getString("BUTTON_ERROR"));
         }});
             return temp;
@@ -217,11 +214,9 @@ public class Console extends Stage {
             myManager.parseCommand(input, language);
         }
         catch (IllegalCommandException e){
-            e.printStackTrace();
             showError(myErrorResourceBundle.getString("COMMAND"));
         }
         catch (IllegalParametersException e){
-            e.printStackTrace();
             showError(myErrorResourceBundle.getString("PARAMS"));
         }
     }
