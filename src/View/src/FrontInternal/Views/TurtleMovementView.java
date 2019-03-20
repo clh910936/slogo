@@ -5,10 +5,8 @@ import API.IModelManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
@@ -31,8 +29,12 @@ public class TurtleMovementView extends View {
     private static final String DEFAULT_LANGAUGE = "English";
     private static final int HEIGHT = 175;
 
-
-
+    /**
+     * Creates an instance of a pane that contains shapes that, when clicked,
+     * move the selected turtle
+     * @param manager Allows this view to parse commands corresponding to desired
+     *                turtle movement
+     */
     public TurtleMovementView(IModelManager manager){
         super(manager);
         myGridPane = new GridPane();
@@ -68,11 +70,17 @@ public class TurtleMovementView extends View {
         return temp;
     }
 
+    /**
+     * called on all views to update
+     */
     @Override
     public void update() {
-
+        //doesn't need to update
     }
 
+    /**
+     * @return Pane containing the controls
+     */
     @Override
     public Pane getPane() {
         return myGridPane;
