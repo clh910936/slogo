@@ -19,7 +19,6 @@ import java.util.Map;
  * that is created in View.
  */
 public class UserDefinedCommandsView extends View {
-    private Console myConsole;
     private Accordion myAccordion;
     private VBox myVBox;
 
@@ -27,9 +26,8 @@ public class UserDefinedCommandsView extends View {
      * Creates a pane that can be updated based on the manager passed through
      * @param manager used for updating
      */
-    public UserDefinedCommandsView(IModelManager manager, Console console){
+    public UserDefinedCommandsView(IModelManager manager){
         super(manager);
-        myConsole = console;
         myVBox = new VBox();
         myAccordion = new Accordion();
         myVBox.getChildren().add(myAccordion);
@@ -49,16 +47,14 @@ public class UserDefinedCommandsView extends View {
         }
     }
 
-    private void clear(){
-
-    }
-
+    /**
+     * @return Pane containing the text displaying user defined commands
+     */
     @Override
     public Pane getPane() {
         return myVBox;
     }
 
-    //TODO: fix this javadoc comment
     private void addCommand(String name, String contents){
         TitledPane dropDown = new TitledPane();
         dropDown.setText(name);

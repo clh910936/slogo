@@ -11,8 +11,8 @@ public interface FrontExternalAPI {
     /**
      * part of board class
      * changes the background color of the void
-     * will have an argument for the color TBD
      */
+    //TODO: Feroze can you comment this? Idk what the index is
     public void setBackgroundColor(int index);
 
     /**

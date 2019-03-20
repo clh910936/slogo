@@ -27,6 +27,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/**
+ * @author Carrie Hunner
+ * This class creates a terminal where a user can enter code.
+ * This class extends Stage and as such can have .show() called on it
+ */
 public class Console extends Stage {
     //private CommandParser myParser;
     private BorderPane myBorderPane;
@@ -62,8 +67,10 @@ public class Console extends Stage {
     private Insets myButtonInsets;
     private boolean isDisplaying = true;
 
-
-    //public Console(Stage stage, CommandParser parser){
+    /**
+     * Creates a Console that can be displayed when
+     * .show() is called
+     */
     public Console (){
         initializeInstanceVariables();
         initializeLanguageList();
@@ -243,16 +250,4 @@ public class Console extends Stage {
         return temp;
     }
 
-    public boolean getDisplaying(){
-        return isDisplaying;
-    }
-
-    /**
-     * Can be used to write to the Console
-     * Allows user-defined commands to be written to the console
-     * @param s String of the desired text to be displayed
-     */
-    public void display(String s){
-        myUserInputField.setText(s);
-    }
 }
