@@ -3,14 +3,15 @@ package Models;
 import BackExternal.IllegalSavedStateFileException;
 import BackExternal.ModelManager;
 import Commands.UserDefinedCommand;
-import Parsing.CommandParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,6 +23,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import static java.util.Map.entry;
+
+/**
+ * @author christinachen
+ * This class is used to for saving and setting the state of the program using XML files
+ * Depends on the UserDefinedCommandsModel, VariablesModel, and ModelManager
+ */
 
 public class CurrentStateFileModel {
     private VariablesModel myVariablesModel;
@@ -42,13 +49,21 @@ public class CurrentStateFileModel {
         myModelManager = mm;
     }
 
+    /**
+     * This is to be used so that the front end can get all of the existing files to display to the user
+     * @return list of all of the saved files
+     */
     public List<String> getSavedFilesList() {
         File folder = new File(DOCUMENT_PATH);
         File[] listOfFiles = folder.listFiles();
         return Arrays.asList(listOfFiles).stream().map(File::getName).collect(Collectors.toList());
     }
 
-    public void setStateFromFile(String fileName, String language) {
+    /**
+     * This sets the state in the variables model and user defined command model to be the state read in from a file
+     * @param fileName
+     */
+    public void setStateFromFile(String fileName) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -60,7 +75,6 @@ public class CurrentStateFileModel {
                 String commandName = eElement.getElementsByTagName(COMMAND_NAME_TAG).item(0).getTextContent();
                 String[] commandVar = eElement.getElementsByTagName(COMMAND_VAR_TAG).item(0).getTextContent().split(" ");
                 String commandDefined = eElement.getElementsByTagName(COMMAND_COMMANDS_TAG).item(0).getTextContent();
-                System.out.println("^^^^"+commandName + " " + commandVar + " " + commandDefined);
                 myUserDefinedCommandsModel.addUserCreatedCommand(new UserDefinedCommand(myModelManager,commandName, commandDefined, commandVar));
             });
 
@@ -87,6 +101,10 @@ public class CurrentStateFileModel {
     }
 
 
+    /**
+     * Used to save the current state into an XML file
+     * @param fileName
+     */
     public void saveStateIntoFile(String fileName) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

@@ -45,8 +45,6 @@ public class ModelManager implements IModelManager {
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             mySyntaxHandlerFactory.changeLanguage(language);
-            System.out.println("*******"+ inputString);
-
             myCommandParser.parseCommand(inputString);
             myHistoryModel.addHistoryEntry(inputString, true);
             myFrontEnd.updateViews();
@@ -115,7 +113,7 @@ public class ModelManager implements IModelManager {
     }
 
     public void setStateFromFile(String fileName, String language) {
-        myCurrentStateFileModel.setStateFromFile(fileName,language);
+        myCurrentStateFileModel.setStateFromFile(fileName);
         myFrontEnd.updateViews();
     }
 

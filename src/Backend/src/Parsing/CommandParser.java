@@ -1,7 +1,7 @@
 package Parsing;
 
 import BackExternal.IllegalParametersException;
-import Commands.*;
+import Commands.CommandNode;
 import BackExternal.IllegalCommandException;
 import BackExternal.ModelManager;
 import Models.TurtleModel;
@@ -9,6 +9,17 @@ import Models.VariablesModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * @author Christina Chen and Michael Zhang
+ * This class is used to parse a string command input using a tree.
+ * It can take in any string and will throw an exception if the syntax
+ * is incorrect or invalid.
+ * It depends on the CommandNode class and the ModelManager, including the
+ * TurtleModel and VariablesModel that are used to handle turtle commands.
+ * It also uses the SyntaxHandlerFactory and ParserTracker which are in the
+ * same Parsing package.
+ */
 
 public class CommandParser {
     private ModelManager myModelManager;
@@ -24,6 +35,16 @@ public class CommandParser {
         returnValues = new ArrayList<>();
     }
 
+    /**
+     * Can be called in order to parse a string command input and will
+     * result in the execution of the command(s) through updating of the necessary
+     * models (Variables, Turtle, etc)
+     * Will throw an IllegalCommandException if the command is invalid
+     * @param command
+     * @return double that is the return value of a particular command
+     * @throws IllegalCommandException
+     * @throws IllegalParametersException
+     */
     public double parseCommand(String command) throws IllegalCommandException, IllegalParametersException {
         parserTracker = new ParserTracker(command);
         currentReturnValue = -1;
@@ -40,6 +61,17 @@ public class CommandParser {
         return currentReturnValue; 
     }
 
+    /**
+     * Used to get the return values for each individual command that was
+     * executed in the previous full command input string.
+     * It will return an empty list if no commands have been executed.
+     * Used in order to get the input values for loop commands that have list parameters
+     * with individual expressions that should all be stored as doubles.
+     *
+     * Assumes that it will be called after the command associated with the desired
+     * return values is parsed
+     * @return a list of doubles that represent return values for commands in order
+     */
     public List<Double> getReturnValues() {
         return returnValues;
     }
@@ -85,9 +117,7 @@ public class CommandParser {
         turtleEvaluated = true;
         VariablesModel currVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
         VariablesModel newVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
-        System.out.println("YUHHH" + myModelManager.getTurtleModel().getCurrentActiveTurtles());
         for (int id : turtleModel.getCurrentActiveTurtles()) {
-            System.out.println("********" + command + " " + id);
             double currTurtleId = turtleModel.getCurrentTurtleIndex();
             turtleModel.setCurrentTurtle(id);
             currentValue = addParamsAndExecute(command);

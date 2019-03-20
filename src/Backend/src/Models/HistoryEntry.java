@@ -1,5 +1,10 @@
 package Models;
 
+/**
+ * @author Christina Chen
+ * This class handles information for each history entry
+ */
+
 public class HistoryEntry {
     private String myCommand;
     private boolean successful;
