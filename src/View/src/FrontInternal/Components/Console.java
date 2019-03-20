@@ -67,9 +67,6 @@ public class Console extends Stage {
     private Insets myButtonInsets;
     private boolean isDisplaying = true;
 
-
-    //public Console(Stage stage, CommandParser parser){
-
     /**
      * Creates a Console that can be displayed when
      * .show() is called
