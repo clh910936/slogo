@@ -72,6 +72,7 @@ public class TurtleMovementView extends View {
 
     /**
      * called on all views to update
+     * this particular class doesn't actually need to update
      */
     @Override
     public void update() {
