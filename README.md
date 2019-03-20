@@ -98,19 +98,22 @@ any decisions, assumptions, or simplifications you made to handle vague, ambiguo
 - For the parser, the resource files required are the languages properties files that include the Command name mapped to the spelling of possible inputs for that command in each language. The parser also requires the files within the Commands resource file which include files for commands that take in a parameter in the format of a variable (such as MakeVariable which requires the name of the variable), file for commands that take in a string as a parameter (MakeCommand which requires the name of the new command), the file of all turtle commands which is needed for the multiple turtles functionality, and the file of all the functions that allow grouping.
 - For parameter grouping, we chose to implement it based on which commands could be cumulative. This includes sum, difference, quotient, and other basic math commands. It also includes and, or, less than, greater than, which can be cumulative from left to right. The whole list of commands that we chose to group like this are in the ******** data file. The ones that aren’t able to be grouped, if they are entered with grouped parameters, will just execute every n parameters in order, where n is how many parameters the command needs.
 - We also made the assumption that all of the saved state files that can be uploaded can only be from the ones that the program itself saves. Therefore, the user can not upload XML files from other sources into our program. This makes sense because the way that our program formats the XMLs are particular and no user should have access to the actual contents of the file so as to replicate it.
+- For the command `askwith`, if no turtles meet the condition, then zero is returned.
 
 # Known Bugs
 any known bugs, crashes, or problems with the project's functionality
 
-- AskWith is throwing a null pointer error
+- In loops, conditions that require expressions to be evaluated do not work.
 
 # Extra Features
 any extra features included in the project
 * Uploading a .txt or .logo file: Users can navigate to any folder on their computer and upload a file to the console where it can then be run.
+* Can handle recursive functions
+* Can group variable number of parameters
 
 # Impressions
 your impressions of the assignment to help improve it in the future
 * **Michael:** I found this assignment rewarding. But I wish we had more help with setting up modules and working with interfaces. We felt like we were getting conflicting information about how we should approach design using interfaces and module exports.
-* **Christina:** 
+* **Christina:** I thought it was a helpful project to understand relationships between packages and modules and for understanding the purpose of APIs. However, I feel that we didn’t receive enough guidance in the beginning to implement the different modules and that took the majority of our time when we were planning. It would have been helpful to have known more about modules and for the TAs to know more as well.
 * **Feroze:** Although we all agree it was rocky in the beginning, I thought that I gained more insight into object-oriented programming through this one assignment than with any other CS assignment I've had here at Duke. I never even really knew what an interface was before starting this project but now I feel like I have a solid understanding of abstracting as well as other advanced Java tools like Reflection, Functional Interfaces, and Generics. Overall, I wish there was a little more guidance in this assignment  - especially during sprint 2 - but I very happy with how hard my team worked and what we were eventually able to accomplish.
 * **Carrie:** The initial start was extremely rough. We had a lot of struggles getting modules up, running, and communicating and I felt unprepared to be working with them. TA office hours were not particularly helpful either, as the TAs had not heard of modules until we arrived. In the future, perhaps a more in depth explanation and demo, as well as more resources or examples, would be helpful if modules are to remain a part of this project.

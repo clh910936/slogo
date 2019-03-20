@@ -1,11 +1,8 @@
 package Commands;
 
-import Parsing.SyntaxHandlerFactory;
 import BackExternal.IllegalCommandException;
-import BackExternal.IllegalLoopParamsException;
 import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
-import Parsing.CommandParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +42,7 @@ public class For extends TwoParamCommand {
                 commandString = commandString.replaceAll(varName, param);
                 out = getCp().parseCommand(commandString);
             }
+
         }
         catch(IllegalCommandException e) {
             throw new IllegalCommandException("For loop broke");
@@ -52,15 +50,6 @@ public class For extends TwoParamCommand {
         return out;
     }
 
-    private List<Double> getVariableValues(String[] variablesInfo) {
-        List<String> varParams = new ArrayList<>();
-        for(int i = 1;i<variablesInfo.length;i++) {
-            varParams.add(variablesInfo[i]);
-        }
-        getCp().parseCommand(String.join(" ",varParams));
-        System.out.println(getCp().getReturnValues());
-        return getCp().getReturnValues();
-    }
 
 
 }
