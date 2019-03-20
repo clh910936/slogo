@@ -1,14 +1,19 @@
 package Parsing;
 
 import BackExternal.IllegalParametersException;
-import Commands.CommandNode;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+
+/**
+ * @author christinachen
+ * This class is used to keep track of the status of the progress of parsing through a
+ * given command input string.
+ * It is used by the CommandParser class so that it does not have to handle array creation and indexing.
+ * It is also used by the SyntaxHandlerFactory class by giving information about the current index and by allowing
+ * its index to be changed based on the syntax procedure.
+ * For example, if the SyntaxHandlerFactory detects a group start or list start input, it can get the whole
+ * group or list parameter from getting information from this class and then setting the final index after it finishes.
+ */
 
 public class ParserTracker {
     public static final String COMMENT_SYMBOL = "Comment";
@@ -26,40 +31,35 @@ public class ParserTracker {
 
     private void makeInputArray(String command) {
         var resources = ResourceBundle.getBundle(SyntaxHandlerFactory.SYNTAX_FILE);
-        System.out.println("COMMAND STRING" + command);
         command = command.strip();
         commandInputList = command.split(String.valueOf(resources.getObject(NEW_LINE_SYMBOL)));
-        System.out.println("AFTER FIRST SPLIT" + Arrays.toString(commandInputList));
         for(int i = 0 ;i<commandInputList.length;i++) {
             String line = commandInputList[i];
             if(Regex.match(line, Pattern.compile((String) resources.getObject(COMMENT_SYMBOL), Pattern.CASE_INSENSITIVE))) {
                 commandInputList[i] = "";
             }
         }
-        System.out.println("AFTER FOR LOOP" + Arrays.toString(commandInputList));
-        System.out.println("COMMAND LIST SPLIT" + String.join(" ",commandInputList));
         commandInputList = (String.join(" ",commandInputList)).split(String.valueOf(resources.getObject(WHITE_SPACE)));
-        System.out.println("AFTER SECOND SPLIT" + Arrays.toString(commandInputList));
-
     }
 
-    public String[] getCommandInputList() {
+    protected String[] getCommandInputList() {
         return commandInputList;
     }
-    public int getIndex() {return index;}
 
-    public void setNextInputString() {
+    protected int getIndex() {return index;}
+
+    protected void setNextInputString() {
         if(index>=commandInputList.length) {
             throw new IllegalParametersException();
         }
         rawInput = commandInputList[index].strip();
     }
 
-    public void setIndex(int val) {
+    protected void setIndex(int val) {
         this.index=val;
     }
 
-    public String getRawInput() {
+    protected String getRawInput() {
         return rawInput;
     }
 

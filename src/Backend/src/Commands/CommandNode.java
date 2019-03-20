@@ -1,12 +1,10 @@
 package Commands;
 
-import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
 import Models.*;
 import Parsing.CommandParser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -111,7 +109,6 @@ public abstract class CommandNode {
             varParams.add(variablesInfo[i]);
         }
         getCp().parseCommand(String.join(" ",varParams));
-        System.out.println("returns" + getCp().getReturnValues());
         return getCp().getReturnValues();
     }
 

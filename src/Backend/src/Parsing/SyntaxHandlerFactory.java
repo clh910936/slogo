@@ -1,13 +1,29 @@
 package Parsing;
 
 import BackExternal.IllegalCommandException;
-import BackExternal.IllegalParametersException;
 import BackExternal.ModelManager;
-import Commands.*;
+import Commands.CommandNode;
+import Commands.ListInput;
+import Commands.Group;
+import Commands.Constant;
+import Commands.StringInput;
+import Commands.Variable;
+import Commands.UserDefinedCommand;
 
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.regex.Pattern;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * @author christinachen
+ * This class is used to handle the different syntax types that can be used in a given command input.
+ * It uses the ParserTracker to set and get the current status of the command being parsed.
+ * It depends on the different syntax CommandNode subclasses (ListInput, Group, Constant, etc. )
+ * It also depends on the ModelManager, which is used in the constructor of CommandNodes
+ */
 
 public class SyntaxHandlerFactory {
     public static final String LIST_START_SYMBOL = "ListStart";
@@ -34,22 +50,31 @@ public class SyntaxHandlerFactory {
         Regex.addPatterns(SYNTAX_FILE, mySymbols);
     }
 
+    /**
+     * Since the same SyntaxHandlerFactory is used for the entire duration of a program, if the language is
+     * changed while it is being run, this is called each time a new command is parsed.
+     * @param language
+     */
     public void changeLanguage(String language) {
         myCommandSymbols.clear();
         Regex.addPatterns(LANGUAGES_FILE + language, myCommandSymbols);
     }
 
+    /**
+     * Handles all of the syntax within a command input
+     * Can be called by the CommandParser to fetch the next command node to put in its tree
+     * @param parent
+     * @param parserTracker
+     * @return the CommandNode associated with the current raw input in the parserTracker
+     * @throws IllegalCommandException
+     */
     public CommandNode getCommandNode(CommandNode parent, ParserTracker parserTracker) throws IllegalCommandException {
         this.parent = parent;
         rawInput = parserTracker.getRawInput();
-        System.out.println(rawInput);
-
         regexInput = Regex.getRegexSymbol(rawInput, mySymbols);
         this.index = parserTracker.getIndex();
         this.commandInputList = parserTracker.getCommandInputList();
-        System.out.println(rawInput);
         try {
-            System.out.println("&(*&(*&(&"+regexInput);
             Method method = this.getClass().getDeclaredMethod("evaluate" + regexInput + "Symbol");
             CommandNode returnNode = (CommandNode) method.invoke(this);
             parserTracker.setIndex(index);
@@ -69,7 +94,6 @@ public class SyntaxHandlerFactory {
     }
 
     private CommandNode evaluateListStartSymbol() {
-        System.out.println("*****EVALUATE LIST START HERE");
         String[] listContents = getListContents(commandInputList, index, LIST_START_SYMBOL, LIST_END_SYMBOL);
         index+=listContents.length + 2;
         return new ListInput(myModelManager, listContents);
@@ -148,17 +172,13 @@ public class SyntaxHandlerFactory {
     private String[] getListContents(String[] commandInputList, int currentIndex, String startSymbol, String endSymbol) throws IllegalCommandException{
         List<String> listContents = new ArrayList<>();
         int bracketCount = 1;
-        System.out.println("COMMND LIST" + Arrays.toString(commandInputList));
         for(int i = currentIndex+1;i<commandInputList.length;i++) {
             String rawInput = commandInputList[i];
             String input = Regex.getRegexSymbol(rawInput,mySymbols);
-            System.out.println("RAW LIST INPUT" + rawInput);
             if(input.equals(startSymbol)) {
-                System.out.println("EQUALS START SYMBOL");
                 bracketCount++;
             }
             else if(input.equals(endSymbol)) {
-                System.out.println("EQUALS END SYMBOL");
                 bracketCount--;
             }
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
