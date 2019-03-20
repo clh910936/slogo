@@ -36,16 +36,13 @@ public class VariableView extends View {
      * Updates the pane by getting the necessary information from the
      * manager.
      */
-    //TODO: fixme
     @Override
     public void update() {
-        //this.clearLines();
         myVBox.getChildren().clear();
         Map<String, String> map = myManager.getVariables();
         for(Map.Entry<String, String> entry : map.entrySet()){
             Pane p = addEditableVariable(entry.getKey(), entry.getValue());
             myVBox.getChildren().add(p);
-            //addToGridPane(p);
         }
     }
 
@@ -56,7 +53,6 @@ public class VariableView extends View {
         varValue.setPrefWidth(VAR_FIELD_WIDTH);
         varValue.setText(variable);
         varValue.textProperty().addListener(new ChangeListener<String>() {
-            //TODO: this seems unlikely to work-need to test it
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 System.out.println("Changing var: " + varName);
