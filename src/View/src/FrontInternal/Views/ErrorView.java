@@ -49,10 +49,6 @@ public class ErrorView extends HBox {
         setErrorlessBackground();
     }
 
-    private void initializeBorders(){
-        this.setBorder(Border.EMPTY);
-    }
-
     private Background createBackground(Paint color){
         Insets insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
         CornerRadii radii = new CornerRadii(RADII_SIZE);
@@ -82,7 +78,7 @@ public class ErrorView extends HBox {
     /**
      * Changes the background color of the error box and
      * clears the error text being displayed.
-     *Called after the console runs.
+     * Called after the console runs.
      */
     public void clearError(){
         myText.setText(EMPTY_TEXT);
