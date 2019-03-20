@@ -51,7 +51,7 @@ public class HistoryView extends View {
         text.setOnMouseClicked(e -> handleClick(text));
     }
 
-    protected Text createTextLine(String s, Paint color) {
+    private Text createTextLine(String s, Paint color) {
         Text text = new Text();
         HBox tempHBox = new HBox();
         text.setFill(color);

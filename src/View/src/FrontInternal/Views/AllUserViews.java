@@ -2,6 +2,7 @@ package FrontInternal.Views;
 
 import API.IModelManager;
 import FrontInternal.Components.Console;
+import javafx.collections.FXCollections;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
@@ -15,6 +16,7 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 /**
+ * @author Carrie Hunner
  * Extends Accordion and implements ViewAPI.
  * It creates an Accordion of all the Views listed in the
  * ViewDropDown.properties file.
@@ -30,6 +32,14 @@ public class  AllUserViews extends VBox implements ViewAPI  {
     private ScrollPane myScrollPane;
     private static final int WIDTH = 300;
 
+    /**
+     * Creates an instance of AllUserViews
+     * @param manager When this class creates the other views, each of them will need
+     *                an instance of IModelManager so each can get the backend
+     *                information they need
+     * @param console Some of the views created need an instance of Console so they
+     *                can display messages to the user
+     */
     public AllUserViews(IModelManager manager, Console console){
         myViewClassResources = ResourceBundle.getBundle("ViewDropDown");
         myErrorResources = ResourceBundle.getBundle("Errors");
@@ -41,8 +51,11 @@ public class  AllUserViews extends VBox implements ViewAPI  {
         initializeViews();
     }
 
+    /**
+     * @return unmodifiable list of Views
+     */
     public List<View> getViews() {
-        return myViews;
+        return FXCollections.observableList(myViews);
     }
 
     //Initializes all views in the ViewDropDown.properties file

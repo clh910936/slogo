@@ -12,12 +12,7 @@ import javafx.scene.paint.Paint;
 /**
  * @author Carrie Hunner
  * This class creates a template for a user view window with a title at the top
- * and the easy ability to add individual lines of text as well as clear the text.
- *
- * It extends BorderPane such that it is a Pane object that can be easily addded to a scene.
- *
- * This is used to format the HistoryView, VariablesView,
- * and UserDefinedCommandsView
+ * This is used to format all of the views
  */
 public abstract class View {
     protected IModelManager myManager;
@@ -34,7 +29,7 @@ public abstract class View {
 
 
     /**
-     * Used to create a template for the Variable,User Defined Commands, and History view
+     * Used to create a template for Views
      */
     public View(IModelManager manager){
         myManager = manager;
@@ -53,7 +48,10 @@ public abstract class View {
     }
 
 
-
+    /**
+     * Needs to be called by any subclasses so the content is actually displayed
+     * @param p Pane that contains the content to be displayed
+     */
     protected void setContents(Pane p){
         p.setPrefHeight(DEFAULT_HEIGHT);
         p.setPrefWidth(myVBox.getWidth());
@@ -62,13 +60,22 @@ public abstract class View {
     }
 
 
-
+    /**
+     * Updates the contents of the pane
+     */
     public abstract void update();
 
+    /**
+     * @return Pane of the view that can be used in the GUI
+     */
     public Pane getPane() {
         return myVBox;
     }
 
+    /**
+     * Used to override the default height of the pane
+     * @param height int of the height
+     */
     public void setHeight(int height){
         myVBox.setPrefHeight(height);
         myVariableScroll.setPrefHeight(height);

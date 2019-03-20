@@ -17,6 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * @author Carrie Hunner
+ * @author Feroze Mohideen
+ * This class runs the SLogo program and initializes the stage seen
+ * by the user
+ */
 public class Main extends Application {
     private static final int HEIGHT = 600;
     private static final int WIDTH = 800;
@@ -27,6 +33,11 @@ public class Main extends Application {
     private ResourceBundle myResources;
     private int myTabCount;
 
+    /**
+     * Initializes all of the necessary classes and
+     * creates the two starting tabs (a display and a "+" tab)
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         initializeVariables();
@@ -65,6 +76,10 @@ public class Main extends Application {
         myTabCount = 0;
     }
 
+    /**
+     * Launches the program
+     * @param args arguments
+     */
     public static void main(String[] args){
         launch(args);
     }

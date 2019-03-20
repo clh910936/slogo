@@ -18,8 +18,8 @@ import java.util.ResourceBundle;
 /**
  * @author Carrie Hunner
  * This class creates a reference page of all the different Slogo commands.
- * In creating an instanve of ReferencePage, it will initialize all the necessary variables
- * and display the screen. It is coompletely self-contained.
+ * In creating an instance of ReferencePage, it will initialize all the necessary variables
+ * and display the screen. It is completely self-contained.
  */
 public class ReferencePage extends Stage{
     private TabPane myTabPane;
@@ -33,7 +33,11 @@ public class ReferencePage extends Stage{
     private static final int WIDTH = 600;
     private static final int HEIGHT = 300;
 
-    ReferencePage() {
+    /**
+     * Creates an instance of Reference page and initializes all variables.
+     * The page will not be displayed until .show() is called
+     */
+    public ReferencePage() {
         initializeVariables();
         this.setScene(myScene);
         createAllTabs();

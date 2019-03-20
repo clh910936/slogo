@@ -7,14 +7,21 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
+/**
+ * @author Carrie Hunner
+ * This class extends the View superclass.
+ * It is dependent on a backend implementation of API.IModelManager to get
+ * the SavedStates. It then displays these on a pane
+ * that is created in View.
+ * Users can click on a state to load its variables and commands
+ */
 public class SavedStateView extends View {
     private VBox myVBox;
 
 
     /**
-     * Used to create a template for the Variable,User Defined Commands, and History view
-     *
-     * @param manager
+     * Creates a pane that displays past saved states
+     * @param manager Enables this view to communicate with the backend savedstate model
      */
     public SavedStateView(IModelManager manager) {
         super(manager);
@@ -23,7 +30,10 @@ public class SavedStateView extends View {
         update();
     }
 
-    //TODO: check if this is working
+
+    /**
+     * Updates the pane to display all Saved States
+     */
     @Override
     public void update() {
         myVBox.getChildren().clear();
