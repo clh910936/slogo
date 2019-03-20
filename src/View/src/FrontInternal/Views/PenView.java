@@ -13,6 +13,11 @@ import javafx.scene.layout.VBox;
 import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 
+/**
+ * @author Carrie Hunner
+ * This class provides the user with a slider to change the thickness
+ * of the pen as well as buttons to set the pen to up or down
+ */
 public class PenView extends View{
     private VBox myVBox;
     private final static int MAX_PEN_SIZE = 20;
@@ -27,6 +32,11 @@ public class PenView extends View{
     private ResourceBundle myGeneralResources;
     private static final int HEIGHT = 150;
 
+    /**
+     * Creates a pane that had UI controls to change the pen properties
+     * @param manager Allows for this view to parse commands that correspond to UI controls
+     * @param console Allows for the displaying of errors to user
+     */
     public PenView(IModelManager manager, Console console){
         super(manager);
 
