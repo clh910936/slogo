@@ -1,6 +1,10 @@
 package API;
 
-
+/**
+ * This interface is a series of endpoints that are called upon by the backend in order to enact some action on the
+ * frontend.
+ * @author everyone
+ */
 public interface FrontExternalAPI {
     /**
      * part of Board class
@@ -12,13 +16,12 @@ public interface FrontExternalAPI {
      * part of board class
      * changes the background color of the void
      */
-    //TODO: Feroze can you comment this? Idk what the index is
     public void setBackgroundColor(int index);
 
     /**
      * part of TurtleView class.
      * updates the turtle based on changes made to the Turtle
-     * triggered by backend, using a listener event? (maybe need an external component)
+     * these are API endpoints used by the backend in response to commands
      */
     public void penUp(boolean true_is_penup, int turtleId);
     public void rotate(double degrees, int turtleId);
