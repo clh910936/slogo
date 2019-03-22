@@ -37,7 +37,7 @@ public class ModelManager implements IModelManager {
         myUserDefinedCommandsModel = new UserDefinedCommandsModel();
         myCurrentStateFileModel = new CurrentStateFileModel(myVariablesModel,myUserDefinedCommandsModel,this);
         mySyntaxHandlerFactory = new SyntaxHandlerFactory(this);
-        myCommandParser = new CommandParser(this,mySyntaxHandlerFactory);
+        myCommandParser = new CommandParser(this);
         myPaletteModel = new PaletteModel();
         myBackgroundModel = new BackgroundModel(myFrontEnd);
     }
