@@ -1,41 +1,13 @@
-//package Models;
-//
-//import BackExternal.ITurtle;
-//
-//import java.util.ArrayList;
-//import java.util.ListInput;
-//
-//public class TurtleModel {
-//
-//    int currentTurtleIndex;
-//    ListInput<ITurtle> listOfTurtles;
-//
-//    public TurtleModel(double firstTurtleX, double firstTurtleY, boolean isPenUp, double headingAngle, boolean isDisplayed, int turtleId) {
-//        listOfTurtles = new ArrayList<>();
-//        currentTurtleIndex = turtleId;
-//        //FIXME: don't hardcode
-//        Turtle t = new Turtle(firstTurtleX, firstTurtleY, isPenUp, headingAngle, isDisplayed, false);
-//        listOfTurtles.add(t);
-//    }
-//
-//    public void addTurtleToList(Turtle t) {
-//        listOfTurtles.add(t);
-//    }
-//
-//    public int getCurrentTurtleIndex() {
-//        return currentTurtleIndex;
-//    }
-//
-//    public Turtle getCurrentTurtle() { return (Turtle) listOfTurtles.get(currentTurtleIndex); }
-//
-//    public ListInput<ITurtle> getListOfTurtles() {
-//        return listOfTurtles;
-//    }
-//}
 package Models;
 import API.FrontExternalAPI;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.ArrayList;
+
+
 
 public class TurtleModel {
     public static final double STARTX = 2000;

@@ -16,9 +16,9 @@ public class Group extends ZeroParamCommand {
     private static final String GROUPING_ALLOWED_FILE = "resources/Commands/allow-grouping";
 
     public Group(ModelManager modelManager
-, String[] myList, CommandNode command) {
+            , String[] myList, CommandNode command) {
         super(modelManager
-);
+        );
         this.myParamGroup = myList;
         this.myCommand = command;
         paramsNeeded = myCommand.getNumParamsNeeded();
@@ -29,7 +29,6 @@ public class Group extends ZeroParamCommand {
         var resources = ResourceBundle.getBundle(GROUPING_ALLOWED_FILE);
         String commandToParse;
         if(resources.containsKey(myCommand.getCommandName())) {
-            System.out.println("GROUPING ALLOWED");
             commandToParse = handleGrouping();
         }
         else {

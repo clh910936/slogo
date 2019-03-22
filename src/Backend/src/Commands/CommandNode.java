@@ -30,7 +30,7 @@ public abstract class CommandNode {
         myParams = new ArrayList<>();
         myChildren = new ArrayList<>();
         myUserDefinedCommandsModel = modelManager.getUserDefinedCommandsModel();
-        cp = new CommandParser(modelManager,myModelManager.getMySyntaxHandlerFactory());
+        cp = new CommandParser(modelManager);
     }
 
     protected CommandParser getCp() {
