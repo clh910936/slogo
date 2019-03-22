@@ -29,8 +29,8 @@ public class CommandParser {
     private List<Double> returnValues;
     private ParserTracker parserTracker;
 
-    public CommandParser(ModelManager modelManager, SyntaxHandlerFactory syntaxHandlerFactory) {
-        mySyntaxHandlerFactory = syntaxHandlerFactory;
+    public CommandParser(ModelManager modelManager) {
+        mySyntaxHandlerFactory = modelManager.getMySyntaxHandlerFactory();
         myModelManager = modelManager;
         returnValues = new ArrayList<>();
     }
