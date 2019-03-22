@@ -1,5 +1,9 @@
 package FrontInternal.Util;
 
+/**
+ * General class to hold a tuple (in this case, the location of the turtle).
+ * @author Feroze
+ */
 public class Location {
     private double myX;
     private double myY;

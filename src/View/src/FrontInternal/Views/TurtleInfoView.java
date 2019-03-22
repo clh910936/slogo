@@ -5,22 +5,32 @@ import FrontInternal.Players.AddElement;
 import FrontInternal.Players.TurtleInfoElement;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
 import java.util.Collections;
 
+/**
+ * The TurtleInfoView gives information on the turtles in play including position and pen status. It also allows
+ * users to add a new turtle from the GUI and change the image of a turtle.
+ * @author Feroze
+ */
 public class TurtleInfoView extends HorizontalView {
+    public static final int DEFAULT_HEIGHT = 270;
     private HBox myRoot;
     private Pane myPane;
     private AddElement addNewTurtleButton;
     private final String SETIMAGE = "setsh ";
     private final String DEFAULT_LANGUAGE = "English";
     private final String TELL = "tell [ %d ] ";
+
+    /**
+     * Creates the scrollpane and sets the default height, then populates the view with `update()`.
+     * @param manager backend instance on which to call commands
+     */
     public TurtleInfoView(IModelManager manager) {
         super(manager);
         myRoot = new HBox();
         myPane = makeScrollPane(myRoot);
         setContents(myPane);
-        setHeight(270);
+        setHeight(DEFAULT_HEIGHT);
         update();
     }
 
@@ -29,6 +39,10 @@ public class TurtleInfoView extends HorizontalView {
         myManager.parseCommand(String.format(TELL, newid), DEFAULT_LANGUAGE);
     }
 
+    /**
+     * Update queries the backend for all the current turtles in play and creates a turtleinfoelement for each of
+     * them. Afterward, it adds the new turtle button.
+     */
     @Override
     public void update() {
         myRoot.getChildren().clear();

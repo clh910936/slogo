@@ -18,7 +18,7 @@ import java.util.Map;
 public class TurtleManager {
     private Board myBoard;
     private SimpleDoubleProperty slideSpeed;
-    private Map<Integer, TurtleView> GAME_ACTORS = new HashMap<>();
+    private Map<Integer, TurtleView> GAME_ACTORS;
     private IModelManager myController;
 
     /**
@@ -29,6 +29,7 @@ public class TurtleManager {
      */
     public TurtleManager(Board b, SimpleDoubleProperty speed, IModelManager controller) {
         myBoard = b;
+        GAME_ACTORS = new HashMap<>();
         slideSpeed = speed;
         myController = controller;
     }
@@ -89,15 +90,25 @@ public class TurtleManager {
         get(turtleId).getScheduler().addToSchedule(name, isDisplayed);
     }
 
+    /**
+     * @return all the turtles currently on the screen
+     */
     public Collection<TurtleView> getAllTurtles() {
         return GAME_ACTORS.values();
     }
+
+    /**
+     * Resets the list of turtles on the screen
+     */
     public void clearTurtles() {
         GAME_ACTORS = new HashMap<>();
     }
 
+    /**
+     * Updates each turtle on the screen
+     */
     public void update() {
         GAME_ACTORS.values().forEach(Sprite::update);
     }
-    
+
 }
