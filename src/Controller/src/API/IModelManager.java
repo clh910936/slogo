@@ -10,20 +10,70 @@ import java.util.Set;
 
 public interface IModelManager {
 
+    /**
+     *
+     * @return map of user defined commands
+     */
     Map<String,String> getUserDefinedCommands();
+
+    /**
+     *
+     * @return map of variables
+     */
     Map<String,String> getVariables();
+
+    /**
+     *
+     * @return list of history in string form
+     */
     List<String> getHistory();
+
+    /**
+     * parses a command
+     * @param input
+     * @param language
+     */
     void parseCommand(String input, String language);
+
+    /**
+     *
+     * @param index
+     * @return boolean that indicates success of a command input in history
+     */
     boolean getSuccessOfHistoryEntry(int index);
+
+
+
+    /**
+     * takes in a string file and tells the currentStateFileModel to save the state into that file
+     * @param fileName
+     */
     void saveCurrentState(String fileName);
+
+
+    /**
+     * takes in a string file and tells the currentStateFileModel to set the state from that file
+     * @param fileName
+     * @param language
+     */
     void setStateFromFile(String fileName, String language);
+
+    /**
+     *
+     * @return list of all saved state files
+     */
     List<String> getSavedFilesList();
+
+    /**
+     * adds or change a variable
+     * @param variableName
+     * @param value
+     */
     void changeVariable(String variableName, String value);
     void addPalette(int index, int r, int g, int b);
     int getCurrentActiveTurtle();
 
 
-    // also this method: void makeCurrentActiveTurtle(int index);
     void makeCurrentActiveTurtle(int index);
 
 
@@ -70,7 +120,6 @@ public interface IModelManager {
     SimpleIntegerProperty getR(int turtleId);
     SimpleIntegerProperty getG(int turtleId);
     SimpleIntegerProperty getB(int turtleId);
-
     void populateBoard();
 
 

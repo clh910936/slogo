@@ -13,6 +13,8 @@ public class Constant extends ZeroParamCommand {
 );
         this.num = num;
     }
+
+
     @Override
     public Object executeCommand() throws ClassCastException {
         return num;
