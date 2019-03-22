@@ -3,40 +3,37 @@ import API.IModelManager;
 import FrontInternal.Components.Board;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.paint.Color;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+
 
 
 /**
- * Sprite manager is responsible for holding all sprite objects (like turtles), and cleaning up
- * sprite objects to be removed. IDEALLY WILL IMPLEMENT AN INTERFACE
+ * Turtle manager is responsible for holding all sprite objects (like turtles), and cleaning up
+ * sprite objects to be removed.
  * @author Feroze
  */
 
-//TODO: REFACTOR SO THAT SPRITE DOESNT HAVE TO HAVE EVERYTHING
 public class TurtleManager {
     private Board myBoard;
     private SimpleDoubleProperty slideSpeed;
     private Map<Integer, TurtleView> GAME_ACTORS = new HashMap<>();
     private IModelManager myController;
 
+    /**
+     * Creates a turtle manager with speed and associates it with a board.
+     * @param b Board upon which to act
+     * @param speed speed at which turtles move
+     * @param controller backend instance
+     */
     public TurtleManager(Board b, SimpleDoubleProperty speed, IModelManager controller) {
         myBoard = b;
         slideSpeed = speed;
         myController = controller;
-
-
-
     }
 
-    /**
-     * VarArgs of sprite objects to be added to the game.
-     * @param sprites
-     */
-    public void addSprites(TurtleView... sprites) {
+    private void addSprites(TurtleView... sprites) {
         myBoard.getChildren().addAll(sprites);
         for (TurtleView t: sprites) {
             GAME_ACTORS.put(t.getID(), t);
@@ -47,6 +44,10 @@ public class TurtleManager {
         return GAME_ACTORS.get(turtleId);
     }
 
+    /**
+     * The following public methods are used to change the turtle properties by adding the action
+     * to the turtle's scheduler. See `TurtleView.java` or `TurtleScheduler.java` for details about the scheduler.
+     */
     public void move(double x, double y, int turtleId) {
         String name = new Object(){}.getClass().getEnclosingMethod().getName();
         get(turtleId).getScheduler().addToSchedule(name, x, y);
@@ -83,6 +84,11 @@ public class TurtleManager {
         t.setImageProp();
     }
 
+    public void setDisplayed(boolean isDisplayed, int turtleId) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        get(turtleId).getScheduler().addToSchedule(name, isDisplayed);
+    }
+
     public Collection<TurtleView> getAllTurtles() {
         return GAME_ACTORS.values();
     }
@@ -93,9 +99,5 @@ public class TurtleManager {
     public void update() {
         GAME_ACTORS.values().forEach(Sprite::update);
     }
-
-    public void setDisplayed(boolean isDisplayed, int turtleId) {
-        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        get(turtleId).getScheduler().addToSchedule(name, isDisplayed);
-    }
+    
 }

@@ -144,7 +144,7 @@ public class TurtleView extends Sprite {
 
     //TODO: REFACTOR THIS MASSIVE METHOD
     @Override
-    public  void move(Double x, Double y) {
+    public void move(Double x, Double y) {
         setBusy(true);
         double xdisp = x - getLastX();
         double ydisp = y - getLastY();
@@ -236,10 +236,6 @@ public class TurtleView extends Sprite {
         setBusy(false);
     }
 
-    @Override
-    public Node getPath() {
-        return myPath;
-    }
 
     public void setDisplayed(boolean display) {
         setVisible(display);
