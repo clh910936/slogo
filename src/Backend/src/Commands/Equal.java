@@ -5,11 +5,10 @@ import BackExternal.ModelManager;
 
 public class Equal extends TwoParamCommand {
 
-    public Equal(ModelManager modelManager
-) {
-        super(modelManager
-);
+    public Equal(ModelManager modelManager) {
+        super(modelManager);
     }
+
     @Override
     public Object executeCommand() throws ClassCastException {
         double one = Double.parseDouble(String.valueOf(getMyParams().get(0)));
