@@ -1,11 +1,10 @@
 package FrontInternal.Util;
-
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
 /**
- * Found at https://stackoverflow.com/questions/4126029/convert-rgb-values-to-color-name
+ * Adapted from https://stackoverflow.com/questions/4126029/convert-rgb-values-to-color-name
+ * This utility class is a database of colors from which we can relate RGB values to their corresponding colors.
+ * @author Feroze
  */
 public class ColorUtils {
 
@@ -160,10 +159,10 @@ public class ColorUtils {
     /**
      * Get the closest color name from our list
      *
-     * @param r
-     * @param g
-     * @param b
-     * @return
+     * @param r r-value color
+     * @param g g-value color
+     * @param b b-value color
+     * @return name of the closest color
      */
     public static String getColorNameFromRgb(int r, int g, int b) {
         //ArrayList<ColorName> colorList = initColorList();
