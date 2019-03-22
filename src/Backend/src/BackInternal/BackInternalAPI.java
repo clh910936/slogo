@@ -1,107 +1,113 @@
 package BackInternal;
 
 import BackExternal.IllegalCommandException;
+import BackExternal.IllegalParametersException;
+import Commands.CommandNode;
+import Parsing.ParserTracker;
+import java.util.List;
 
 public interface BackInternalAPI {
+    /**
+     * Gets number of parameters are required for this command
+     * @return max number of parameters
+     */
+    int getNumParamsNeeded();
 
     /**
-     * Defined within the UserSetCommandModel
-     * The user will be able to add a command with relevant variables and predefined commands that can be called at any other time
-     * @param commandName
-     * @param input
+     * Adds child to the command
+     * @param node
      */
-    public void addCommand(String commandName, String input);
+    void addChild(CommandNode node);
 
     /**
-     * Defined within the VariablesModel
-     * The user can define a variable that can be accessed through any other command
-     * @param var
+     * Gets list of children
+     * @return list of children
      */
-    public void addVariable(Object var);
+    List<CommandNode> getChildren();
 
     /**
-     * Defined within the VariablesModel
-     * Removes a variable from the current state
-     * @param var
-     * @throws IllegalCommandException if the variable doesn't exist
+     * Clears list of children
      */
-    public void removeVariable(Object var) throws IllegalCommandException;
+    void clearChildren();
 
     /**
-     * Defined within the Turtle
-     * @return Java Pair object with x coordinate and y coordinate of the turtle
+     * Gets the parameters given to this command
+     * @return list of parameters
      */
-    public Object getTurtleCoordinates();
+    List<Object> getMyParams();
 
     /**
-     * Defined within the Turtle
-     * Places the turtle at a certain place on the board
-     * @param coordinates
-     * @throws if the coordinates are outside the bounds of the dimensions of the board
+     * Adds a parameter to command
+     * @param p
      */
-    public void moveTurtleToCoordinates(Object coordinates) throws IllegalCommandException;
+    void addParam(Object p);
 
     /**
-     * Defined within the Turtle
-     * Gets the current direction of the turtle on the board
-     * @return direction of the turtle
+     * Clears list of parameters
      */
-    public double getTurtleDirection();
+    void clearMyParams();
 
     /**
-     * Defined within the Turtle
-     * Sets the direction of the turtle to a certain direction
-     * Should handle degrees greater than a value of 360
-     * @param  direction of the turtle
+     * Gets command name
+     * @return command name
      */
-    public void setTurtleDirection(double direction);
+    String getCommandName();
 
     /**
-     * Defined within the Turtle
-     * Sets the pen up
+     * If command has all its required children, then returns true
+     * @return
      */
-    public void setPenUp();
+    boolean isCommandReadyToExecute();
 
     /**
-     * Defined within the Turtle
-     * Sets the pen down
+     * Executes the action for a given command
+     * @return always returns a number
      */
-    public void setPenDown();
+    Object executeCommand();
 
     /**
-     * Defined within the Turtle
-     * Shows the turtle
+     * Can be called in order to parse a string command input and will
+     * result in the execution of the command(s) through updating of the necessary
+     * models (Variables, Turtle, etc)
+     * Will throw an IllegalCommandException if the command is invalid
+     * @param command
+     * @return double that is the return value of a particular command
+     * @throws IllegalCommandException
+     * @throws IllegalParametersException
      */
-    public void showTurtle();
+    double parseCommand(String command);
 
     /**
-     * Defined within the Turtle
-     * Hides the turtle
+     * Used to get the return values for each individual command that was
+     * executed in the previous full command input string.
+     * It will return an empty list if no commands have been executed.
+     * Used in order to get the input values for loop commands that have list parameters
+     * with individual expressions that should all be stored as doubles.
+     *
+     * Assumes that it will be called after the command associated with the desired
+     * return values is parsed
+     * @return a list of doubles that represent return values for commands in order
      */
-    public void hideTurtle();
+    List<Double> getReturnValues();
 
     /**
-     * Defined within the HistoryModel
-     * Adds a certain input to the history data
+     * Since the same SyntaxHandlerFactory is used for the entire duration of a program, if the language is
+     * changed while it is being run, this is called each time a new command is parsed.
+     * @param language
      */
-    public void addCommandToHistory();
+    public void changeLanguage(String language);
 
     /**
-     * Defined within the HistoryModel
-     * Removes a certain input from the history data
+     * Handles all of the syntax within a command input
+     * Can be called by the CommandParser to fetch the next command node to put in its tree
+     * @param parent
+     * @param parserTracker
+     * @return the CommandNode associated with the current raw input in the parserTracker
+     * @throws IllegalCommandException
      */
-    public void removeCommandFromHistory() throws IllegalCommandException;
+    public CommandNode getCommandNode(CommandNode parent, ParserTracker parserTracker);
 
-    /**
-     * Defined within the HistoryModel
-     * Clears all history
-     */
-    public void clearAllHistory();
 
-    /**
-     * Defined within the controller
-     * Parses any input to a command
-     * @param consoleInput
-     */
-    public void parseCommand(String consoleInput) throws IllegalCommandException;
+
+
 }

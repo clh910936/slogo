@@ -1,15 +1,19 @@
 package Commands;
 
-import Parsing.SyntaxHandlerFactory;
 import BackExternal.ModelManager;
-import Parsing.SyntaxHandlerFactory;
 
+/**
+ * @author michaelzhang
+ * Abstraction for command that requires zero parameters
+ */
 public abstract class ZeroParamCommand extends CommandNode {
 
-    public ZeroParamCommand(ModelManager modelManager
-) {
-        super(modelManager
-);
+    /**
+     * Constructor - sets max parameters and takes in modelManager
+     * @param modelManager
+     */
+    public ZeroParamCommand(ModelManager modelManager) {
+        super(modelManager);
         setMaxParams(0);
     }
 

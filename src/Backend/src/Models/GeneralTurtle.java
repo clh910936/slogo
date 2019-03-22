@@ -1,11 +1,15 @@
 package Models;
 
 import API.FrontExternalAPI;
-import Commands.PenDown;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+
+/**
+ * @author michaelzhang
+ * This abstract class describes the characteristics of a turtle, and provides getters and setters as necessary
+ */
 public abstract class GeneralTurtle {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
@@ -30,7 +34,20 @@ public abstract class GeneralTurtle {
     private SimpleIntegerProperty G;
     private SimpleIntegerProperty B;
 
-
+    /**
+     * Constructor for a Turtle, which includes all the parameters each turtle must keep track off
+     * @param nextPointX
+     * @param nextPointY
+     * @param isPenUp
+     * @param headingAngle
+     * @param isDisplayed
+     * @param isClearScreen
+     * @param id
+     * @param pcIndex
+     * @param ps
+     * @param si
+     * @param myFrontExternal
+     */
     public GeneralTurtle(double nextPointX, double nextPointY, boolean isPenUp,
                          double headingAngle, boolean isDisplayed, boolean isClearScreen,
                          int id, int pcIndex, double ps, int si, FrontExternalAPI myFrontExternal) {
@@ -47,6 +64,10 @@ public abstract class GeneralTurtle {
         this.myFrontExternalAPI = myFrontExternal;
     }
 
+    /**
+     * Getter for myPointX
+     * @return
+     */
     public double getMyPointX() {
         return myPointX;
     }
@@ -55,6 +76,10 @@ public abstract class GeneralTurtle {
         myPointX = x;
     }
 
+    /**
+     * Getter for myPointY
+     * @return
+     */
     public double getMyPointY() {
         return myPointY;
     }
@@ -63,6 +88,10 @@ public abstract class GeneralTurtle {
         myPointY = y;
     }
 
+    /**
+     * Getter for myIsPenUp
+     * @return
+     */
     public boolean getMyIsPenUp() {
         return myIsPenUp;
     }
@@ -71,6 +100,10 @@ public abstract class GeneralTurtle {
         this.myIsPenUp = isPenUp;
     }
 
+    /**
+     * Getter for myHeadingAngle
+     * @return
+     */
     public double getMyHeadingAngle() {
         return myHeadingAngle;
     }
@@ -79,6 +112,10 @@ public abstract class GeneralTurtle {
         this.myHeadingAngle = angle;
     }
 
+    /**
+     * Getter for myIsDisplayed
+     * @return
+     */
     public boolean getMyIsDisplayed() {
         return myIsDisplayed;
     }
@@ -87,22 +124,18 @@ public abstract class GeneralTurtle {
         myIsDisplayed = isDisplayed;
     }
 
-    public boolean getMyIsClearScreen() {
-        return myIsClearScreen;
-    }
-
-    protected void setMyIsClearScreen(boolean isClearScreen) {
-        myIsClearScreen = isClearScreen;
-    }
-
+    /**
+     * Getter for myId
+     * @return
+     */
     public int getMyId() {
         return myId;
     }
 
-    protected void setMyId(int id) {
-        myId = id;
-    }
-
+    /**
+     * Getter for myPenColourIndex
+     * @return
+     */
     public int getMyPenColourIndex() {
         return myPenColourIndex;
     }
@@ -111,6 +144,10 @@ public abstract class GeneralTurtle {
         myPenColourIndex = index;
     }
 
+    /**
+     * Getter for myPenSive
+     * @return
+     */
     public double getMyPenSize() {
         return myPenSize;
     }
@@ -119,6 +156,10 @@ public abstract class GeneralTurtle {
         myPenSize = penSize;
     }
 
+    /**
+     * Getter for myShapeIndex
+     * @return
+     */
     public int getMyShapeIndex() {
         return myShapeIndex;
     }
@@ -127,63 +168,122 @@ public abstract class GeneralTurtle {
         myShapeIndex = index;
     }
 
+    /**
+     * Getter for myFrontExternalAPI
+     * @return
+     */
     public FrontExternalAPI getMyFrontExternalAPI() {
         return myFrontExternalAPI;
     }
 
-
+    /**
+     * Getter for xPos (JavaFX)
+     * @return
+     */
     public SimpleDoubleProperty getxPos() {
         return xPos;
     }
 
+    /**
+     * Setter for xPos (JavaFX)
+     * @param x
+     */
     public void setxPos(SimpleDoubleProperty x) {
         xPos = x;
     }
 
+    /**
+     * Getter for yPos (JavaFX)
+     * @return
+     */
     public SimpleDoubleProperty getyPos() {
         return yPos;
     }
 
+    /**
+     * Setter for yPos (JavaFX)
+     * @param y
+     */
     public void setyPos(SimpleDoubleProperty y) {
         yPos = y;
     }
 
+    /**
+     * Getter for PenUp (JavaFX)
+     * @return
+     */
     public SimpleBooleanProperty getPenUp() {
         return PenUp;
     }
 
+    /**
+     * Setter for PenUp (JavaFX)
+     * @param PenUp
+     */
     public void setPenUp(SimpleBooleanProperty PenUp) {
         this.PenUp = PenUp;
     }
 
+    /**
+     * Getter for PenThickness (JavaFX)
+     * @return
+     */
     public SimpleDoubleProperty getPenThickness() {
         return PenThickness;
     }
 
+    /**
+     * Setter for PenThickness (JavaFX)
+     * @param thickness
+     */
     public void setPenThickness(SimpleDoubleProperty thickness) {
         PenThickness = thickness;
     }
 
+    /**
+     * Getter for R (JavaFX)
+     * @return
+     */
     public SimpleIntegerProperty getR() {
         return R;
     }
 
+    /**
+     * Setter for R (JavaFX)
+     * @param r
+     */
     public void setR(SimpleIntegerProperty r) {
         R = r;
     }
 
+    /**
+     * Getter for G (JavaFX)
+     * @return
+     */
     public SimpleIntegerProperty getG() {
         return G;
     }
 
+    /**
+     * Setter for G (JavaFX)
+     * @param g
+     */
     public void setG(SimpleIntegerProperty g) {
         G = g;
     }
 
+    /**
+     * Getter for B (JavaFX)
+     * @return
+     */
     public SimpleIntegerProperty getB() {
         return B;
     }
 
+    /**
+     * Setter for B (JavaFX)
+     * @param b
+     */
     public void setB(SimpleIntegerProperty b) {
         B = b;
     }
