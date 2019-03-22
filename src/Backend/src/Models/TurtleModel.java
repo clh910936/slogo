@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 
 
+/**
+ * @author michaelzhang & Christina Chen
+ * This model stores information about turtles
+ */
 public class TurtleModel {
     public static final double STARTX = 2000;
     public static final double STARTY = 2000;
@@ -26,12 +30,20 @@ public class TurtleModel {
     private double currentTurtleIndex;
     private FrontExternalAPI myFrontExternalAPI;
 
+    /**
+     * Constructor that initializes TurtleModel
+     * @param frontExternalAPI
+     */
     public TurtleModel(FrontExternalAPI frontExternalAPI) {
         myFrontExternalAPI = frontExternalAPI;
         allTurtles = new HashMap<>();
 
     }
 
+    /**
+     * Makes list of turtles the currently active ones
+     * @param turtleIds
+     */
     public void setCurrentActiveTurtles(List<Integer> turtleIds) {
         currentActiveTurtles = turtleIds;
         turtleIds.stream().
@@ -43,35 +55,65 @@ public class TurtleModel {
                 });
     }
 
+    /**
+     * Gets all turtles that have been initialized
+     * @return map of all turtles
+     */
     public Map<Integer, Turtle> getAllTurtles() {
         return allTurtles;
     }
 
+    /**
+     * Gets the current turtle as a Turtle object
+     * @return index of current turtle
+     */
     public Turtle getCurrentTurtle() {
         return allTurtles.get((int) currentTurtleIndex);
     }
 
+    /**
+     * Gets the current turtle's id
+     * @param turtleId
+     * @return id of current turtle
+     */
     public Turtle getTurtle(int turtleId) {
         return allTurtles.get(turtleId);
     }
 
+    /**
+     * Gets a list of currently active turtle id's
+     * @return list of current active turtles
+     */
     public List<Integer> getCurrentActiveTurtles() {
         return Collections.unmodifiableList(currentActiveTurtles);
     }
 
+    /**
+     * Clears current active turtles
+     */
     public void clearCurrentActiveTurtles() {
         currentActiveTurtles.clear();
     }
 
+    /**
+     * Setter for current turtle
+     * @param index
+     */
     public void setCurrentTurtle(int index) {
         currentTurtleIndex = index;
     }
 
+    /**
+     * Getter for current turtle
+     * @return current turtle index
+     */
     public double getCurrentTurtleIndex() {
         return currentTurtleIndex;
     }
 
-
+    /**
+     * Resets models back to only one turtle at center of board
+     */
     public void populateBoard() {
         Turtle t = new Turtle(STARTX, STARTY, IS_PEN_UP, HEADING_ANGLE, IS_DISPLAYED,
                 CLEAR_SCREEN, 1, PEN_COLOR_INDEX, PEN_SIZE, SHAPE_INDEX, myFrontExternalAPI);

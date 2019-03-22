@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author michaelzhang
+ * Top-most abstraction for commands
+ */
 public abstract class CommandNode {
 
     private TurtleModel myTurtleModel;
@@ -61,42 +65,80 @@ public abstract class CommandNode {
         return myPaletteModel;
     }
 
+    /**
+     * Gets number of parameters are required for this command
+     * @return max number of parameters
+     */
     public int getNumParamsNeeded() {
         return MAX_PARAMS;
     }
 
+    /**
+     * Adds child to the command
+     * @param node
+     */
     public void addChild(CommandNode node) {
         myChildren.add(node);
     }
 
+    /**
+     * Gets list of children
+     * @return list of children
+     */
     public List<CommandNode> getChildren() {
         return Collections.unmodifiableList(myChildren);
     }
+
+    /**
+     * Clears list of children
+     */
     public void clearChildren() {
         myChildren.clear();
     }
 
-
+    /**
+     * Gets the parameters given to this command
+     * @return list of parameters
+     */
     public List<Object> getMyParams() {
         return Collections.unmodifiableList(myParams);
     }
 
+    /**
+     * Adds a parameter to command
+     * @param p
+     */
     public void addParam(Object p) {
         myParams.add(p);
     }
 
+    /**
+     * Clears list of parameters
+     */
     public void clearMyParams() {
         myParams.clear();
     }
 
+    /**
+     * Gets command name
+     * @return command name
+     */
     public String getCommandName() {
         return this.getClass().getSimpleName();
     }
 
+    /**
+     * If command has all its required children, then returns true
+     * @return
+     */
     public boolean isCommandReadyToExecute() {
         return myChildren.size()==MAX_PARAMS;
     }
 
+    /**
+     * Executes the action for a given command
+     * @return always returns a number
+     */
     public abstract Object executeCommand();
 
     protected void setMaxParams(int max) {
