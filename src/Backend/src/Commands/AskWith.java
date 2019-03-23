@@ -42,7 +42,6 @@ public class AskWith extends TwoParamCommand {
         for (Integer currentTurtle : getMyTurtleModel().getAllTurtles().keySet()) {
             makeTurtleIndexActiveTurtle(currentTurtle);
             double out = getCp().parseCommand(conditionString);
-            System.out.println("OUT VALUE" + out);
             if (out != 0) {
                 newActiveTurtles.add(currentTurtle);
             }

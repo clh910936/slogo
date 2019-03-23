@@ -11,14 +11,23 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+
+/**
+ * @author christinachen and Michael Zhang
+ * This class serves as a manager for all of the models in that it implements the IModelManager/backend external API
+ * Serves as the intermediary to handle the models and communicate with the frontend
+ */
 
 public class ModelManager implements IModelManager {
     /*
     For each turtle, call myFrontEnd.move() or whatever
      */
     private FrontExternalAPI myFrontEnd;
-
     private VariablesModel myVariablesModel;
     private final HistoryModel myHistoryModel;
     private TurtleModel myTurtleModel;
@@ -42,6 +51,13 @@ public class ModelManager implements IModelManager {
         myBackgroundModel = new BackgroundModel(myFrontEnd);
     }
 
+    /**
+     * parses a command
+     * @param inputString
+     * @param language
+     * @throws IllegalCommandException
+     * @throws IllegalParametersException
+     */
     public void parseCommand(String inputString, String language) throws IllegalCommandException, IllegalParametersException {
         try {
             mySyntaxHandlerFactory.changeLanguage(language);
@@ -56,26 +72,51 @@ public class ModelManager implements IModelManager {
         }
     }
 
+    /**
+     * sets a new variables model
+     * @param vm
+     */
     public void setVariablesModel(VariablesModel vm) {
         myVariablesModel = vm;
     }
 
+    /**
+     *
+     * @return map of variables
+     */
     public Map<String, String> getVariables() {
         return myVariablesModel.getVariables();
     }
 
+    /**
+     *
+     * @return list of all history in string format
+     */
     public List<String> getHistory() {
         return myHistoryModel.getHistory();
     }
 
+    /**
+     *
+     * @return list of all current saved state files
+     */
     public List<String> getSavedFilesList() {
         return myCurrentStateFileModel.getSavedFilesList();
     }
 
+    /**
+     *
+     * @param index
+     * @return boolean of success of a command input from history
+     */
     public boolean getSuccessOfHistoryEntry(int index) {
         return myHistoryModel.getWasSuccessful(index);
     }
 
+    /**
+     *
+     * @return map of user defined commands
+     */
     public Map<String,String> getUserDefinedCommands() {
         Map<String,String> commandsList = new HashMap<>();
         for(Map.Entry<String,UserDefinedCommand> command : myUserDefinedCommandsModel.getUserCreatedCommands().entrySet()) {
@@ -83,40 +124,79 @@ public class ModelManager implements IModelManager {
         }
         return commandsList;
     }
+
+    /**
+     *
+     * @return the current syntaxHandlerFactory
+     */
     public SyntaxHandlerFactory getMySyntaxHandlerFactory() {
         return mySyntaxHandlerFactory;
     }
 
+    /**
+     *
+     * @return the current variablesModel
+     */
     public VariablesModel getVariablesModel() {
         return myVariablesModel;
     }
 
+    /**
+     *
+     * @return the current userDefinedCommandsModel
+     */
     public UserDefinedCommandsModel getUserDefinedCommandsModel() {
         return myUserDefinedCommandsModel;
     }
 
+    /**
+     *
+     * @return the current turtleModel
+     */
     public TurtleModel getTurtleModel() {
         return myTurtleModel;
     }
 
+    /**
+     *
+     * @return the current paletteModel
+     */
     public PaletteModel getMyPaletteModel() {
         return myPaletteModel;
     }
 
+    /**
+     *
+     * @return the current backgroundModel
+     */
     public BackgroundModel getMyShapeModel() {
         return myBackgroundModel;
     }
 
+    /**
+     * takes in a string file and tells the currentStateFileModel to save the state into that file
+     * @param fileName
+     */
     public void saveCurrentState(String fileName) {
         myCurrentStateFileModel.saveStateIntoFile(fileName);
         myFrontEnd.updateViews();
     }
 
+    /**
+     * takes in a string file and tells the currentStateFileModel to set the state from that file
+     * @param fileName
+     * @param language
+     */
     public void setStateFromFile(String fileName, String language) {
         myCurrentStateFileModel.setStateFromFile(fileName);
         myFrontEnd.updateViews();
     }
 
+    /**
+     * sets a new variable
+     * @param variableName
+     * @param value
+     */
     public void changeVariable(String variableName, String value) {
         myVariablesModel.addVariable(variableName, value);
     }
