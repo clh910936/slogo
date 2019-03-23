@@ -1,0 +1,4 @@
+cs
+tell [ 1 10 20 ]
+set :x 10
+fd * id :x
