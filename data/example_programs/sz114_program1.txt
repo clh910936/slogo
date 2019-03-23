@@ -1,0 +1,24 @@
+tell [ 1 2 3 4 ]
+ask [ 1 ] [ pu fd 100 pd setshape 1 setpc 0 ]
+ask [ 2 ] [ pu rt 90 fd 100 pd setshape 2 ]
+ask [ 3 ] [ pu rt 180 fd 100 pd setshape 3 setpc 0 ]
+ask [ 4 ] [ pu lt 90 fd 100 pd setshape 4 ]
+
+ask [ 2 ] [
+to spiral [ :len ]
+[
+  if less? :len 100
+  [
+    fd :len
+    rt 68
+    spiral + :len 3
+  ]
+]
+
+spiral 10
+]
+
+
+ask [ 4 ] [
+  ( fd 10 20 30 40 50 )
+]

@@ -1,0 +1,5 @@
+dang [ :dist 1 110 1 ]
+[
+  tb qj :dist lb
+  yz cheng :dist 3
+]
