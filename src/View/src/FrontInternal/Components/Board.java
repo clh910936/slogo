@@ -15,8 +15,9 @@ import javafx.util.Duration;
 
 import java.awt.*;
 
-/*
-    Board functions as the sprite manager (need to get rid of that class) and moves the sprite across the screen
+/**
+ * The Board handles the actions of all turtle elements on the screen, including movement, changes to the pen, etc.
+ * @author Feroze
  */
 public class Board extends Pane implements ViewAPI {
     private Canvas myCanvas;
@@ -25,11 +26,16 @@ public class Board extends Pane implements ViewAPI {
     private IModelManager myController;
 
     private TurtleManager myTurtleManager;
-    public static final int FRAMES_PER_SECOND = 60;
-    public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+    private static final int FRAMES_PER_SECOND = 60;
+    private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 
     private SimpleDoubleProperty slideSpeed;
 
+    /**
+     * Constructor of the board. Creates the canvas, a TurtleManager, and the animation.
+     * @param d dimension inherited from the GUI
+     * @param controller backend instance also inherited from GUI
+     */
     public Board(Dimension d, IModelManager controller) {
         myDimensions = d;
         myController = controller;
@@ -61,6 +67,10 @@ public class Board extends Pane implements ViewAPI {
         getChildren().add(slider);
     }
 
+    /**
+     * Returns the dimensions of the board
+     * @return myDimensions
+     */
     public Dimension getDimensions() {
         return myDimensions;
     }
@@ -78,16 +88,26 @@ public class Board extends Pane implements ViewAPI {
         gc.fillRect(0, 0, myDimensions.height, myDimensions.width);
     }
 
+    /**
+     * Calls upon the turtle manager to move the turtle on the canvas
+     * @param x x-coordinate of new position
+     * @param y y-coordinate of new position
+     * @param turtleId specified turtle id
+     */
     public void move(double x, double y, int turtleId) {
         myTurtleManager.move(x, y, turtleId);
-        System.out.println(slideSpeed);
-
     }
 
+    /**
+     * @return Returns the graphic context of the canvas, required for turtles to draw on it.
+     */
     public GraphicsContext getGC() {
         return gc;
     }
 
+    /**
+     * Required to implement these next two methods from API
+     */
     @Override
     public void update() {
         myTurtleManager.update();
@@ -99,40 +119,82 @@ public class Board extends Pane implements ViewAPI {
     }
 
 
+    /**
+     * Clears the screen
+     */
     public void clear() {
         setBackground(Color.BEIGE);
         myTurtleManager.getAllTurtles().forEach(e -> getChildren().remove(e));
         myTurtleManager.clearTurtles();
     }
 
+    /**
+     * Sets the background color of the screen
+     * @param c new bg color
+     */
     public void setBackgroundColor(Color c) {
         setBackground(c);
     }
 
+    /**
+     * Asks the turtle manager to set pen up status of turtle
+     * @param true_is_penup pen up/down
+     * @param turtleId specified turtle id
+     */
     public void penUp(boolean true_is_penup, int turtleId) {
         myTurtleManager.setPen(true_is_penup, turtleId);
     }
 
+    /**
+     * Asks the turtle manager to rotate the given turtle
+     * @param degrees rotation angle
+     * @param turtleId specified turtle id
+     */
     public void rotate(double degrees, int turtleId) {
         myTurtleManager.rotate(degrees, turtleId);
     }
 
+    /**
+     * Asks the turtle manager to set pen color of given turtle
+     * @param c new pen color
+     * @param turtleId specified turtle id
+     */
     public void setPenColor(Color c, int turtleId) {
         myTurtleManager.setPenColor(c, turtleId);
     }
 
+    /**
+     * Asks turtle manager to set pen size of given turtle
+     * @param pixels pen size in pixels
+     * @param turtleId specified turtle id
+     */
     public void setPenSize(double pixels, int turtleId) {
         myTurtleManager.setPenSize(pixels, turtleId);
     }
 
+    /**
+     * Asks turtle manager to set image of turtle
+     * @param index index into image array
+     * @param turtleId specified turtle id
+     */
     public void setTurtleShape(int index, int turtleId) {
         myTurtleManager.setTurtleShape(index, turtleId);
     }
 
+    /**
+     * Asks turtle manager to add turtle to screen
+     * @param turtleId id of new turtle
+     * @param controller backend instance
+     */
     public void addTurtle(int turtleId, IModelManager controller) {
         myTurtleManager.addTurtle(turtleId, controller);
     }
 
+    /**
+     * Asks turtle manager to set display status of given turtle
+     * @param isDisplayed true if visible, false if hidden
+     * @param turtleId specified turtle id
+     */
     public void setDisplayed(boolean isDisplayed, int turtleId) {
         myTurtleManager.setDisplayed(isDisplayed, turtleId);
     }

@@ -2,13 +2,16 @@ package FrontInternal.Views;
 
 import API.IModelManager;
 import FrontInternal.Players.AddElement;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+/**
+ * A HorizontalView is a view that extends horizontally and uses a scrollpane to do so. It may include widgets.
+ * @author Feroze
+ */
 public abstract class HorizontalView extends View {
     protected HorizontalView(IModelManager manager) {
         super(manager);

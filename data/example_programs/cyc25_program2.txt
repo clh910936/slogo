@@ -1,0 +1,10 @@
+tell [ 1 2 3 4 5 ]
+pu
+fd * id 30
+pd
+ask [ 1 3 5 ] [ setpc 0 ]
+to recurse [ :x ]
+[ if greater? :x 5 [ recurse difference :x 1 ]
+repeat 5 [ rt 45 fd 100 rt 90 fd 100 rt 90 fd 100 ] ]
+
+recurse 6

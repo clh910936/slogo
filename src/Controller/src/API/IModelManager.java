@@ -8,103 +8,115 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * IModelManager is the backend API which the front-end calls upon to parse commands and update states in the model.
+ * @author everyone
+ */
 public interface IModelManager {
-
     /**
-     *
-     * @return map of user defined commands
+     * @return The state of the current user defined commands
      */
     Map<String,String> getUserDefinedCommands();
 
     /**
-     *
-     * @return map of variables
+     * @return The state of current variables
      */
     Map<String,String> getVariables();
 
     /**
-     *
-     * @return list of history in string form
+     * @return The state of the current history
      */
     List<String> getHistory();
 
     /**
-     * parses a command
-     * @param input
-     * @param language
+     * Used by the frontend to send a command to the backend
+     * @param input the input string of the command
+     * @param language the language the command is written in
      */
     void parseCommand(String input, String language);
 
     /**
-     *
-     * @param index
-     * @return boolean that indicates success of a command input in history
+     * Determines whether a given command from previous was valid or not.
+     * @param index the index of the command in the list of commands
+     * @return true if successful, false otherwise
      */
     boolean getSuccessOfHistoryEntry(int index);
 
-
-
     /**
-     * takes in a string file and tells the currentStateFileModel to save the state into that file
-     * @param fileName
+     * Saves the state models to a given filename
+     * @param fileName filename to be written to
      */
     void saveCurrentState(String fileName);
 
-
     /**
-     * takes in a string file and tells the currentStateFileModel to set the state from that file
-     * @param fileName
-     * @param language
+     * Sets the model according to a file
+     * @param fileName name of the file
+     * @param language language the file is written in
      */
     void setStateFromFile(String fileName, String language);
 
     /**
-     *
-     * @return list of all saved state files
+     * Returns all the saved files
+     * @return list of the saved state files
      */
     List<String> getSavedFilesList();
 
     /**
-     * adds or change a variable
-     * @param variableName
-     * @param value
+     * Updates the variable model
+     * @param variableName name of the variable
+     * @param value new variable value
      */
     void changeVariable(String variableName, String value);
+
+    /**
+     * Adds a color to the palette, specified by its index and rgb values
+     * @param index new color index
+     * @param r new color r-value
+     * @param g new color g-value
+     * @param b new color b-value
+     */
     void addPalette(int index, int r, int g, int b);
+
+    /**
+     * @return the index of the currently active turtle
+     */
     int getCurrentActiveTurtle();
 
-
+    /**
+     * Sets the currently active turtle
+     * @param index index of turtle in the list of turtles
+     */
     void makeCurrentActiveTurtle(int index);
 
-
-    //TODO: add an image index to each turtle, 0-5, initially starts at 0
-    // this way we don't have to have users upload their own images, ill just look
-    // at the index to determine which image to use
-
-
-    // implement this, just so i can read the index from the model later
+    /**
+     * Sets the image of a turtle given its id
+     * @param turtleid the id of the turtle
+     * @param shapeIndex shape number in array of shapes (images)
+     */
     void setTurtleImage(int turtleid, int shapeIndex);
 
-    // tells me which turtle image to render
+    /**
+     * Returns the current image of a turtle
+     * @param turtleid id of the turtle
+     * @return image index in array of images
+     */
     int getTurtleImage(int turtleid);
 
-    // I need to know all the turtle IDs to query
+    /**
+     * @return a list of all current turtle id's
+     */
     List<Integer> getTurtles();
+
+    /**
+     * @return a list of all current color id's
+     */
     Set<Integer> getColors();
 
-    //TODO: ALSO, in order to track the turtles in real time, I need
-    // u to add these private variables to each Turtle (no need to initialize them)
-    // private SimpleDoubleProperty xPos;
-    // private SimpleDoubleProperty yPos;
-    // private SimpleBooleanProperty PenUp;
-    // private SimpleDoubleProperty PenThickness;
-
-    // these next ones are RGB for color
-
-    // private SimpleIntegerProperty R;
-    // private SimpleIntegerProperty G;
-    // private SimpleIntegerProperty B;
-
+    /**
+     * The following methods are used to link the front-end turtle status variables with the back-end model variables
+     * using properties. Each takes the id of a turtle and a Property, which is initially set by the front-end. When
+     * the backend makes updates to the property, the front-end knows and can update automatically.
+     */
     void setXPos(int turtleId, SimpleDoubleProperty xpos);
     void setYPos(int turtleId, SimpleDoubleProperty ypos);
     void setPenUp(int turtleId, SimpleBooleanProperty penUp);
@@ -113,6 +125,10 @@ public interface IModelManager {
     void setG(int turtleId, SimpleIntegerProperty g);
     void setB(int turtleId, SimpleIntegerProperty b);
 
+    /**
+     * The following methods are the getters to the setters used above, made to retrieve the properties initialized
+     * when a turtle is create on the front-end.
+     */
     SimpleDoubleProperty getXPos(int turtleId);
     SimpleDoubleProperty getYPos(int turtleId);
     SimpleBooleanProperty getPenUp(int turtleId);
@@ -120,11 +136,9 @@ public interface IModelManager {
     SimpleIntegerProperty getR(int turtleId);
     SimpleIntegerProperty getG(int turtleId);
     SimpleIntegerProperty getB(int turtleId);
+
+    /**
+     * Creates the first turtle on the board after everything else is set up.
+     */
     void populateBoard();
-
-
-
-
-
-
 }
