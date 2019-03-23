@@ -12,7 +12,11 @@ import javafx.scene.paint.Paint;
 /**
  * @author Carrie Hunner
  * This class creates a template for a user view window with a title at the top
- * This is used to format all of the views
+ * This is used to format all of the views.
+ *
+ * When extending this class, it is important to note that the setContents() method
+ * must be called in order for whatever view/display is created
+ * to be shown.
  */
 public abstract class View {
     protected IModelManager myManager;

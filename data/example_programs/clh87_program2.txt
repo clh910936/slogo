@@ -1,0 +1,29 @@
+lp
+a triangle [  ] [ 
+	haz [ :num 3 ] [ 
+	ava :size
+	der 120
+	 ] 
+]
+psu
+
+der 30
+izq 90
+ava 75
+der 90
+pab
+
+crear :size 50
+haz [ :times 10 ] [ 
+	psu
+	izq 90
+	ava 10
+	izq 90
+	ava 15
+	der 180
+	pab
+	ponpc % :times 2
+ 	crear :size + :size 30
+	triangle
+] 
+
