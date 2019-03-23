@@ -3,22 +3,20 @@ package FrontInternal.Views;
 import API.IModelManager;
 import FrontInternal.Players.AddElement;
 import FrontInternal.Players.PaletteElement;
-
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
 import javafx.scene.paint.Color;
-
-
-
 import java.util.*;
 import java.util.function.Predicate;
 
-
+/**
+ * PaletteView holds all the colors actively in play, with their indices and names. Also allows users to add a new
+ * color to the palette.
+ * @author Feroze
+ */
 public class PaletteView extends HorizontalView{
-//    private ScrollPane myScrollPane;
-//    private IModelManager myManager;
+    private static final int DEFAULT_HEIGHT = 250;
     private Pane myPane;
     private HBox myRoot;
     private Map<Integer, Color> ACTIVE_COLORS = new LinkedHashMap<>();
@@ -26,26 +24,21 @@ public class PaletteView extends HorizontalView{
     private static final String DEFAULT_LANGUAGE = "English";
     private AddElement addNewColor;
 
-    //TODO: PALETTEVIEW HAS TO TELL THE BOARD ITS COLORS SOMEHOW
+    /**
+     * Creates the view and its surrounding HBox.
+     * @param manager backend instance to which it sends commands
+     */
     public PaletteView(IModelManager manager) {
         super(manager);
         myRoot = new HBox();
         myPane = makeScrollPane(myRoot);
-        //myPane.setMinHeight(210);
-        //makeScrollPane();
         addDefaultColors();
         addNewColor = addPlus(myRoot, e->openInput());
-        //addPlus();
 
         setContents(myPane);
-        setHeight(250);
-
+        setHeight(DEFAULT_HEIGHT);
     }
 
-//    private void addPlus() {
-//        addNewColor = new AddElement(e -> openInput());
-//        myRoot.getChildren().add(addNewColor);
-//    }
 
     private void openInput() {
         TextInputDialog dialog = new TextInputDialog("22, 100, 245, 216");
@@ -65,22 +58,24 @@ public class PaletteView extends HorizontalView{
             int arg2 = validcolor.test(Integer.parseInt(args.get(1))) ? Integer.parseInt(args.get(1)) : 0;
             int arg3 = validcolor.test(Integer.parseInt(args.get(2))) ? Integer.parseInt(args.get(2)) : 0;
             int arg4 = validcolor.test(Integer.parseInt(args.get(3))) ? Integer.parseInt(args.get(3)) : 0;
-            addColor(arg1, arg2,
-                    arg3, arg4);
+            addColor(arg1, arg2, arg3, arg4);
         });
     }
 
+    /**
+     * Return the color with the corresponding index
+     * @param index index to query
+     * @return Color at index
+     */
     public Color getColor(int index) {
         if(ACTIVE_COLORS.keySet().contains(index)) {
             return ACTIVE_COLORS.get(index);
         }
         else {
-            //TODO: ADD EXCEPTION
-            return null;
+            return Color.BLUE;
         }
     }
 
-    //
     private void addDefaultColors() {
         for (int i = 0; i < DEFAULT_COLORS.length; i++) {
             addColor(i, DEFAULT_COLORS[i][0], DEFAULT_COLORS[i][1], DEFAULT_COLORS[i][2]);
@@ -88,14 +83,19 @@ public class PaletteView extends HorizontalView{
 
     }
 
+    /**
+     * Adds a color from RGB values with corresponding index, checking if the index already exists and if the r, g,
+     * and b values are between 0 and 255.
+     * @param index new color index
+     * @param r new color r-value
+     * @param g new color g-value
+     * @param b new color b-value
+     */
     public void addColor(int index, int r, int g, int b) {
-        //remove button
-        //TODO MAKE ADDING AND REMOVING THE BUTTON CLEANER
         if(addNewColor != null) {
             myRoot.getChildren().remove(addNewColor);
         }
         if (ACTIVE_COLORS.keySet().contains(index)) {
-            //TODO: THROW EXCEPTION
             return;
         }
         ACTIVE_COLORS.put(index, Color.rgb(r, g, b));
@@ -110,22 +110,9 @@ public class PaletteView extends HorizontalView{
         }
     }
 
-//    private void makeScrollPane() {
-//        myScrollPane = new ScrollPane();
-//        myScrollPane.setFitToHeight(true);
-//
-//        myScrollPane.setContent(myRoot);
-//        //myScrollPane.setMinViewportHeight(200);
-//        var y = new HBox(myScrollPane);
-//        y.setMinHeight(300);
-//        //y.setMaxWidth(180);
-//
-//        myPane = y;
-//    }
-
     @Override
     public void update() {
-        return;
+        // doesn't have to update
     }
 
 

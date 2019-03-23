@@ -20,101 +20,95 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The GUI class holds all active players of the display window, including the Board and user views. The GUI can be
+ * thought of as a workspace, so multiple workspaces are implemented by simply creating more instances of GUI. It is
+ * a wrapper class and is flexible to the addition of new components - they just have to be added in the main HBox.
+ * @author Feroze
+ */
 public class GUI implements FrontExternalAPI {
     private static final Dimension DEFAULT_SIZE = new Dimension(800,600);
-    public static final String RESOURCE_FILENAME = "GUI";
+    public static final double CONSOLE_WIDTH_ADJUSTMENT = 0.8;
+    public static final int CONSOLE_HEIGHT_ADJUSTMENT = 4;
+    public static final double BOARD_WIDTH_FACTOR = 0.75;
     private Scene myScene;
 
     private Console myConsole;
     private Board myBoard;
     private HBox myRoot;
 
-    private ResourceBundle myResources;
     private ModelManager myController;
     private AllUserViews myToolBar;
 
 
-    // private
+    /**
+     * Constructor of the GUI. Creates a board and all the user views, then attaches them. It also
+     * instantiates a backend instance which it uses to keep state information and parse commands.
+     * @param console Each GUI (instance of a workspace) requires a console to which it is attached,
+     *                which it receives commands from.
+     */
     public GUI(Console console) {
         var left = makeBoard();
         myController = new ModelManager(this);
         myController.populateBoard();
-        myResources = ResourceBundle.getBundle(RESOURCE_FILENAME);
-
-        //var right = makeRightView();
-        //myRoot = new HBox(left, right);
         myConsole = console;
         myToolBar = new AllUserViews(myController, myConsole);
         myRoot = new HBox(left, myToolBar);
-        //myRoot.setHgrow(right, Priority.ALWAYS);
         showConsole();
-
-
-
-
         myScene = new Scene(myRoot, DEFAULT_SIZE.width, DEFAULT_SIZE.height);
     }
 
 
+    /**
+     * @return Returns the backend associated with this workspace, because each workspace has a unique state
+     * configuration.
+     */
     public IModelManager getModelManager() {
         return myController;
     }
-    public void showConsole() {
+
+    private void showConsole() {
         myConsole.show();
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        myConsole.setX((primScreenBounds.getWidth() - myConsole.getWidth()/0.8) );
-        myConsole.setY((primScreenBounds.getHeight() - myConsole.getHeight()) / 4);
+        myConsole.setX((primScreenBounds.getWidth() - myConsole.getWidth()/ CONSOLE_WIDTH_ADJUSTMENT) );
+        myConsole.setY((primScreenBounds.getHeight() - myConsole.getHeight()) / CONSOLE_HEIGHT_ADJUSTMENT);
     }
 
     private Node makeBoard() {
-        myBoard = new Board(new Dimension(DEFAULT_SIZE.width * 3/4, DEFAULT_SIZE.height), myController);
+        myBoard = new Board(new Dimension((int) (DEFAULT_SIZE.width * BOARD_WIDTH_FACTOR), DEFAULT_SIZE.height), myController);
         return new HBox(myBoard);
     }
 
+    /**
+     * @return Returns the front-end representation of the workspace.
+     */
     public Pane getPane() {
         return myRoot;
     }
 
-//    private Node makeConsoleButton() {
-//        var b = makeButton("OpenConsole", e -> openConsole(null));
-//        b.disableProperty().bind(Bindings.createBooleanBinding(()-> myConsole.getDisplaying()));
-//        return b;
-//    }
 
-
+    /**
+     * @return Returns the main scene this workspace uses.
+     */
     public Scene getScene() {
         return myScene;
     }
 
-    // makes a button using either an image or a label
-    private Button makeButton (String property, EventHandler<ActionEvent> handler) {
-        // represent all supported image suffixes
-        final var IMAGEFILE_SUFFIXES =
-                String.format(".*\\.(%s)", String.join("|", ImageIO.getReaderFileSuffixes()));
-
-        var result = new Button();
-        var label = myResources.getString(property);
-        if (label.matches(IMAGEFILE_SUFFIXES)) {
-            result.setGraphic(new ImageView(
-                    new Image(getClass().getResourceAsStream(label))));
-        }
-        else {
-            result.setText(label);
-        }
-        result.setOnAction(handler);
-        return result;
-    }
-
+    /**
+     * Clears everything on the Board and removes all turtles, then places a turtle in the center.
+     */
     @Override
     public void clearBoard() {
         myBoard.clear();
     }
 
-    //TODO: THIS IS MESSY AND I DONT LIKE IT BUT IT WORKS
+    /**
+     * Sets the background color of the Board
+     * @param index The index is the index into the color array.
+     */
     @Override
     public void setBackgroundColor(int index) {
         for (View v: myToolBar.getViews()) {
@@ -125,22 +119,42 @@ public class GUI implements FrontExternalAPI {
         }
     }
 
+    /**
+     * Sets the specified turtle to have pen up or down.
+     * @param true_is_penup boolean for up or down
+     * @param turtleId id of the turtle
+     */
     @Override
     public void penUp(boolean true_is_penup, int turtleId) {
         myBoard.penUp(true_is_penup, turtleId);
     }
 
+    /**
+     * rotate the turtle of given id
+     * @param degrees rotation angle
+     * @param turtleId specified turtle id
+     */
     @Override
     public void rotate(double degrees, int turtleId) {
         myBoard.rotate(degrees, turtleId);
     }
 
+    /**
+     * Moves a given turtle to the coordinates on a screen.
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @param turtleId specified turtle id
+     */
     @Override
     public void move(double x, double y, int turtleId) {
         myBoard.move(x, y, turtleId);
     }
 
-    //TODO EW
+    /**
+     * Sets the pen color of a turtle
+     * @param index index of the color in the list
+     * @param turtleId specified turtle id
+     */
     @Override
     public void setPenColor(int index, int turtleId) {
         for (View v: myToolBar.getViews()) {
@@ -151,22 +165,43 @@ public class GUI implements FrontExternalAPI {
         }
     }
 
+    /**
+     * Sets the pen size of a given turtle
+     * @param pixels pen size in pixels
+     * @param turtleId specified turtle id
+     */
     @Override
     public void setPenSize(double pixels, int turtleId) {
         myBoard.setPenSize(pixels, turtleId);
     }
 
+    /**
+     * Sets the image of the turtle
+     * @param index index into the list of images
+     * @param turtleId specified turtle id
+     */
     @Override
     public void setShape(int index, int turtleId) {
         myBoard.setTurtleShape(index, turtleId);
     }
 
+    /**
+     * Sets the display status of a given turtle
+     * @param isDisplayed boolean true if to be displayed, false if hidden
+     * @param turtleId specified turtle id
+     */
     @Override
     public void setDisplayTurtle(boolean isDisplayed, int turtleId) {
         myBoard.setDisplayed(isDisplayed, turtleId);
     }
 
-    //TODO THIS IS ALSO MESSY
+    /**
+     * Adds a color to the palette
+     * @param index index of the new color
+     * @param r r-value of color
+     * @param g g-value of color
+     * @param b b-value of color
+     */
     @Override
     public void setPalette(int index, int r, int g, int b) {
         for (View v: myToolBar.getViews()) {
@@ -176,14 +211,17 @@ public class GUI implements FrontExternalAPI {
         }
     }
 
+    /**
+     * Adds a turtle to the display
+     * @param turtleId id of the new turtle
+     */
     @Override
     public void addTurtle(int turtleId) {
-        System.out.println(myController == null);
         myBoard.addTurtle(turtleId, myController);
     }
 
     /**
-     * TODO: @Carrie pls add these methods to ur AllUserViews which updates each specific view accordingly.
+     * Update method that forces the views to query the backend after a change occurs.
      */
     @Override
     public void updateViews(){myToolBar.update();}

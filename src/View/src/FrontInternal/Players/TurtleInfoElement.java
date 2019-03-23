@@ -9,41 +9,58 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.util.converter.BooleanStringConverter;
 import javafx.util.converter.NumberStringConverter;
-
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * A TurtleInfoElement is a widget found in the TurtleInfoView. It gives information on the turtle image, id,
+ * position, and pen status in real time using JavaFX Properties.
+ * @author Feroze
+ */
 public class TurtleInfoElement extends ViewElement {
+    public static final int IMAGE_HEIGHT = 50;
+    public static final int IMAGE_WIDTH = 50;
+    public static final int IMAGE_ANGLE_OFFSET = -90;
+    public static final int DEFAULT_HEIGHT = 150;
     private ResourceBundle myBundle;
     private ResourceBundle myImages;
     private ComboBox myComboBox;
-
     private final String TURTLE = "Turtle";
+
+    /**
+     * Creates a widget and populates its information according to the following parameters:
+     * @param turtleID id of the turtle
+     * @param imageindex index of the turtle image
+     * @param x current x-coordinate
+     * @param y current y-coordinate
+     * @param r r-value of its color
+     * @param g g-value of its color
+     * @param b b-value of its color
+     * @param penup pen up/down
+     * @param thickness pen thickness
+     */
     public TurtleInfoElement(int turtleID, int imageindex, SimpleDoubleProperty x, SimpleDoubleProperty y,
                              SimpleIntegerProperty r, SimpleIntegerProperty g, SimpleIntegerProperty b,
                              SimpleBooleanProperty penup, SimpleDoubleProperty thickness) {
         myBundle = getResourceBundle("TurtleInfoElement");
         myImages = getResourceBundle("TurtleImages");
         String image = myImages.getString(TURTLE+imageindex);
-        var display = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(image), 50, 50,
+        var display = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(image), IMAGE_WIDTH, IMAGE_HEIGHT,
                 false, false));
-        display.setRotate(-90);
+        display.setRotate(IMAGE_ANGLE_OFFSET);
         getChildren().add(display);
         String idlabel = myBundle.getString("ID") + turtleID;
         makeLabels(idlabel);
         makePositionLabels(x, y);
         makePenLabels(r, g,b, penup, thickness);
         makeComboBox();
-        expand(150);
+        expand(DEFAULT_HEIGHT);
 
     }
 
@@ -55,11 +72,17 @@ public class TurtleInfoElement extends ViewElement {
         getChildren().add(myComboBox);
     }
 
+    /**
+     * Returns the selected image choice from the dropdown menu
+     * @return new image label to set to
+     */
     public String getChoice() {
         return (String) myComboBox.getValue();
     }
 
-    private void makePenLabels(SimpleIntegerProperty r, SimpleIntegerProperty g, SimpleIntegerProperty b, SimpleBooleanProperty penup, SimpleDoubleProperty thickness) {
+    private void makePenLabels(SimpleIntegerProperty r, SimpleIntegerProperty g,
+                               SimpleIntegerProperty b, SimpleBooleanProperty penup,
+                               SimpleDoubleProperty thickness) {
         var colorname = Bindings.createStringBinding(() -> ColorUtils.getColorNameFromRgb(r.get(), g.get(),
                 b.get()), r, g, b);
         var textcolor = Bindings.createObjectBinding(() -> Color.rgb(r.get(), g.get(), b.get()), r, g, b);

@@ -1,14 +1,8 @@
 package FrontInternal.Players;
 
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 public abstract class Sprite extends ImageView {
-    /**
-     * Current display node
-     */
-    public Node node;
 
     private int myId;
 
@@ -21,19 +15,10 @@ public abstract class Sprite extends ImageView {
      */
     public abstract void update();
 
-    public abstract void move(Double x, Double y);
 
     protected int getID() {
         return myId;
     }
-
-    public abstract void setPen(boolean penUp);
-
-    public abstract void rotate(double degrees);
-
-    public abstract void setPenColor(Color c);
-
-    public abstract Node getPath();
 
     public abstract TurtleScheduler getScheduler();
 
