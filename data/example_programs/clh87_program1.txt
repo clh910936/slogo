@@ -1,0 +1,22 @@
+cs
+to spiral [ ] [
+dotimes [ :dist 50 ] 
+[
+  fd :dist
+  rt 80
+] 
+]
+pu
+lt 90
+fd 225
+lt 90
+fd 150
+rt 180
+
+dotimes [ :times 5 ] [
+  setps :times
+  pd
+  spiral
+  pu 
+  fd 150
+ ]
