@@ -183,7 +183,6 @@ public class SyntaxHandlerFactory {
             }
             if(bracketCount==0) return listContents.toArray(new String[listContents.size()]);
             listContents.add(rawInput);
-            System.out.println(listContents);
         }
         throw new IllegalCommandException("Invalid ListInput Parameter");
     }

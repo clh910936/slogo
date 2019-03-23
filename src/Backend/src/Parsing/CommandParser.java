@@ -58,7 +58,7 @@ public class CommandParser {
             returnValues.add(currentReturnValue);
         }
         if (currentReturnValue==-1) throw new IllegalCommandException("Command did not execute correctly");
-        return currentReturnValue; 
+        return currentReturnValue;
     }
 
     /**
@@ -115,20 +115,22 @@ public class CommandParser {
         Object currentValue = -1;
         TurtleModel turtleModel = myModelManager.getTurtleModel();
         turtleEvaluated = true;
-        VariablesModel currVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
-        VariablesModel newVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
-        for (int id : turtleModel.getCurrentActiveTurtles()) {
-            double currTurtleId = turtleModel.getCurrentTurtleIndex();
-            turtleModel.setCurrentTurtle(id);
+        VariablesModel prevVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
+        double currTurtleId = turtleModel.getCurrentTurtleIndex();
+        for (int i= 0; i<turtleModel.getCurrentActiveTurtles().size();i++) {
+            int toBeSetId = turtleModel.getCurrentActiveTurtles().get(i);
+            turtleModel.setCurrentTurtle(toBeSetId);
             currentValue = addParamsAndExecute(command);
-            turtleModel.setCurrentTurtle((int) currTurtleId);
-            newVariablesModel = new VariablesModel(myModelManager.getVariablesModel());
-            myModelManager.setVariablesModel(new VariablesModel(currVariablesModel));
+            if(i!=turtleModel.getCurrentActiveTurtles().size()-1) {
+                myModelManager.setVariablesModel(new VariablesModel(prevVariablesModel));
+            }
         }
-        myModelManager.setVariablesModel(newVariablesModel);
+        turtleModel.setCurrentTurtle((int) currTurtleId);
         turtleEvaluated = false;
 
         return currentValue;
     }
+
+
 
 }
