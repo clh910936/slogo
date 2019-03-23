@@ -1,0 +1,21 @@
+cs
+to spiral [ :len ]
+[
+  if less? :len 30
+  [
+    fd * :len 3
+    rt 89
+    spiral + :len 3
+  ]
+]
+
+tell [ 1 2 3 4 5 6 ]
+pu
+askwith [ less? id 4 ] [ rt 90 setshape 1 ]
+askwith [ greater? id 3 ] [ lt 90 setshape 2 ]
+pd
+repeat ( sum 2 2 2 ) [
+fd 100
+rt / 360 id
+spiral 10
+]

@@ -29,7 +29,7 @@ public class HistoryModel {
     }
 
     /**
-     * @return history list
+     * @return list of all history entries
      */
     public List<String> getHistory() {
         List<String> history = new ArrayList<>();
